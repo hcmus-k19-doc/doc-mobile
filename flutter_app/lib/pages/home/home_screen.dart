@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/utils/constants/color_const.dart';
+import '../../constants/export_constants.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key, required this.title}) : super(key: key);
-
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key, required this.title, required this.number}) : super(key: key);
+  final int number;
   final String title;
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -21,6 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (_counter == 0) _counter = widget.number;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
