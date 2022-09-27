@@ -1,14 +1,11 @@
-import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-
+import '../constants/export_constants.dart';
 import '../app_config.dart';
 import '../model/repositories/user_repository.dart';
-import '../ui/screens/splash_screen.dart';
-import '../utils/constants/color_const.dart';
-import '../utils/constants/font_const.dart';
+import '../pages/splash/splash_screen.dart';
 import '../utils/local_preferences.dart';
 import 'my_router.dart';
 
@@ -54,9 +51,9 @@ class MyAppState extends State<MyApp> {
   // static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   late Map<String, dynamic> _deviceData;
 
-  GetMaterialApp _buildGetMaterialApp(BuildContext context) {
+  MaterialApp _buildGetMaterialApp(BuildContext context) {
     final config = AppConfig.of(context);
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: config?.debugTag ?? false,
       theme: ThemeData(
         brightness: Brightness.light,

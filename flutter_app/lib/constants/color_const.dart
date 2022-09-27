@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'hex_color.dart';
 
 class ColorConst {
@@ -45,3 +44,4 @@ class ColorConst {
   static const Color lightOrangeColor = Color.fromRGBO(243, 111, 33, 0.1);
   static const Color mediumGreyColor = Color.fromRGBO(34, 49, 63, 0.7);
 }
+
