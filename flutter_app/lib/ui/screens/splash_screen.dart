@@ -11,6 +11,9 @@ class SplashScreen extends StatefulWidget {
 }
 
 
+/**
+ * Test project
+ */
 class _SplashScreenState extends State<SplashScreen> {
   int _counter = 0;
 

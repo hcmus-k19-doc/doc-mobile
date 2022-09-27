@@ -9,11 +9,11 @@ class MyRouter {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      // case home:
+      // case login:
       //   return MaterialPageRoute(builder: (_) => LoginScreen());
       case splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen(title: 'Hehe',));
-      // case HOME:
+      // case home:
       //   return MaterialPageRoute(builder: (_) => HomeScreen());
       default:
         return MaterialPageRoute(
