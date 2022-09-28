@@ -15,28 +15,27 @@ class MyRouter {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var args = settings.arguments;
-    if (args is ScreenArguments) {
       switch (settings.name) {
         case splash:
           return MaterialPageRoute(
-              builder: (_) => const SplashScreen(title: 'Flutter demo',));
+              builder: (_) => const SplashScreen());
       // case home:
       //   return MaterialPageRoute(builder: (_) => HomeScreen(title: settings.arguments, number: null,));
         case home:
-          String? mTitle = args.title;
-          int? mNumber = args.number;
+          if (args is ScreenArguments) {
+            String? mTitle = args.title;
+            int? mNumber = args.number;
             return MaterialPageRoute(
                 builder: (_) =>
-                    HomeScreen(title: mTitle??"Hehe", number: mNumber??0),
+                    HomeScreen(title: mTitle ?? "Missing title", number: mNumber ?? 0),
                 settings: RouteSettings(
                     name: home, arguments: settings.arguments));
+          } else {
+            return errorRoute("Input for Home - routing is not ScreenArguments");
+          }
         default:
           return errorRoute("No route-name founded");
       }
-    }
-    else {
-      return errorRoute("Input for routing is not ScreenArguments");
-    }
   }
 
   static Route<dynamic> errorRoute(String errorMsg) {

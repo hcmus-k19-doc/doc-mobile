@@ -7,9 +7,10 @@ void main() {
   MyApp.initSystemDefault();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    AppConfig(
-        debugTag: false,
+    const AppConfig(
+      appName: "DOC",
+        debugTag: true,
         initialRoute: MyRouter.splash,
-        child: MyApp.runWidget()),
+        child: MyApp()),
   );
 }

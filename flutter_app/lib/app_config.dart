@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class AppConfig extends InheritedWidget {
   const AppConfig({
     Key? key,
+    required this.appName,
     required this.debugTag,
     required this.initialRoute,
     required Widget child,
   }) : super(key: key, child: child);
 
+  final String appName;
   final String initialRoute;
   final bool debugTag;
 

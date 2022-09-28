@@ -3,9 +3,9 @@ import 'package:flutter_app/app/my_router.dart';
 import '../../constants/export_constants.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key, required this.title}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
-  final String title;
+  final String title = "Hehe";
 
 
   @override

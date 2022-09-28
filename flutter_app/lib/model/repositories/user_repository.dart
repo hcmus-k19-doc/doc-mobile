@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import '../../utils/local_preferences.dart';
 
 class UserRepository {
+  static const String userPrefix = "user/";
   LocalPreferences localPreferences;
   final dio = Dio();
 
