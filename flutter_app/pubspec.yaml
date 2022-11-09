@@ -61,6 +61,12 @@ dependencies:
   json_serializable: ^6.3.1
   get: ^4.6.5
 
+  #Get device info and access to camera
+  device_info_plus: ^8.0.0
+  camera: ^0.10.0+4
+  path: ^1.8.1
+  path_provider: ^2.0.11
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

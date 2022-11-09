@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../pages/camera_screen.dart';
 import '../pages/home/home_screen.dart';
 import '../pages/splash/splash_screen.dart';
 
@@ -12,6 +13,7 @@ class MyRouter {
   static const String home = 'home';
   static const String splash = '/';
   static const String login = 'login';
+  static const String camera = 'camera';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var args = settings.arguments;
@@ -33,6 +35,9 @@ class MyRouter {
           } else {
             return errorRoute("Input for Home - routing is not ScreenArguments");
           }
+        case camera:
+          return MaterialPageRoute(
+              builder: (_) => const CameraScreen());
         default:
           return errorRoute("No route-name founded");
       }
