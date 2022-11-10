@@ -1,12 +1,18 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import '../pages/camera_screen.dart';
 import '../pages/home/home_screen.dart';
 import '../pages/splash/splash_screen.dart';
 
-class ScreenArguments{
-  final String? title;
-  final int? number;
-  const ScreenArguments({this.title, this.number});
+class HomeArguments{
+  final String title;
+  final int number;
+  const HomeArguments({required this.title, required this.number});
+}
+
+class CameraArguments {
+  final CameraDescription camera;
+  const CameraArguments({required this.camera});
 }
 
 class MyRouter {
@@ -24,20 +30,27 @@ class MyRouter {
       // case home:
       //   return MaterialPageRoute(builder: (_) => HomeScreen(title: settings.arguments, number: null,));
         case home:
-          if (args is ScreenArguments) {
-            String? mTitle = args.title;
-            int? mNumber = args.number;
+          if (args is HomeArguments) {
+            String mTitle = args.title;
+            int mNumber = args.number;
             return MaterialPageRoute(
                 builder: (_) =>
-                    HomeScreen(title: mTitle ?? "Missing title", number: mNumber ?? 0),
+                    HomeScreen(title: mTitle, number: mNumber),
                 settings: RouteSettings(
                     name: home, arguments: settings.arguments));
           } else {
             return errorRoute("Input for Home - routing is not ScreenArguments");
           }
         case camera:
-          return MaterialPageRoute(
-              builder: (_) => const CameraScreen());
+          if (args is CameraArguments) {
+            CameraDescription mCamera = args.camera;
+            return MaterialPageRoute(
+                builder: (_) => CameraScreen(camera: mCamera),
+                settings: RouteSettings(
+                  name: camera, arguments: settings.arguments));
+          } else {
+            return errorRoute("Input for Camera - routing is not ScreenArguments");
+          }
         default:
           return errorRoute("No route-name founded");
       }
