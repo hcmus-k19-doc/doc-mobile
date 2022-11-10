@@ -1,0 +1,120 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+
+class APIProvider {
+  late final Dio dio;
+
+  APIProvider(String apiBaseUrl) {
+    dio = Dio();
+    dio.options.baseUrl = apiBaseUrl;
+  }
+
+  Future<dynamic> post({required String url, Map<String, dynamic>? headers, Map<String, dynamic>? data, CancelToken? cancelToken}) async {
+    try {
+      final response = await dio.post(url, options: Options(headers: headers), data: data, cancelToken: cancelToken);
+      var responseJson = json.decode(response.toString());
+      switch(responseJson['responseCode']) {
+        case 200:
+          return responseJson;
+        case 201:
+          return responseJson;
+        case 401:
+          throw UnauthorizedException(responseJson['message'].toString());
+        case 419:
+          throw AccessTokenExpiredException(responseJson['message'].toString());
+        case 500:
+          throw FailedException(responseJson['message'].toString());
+      }
+    } on DioError catch(err) {
+      switch(err.type) {
+        case DioErrorType.cancel:
+          throw FailedException("Request is cancelled");
+        default:
+          throw FailedException("Failed");
+      }
+    }
+  }
+
+  Future<dynamic> get({required String url, Map<String, dynamic>? headers, CancelToken? cancelToken}) async {
+    try {
+      final response = await dio.get(url, options: Options(headers: headers), cancelToken: cancelToken);
+      var responseJson = json.decode(response.toString());
+      switch(responseJson['responseCode']) {
+        case 200:
+          return responseJson;
+        case 201:
+          throw NoHaveDataException(responseJson['message'].toString());
+        case 401:
+          throw UnauthorizedException(responseJson['message'].toString());
+        case 419:
+          throw AccessTokenExpiredException(responseJson['message'].toString());
+        case 500:
+          throw FailedException(responseJson['message'].toString());
+      }
+    } on DioError catch(err) {
+      switch(err.type) {
+        case DioErrorType.cancel:
+          throw FailedException("Không thể kết nối tới máy chủ");
+        default:
+          throw FailedException("Failed");
+      }
+    }
+  }
+
+  Future<dynamic> postFormData({required String url, Map<String, dynamic>? headers, required FormData data, CancelToken? cancelToken}) async {
+    try {
+      final response = await dio.post(url, options: Options(headers: headers, contentType: Headers.formUrlEncodedContentType), data: data, cancelToken: cancelToken);
+      var responseJson = json.decode(response.toString());
+      switch(responseJson['responseCode']) {
+        case 200:
+          return responseJson;
+        case 201:
+          throw NoHaveDataException(responseJson['message'].toString());
+        case 401:
+          throw UnauthorizedException(responseJson['message'].toString());
+        case 419:
+          throw AccessTokenExpiredException(responseJson['message'].toString());
+        case 500:
+          throw FailedException(responseJson['message'].toString());
+      }
+    } on DioError catch(err) {
+      switch(err.type) {
+        case DioErrorType.cancel:
+          throw FailedException("Không thể kết nối tới máy chủ");
+        default:
+          throw FailedException("Failed");
+      }
+    }
+  }
+}
+
+class APIException implements Exception {
+  final String? _message;
+  final String? _prefix;
+
+  APIException([this._message, this._prefix]);
+
+  @override
+  String toString() {
+    return "$_prefix$_message";
+  }
+}
+
+class NoHaveDataException extends APIException {
+  NoHaveDataException([message]) : super(message, "");
+}
+
+class UnauthorizedException extends APIException {
+  UnauthorizedException([message]) : super(message, "Unauthorized: ");
+}
+
+class AccessTokenExpiredException extends APIException {
+  AccessTokenExpiredException([message]) : super(message, "Access token expired: ");
+}
+
+class FailedException extends APIException {
+  FailedException([message]) : super(message, "Lỗi: ");
+}
