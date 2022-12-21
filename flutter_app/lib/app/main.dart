@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'app/my_app.dart';
-import 'app/my_router.dart';
-import 'app_config.dart';
+import 'my_app.dart';
+import 'router.dart';
+import 'config.dart';
 
 Future<void> main() async {
   MyApp.initSystemDefault();

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../app_config.dart';
+import 'config.dart';
 import '../constants/export_constants.dart';
 import '../model/repositories/user_repository.dart';
 import '../utils/local_preferences.dart';
-import 'my_router.dart';
+import 'router.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);

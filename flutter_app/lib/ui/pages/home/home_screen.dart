@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../constants/export_constants.dart';
+import '../../../constants/export_constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title, required this.number}) : super(key: key);

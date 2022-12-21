@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/my_router.dart';
-import '../../constants/export_constants.dart';
+import 'package:flutter_app/app/router.dart';
+import '../../../constants/export_constants.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);

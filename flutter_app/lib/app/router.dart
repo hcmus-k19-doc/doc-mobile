@@ -1,8 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import '../pages/camera_screen.dart';
-import '../pages/home/home_screen.dart';
-import '../pages/splash/splash_screen.dart';
+
+import '../ui/pages/home/home_screen.dart';
+import '../ui/pages/camera_screen.dart';
+import '../ui/pages/splash/splash_screen.dart';
 
 class HomeArguments{
   final String title;
