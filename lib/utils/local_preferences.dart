@@ -48,11 +48,9 @@ class DATA_CONST {
   static const String SESSION = "SESSION";
   static const String CACHE_DEVICE_ID = "CACHE_DEVICE_ID";
   static const String ACCESS_TOKEN = "ACCESS_TOKEN";
-  static const String KEY_ACTIVE = "KEY_ACTIVE";
   static const String DEVICE_ID = "device_id";
   static const String DEVICE_NAME = "device_name";
   static const String DEVICE_TOKEN = "device_token";
   static const String DEVICE_PLATFORM = "device_platform";
   static const String VERSION_APP = "version_app";
-  static const String FIRST_TIME_OPEN_LIST_PRICE = "FIRST_TIME_OPEN_LIST_PRICE";
 }

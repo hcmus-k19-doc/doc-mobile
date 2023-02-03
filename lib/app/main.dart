@@ -13,6 +13,7 @@ Future<void> main() async {
       appName: "DOC",
         debugTag: true,
         initialRoute: MyRouter.splash,
+        baseUrl: "http://localhost:8080/api/v1",
         child: MyApp()),
   );
 }

@@ -18,11 +18,6 @@ class UserRepository {
     return session;
   }
 
-  Future<String> getKeyActive() async {
-    var keyActive = await localPreferences.getString(DATA_CONST.KEY_ACTIVE);
-    return keyActive;
-  }
-
   Future<String> getVersionApp() async {
     var versionApp = await localPreferences.getString(DATA_CONST.VERSION_APP);
     return versionApp;
@@ -30,10 +25,6 @@ class UserRepository {
 
   Future<bool> cacheSession(String session) {
     return localPreferences.saveString(DATA_CONST.SESSION, session);
-  }
-
-  Future<bool> cacheKeyActive(String value) {
-    return localPreferences.saveString(DATA_CONST.KEY_ACTIVE, value);
   }
 
   Future<bool> cacheVersionApp(String value) {
