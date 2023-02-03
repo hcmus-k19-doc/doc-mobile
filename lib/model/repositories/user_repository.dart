@@ -1,37 +1,20 @@
 import 'package:dio/dio.dart';
-import '../../utils/local_preferences.dart';
+import '../../constants/export_constants.dart';
+import '../response/user/login_response.dart';
+import 'basic_repository.dart';
 
-class UserRepository {
-  static const String userPrefix = "user/";
-  LocalPreferences localPreferences;
-  final dio = Dio();
+class UserRepository extends BasicRepository {
+  static const String customerPrefix = "customer/";
 
-  UserRepository({required this.localPreferences});
+  UserRepository(String apiBaseUrl) : super(apiBaseUrl, customerPrefix);
 
-  Future<String> getAccessToken() async {
-    var accessToken = await localPreferences.getString(DATA_CONST.ACCESS_TOKEN);
-    return accessToken;
-  }
-
-  Future<String> getSession() async {
-    var session = await localPreferences.getString(DATA_CONST.SESSION);
-    return session;
-  }
-
-  Future<String> getVersionApp() async {
-    var versionApp = await localPreferences.getString(DATA_CONST.VERSION_APP);
-    return versionApp;
-  }
-
-  Future<bool> cacheSession(String session) {
-    return localPreferences.saveString(DATA_CONST.SESSION, session);
-  }
-
-  Future<bool> cacheVersionApp(String value) {
-    return localPreferences.saveString(DATA_CONST.VERSION_APP, value);
-  }
-
-  Future<bool> logout() async {
-    return await localPreferences.logout();
+  Future<LoginResponse> getTestObject(String randomParam, String accessToken) async {
+    final response = await provider.get(
+      url: "home-components?customerId=$randomParam",
+      headers: {
+        "Authorization": accessToken
+      },
+    );
+    return LoginResponse.fromJson(response);
   }
 }

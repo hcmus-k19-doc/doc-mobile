@@ -58,6 +58,7 @@ dependencies:
   #JSON parse: https://docs.flutter.dev/development/data-and-backend/json
   json_annotation: ^4.5.0
   build_runner: ^2.2.0
+  build_test: ^2.1.0
   json_serializable: ^6.3.1
   get: ^4.6.5
 
@@ -88,7 +89,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  generate: true
+  generate: false
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/

@@ -45,7 +45,6 @@ abstract class Pref {
 }
 
 class DATA_CONST {
-  static const String SESSION = "SESSION";
   static const String CACHE_DEVICE_ID = "CACHE_DEVICE_ID";
   static const String ACCESS_TOKEN = "ACCESS_TOKEN";
   static const String DEVICE_ID = "device_id";

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/model/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'config.dart';
 import '../constants/export_constants.dart';
-import '../model/repositories/user_repository.dart';
 import '../utils/local_preferences.dart';
 import 'router.dart';
 
@@ -28,12 +28,12 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final LocalPreferences localPreferences = LocalPreferences();
+    final config = AppConfig.of(context)!;
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<UserRepository>(
             create: (context) =>
-                UserRepository(localPreferences: localPreferences)),
+                UserRepository(config.baseUrl)),
       ],
       // child: MultiBlocProvider(
       //     providers: [],
