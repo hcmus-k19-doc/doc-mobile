@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 
 import '../../bloc/api_provider.dart';
 
-class BasicRepository {
+class BaseRepository {
   late CancelToken cancelToken;
   late APIProvider provider;
 
-  BasicRepository(String apiBaseUrl, String prefix) {
+  BaseRepository(String apiBaseUrl, String prefix) {
     provider = APIProvider("$apiBaseUrl$prefix");
     cancelToken = CancelToken();
   }

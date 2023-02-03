@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import '../../constants/export_constants.dart';
 import '../response/user/login_response.dart';
-import 'basic_repository.dart';
+import 'base_repository.dart';
 
-class UserRepository extends BasicRepository {
+class UserRepository extends BaseRepository {
   static const String customerPrefix = "customer/";
 
   UserRepository(String apiBaseUrl) : super(apiBaseUrl, customerPrefix);
