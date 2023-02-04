@@ -9,10 +9,12 @@ Future<void> main() async {
 
 
   runApp(
+    //nay cung duoc nhma hoi roi
+    //ve co ban la cho MyApp chia vao AppConfig InheritedWidget de lay cai value ra thoi
     const AppConfig(
       appName: "DOC",
         debugTag: true,
-        initialRoute: MyRouter.splash,
+        initialRoute: MyRouter.login,
         baseUrl: "http://localhost:8080/api/v1",
         child: MyApp()),
   );

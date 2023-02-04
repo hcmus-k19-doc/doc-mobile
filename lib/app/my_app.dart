@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/constants/hex_color.dart';
 import 'package:flutter_app/model/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  final navigatorKey = GlobalKey<NavigatorState>();
+  final navigatorKey = GlobalKey<NavigatorState>(); //ko can lam
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ class MyAppState extends State<MyApp> {
         title: config.appName,
         debugShowCheckedModeBanner: config.debugTag,
         theme: ThemeData(
-            primaryColor: Colors.teal[600],
+            primaryColor: HexColor("4FAFD1"),
             primaryColorDark: Colors.teal[900],
             primarySwatch: Colors.blue,
             focusColor: Colors.grey[850],

@@ -92,7 +92,7 @@ flutter:
   generate: false
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/
+    - assets/images/
     - assets/1.5x/
     - assets/2.0x/
     - assets/3.0x/
