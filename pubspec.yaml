@@ -43,7 +43,6 @@ dependencies:
   http: ^0.13.4
   retrofit: ^3.0.1+1
   dio: ^4.0.6
-  connectivity_plus: ^3.0.2
 
   #Local key-value storage
   shared_preferences: ^2.0.15
@@ -89,7 +88,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  generate: false
+  generate: true
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/

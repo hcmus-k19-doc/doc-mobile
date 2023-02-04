@@ -7,7 +7,7 @@ class BaseRepository {
   late APIProvider provider;
 
   BaseRepository(String apiBaseUrl, String prefix) {
-    provider = APIProvider("$apiBaseUrl$prefix");
+    provider = APIProvider("$apiBaseUrl/$prefix");
     cancelToken = CancelToken();
   }
 
