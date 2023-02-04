@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _incrementCounter() {
     setState(() {
       _counter++;
-      getDeviceDetails().then((value) => { getInfo = value}); // ????? wtf is this
+      getDeviceDetails().then((value) => { getInfo = value});
     });
   }
 
