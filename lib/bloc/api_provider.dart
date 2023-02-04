@@ -40,19 +40,19 @@ class APIProvider {
 
   Future<dynamic> get({required String url, Map<String, dynamic>? headers, CancelToken? cancelToken}) async {
     try {
+      //Sua do de goi API test
       final response = await dio.get(url, options: Options(headers: headers), cancelToken: cancelToken);
-      var responseJson = json.decode(response.toString());
-      switch(responseJson['responseCode']) {
+      switch(response.statusCode) {
         case 200:
-          return responseJson;
+          return response.data;
         case 201:
-          throw NoHaveDataException(responseJson['message'].toString());
+          throw NoHaveDataException(response.data['message'].toString());
         case 401:
-          throw UnauthorizedException(responseJson['message'].toString());
+          throw UnauthorizedException(response.data['message'].toString());
         case 419:
-          throw AccessTokenExpiredException(responseJson['message'].toString());
+          throw AccessTokenExpiredException(response.data['message'].toString());
         case 500:
-          throw FailedException(responseJson['message'].toString());
+          throw FailedException(response.data['message'].toString());
       }
     } on DioError catch(err) {
       switch(err.type) {

@@ -1,7 +1,10 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/bloc/login_bloc/login_bloc.dart';
 import 'package:flutter_app/ui/pages/base/base_screen.dart';
 import 'package:flutter_app/ui/pages/login/login_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path/path.dart';
 
 import '../ui/pages/home/home_screen.dart';
 import '../ui/pages/camera_screen.dart';
@@ -28,7 +31,6 @@ class MyRouter {
   //DOC
   static const String baseScreen = 'base-screen';
   static const String login = 'login';
-
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var args = settings.arguments;
@@ -63,7 +65,12 @@ class MyRouter {
         return MaterialPageRoute(
             builder: (_) => BaseScreen(title: "VĂN BẢN ĐẾN"));
       case login:
-        return MaterialPageRoute(builder: (_) => LoginScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<LoginBloc>(
+            create: (context) => LoginBloc(),
+            child: LoginScreen(),
+          ),
+        );
       default:
         return errorRoute("No route-name founded");
     }

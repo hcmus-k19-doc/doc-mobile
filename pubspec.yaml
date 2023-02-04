@@ -53,6 +53,7 @@ dependencies:
   #BLoC for state management
   bloc: ^8.0.3
   flutter_bloc: ^8.0.1
+  equatable: ^2.0.5
 
   #JSON parse: https://docs.flutter.dev/development/data-and-backend/json
   json_annotation: ^4.5.0
