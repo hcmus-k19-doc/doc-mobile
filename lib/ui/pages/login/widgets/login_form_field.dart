@@ -4,12 +4,17 @@ import 'package:flutter_app/constants/color_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginFormField extends StatelessWidget {
+class LoginFormField extends StatefulWidget {
   const LoginFormField({Key? key}) : super(key: key);
 
   @override
+  State<LoginFormField> createState() => _LoginFormFieldState();
+}
+
+class _LoginFormFieldState extends State<LoginFormField> {
+  @override
   Widget build(BuildContext context) {
-    var _loginBloc = BlocProvider.of<LoginBloc>(context);
+    LoginBloc _loginBloc = BlocProvider.of<LoginBloc>(context);
     return BlocBuilder(
         bloc: _loginBloc,
         builder: (context, state) {
