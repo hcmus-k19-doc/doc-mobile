@@ -3,7 +3,9 @@ import 'package:flutter_app/bloc/login_bloc/login_bloc.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/ui/pages/login/widgets/login_form_field.dart';
+import 'package:flutter_app/ui/pages/login/widgets/sign_in_btn.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -13,7 +15,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    var _loginBloc = BlocProvider.of<LoginBloc>(context);
+    LoginBloc _loginBloc = BlocProvider.of<LoginBloc>(context);
     return BlocConsumer(
         bloc: _loginBloc,
         listener: (context, state) {
@@ -52,42 +54,30 @@ class LoginScreen extends StatelessWidget {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           child: Column(
                             children: [
-
-                              LoginFormField(),
+                              //textField email and password
+                              const LoginFormField(),
 
                               const SizedBox(
-                                height: StyleConst.defaultPadding * 2,
+                                height: StyleConst.defaultPadding / 2,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: StyleConst.defaultPadding * 3),
-                                child: ElevatedButton(
-                                    onPressed: formKey.currentState == null
-                                        ? null
-                                        : formKey.currentState!.validate()
-                                            ? () {
-                                                //API test
-                                                _loginBloc.add(LoginEvent(
-                                                    "https://fakestoreapi.com/"));
-                                              }
-                                            : null,
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            Theme.of(context).primaryColor,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                StyleConst.defaultRadius)),
-                                        padding: const EdgeInsets.all(12)),
-                                    child: Center(
-                                      child: state is LoginLoading
-                                          ? CircularProgressIndicator()
-                                          : Text(
-                                              "Sign in",
-                                              style:
-                                                  FontConst.SEMIBOLD_WHITE_18,
-                                            ),
-                                    )),
+
+                              Visibility(
+                                visible: state is LoginFailure ? true : false,
+                                maintainSize: true,
+                                maintainAnimation: true,
+                                maintainState: true,
+                                child: Text(
+                                  "Fail to Login",
+                                  style: FontConst.medium
+                                      .copyWith(color: Colors.red),
+                                ),
                               ),
+
+                              const SizedBox(
+                                height: StyleConst.defaultPadding / 2,
+                              ),
+                              //Sign in btn
+                              SigninBtn(formKey, _loginBloc, context, state!!)
                             ],
                           ))
                     ],

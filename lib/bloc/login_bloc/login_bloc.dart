@@ -15,7 +15,7 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
     on<LoginEvent>((event, emit) async {
-      if (state is LoginInitial) {
+      if (state is LoginInitial || state is LoginFailure) {
         emit(LoginLoading());
         APIProvider apiProvider = APIProvider(event.url);
         try {
