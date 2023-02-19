@@ -17,7 +17,7 @@ Widget SigninBtn(GlobalKey<FormState> formKey, LoginBloc loginBloc,
                 loginBloc.add(const LoginEvent("https://fakestoreapi.com/"));
               },
         style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).primaryColor,
+            primary: Theme.of(context).primaryColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(StyleConst.defaultRadius)),
             padding: const EdgeInsets.all(12)),

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app/constants/hex_color.dart';
 import 'package:flutter_app/model/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'config.dart';
 import '../constants/export_constants.dart';
@@ -85,8 +86,12 @@ class MyAppState extends State<MyApp> {
               button: TextStyle(color: Colors.grey[850], fontSize: 14),
             )),
         onGenerateRoute: MyRouter.generateRoute,
-        // localizationsDelegates: AppLocalizations.localizationsDelegates,
-        // supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates:
+        GlobalMaterialLocalizations.delegates,
+        supportedLocales: const [
+          Locale('en'), // English
+          Locale('vi'), // Spanish
+        ],
         navigatorKey: navigatorKey,
         // navigatorObservers: [routeObserver],
         initialRoute: config.initialRoute.toString());

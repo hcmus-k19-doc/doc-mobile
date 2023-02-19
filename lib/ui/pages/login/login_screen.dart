@@ -15,9 +15,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    LoginBloc _loginBloc = BlocProvider.of<LoginBloc>(context);
+    LoginBloc loginBloc = BlocProvider.of<LoginBloc>(context);
     return BlocConsumer(
-        bloc: _loginBloc,
+        bloc: loginBloc,
         listener: (context, state) {
           if (state is LoginSuccess) {
             Navigator.pushNamed(context, "base-screen");
@@ -77,7 +77,7 @@ class LoginScreen extends StatelessWidget {
                                 height: StyleConst.defaultPadding / 2,
                               ),
                               //Sign in btn
-                              SigninBtn(formKey, _loginBloc, context, state!!)
+                              SigninBtn(formKey, loginBloc, context, state!!)
                             ],
                           ))
                     ],
