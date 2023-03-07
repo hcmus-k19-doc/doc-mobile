@@ -31,16 +31,26 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final config = AppConfig.of(context)!;
-    return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider<UserRepository>(
-            create: (context) =>
-                UserRepository(config.baseUrl)),
-      ],
-      // child: MultiBlocProvider(
-      //     providers: [],
-      child: _buildMyApp(context),
-      // )
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild != null) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        }
+      },
+      child: MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider<UserRepository>(
+              create: (context) =>
+                  UserRepository(config.baseUrl)),
+        ],
+        // child: MultiBlocProvider(
+        //     providers: [],
+        child: _buildMyApp(context),
+        // )
+      ),
     );
   }
 

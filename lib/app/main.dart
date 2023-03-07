@@ -9,8 +9,6 @@ Future<void> main() async {
 
 
   runApp(
-    //nay cung duoc nhma hoi roi
-    //ve co ban la cho MyApp chia vao AppConfig InheritedWidget de lay cai value ra thoi
     const AppConfig(
       appName: "DOC",
         debugTag: true,

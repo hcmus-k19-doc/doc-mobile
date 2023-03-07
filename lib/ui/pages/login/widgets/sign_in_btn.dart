@@ -3,37 +3,31 @@ import 'package:flutter_app/bloc/login_bloc/login_bloc.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 
-Widget SigninBtn(GlobalKey<FormState> formKey, LoginBloc loginBloc,
-    BuildContext context, Object state) {
-  return Padding(
-    padding:
-        const EdgeInsets.symmetric(horizontal: StyleConst.defaultPadding * 3),
-    child: ElevatedButton(
-        onPressed: formKey.currentState == null ||
-                !formKey.currentState!.validate()
-            ? null
-            : () {
-                //API test
-                loginBloc.add(const LoginEvent("https://fakestoreapi.com/"));
-              },
+class SignInBtn extends StatelessWidget {
+  const SignInBtn({Key? key, required this.formKey}) : super(key: key);
+  final GlobalKey<FormState> formKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Theme.of(context).primaryColor,
+            padding: const EdgeInsets.all(16),
+            elevation: 2,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(StyleConst.defaultRadius)),
-            padding: const EdgeInsets.all(12)),
-        child: Center(
-          child: state is LoginLoading
-              ? const SizedBox(
-                  height: StyleConst.defaultPadding,
-                  width: StyleConst.defaultPadding,
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation(Colors.white),
-                  ),
-                )
-              : Text(
-                  "Sign in",
-                  style: FontConst.SEMIBOLD_WHITE_18,
-                ),
-        )),
-  );
+                borderRadius: BorderRadius.circular(StyleConst.defaultRadius))),
+        onPressed: () {
+          if (formKey.currentState!.validate())
+            {
+              print("Valid login");
+            }
+        },
+        child: Text(
+          "Login",
+          style: FontConst.medium.copyWith(fontSize: 18),
+        ),
+      ),
+    );
+  }
 }
