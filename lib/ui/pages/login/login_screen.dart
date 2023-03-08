@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
         bloc: loginBloc,
         listener: (context, state) {
           if (state is LoginSuccess) {
-            Navigator.pushNamed(context, "base-screen");
+            Navigator.pushReplacementNamed(context, "base-screen");
           }
         },
         builder: (context, state) {

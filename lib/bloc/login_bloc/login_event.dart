@@ -1,8 +1,9 @@
 part of 'login_bloc.dart';
 
 class LoginEvent extends Equatable {
-  final String url;
-  const LoginEvent(this.url);
+  final String userName;
+  final String password;
+  const LoginEvent(this.userName, this.password);
 
   @override
   // TODO: implement props
