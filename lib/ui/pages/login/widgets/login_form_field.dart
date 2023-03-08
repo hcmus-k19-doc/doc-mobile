@@ -7,7 +7,8 @@ import 'package:flutter_app/utils/validation_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginFormField extends StatefulWidget {
-  const LoginFormField({Key? key}) : super(key: key);
+  const LoginFormField({Key? key, required this.emailTextEditingController, required this.passwordTextEditingController}) : super(key: key);
+  final TextEditingController emailTextEditingController, passwordTextEditingController;
 
   @override
   State<LoginFormField> createState() => _LoginFormFieldState();
@@ -37,6 +38,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
               ),
 
               TextFormField(
+                controller: widget.emailTextEditingController,
                 validator: (value) {
                   if (value != null && !value.isValidEmail) {
                     return 'Email must follow standard format';
@@ -65,6 +67,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
               ),
               //password textField
               TextFormField(
+                controller: widget.passwordTextEditingController,
                 obscureText: !_passwordVisible,
                 validator: (value) {
                   //Currently just stick with password length

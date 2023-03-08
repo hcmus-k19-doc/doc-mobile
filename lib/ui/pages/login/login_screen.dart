@@ -12,11 +12,14 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
+  TextEditingController emailEditingController = TextEditingController();
+  TextEditingController passwordEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     LoginBloc loginBloc = BlocProvider.of<LoginBloc>(context);
+
     return BlocConsumer(
         bloc: loginBloc,
         listener: (context, state) {
@@ -55,7 +58,12 @@ class LoginScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               //textField email and password
-                              const LoginFormField(),
+                              LoginFormField(
+                                emailTextEditingController:
+                                    emailEditingController,
+                                passwordTextEditingController:
+                                    passwordEditingController,
+                              ),
 
                               Container(
                                 alignment: Alignment.centerRight,
@@ -86,11 +94,19 @@ class LoginScreen extends StatelessWidget {
                                 ),
                               ),
 
+                                state is LoginLoading ?  CircularProgressIndicator() : SizedBox(),
+
                               const SizedBox(
                                 height: StyleConst.defaultPadding / 2,
                               ),
 
-                              SignInBtn(formKey: _formKey)
+                              SignInBtn(
+                                formKey: _formKey,
+                                emailTextEditingController:
+                                    emailEditingController,
+                                passwordTextEditingController:
+                                    passwordEditingController,
+                              )
                             ],
                           ))
                     ],

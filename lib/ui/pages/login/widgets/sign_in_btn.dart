@@ -6,8 +6,9 @@ import 'package:flutter_app/constants/url_const.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInBtn extends StatelessWidget {
-  const SignInBtn({Key? key, required this.formKey}) : super(key: key);
+  const SignInBtn({Key? key, required this.formKey, required this.emailTextEditingController, required this.passwordTextEditingController}) : super(key: key);
   final GlobalKey<FormState> formKey;
+  final TextEditingController emailTextEditingController, passwordTextEditingController;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,8 @@ class SignInBtn extends StatelessWidget {
                     borderRadius: BorderRadius.circular(
                         StyleConst.defaultRadius))),
             onPressed: () {
-              _loginBloc.add(const LoginEvent("user1", "user1"));
+              _loginBloc.add(LoginEvent(emailTextEditingController.text
+                  , passwordTextEditingController.text));
               // if (formKey.currentState!.validate()) {
               // }
             },

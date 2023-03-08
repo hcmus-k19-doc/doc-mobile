@@ -5,16 +5,17 @@ import 'package:flutter_app/exceptions.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
 
 class Api {
-  late final Dio api;
+  Dio api = Dio();
   String? accessToken;
   final SecuredLocalStorage _storage = SecuredLocalStorage();
 
   Api(String baseUrl) {
-    api = Dio();
     api.options.baseUrl = baseUrl;
 
     api.interceptors
         .add(InterceptorsWrapper(onRequest: (options, handler) async {
+      options.connectTimeout = 3000;
+      options.receiveTimeout = 3000;
 
       accessToken = await _storage.readString(KEY_CONST.ACCESS_TOKEN_KEY);
 
@@ -28,10 +29,10 @@ class Api {
       return handler.next(options);
     }, onError: (DioError error, handler) async {
       //if invalid token
-      if (error.response?.statusCode == 401 || error.response?.statusCode == 419) {
+      if (error.response?.statusCode == 401 &&
+          error.response?.data["message"] == "Invalid token") {
         String? refreshToken =
             await _storage.readString(KEY_CONST.REFRESH_TOKEN_KEY);
-
         if (refreshToken != null) {
           if (await refreshTokenApi(refreshToken)) {
             //success get new access token retry a request
@@ -43,11 +44,18 @@ class Api {
     }));
   }
 
-
-  Future<dynamic> post({required String url, Map<String, dynamic>? headers,String? contentType, Map<String, dynamic>? data, CancelToken? cancelToken}) async {
+  Future<dynamic> post(
+      {required String url,
+      Map<String, dynamic>? headers,
+      String? contentType,
+      Map<String, dynamic>? data,
+      CancelToken? cancelToken}) async {
     try {
-      final response = await api.post(url, options: Options(headers: headers, contentType: contentType), data: data, cancelToken: cancelToken);
-      switch(response.statusCode) {
+      final response = await api.post(url,
+          options: Options(headers: headers, contentType: contentType),
+          data: data,
+          cancelToken: cancelToken);
+      switch (response.statusCode) {
         case 200:
           return response.data;
         case 201:
@@ -55,35 +63,41 @@ class Api {
         case 401:
           throw UnauthorizedException(response.data['message'].toString());
         case 419:
-          throw AccessTokenExpiredException(response.data['message'].toString());
+          throw AccessTokenExpiredException(
+              response.data['message'].toString());
         case 500:
           throw FailedException(response.data['message'].toString());
       }
-    } on DioError catch(err) {
-      switch(err.type) {
+    } on DioError catch (err) {
+      switch (err.type) {
         case DioErrorType.cancel:
           throw FailedException("Request is cancelled");
         default:
-          throw FailedException("Failed");
+          throw FailedException(err.response?.data["message"]);
       }
     }
   }
 
-
-
   Future<bool> refreshTokenApi(String refreshToken) async {
-    final reponse =
-        await api.post("/auth/refresh", data: {'refreshToken': refreshToken});
-    if (reponse.statusCode == 201) {
-      //get new access token
-      accessToken = reponse.data;
-      await _storage.saveString(KEY_CONST.ACCESS_TOKEN_KEY, accessToken!);
-      return true;
-    } else {
-      //invalid refresh token
-      accessToken = null;
-      _storage.deleteAll();
-      return false;
+    try {
+      final reponse = await api.post("/security/auth/token/refresh",
+          options: Options(
+            contentType: Headers.formUrlEncodedContentType,
+          ),
+          data: {'refreshToken': refreshToken});
+      if (reponse.statusCode == 200) {
+        //get new access token
+        accessToken = reponse.data["access_token"];
+        await _storage.saveString(KEY_CONST.ACCESS_TOKEN_KEY, accessToken!);
+        return true;
+      } else {
+        //invalid refresh token
+        accessToken = null;
+        _storage.deleteAll();
+        return false;
+      }
+    } catch (err) {
+      rethrow;
     }
   }
 

@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/constants/hex_color.dart';
 import 'package:flutter_app/model/repositories/user_repository.dart';
+import 'package:flutter_app/utils/secured_local_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+
 
 import 'config.dart';
 import '../constants/export_constants.dart';
-import '../utils/local_preferences.dart';
 import 'router.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key, this.accessToken}) : super(key: key);
+  final String? accessToken;
 
   static void initSystemDefault() {
     SystemChrome.setSystemUIOverlayStyle(
@@ -29,6 +32,12 @@ class MyAppState extends State<MyApp> {
   final navigatorKey = GlobalKey<NavigatorState>(); //ko can lam
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final config = AppConfig.of(context)!;
     return GestureDetector(
@@ -43,11 +52,8 @@ class MyAppState extends State<MyApp> {
       child: MultiRepositoryProvider(
         providers: [
           RepositoryProvider<UserRepository>(
-              create: (context) =>
-                  UserRepository(config.baseUrl)),
+              create: (context) => UserRepository(config.baseUrl)),
           //
-
-
         ],
         // child: MultiBlocProvider(
         //     providers: [],
@@ -99,14 +105,16 @@ class MyAppState extends State<MyApp> {
               button: TextStyle(color: Colors.grey[850], fontSize: 14),
             )),
         onGenerateRoute: MyRouter.generateRoute,
-        localizationsDelegates:
-        GlobalMaterialLocalizations.delegates,
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
         supportedLocales: const [
           Locale('en'), // English
           Locale('vi'), // Spanish
         ],
         navigatorKey: navigatorKey,
         // navigatorObservers: [routeObserver],
-        initialRoute: config.initialRoute.toString());
+        initialRoute: (widget.accessToken != null &&
+            JwtDecoder.isExpired(widget.accessToken!) == false)
+            ? MyRouter.baseScreen
+            : config.initialRoute.toString());
   }
 }

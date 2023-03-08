@@ -39,6 +39,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           emit(LoginSuccess());
           emit(LoginInitial());
         } catch (err) {
+          print(err);
           emit(LoginFailure(err as APIException));
         }
       }

@@ -7,13 +7,13 @@ import 'config.dart';
 Future<void> main() async {
   MyApp.initSystemDefault();
   WidgetsFlutterBinding.ensureInitialized();
-
+  String? accessToken = await SecuredLocalStorage().readString(KEY_CONST.ACCESS_TOKEN_KEY);
   runApp(
-    const AppConfig(
+    AppConfig(
       appName: "DOC",
         debugTag: true,
         initialRoute: MyRouter.login,
         baseUrl: "http://localhost:8080/api/v1",
-        child: MyApp()),
+        child: MyApp(accessToken: accessToken,)),
   );
 }
