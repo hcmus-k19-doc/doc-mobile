@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/constants/hex_color.dart';
 import 'package:flutter_app/model/repositories/user_repository.dart';
+import 'package:flutter_app/utils/secured_local_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 import 'config.dart';
 import '../constants/export_constants.dart';
-import '../utils/local_preferences.dart';
 import 'router.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key, this.accessToken}) : super(key: key);
+  final String? accessToken;
 
   static void initSystemDefault() {
     SystemChrome.setSystemUIOverlayStyle(
@@ -27,20 +29,46 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   final navigatorKey = GlobalKey<NavigatorState>(); //ko can lam
+  late bool isLoggedIn;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkLogin();
+  }
+
+  Future<void> checkLogin() async {
+    isLoggedIn = widget.accessToken != null &&
+        !JwtDecoder.isExpired(widget.accessToken!);
+    if (!isLoggedIn) {
+      await SecuredLocalStorage().deleteAll();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final config = AppConfig.of(context)!;
-    return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider<UserRepository>(
-            create: (context) =>
-                UserRepository(config.baseUrl)),
-      ],
-      // child: MultiBlocProvider(
-      //     providers: [],
-      child: _buildMyApp(context),
-      // )
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild != null) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        }
+      },
+      child: MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider<UserRepository>(
+              create: (context) => UserRepository(config.baseUrl)),
+          //
+        ],
+        // child: MultiBlocProvider(
+        //     providers: [],
+        child: _buildMyApp(context),
+        // )
+      ),
     );
   }
 
@@ -65,35 +93,36 @@ class MyAppState extends State<MyApp> {
               textTheme: ButtonTextTheme.accent,
             ),
             primaryTextTheme: TextTheme(
-              caption: TextStyle(color: Colors.grey[700], fontSize: 10),
-              bodyText1: TextStyle(
+              bodySmall: TextStyle(color: Colors.grey[700], fontSize: 10),
+              bodyLarge: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
-              bodyText2: TextStyle(color: Colors.grey[700], fontSize: 12),
-              subtitle1: TextStyle(
+              bodyMedium: TextStyle(color: Colors.grey[700], fontSize: 12),
+              titleMedium: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 16,
                   fontWeight: FontWeight.w500),
-              subtitle2: TextStyle(
+              titleSmall: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 14,
                   fontWeight: FontWeight.w500),
-              headline6: TextStyle(
+              titleLarge: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 18,
                   fontWeight: FontWeight.w500),
-              button: TextStyle(color: Colors.grey[850], fontSize: 14),
+              labelLarge: TextStyle(color: Colors.grey[850], fontSize: 14),
             )),
         onGenerateRoute: MyRouter.generateRoute,
-        localizationsDelegates:
-        GlobalMaterialLocalizations.delegates,
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
         supportedLocales: const [
           Locale('en'), // English
           Locale('vi'), // Spanish
         ],
         navigatorKey: navigatorKey,
         // navigatorObservers: [routeObserver],
-        initialRoute: config.initialRoute.toString());
+        initialRoute: isLoggedIn
+            ? MyRouter.baseScreen
+            : config.initialRoute.toString());
   }
 }

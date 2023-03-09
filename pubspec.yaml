@@ -68,6 +68,12 @@ dependencies:
   path: ^1.8.1
   path_provider: ^2.0.11
 
+  #local secure storage
+  flutter_secure_storage: ^8.0.0
+
+  #jwt_decode
+  jwt_decoder: ^2.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
