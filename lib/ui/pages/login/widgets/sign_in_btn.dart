@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/login_bloc/login_bloc.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
-import 'package:flutter_app/constants/url_const.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInBtn extends StatelessWidget {
-  const SignInBtn({Key? key, required this.formKey, required this.emailTextEditingController, required this.passwordTextEditingController}) : super(key: key);
+  const SignInBtn(
+      {Key? key,
+      required this.formKey,
+      required this.emailTextEditingController,
+      required this.passwordTextEditingController})
+      : super(key: key);
   final GlobalKey<FormState> formKey;
-  final TextEditingController emailTextEditingController, passwordTextEditingController;
+  final TextEditingController emailTextEditingController,
+      passwordTextEditingController;
 
   @override
   Widget build(BuildContext context) {
@@ -20,23 +25,35 @@ class SignInBtn extends StatelessWidget {
         return SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(16),
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        StyleConst.defaultRadius))),
-            onPressed: () {
-              _loginBloc.add(LoginEvent(emailTextEditingController.text
-                  , passwordTextEditingController.text));
-              // if (formKey.currentState!.validate()) {
-              // }
-            },
-            child: Text(
-              "Login",
-              style: FontConst.medium.copyWith(fontSize: 18),
-            ),
-          ),
+              style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(16),
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(StyleConst.defaultRadius))),
+              onPressed: state is LoginLoading
+                  ? null
+                  : () {
+                      if (formKey.currentState!.validate()) {
+                        _loginBloc.add(LoginEvent(
+                            emailTextEditingController.text,
+                            passwordTextEditingController.text));
+                      }
+                    },
+              child: Center(
+                child: state is LoginLoading
+                    ? const SizedBox(
+                        height: StyleConst.defaultPadding,
+                        width: StyleConst.defaultPadding,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        ),
+                      )
+                    : Text(
+                        "Login",
+                        style: FontConst.medium.copyWith(fontSize: 18),
+                      ),
+              )),
         );
       },
     );

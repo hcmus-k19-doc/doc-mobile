@@ -6,14 +6,13 @@ import 'package:flutter_app/constants/value_const.dart';
 import 'package:flutter_app/ui/pages/login/widgets/login_form_field.dart';
 import 'package:flutter_app/ui/pages/login/widgets/sign_in_btn.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
-  TextEditingController emailEditingController = TextEditingController();
-  TextEditingController passwordEditingController = TextEditingController();
+  final TextEditingController emailEditingController = TextEditingController();
+  final TextEditingController passwordEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     splashFactory: NoSplash.splashFactory,
                                   ),
-                                  child: Text("Forgot your password?"),
+                                  child: const Text("Forgot your password?"),
                                   onPressed: () {
                                     print("Forgot password");
                                   },
@@ -88,13 +87,11 @@ class LoginScreen extends StatelessWidget {
                               Visibility(
                                 visible: state is LoginFailure ? true : false,
                                 child: Text(
-                                  "Fail to Login",
+                                  "Failed to Login",
                                   style: FontConst.medium
                                       .copyWith(color: Colors.red),
                                 ),
                               ),
-
-                                state is LoginLoading ?  CircularProgressIndicator() : SizedBox(),
 
                               const SizedBox(
                                 height: StyleConst.defaultPadding / 2,

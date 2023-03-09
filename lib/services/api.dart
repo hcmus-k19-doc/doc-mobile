@@ -27,12 +27,16 @@ class Api {
 
       options.headers['Authorization'] = 'Bearer $accessToken';
       return handler.next(options);
+
     }, onError: (DioError error, handler) async {
-      //if invalid token
+
+      //only run if access Token expired or invalid.
+      //Need to discuss with Nam to have the message of Expired Token
       if (error.response?.statusCode == 401 &&
           error.response?.data["message"] == "Invalid token") {
         String? refreshToken =
             await _storage.readString(KEY_CONST.REFRESH_TOKEN_KEY);
+
         if (refreshToken != null) {
           if (await refreshTokenApi(refreshToken)) {
             //success get new access token retry a request

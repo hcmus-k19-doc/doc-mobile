@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
-
 import 'config.dart';
 import '../constants/export_constants.dart';
 import 'router.dart';
@@ -30,11 +29,21 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   final navigatorKey = GlobalKey<NavigatorState>(); //ko can lam
+  late bool isLoggedIn;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    checkLogin();
+  }
+
+  Future<void> checkLogin() async {
+    isLoggedIn = widget.accessToken != null &&
+        !JwtDecoder.isExpired(widget.accessToken!);
+    if (!isLoggedIn) {
+      await SecuredLocalStorage().deleteAll();
+    }
   }
 
   @override
@@ -84,25 +93,25 @@ class MyAppState extends State<MyApp> {
               textTheme: ButtonTextTheme.accent,
             ),
             primaryTextTheme: TextTheme(
-              caption: TextStyle(color: Colors.grey[700], fontSize: 10),
-              bodyText1: TextStyle(
+              bodySmall: TextStyle(color: Colors.grey[700], fontSize: 10),
+              bodyLarge: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
-              bodyText2: TextStyle(color: Colors.grey[700], fontSize: 12),
-              subtitle1: TextStyle(
+              bodyMedium: TextStyle(color: Colors.grey[700], fontSize: 12),
+              titleMedium: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 16,
                   fontWeight: FontWeight.w500),
-              subtitle2: TextStyle(
+              titleSmall: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 14,
                   fontWeight: FontWeight.w500),
-              headline6: TextStyle(
+              titleLarge: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 18,
                   fontWeight: FontWeight.w500),
-              button: TextStyle(color: Colors.grey[850], fontSize: 14),
+              labelLarge: TextStyle(color: Colors.grey[850], fontSize: 14),
             )),
         onGenerateRoute: MyRouter.generateRoute,
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
@@ -112,8 +121,7 @@ class MyAppState extends State<MyApp> {
         ],
         navigatorKey: navigatorKey,
         // navigatorObservers: [routeObserver],
-        initialRoute: (widget.accessToken != null &&
-            JwtDecoder.isExpired(widget.accessToken!) == false)
+        initialRoute: isLoggedIn
             ? MyRouter.baseScreen
             : config.initialRoute.toString());
   }

@@ -3,7 +3,6 @@ import 'package:flutter_app/bloc/login_bloc/login_bloc.dart';
 import 'package:flutter_app/constants/color_const.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
-import 'package:flutter_app/utils/validation_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginFormField extends StatefulWidget {
@@ -40,11 +39,12 @@ class _LoginFormFieldState extends State<LoginFormField> {
               TextFormField(
                 controller: widget.emailTextEditingController,
                 validator: (value) {
-                  if (value != null && !value.isValidEmail) {
-                    return 'Email must follow standard format';
-                  } else {
-                    return null;
-                  }
+                  // if (value != null && !value.isValidEmail) {
+                  //   return 'Email must follow standard format';
+                  // } else {
+                  //   return null;
+                  // }
+                  return null; //Fix this later
                 },
                 enabled: state is LoginLoading ? false : true,
                 decoration: InputDecoration(
@@ -53,7 +53,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                         borderRadius:
                             BorderRadius.circular(StyleConst.defaultRadius)),
                     hintText: 'Ex: email@gmail.com',
-                    hintStyle: TextStyle(color: ColorConst.textFieldHintColor)),
+                    hintStyle: const TextStyle(color: ColorConst.textFieldHintColor)),
               ),
 
               Padding(
@@ -71,11 +71,13 @@ class _LoginFormFieldState extends State<LoginFormField> {
                 obscureText: !_passwordVisible,
                 validator: (value) {
                   //Currently just stick with password length
-                  if (value != null && value.length < 7) {
-                    return "Enter min. 7 characters";
-                  } else {
-                    return null;
-                  }
+                  // if (value != null && value.length < 7) {
+                  //   return "Enter min. 7 characters";
+                  // } else {
+                  //   return null;
+                  // }
+                  return null; //Fix this later
+
                 },
                 enabled: state is LoginLoading ? false : true,
                 decoration: InputDecoration(
@@ -94,7 +96,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                         borderRadius:
                             BorderRadius.circular(StyleConst.defaultRadius)),
                     hintText: "*********",
-                    hintStyle: TextStyle(color: ColorConst.textFieldHintColor)),
+                    hintStyle: const TextStyle(color: ColorConst.textFieldHintColor)),
               ),
             ],
           );
