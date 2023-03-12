@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
+import 'package:flutter_app/bloc/login_bloc/login_bloc.dart';
 import 'package:flutter_app/constants/hex_color.dart';
 import 'package:flutter_app/model/repositories/user_repository.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
@@ -12,8 +14,7 @@ import '../constants/export_constants.dart';
 import 'router.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key, this.accessToken}) : super(key: key);
-  final String? accessToken;
+  const MyApp({Key? key}) : super(key: key);
 
   static void initSystemDefault() {
     SystemChrome.setSystemUIOverlayStyle(
@@ -28,23 +29,14 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  final navigatorKey = GlobalKey<NavigatorState>(); //ko can lam
-  late bool isLoggedIn;
+  final navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    checkLogin();
   }
 
-  Future<void> checkLogin() async {
-    isLoggedIn = widget.accessToken != null &&
-        !JwtDecoder.isExpired(widget.accessToken!);
-    if (!isLoggedIn) {
-      await SecuredLocalStorage().deleteAll();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +50,17 @@ class MyAppState extends State<MyApp> {
           FocusManager.instance.primaryFocus?.unfocus();
         }
       },
-      child: MultiRepositoryProvider(
+      // child: MultiRepositoryProvider(
+      //   providers: [
+      //     RepositoryProvider<UserRepository>(
+      //         create: (context) => UserRepository(config.baseUrl)),
+      //     //
+      //   ],
+      child: MultiBlocProvider(
         providers: [
-          RepositoryProvider<UserRepository>(
-              create: (context) => UserRepository(config.baseUrl)),
-          //
+          BlocProvider(create: (context) => AuthBloc()),
+          BlocProvider(create: (context) => LoginBloc()),
         ],
-        // child: MultiBlocProvider(
-        //     providers: [],
         child: _buildMyApp(context),
         // )
       ),
@@ -121,8 +116,6 @@ class MyAppState extends State<MyApp> {
         ],
         navigatorKey: navigatorKey,
         // navigatorObservers: [routeObserver],
-        initialRoute: isLoggedIn
-            ? MyRouter.baseScreen
-            : config.initialRoute.toString());
+        initialRoute: config.initialRoute.toString());
   }
 }

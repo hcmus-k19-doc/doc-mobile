@@ -33,7 +33,7 @@ class Api {
       //only run if access Token expired or invalid.
       //Need to discuss with Nam to have the message of Expired Token
       if (error.response?.statusCode == 401 &&
-          error.response?.data["message"] == "Invalid token") {
+          error.response?.data["message"] == "Unauthorized: Access token expired") {
         String? refreshToken =
             await _storage.readString(KEY_CONST.REFRESH_TOKEN_KEY);
 
