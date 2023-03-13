@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_app/exceptions.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class Api {
   Dio api = Dio();
@@ -14,13 +13,13 @@ class Api {
 
     api.interceptors
         .add(InterceptorsWrapper(onRequest: (options, handler) async {
-      options.connectTimeout = 3000;
-      options.receiveTimeout = 3000;
+      options.connectTimeout = const Duration(seconds: 6);
+      options.receiveTimeout = const Duration(seconds: 6);
 
       accessToken = await _storage.readString(KEY_CONST.ACCESS_TOKEN_KEY);
 
 
-      if (accessToken == null)
+      if (accessToken == null || JwtDecoder.isExpired(accessToken!))
         {
           return handler.next(options);
         }
@@ -32,8 +31,9 @@ class Api {
 
       //only run if access Token expired or invalid.
       //Need to discuss with Nam to have the message of Expired Token
+
       if (error.response?.statusCode == 401 &&
-          error.response?.data["message"] == "Invalid token") {
+          error.response?.data["message"] == "ACCESS_TOKEN.INVALID") {
         String? refreshToken =
             await _storage.readString(KEY_CONST.REFRESH_TOKEN_KEY);
 

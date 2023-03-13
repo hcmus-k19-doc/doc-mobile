@@ -66,10 +66,7 @@ class MyRouter {
             builder: (_) => BaseScreen(title: "VĂN BẢN ĐẾN"));
       case login:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider<LoginBloc>(
-            create: (context) => LoginBloc(),
-            child: LoginScreen(),
-          ),
+          builder: (_) => LoginScreen(),
         );
       default:
         return errorRoute("No route-name founded");
