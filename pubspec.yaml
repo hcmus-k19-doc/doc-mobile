@@ -40,9 +40,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   #API
-  http: ^0.13.4
-  retrofit: ^3.0.1+1
-  dio: ^4.0.6
+  dio: ^5.0.2
 
   #Local key-value storage
   shared_preferences: ^2.0.15

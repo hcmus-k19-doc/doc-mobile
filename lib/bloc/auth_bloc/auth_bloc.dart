@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/constants/url_const.dart';
 import 'package:flutter_app/services/api.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
@@ -26,8 +27,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           accessToken = event.accessTokenStorage;
           refreshToken = event.refreshTokenStorage;
           emit(Authenticated());
-        }
-        else {
+        } else {
           Api api = Api(UrlConst.DOC_SERVICE_URL);
           SecuredLocalStorage _storage = SecuredLocalStorage();
 
@@ -35,8 +35,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             final response = await api.post(
                 url: "/security/auth/token/refresh",
                 contentType: Headers.formUrlEncodedContentType,
-                data: {'refreshToken': refreshToken});
-            SecuredLocalStorage _storage = SecuredLocalStorage();
+                data: {'refreshToken': event.refreshTokenStorage});
+
             await _storage.saveString(
                 KEY_CONST.ACCESS_TOKEN_KEY, response["access_token"]!);
             await _storage.saveString(
@@ -46,13 +46,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             refreshToken = response["refresh_token"];
             emit(Authenticated());
           } else {
-            print("hello");
-            _storage.deleteAll();
+            await _storage.deleteAll();
             emit(UnAuthenticated());
           }
         }
       } catch (error) {
-        print(error);
+        await SecuredLocalStorage().deleteAll();
         emit(AuthError());
       }
     });
