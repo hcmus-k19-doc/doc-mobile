@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_app/bloc/api_provider.dart';
+import 'package:flutter_app/services/api_provider.dart';
 import 'package:flutter_app/constants/url_const.dart';
 import 'package:flutter_app/exceptions.dart';
 import 'package:flutter_app/model/repositories/base_repository.dart';

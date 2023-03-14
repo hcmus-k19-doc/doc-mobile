@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/bloc/login_bloc/login_bloc.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
@@ -12,8 +13,10 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController emailEditingController = TextEditingController();
-  final TextEditingController passwordEditingController = TextEditingController();
+  final TextEditingController usernameEditingController =
+      TextEditingController();
+  final TextEditingController passwordEditingController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +62,8 @@ class LoginScreen extends StatelessWidget {
                             children: [
                               //textField email and password
                               LoginFormField(
-                                emailTextEditingController:
-                                    emailEditingController,
+                                usernameTextEditingController:
+                                    usernameEditingController,
                                 passwordTextEditingController:
                                     passwordEditingController,
                               ),
@@ -77,9 +80,14 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     splashFactory: NoSplash.splashFactory,
                                   ),
-                                  child: const Text("Forgot your password?"),
+                                  child: Text(
+                                    "Forgot your password?",
+                                    style: FontConst.regular.copyWith(
+                                        color: Theme.of(context).primaryColor),
+                                  ),
                                   onPressed: () {
-                                    print("Forgot password");
+                                    Navigator.pushNamed(
+                                        context, MyRouter.forgotPassword);
                                   },
                                 ),
                               ),
@@ -100,8 +108,8 @@ class LoginScreen extends StatelessWidget {
 
                               SignInBtn(
                                 formKey: _formKey,
-                                emailTextEditingController:
-                                    emailEditingController,
+                                usernameTextEditingController:
+                                    usernameEditingController,
                                 passwordTextEditingController:
                                     passwordEditingController,
                               )

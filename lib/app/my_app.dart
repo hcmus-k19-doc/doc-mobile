@@ -87,6 +87,9 @@ class MyAppState extends State<MyApp> {
               buttonColor: Colors.grey[800],
               textTheme: ButtonTextTheme.accent,
             ),
+            appBarTheme: AppBarTheme(
+              color: HexColor("4FAFD1")
+            ),
             primaryTextTheme: TextTheme(
               bodySmall: TextStyle(color: Colors.grey[700], fontSize: 10),
               bodyLarge: TextStyle(

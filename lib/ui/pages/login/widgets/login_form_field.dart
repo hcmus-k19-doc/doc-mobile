@@ -6,8 +6,13 @@ import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginFormField extends StatefulWidget {
-  const LoginFormField({Key? key, required this.emailTextEditingController, required this.passwordTextEditingController}) : super(key: key);
-  final TextEditingController emailTextEditingController, passwordTextEditingController;
+  const LoginFormField(
+      {Key? key,
+      required this.usernameTextEditingController,
+      required this.passwordTextEditingController})
+      : super(key: key);
+  final TextEditingController usernameTextEditingController,
+      passwordTextEditingController;
 
   @override
   State<LoginFormField> createState() => _LoginFormFieldState();
@@ -31,13 +36,13 @@ class _LoginFormFieldState extends State<LoginFormField> {
                 padding: const EdgeInsets.only(
                     bottom: StyleConst.defaultPadding / 2),
                 child: Text(
-                  "Email",
+                  "Username",
                   style: FontConst.SEMIBOLD_BLACK_18,
                 ),
               ),
 
               TextFormField(
-                controller: widget.emailTextEditingController,
+                controller: widget.usernameTextEditingController,
                 validator: (value) {
                   // if (value != null && !value.isValidEmail) {
                   //   return 'Email must follow standard format';
@@ -48,12 +53,18 @@ class _LoginFormFieldState extends State<LoginFormField> {
                 },
                 enabled: state is LoginLoading ? false : true,
                 decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Theme.of(context).primaryColor, width: 2),
+                        borderRadius:
+                            BorderRadius.circular(StyleConst.defaultRadius)),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: ColorConst.lightGrey),
                         borderRadius:
                             BorderRadius.circular(StyleConst.defaultRadius)),
-                    hintText: 'Ex: email@gmail.com',
-                    hintStyle: const TextStyle(color: ColorConst.textFieldHintColor)),
+                    hintText: 'Ex: abc123xyz',
+                    hintStyle:
+                        const TextStyle(color: ColorConst.textFieldHintColor)),
               ),
 
               Padding(
@@ -77,10 +88,14 @@ class _LoginFormFieldState extends State<LoginFormField> {
                   //   return null;
                   // }
                   return null; //Fix this later
-
                 },
                 enabled: state is LoginLoading ? false : true,
                 decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Theme.of(context).primaryColor, width: 2),
+                        borderRadius:
+                            BorderRadius.circular(StyleConst.defaultRadius)),
                     suffixIcon: IconButton(
                       icon: Icon(_passwordVisible
                           ? Icons.visibility
@@ -96,7 +111,8 @@ class _LoginFormFieldState extends State<LoginFormField> {
                         borderRadius:
                             BorderRadius.circular(StyleConst.defaultRadius)),
                     hintText: "*********",
-                    hintStyle: const TextStyle(color: ColorConst.textFieldHintColor)),
+                    hintStyle:
+                        const TextStyle(color: ColorConst.textFieldHintColor)),
               ),
             ],
           );

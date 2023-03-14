@@ -72,6 +72,8 @@ class FontConst {
       REGULAR_MEDIUM_GREY.copyWith(fontSize: 14);
   static final REGULAR_MEDIUM_GREY_16 =
       REGULAR_MEDIUM_GREY.copyWith(fontSize: 16);
+  static final REGULAR_MEDIUM_GREY_18 =
+      REGULAR_MEDIUM_GREY.copyWith(fontSize: 18);
 
   static final REGULAR_BLUE = regular.copyWith(color: ColorConst.blue);
   static final REGULAR_BLUE_14 = REGULAR_BLUE.copyWith(fontSize: 14);

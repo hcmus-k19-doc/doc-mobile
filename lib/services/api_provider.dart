@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_app/exceptions.dart';
 
-//xai ke duoc
+//xai ke duoc nay xem template post get nay kia co gi implement ben file API trong services
 class APIProvider {
   late final Dio dio;
 
