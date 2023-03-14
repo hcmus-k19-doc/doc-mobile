@@ -8,11 +8,11 @@ class SignInBtn extends StatelessWidget {
   const SignInBtn(
       {Key? key,
       required this.formKey,
-      required this.emailTextEditingController,
+      required this.usernameTextEditingController,
       required this.passwordTextEditingController})
       : super(key: key);
   final GlobalKey<FormState> formKey;
-  final TextEditingController emailTextEditingController,
+  final TextEditingController usernameTextEditingController,
       passwordTextEditingController;
 
   @override
@@ -28,6 +28,7 @@ class SignInBtn extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
                   elevation: 2,
+                  backgroundColor: Theme.of(context).primaryColor,
                   shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(StyleConst.defaultRadius))),
@@ -36,7 +37,7 @@ class SignInBtn extends StatelessWidget {
                   : () {
                       if (formKey.currentState!.validate()) {
                         _loginBloc.add(LoginEvent(
-                            emailTextEditingController.text,
+                            usernameTextEditingController.text,
                             passwordTextEditingController.text));
                       }
                     },
