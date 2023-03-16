@@ -27,7 +27,7 @@ class CameraArguments {
 
 class MyRouter {
   static const String home = 'home';
-  static const String splash = '/';
+  static const String splash = '/splash';
   static const String camera = 'camera';
 
   //DOC
@@ -68,7 +68,7 @@ class MyRouter {
         }
       case baseScreen:
         return MaterialPageRoute(
-            builder: (_) => BaseScreen(title: "VĂN BẢN ĐẾN"));
+            builder: (_) => const BaseScreen());
       case login:
         return MaterialPageRoute(
           builder: (_) => LoginScreen(),
