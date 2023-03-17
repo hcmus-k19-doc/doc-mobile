@@ -10,7 +10,7 @@ part 'list_incoming_event.dart';
 part 'list_incoming_state.dart';
 
 class ListIncomingBloc extends Bloc<ListIncomingEvent, ListIncomingState> {
-  IncomingDocumentRepositoryImpl repository;
+  IncomingDocumentRepository repository;
   ListIncomingBloc(this.repository) : super(ListIncomingInitial()) {
     on<FetchIncomingListDocumentEvent>((event, emit) async {
       if (state is! ListIncomingSuccess) {

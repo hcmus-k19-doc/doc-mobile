@@ -34,8 +34,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     refressTokenLocalStorage =
         await SecuredLocalStorage().readString(KEY_CONST.REFRESH_TOKEN_KEY);
-
-
     authBloc.add(
         CheckTokenEvent(accessTokenLocalStorage, refressTokenLocalStorage));
   }

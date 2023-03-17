@@ -104,35 +104,37 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
                 const SizedBox(
                   height: StyleConst.defaultPadding / 2,
                 ),
-                state is ListIncomingLoading
-                    ? Column(
-                        children: testDocumentTile
-                            .map((e) => Column(
-                                  children: const [
-                                    ShimmerLoadingDocTile(),
-                                    SizedBox(
-                                      height: StyleConst.defaultPadding,
-                                    )
-                                  ],
-                                ))
-                            .toList(),
-                      )
-                    : state is ListIncomingSuccess
-                        ? Column(
-                            children: state.listDocs
-                                .map((e) => Column(
-                                      children: [
-                                        DocumentTile(
-                                          incomingDocument: e,
-                                        ),
-                                        const SizedBox(
-                                          height: StyleConst.defaultPadding,
-                                        )
-                                      ],
-                                    ))
-                                .toList(),
-                          )
-                        : Text("Fail to get list document")
+                
+                if (state is ListIncomingLoading)
+                  Column(
+                    children: testDocumentTile
+                        .map((e) => Column(
+                              children: const [
+                                ShimmerLoadingDocTile(),
+                                SizedBox(
+                                  height: StyleConst.defaultPadding,
+                                )
+                              ],
+                            ))
+                        .toList(),
+                  )
+                else if (state is ListIncomingSuccess)
+                  Column(
+                    children: state.listDocs
+                        .map((e) => Column(
+                              children: [
+                                DocumentTile(
+                                  incomingDocument: e,
+                                ),
+                                const SizedBox(
+                                  height: StyleConst.defaultPadding,
+                                )
+                              ],
+                            ))
+                        .toList(),
+                  )
+                else
+                  Text("Fail to get list document")
               ],
             ),
           ),

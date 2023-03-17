@@ -12,5 +12,16 @@ class CheckTokenEvent extends AuthEvent {
 
   @override
   // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
+}
+
+class LoginEvent extends AuthEvent {
+  final String username;
+  final String password;
+
+  const LoginEvent(this.username, this.password);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
 }

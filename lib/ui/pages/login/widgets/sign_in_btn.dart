@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bloc/login_bloc/login_bloc.dart';
+import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,10 +17,10 @@ class SignInBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoginBloc _loginBloc = BlocProvider.of<LoginBloc>(context);
+    AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
 
-    return BlocBuilder<LoginBloc, LoginState>(
-      bloc: _loginBloc,
+    return BlocBuilder<AuthBloc, AuthState>(
+      bloc: authBloc,
       builder: (context, state) {
         return SizedBox(
           width: double.infinity,
@@ -32,17 +32,17 @@ class SignInBtn extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(StyleConst.defaultRadius))),
-              onPressed: state is LoginLoading
+              onPressed: state is AuthLoading
                   ? null
                   : () {
                       if (formKey.currentState!.validate()) {
-                        _loginBloc.add(LoginEvent(
+                        authBloc.add(LoginEvent(
                             usernameTextEditingController.text,
                             passwordTextEditingController.text));
                       }
                     },
               child: Center(
-                child: state is LoginLoading
+                child: state is AuthLoading
                     ? const SizedBox(
                         height: StyleConst.defaultPadding,
                         width: StyleConst.defaultPadding,
