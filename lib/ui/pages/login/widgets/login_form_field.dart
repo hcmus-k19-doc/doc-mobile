@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bloc/login_bloc/login_bloc.dart';
+import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:flutter_app/constants/color_const.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
@@ -23,9 +23,9 @@ class _LoginFormFieldState extends State<LoginFormField> {
 
   @override
   Widget build(BuildContext context) {
-    LoginBloc _loginBloc = BlocProvider.of<LoginBloc>(context);
+    AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
     return BlocBuilder(
-        bloc: _loginBloc,
+        bloc: authBloc,
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +51,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                   // }
                   return null; //Fix this later
                 },
-                enabled: state is LoginLoading ? false : true,
+                enabled: state is AuthLoading ? false : true,
                 decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -89,7 +89,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                   // }
                   return null; //Fix this later
                 },
-                enabled: state is LoginLoading ? false : true,
+                enabled: state is AuthLoading ? false : true,
                 decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/router.dart';
-import 'package:flutter_app/bloc/login_bloc/login_bloc.dart';
+import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/constants/value_const.dart';
@@ -21,13 +21,13 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    LoginBloc loginBloc = BlocProvider.of<LoginBloc>(context);
+    AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
 
     return BlocConsumer(
-        bloc: loginBloc,
+        bloc: authBloc,
         listener: (context, state) {
-          if (state is LoginSuccess) {
-            Navigator.pushReplacementNamed(context, "base-screen");
+          if (state is Authenticated) {
+            Navigator.pushReplacementNamed(context, MyRouter.baseScreen);
           }
         },
         builder: (context, state) {
@@ -94,7 +94,7 @@ class LoginScreen extends StatelessWidget {
                               //Sign in btn
 
                               Visibility(
-                                visible: state is LoginFailure ? true : false,
+                                visible: state is AuthError ? true : false,
                                 child: Text(
                                   "Failed to Login",
                                   style: FontConst.medium

@@ -1,6 +1,5 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bloc/login_bloc/login_bloc.dart';
 import 'package:flutter_app/ui/pages/base/base_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/check_your_mail_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/forgot_pass_screen.dart';
@@ -27,7 +26,7 @@ class CameraArguments {
 
 class MyRouter {
   static const String home = 'home';
-  static const String splash = '/';
+  static const String splash = '/splash';
   static const String camera = 'camera';
 
   //DOC
@@ -35,7 +34,6 @@ class MyRouter {
   static const String login = '/login';
   static const String forgotPassword = "/forgot-password";
   static const String checkYourMail = "/check-your-mail";
-
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var args = settings.arguments;
@@ -67,8 +65,7 @@ class MyRouter {
               "Input for Camera - routing is not ScreenArguments");
         }
       case baseScreen:
-        return MaterialPageRoute(
-            builder: (_) => BaseScreen(title: "VĂN BẢN ĐẾN"));
+        return MaterialPageRoute(builder: (_) => const BaseScreen());
       case login:
         return MaterialPageRoute(
           builder: (_) => LoginScreen(),

@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/constants/url_const.dart';
+import 'package:flutter_app/repositories/auth_repository.dart';
 import 'package:flutter_app/services/api.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -14,45 +15,51 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  String? accessToken;
-  String? refreshToken;
+  AuthRepository repository;
 
-  AuthBloc() : super(UnAuthenticated()) {
+  AuthBloc(this.repository) : super(UnAuthenticated()) {
     on<CheckTokenEvent>((event, emit) async {
       emit(AuthLoading());
 
       try {
-        if (event.accessTokenStorage != null &&
-            !JwtDecoder.isExpired(event.accessTokenStorage!)) {
-          accessToken = event.accessTokenStorage;
-          refreshToken = event.refreshTokenStorage;
+        SecuredLocalStorage _storage = SecuredLocalStorage();
+
+        await repository.checkAuthentication(
+            event.accessTokenStorage, event.refreshTokenStorage);
+        if (repository.accessToken != null && repository.refreshToken != null) {
+          await _storage.saveString(
+              KEY_CONST.ACCESS_TOKEN_KEY, repository.accessToken!);
+          await _storage.saveString(
+              KEY_CONST.REFRESH_TOKEN_KEY, repository.refreshToken!);
           emit(Authenticated());
         } else {
-          Api api = Api(UrlConst.DOC_SERVICE_URL);
-          SecuredLocalStorage _storage = SecuredLocalStorage();
-
-          if (event.refreshTokenStorage != null) {
-            final response = await api.post(
-                url: "/security/auth/token/refresh",
-                contentType: Headers.formUrlEncodedContentType,
-                data: {'refreshToken': event.refreshTokenStorage});
-
-            await _storage.saveString(
-                KEY_CONST.ACCESS_TOKEN_KEY, response["access_token"]!);
-            await _storage.saveString(
-                KEY_CONST.REFRESH_TOKEN_KEY, response["refresh_token"]!);
-
-            accessToken = response["access_token"];
-            refreshToken = response["refresh_token"];
-            emit(Authenticated());
-          } else {
-            await _storage.deleteAll();
-            emit(UnAuthenticated());
-          }
+          await _storage.deleteAll();
+          emit(UnAuthenticated());
         }
       } catch (error) {
         await SecuredLocalStorage().deleteAll();
         emit(AuthError());
+      }
+    });
+    on<LoginEvent>((event, emit) async {
+      if (state is UnAuthenticated || state is AuthError) {
+        emit(AuthLoading());
+        try {
+          await repository.login(event.username, event.password);
+          if (repository.accessToken != null &&
+              repository.refreshToken != null) {
+            SecuredLocalStorage _storage = SecuredLocalStorage();
+            await _storage.saveString(
+                KEY_CONST.ACCESS_TOKEN_KEY, repository.accessToken!);
+            await _storage.saveString(
+                KEY_CONST.REFRESH_TOKEN_KEY, repository.refreshToken!);
+            emit(Authenticated());
+          } else {
+            emit(AuthError());
+          }
+        } catch (err) {
+          emit(AuthError());
+        }
       }
     });
   }

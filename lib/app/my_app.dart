@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
-import 'package:flutter_app/bloc/login_bloc/login_bloc.dart';
+import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
 import 'package:flutter_app/constants/hex_color.dart';
-import 'package:flutter_app/model/repositories/user_repository.dart';
-import 'package:flutter_app/utils/secured_local_storage.dart';
+import 'package:flutter_app/constants/url_const.dart';
+import 'package:flutter_app/repositories/auth_repository.dart';
+import 'package:flutter_app/repositories/incoming_document_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 
 import 'config.dart';
 import '../constants/export_constants.dart';
@@ -37,7 +37,6 @@ class MyAppState extends State<MyApp> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     final config = AppConfig.of(context)!;
@@ -58,8 +57,12 @@ class MyAppState extends State<MyApp> {
       //   ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => AuthBloc()),
-          BlocProvider(create: (context) => LoginBloc()),
+          BlocProvider(
+              create: (context) => AuthBloc(AuthRepository(
+                  "${UrlConst.DOC_SERVICE_URL}/security/auth/token"))),
+          BlocProvider(
+              create: (context) => ListIncomingBloc(IncomingDocumentRepository(
+                  "${UrlConst.DOC_SERVICE_URL}/incoming-documents")))
         ],
         child: _buildMyApp(context),
         // )
@@ -87,9 +90,7 @@ class MyAppState extends State<MyApp> {
               buttonColor: Colors.grey[800],
               textTheme: ButtonTextTheme.accent,
             ),
-            appBarTheme: AppBarTheme(
-              color: HexColor("4FAFD1")
-            ),
+            appBarTheme: AppBarTheme(color: HexColor("4FAFD1")),
             primaryTextTheme: TextTheme(
               bodySmall: TextStyle(color: Colors.grey[700], fontSize: 10),
               bodyLarge: TextStyle(

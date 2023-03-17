@@ -9,7 +9,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     const AppConfig(
-      appName: "DOC",
+        appName: "DOC",
         debugTag: true,
         initialRoute: MyRouter.splash,
         baseUrl: "http://localhost:8080/api/v1",

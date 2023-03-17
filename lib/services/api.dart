@@ -13,22 +13,15 @@ class Api {
 
     api.interceptors
         .add(InterceptorsWrapper(onRequest: (options, handler) async {
-      options.connectTimeout = const Duration(seconds: 6);
-      options.receiveTimeout = const Duration(seconds: 6);
-
       accessToken = await _storage.readString(KEY_CONST.ACCESS_TOKEN_KEY);
 
-
-      if (accessToken == null || JwtDecoder.isExpired(accessToken!))
-        {
-          return handler.next(options);
-        }
+      if (accessToken == null || JwtDecoder.isExpired(accessToken!)) {
+        return handler.next(options);
+      }
 
       options.headers['Authorization'] = 'Bearer $accessToken';
       return handler.next(options);
-
     }, onError: (DioError error, handler) async {
-
       //only run if access Token expired or invalid.
       //Need to discuss with Nam to have the message of Expired Token
 
