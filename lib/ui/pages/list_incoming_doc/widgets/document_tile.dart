@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/model/incoming_document.dart';
 
 class DocumentTile extends StatefulWidget {
-  const DocumentTile({Key? key}) : super(key: key);
+  const DocumentTile({Key? key, required this.incomingDocument})
+      : super(key: key);
+  final IncomingDocument incomingDocument;
 
   @override
   State<DocumentTile> createState() => _DocumentTileState();
@@ -22,17 +25,18 @@ class _DocumentTileState extends State<DocumentTile> {
           side: const BorderSide(color: Colors.black, width: 0.5)),
       leading: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [Text("1.")],
+        children: [Text("${widget.incomingDocument.id}.")],
       ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("120/ĐP"),
-          const Text("1737/VP-VX"),
+          Text("${widget.incomingDocument.incomingNumber}"),
+          Text("${widget.incomingDocument.originalSymbolNumber}"),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Flexible(child: Text("Công văn")),
+            children: [
+              Flexible(
+                  child: Text("${widget.incomingDocument.documentType?.type}")),
               Flexible(child: Text("Còn 5 ngày"))
             ],
           )
@@ -60,9 +64,12 @@ class _DocumentTileState extends State<DocumentTile> {
           child: Column(
             children: [
               Row(
-                children: const [
+                children: [
                   Expanded(child: Text("Cấp gửi:")),
-                  Flexible(flex: 2, child: Text("Thành phố"))
+                  Flexible(
+                      flex: 2,
+                      child: Text(
+                          "${widget.incomingDocument.sendingLevel?.level}"))
                 ],
                 crossAxisAlignment: CrossAxisAlignment.start,
               ),
@@ -71,11 +78,11 @@ class _DocumentTileState extends State<DocumentTile> {
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Expanded(child: Text("Ngày đến:")),
                   Flexible(
-                    child: Text("23/03/2022"),
                     flex: 2,
+                    child: Text("${widget.incomingDocument.arrivingDate}"),
                   )
                 ],
               ),
@@ -84,11 +91,12 @@ class _DocumentTileState extends State<DocumentTile> {
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Expanded(child: Text("Nơi phát hành:")),
                   Flexible(
                       flex: 2,
-                      child: Text("Lorem ipsum dolor sit amet consectetur."))
+                      child: Text(
+                          "${widget.incomingDocument.distributionOrg?.name}"))
                 ],
               ),
               const SizedBox(
@@ -96,12 +104,11 @@ class _DocumentTileState extends State<DocumentTile> {
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Expanded(child: Text("Trình yếu")),
                   Flexible(
                     flex: 2,
-                    child: Text(
-                        "Lorem ipsum dolor sit amet consectetur. Vitae turpis sed platea mauris tempus."),
+                    child: Text("${widget.incomingDocument.summary}"),
                   )
                 ],
               ),
@@ -120,9 +127,10 @@ class _DocumentTileState extends State<DocumentTile> {
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Expanded(child: Text("Trạng thái:")),
-                  Flexible(flex: 2, child: Text(""))
+                  Flexible(
+                      flex: 2, child: Text("${widget.incomingDocument.status}"))
                 ],
               ),
               const SizedBox(

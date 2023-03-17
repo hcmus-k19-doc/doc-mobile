@@ -72,6 +72,10 @@ dependencies:
   #jwt_decode
   jwt_decoder: ^2.0.1
 
+  #shimmer
+  shimmer: ^2.0.0
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
