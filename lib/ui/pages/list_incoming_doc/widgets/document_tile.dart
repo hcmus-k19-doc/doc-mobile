@@ -16,10 +16,10 @@ class _DocumentTileState extends State<DocumentTile> {
     return ExpansionTile(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(StyleConst.defaultRadius),
-          side: BorderSide(color: Colors.black, width: 0.5)),
+          side: const BorderSide(color: Colors.black, width: 0.5)),
       collapsedShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(StyleConst.defaultRadius),
-          side: BorderSide(color: Colors.black, width: 0.5)),
+          side: const BorderSide(color: Colors.black, width: 0.5)),
       leading: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [Text("1.")],
@@ -128,31 +128,30 @@ class _DocumentTileState extends State<DocumentTile> {
               const SizedBox(
                 height: StyleConst.defaultPadding / 2,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              StyleConst.defaultRadius), // <-- Radius
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal:
-                                StyleConst.defaultPadding / 2), // and this
+              Align(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            StyleConst.defaultRadius), // <-- Radius
                       ),
-                      child: Row(
-                        children: const [
-                          Text("Xem chi tiết"),
-                          SizedBox(
-                            width: StyleConst.defaultPadding / 2,
-                          ),
-                          Icon(Icons.arrow_circle_right_outlined)
-                        ],
-                      ))
-                ],
+                      padding: const EdgeInsets.symmetric(
+                          horizontal:
+                              StyleConst.defaultPadding / 2), // and this
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
+                        Text("Xem chi tiết"),
+                        SizedBox(
+                          width: StyleConst.defaultPadding / 2,
+                        ),
+                        Icon(Icons.arrow_circle_right_outlined)
+                      ],
+                    )),
               )
             ],
           ),

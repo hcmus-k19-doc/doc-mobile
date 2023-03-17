@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
-import 'package:flutter_app/ui/list_incoming_doc/list_incoming_doc_screen.dart';
-import 'package:flutter_app/ui/list_incoming_doc/test_screen.dart';
+import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
+import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({Key? key}) : super(key: key);
@@ -12,11 +11,7 @@ class BaseScreen extends StatefulWidget {
 }
 
 class _BaseScreenState extends State<BaseScreen> {
-
-  List<Widget> pages = [
-    const ListIncomingDocScreen(),
-    const TestScreen()
-  ];
+  List<Widget> pages = [const ListIncomingDocScreen(), const TestScreen()];
 
   int _currentIndex = 0;
   String _title = "Danh sách văn bản đến";
@@ -39,6 +34,7 @@ class _BaseScreenState extends State<BaseScreen> {
         ),
         drawer: MenuDrawer(onNewDrawerIndex: setNewDrawerIndex),
         body: PageView(
+          physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           children: pages,
         ),
@@ -53,5 +49,4 @@ class _BaseScreenState extends State<BaseScreen> {
       _pageController.jumpToPage(_currentIndex);
     });
   }
-
 }

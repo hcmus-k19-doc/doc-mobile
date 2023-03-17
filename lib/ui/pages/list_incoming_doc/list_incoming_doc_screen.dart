@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
-import 'package:flutter_app/ui/list_incoming_doc/widgets/document_tile.dart';
+import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/document_tile.dart';
+import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/seach_modal.dart';
 
 class ListIncomingDocScreen extends StatefulWidget {
   const ListIncomingDocScreen({Key? key}) : super(key: key);
@@ -14,6 +15,8 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
   int numUnHandle = 0;
   int numCoopHandle = 1;
   int numExpired = 3;
+
+  List testDocumentTile = [1, 2, 3, 4];
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +64,15 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
             ),
             InkWell(
               onTap: () {
-                print("Show modal");
+                showModalBottomSheet(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(StyleConst.defaultRadius))),
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) {
+                      return SearchModal();
+                    });
               },
               splashFactory: NoSplash.splashFactory,
               child: Row(
@@ -83,7 +94,14 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
             const SizedBox(
               height: StyleConst.defaultPadding / 2,
             ),
-            DocumentTile(),
+            ...testDocumentTile.map((e) => Column(
+                  children: const [
+                    DocumentTile(),
+                    SizedBox(
+                      height: StyleConst.defaultPadding / 2,
+                    )
+                  ],
+                ))
           ],
         ),
       ),
