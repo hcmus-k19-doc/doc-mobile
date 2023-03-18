@@ -38,7 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
       } catch (error) {
         await SecuredLocalStorage().deleteAll();
-        emit(AuthError());
+        emit(UnAuthenticated());
       }
     });
     on<LoginEvent>((event, emit) async {

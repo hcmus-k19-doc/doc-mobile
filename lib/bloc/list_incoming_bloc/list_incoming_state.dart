@@ -15,6 +15,8 @@ class ListIncomingSuccess extends ListIncomingState {
   ListIncomingSuccess(this.listDocs);
 }
 
+class ListEmptySuccess extends ListIncomingState {}
+
 class ListIncomingFailure extends ListIncomingState {
   final Object responeExeption;
 

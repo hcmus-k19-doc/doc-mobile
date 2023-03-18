@@ -8,12 +8,16 @@ class SearchTextField extends StatefulWidget {
       required this.title,
       this.trailingIcon,
       this.onPressTrailingIcon,
-      this.maxLinesTextField})
+      this.maxLinesTextField,
+      this.textController,
+      this.readOnly})
       : super(key: key);
   final String title;
   final IconData? trailingIcon;
   final VoidCallback? onPressTrailingIcon;
   final int? maxLinesTextField;
+  final TextEditingController? textController;
+  final bool? readOnly;
 
   @override
   State<SearchTextField> createState() => _SearchTextFieldState();
@@ -28,7 +32,9 @@ class _SearchTextFieldState extends State<SearchTextField> {
         Expanded(
             flex: 3,
             child: TextField(
+                readOnly: widget.readOnly ?? false,
                 maxLines: widget.maxLinesTextField,
+                controller: widget.textController,
                 decoration: InputDecoration(
                     suffixIcon: widget.trailingIcon != null
                         ? IconButton(

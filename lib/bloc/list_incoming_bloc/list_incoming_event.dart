@@ -5,6 +5,10 @@ abstract class ListIncomingEvent extends Equatable {
 }
 
 class FetchIncomingListDocumentEvent extends ListIncomingEvent {
+  SearchCriteria? searchCriteria;
+
+  FetchIncomingListDocumentEvent({this.searchCriteria});
+
   @override
   List<Object?> get props => [];
 }

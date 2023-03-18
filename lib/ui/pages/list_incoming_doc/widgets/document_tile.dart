@@ -105,7 +105,7 @@ class _DocumentTileState extends State<DocumentTile> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(child: Text("Trình yếu")),
+                  Expanded(child: Text("Trích yếu")),
                   Flexible(
                     flex: 2,
                     child: Text("${widget.incomingDocument.summary}"),

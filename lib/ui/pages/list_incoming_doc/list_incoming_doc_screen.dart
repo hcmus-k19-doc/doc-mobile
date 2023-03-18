@@ -3,6 +3,7 @@ import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
 import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/document_tile.dart';
+import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/build_list_document.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/seach_modal.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/shimmer_document_tile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,8 +19,6 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
   int numUnHandle = 0;
   int numCoopHandle = 1;
   int numExpired = 3;
-
-  List testDocumentTile = [1, 2, 3];
 
   @override
   Widget build(BuildContext context) {
@@ -104,37 +103,7 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
                 const SizedBox(
                   height: StyleConst.defaultPadding / 2,
                 ),
-                
-                if (state is ListIncomingLoading)
-                  Column(
-                    children: testDocumentTile
-                        .map((e) => Column(
-                              children: const [
-                                ShimmerLoadingDocTile(),
-                                SizedBox(
-                                  height: StyleConst.defaultPadding,
-                                )
-                              ],
-                            ))
-                        .toList(),
-                  )
-                else if (state is ListIncomingSuccess)
-                  Column(
-                    children: state.listDocs
-                        .map((e) => Column(
-                              children: [
-                                DocumentTile(
-                                  incomingDocument: e,
-                                ),
-                                const SizedBox(
-                                  height: StyleConst.defaultPadding,
-                                )
-                              ],
-                            ))
-                        .toList(),
-                  )
-                else
-                  Text("Fail to get list document")
+                const BuildListIncomingDocument(),
               ],
             ),
           ),
