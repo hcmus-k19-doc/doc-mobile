@@ -61,15 +61,15 @@ class _BuildListIncomingDocumentState extends State<BuildListIncomingDocument> {
             return Center(
               child: Text(
                 "Không có dữ liệu",
-                style: FontConst.MEDIUM_GRAY4.copyWith(fontSize: 20),
+                style: bodyLargeBold(context)?.copyWith(fontSize: 20),
               ),
             );
           } else {
             return Center(
               child: Text(
                 "Xảy ra lỗi trong lúc lấy dữ liệu",
-                style:
-                    FontConst.medium.copyWith(fontSize: 20, color: Colors.red),
+                style: bodyLargeBold(context)
+                    ?.copyWith(fontSize: 20, color: Colors.red),
               ),
             );
           }
