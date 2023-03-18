@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/constants/url_const.dart';
 import 'package:flutter_app/repositories/auth_repository.dart';
 import 'package:flutter_app/services/api.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';

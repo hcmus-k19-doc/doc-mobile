@@ -61,7 +61,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
               child: Center(
                 child: Text(
                   "Send Instructions",
-                  style: FontConst.medium.copyWith(fontSize: 18),
+                  style: bodyLargeBold(context)?.copyWith(fontSize: 18),
                 ),
               )),
         )

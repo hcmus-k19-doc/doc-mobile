@@ -23,15 +23,15 @@ class ForgotPassScreen extends StatelessWidget {
             children: [
               Text(
                 "Reset pasword",
-                style: FontConst.semiBold.copyWith(fontSize: 32),
+                style: bodyLarge(context),
               ),
               const SizedBox(
                 height: StyleConst.defaultPadding,
               ),
               Text(
-                "Enter the email asociated with your account and we'll send "
-                "an email with instructions to reset your pasword.",
-                style: FontConst.REGULAR_MEDIUM_GREY_18,
+                "Enter the email associated with your account and we'll send "
+                "an email with instructions to reset your password.",
+                style: bodyLarge(context),
               ),
               const SizedBox(
                 height: StyleConst.defaultPadding,
@@ -41,7 +41,7 @@ class ForgotPassScreen extends StatelessWidget {
                     bottom: StyleConst.defaultPadding / 2),
                 child: Text(
                   "Email address",
-                  style: FontConst.MEDIUM_GRAY4.copyWith(fontSize: 18),
+                  style: bodyLarge(context),
                 ),
               ),
               Form(

@@ -33,7 +33,7 @@ class CheckYourMailScreen extends StatelessWidget {
                 ),
                 Text(
                   "Check your mail",
-                  style: FontConst.SEMIBOLD_BLACK_24,
+                  style: bodyLargeBold(context),
                 ),
                 const SizedBox(
                   height: StyleConst.defaultPadding / 2,
@@ -42,7 +42,7 @@ class CheckYourMailScreen extends StatelessWidget {
                   "We have sent a password recover\n"
                   "instructions to your email.",
                   textAlign: TextAlign.center,
-                  style: FontConst.REGULAR_GRAY4.copyWith(fontSize: 18),
+                  style: bodyLarge(context)?.copyWith(fontSize: 18),
                 ),
                 const SizedBox(
                   height: StyleConst.defaultPadding,
@@ -62,12 +62,12 @@ class CheckYourMailScreen extends StatelessWidget {
                     },
                     child: Text(
                       "Back to login",
-                      style: FontConst.medium.copyWith(fontSize: 18),
+                      style: bodyLarge(context)?.copyWith(fontSize: 18),
                     )),
                 const Spacer(),
                 Text(
                   "Did not receive the email? Check your spam filter,",
-                  style: FontConst.REGULAR_BLACK2.copyWith(fontSize: 14),
+                  style: bodyLarge(context)?.copyWith(fontSize: 14),
                 ),
                 const SizedBox(
                   height: StyleConst.defaultPadding / 3,
@@ -76,10 +76,10 @@ class CheckYourMailScreen extends StatelessWidget {
                     text: TextSpan(children: [
                   TextSpan(
                       text: "or ",
-                      style: FontConst.REGULAR_BLACK2.copyWith(fontSize: 14)),
+                      style: bodyLarge(context)?.copyWith(fontSize: 14)),
                   TextSpan(
                       text: "try another email address",
-                      style: FontConst.regular.copyWith(
+                      style: bodyLarge(context)?.copyWith(
                           fontSize: 14, color: Theme.of(context).primaryColor),
                       recognizer: TapGestureRecognizer()..onTap = () {
                         print("Send back email");
