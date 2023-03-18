@@ -44,20 +44,19 @@ class _BuildListIncomingDocumentState extends State<BuildListIncomingDocument> {
                   .toList(),
             );
           } else if (state is ListIncomingSuccess) {
-            return Column(
-              children: state.listDocs
-                  .map((e) => Column(
-                        children: [
-                          DocumentTile(
-                            incomingDocument: e,
-                          ),
-                          const SizedBox(
-                            height: StyleConst.defaultPadding,
-                          )
-                        ],
-                      ))
-                  .toList(),
-            );
+            return Column(children: [
+              ...state.listDocs.map((e) => Column(
+                    children: [
+                      DocumentTile(
+                        incomingDocument: e,
+                      ),
+                      const SizedBox(
+                        height: StyleConst.defaultPadding,
+                      )
+                    ],
+                  )),
+              Text("for pagination")
+            ]);
           } else if (state is ListEmptySuccess) {
             return Center(
               child: Text(

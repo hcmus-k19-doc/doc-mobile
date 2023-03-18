@@ -11,7 +11,6 @@ class IncomingDocumentRepository extends BaseRepository {
   Future<List<IncomingDocument>> getIncomingDocumentList(
       SearchCriteria? searchCriteria) async {
     try {
-      print(searchCriteria.toString());
       final response = await provider.post(
           url: "/search",
           cancelToken: cancelToken,
