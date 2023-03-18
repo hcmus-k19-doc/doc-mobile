@@ -4,11 +4,11 @@ import 'package:flutter_app/ui/pages/base/base_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/check_your_mail_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/forgot_pass_screen.dart';
 import 'package:flutter_app/ui/pages/login/login_screen.dart';
+import 'package:flutter_app/ui/pages/settings/settings_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path/path.dart';
 
 import '../ui/pages/home/home_screen.dart';
-import '../ui/pages/camera_screen.dart';
 import '../ui/pages/splash/splash_screen.dart';
 
 class HomeArguments {
@@ -27,7 +27,7 @@ class CameraArguments {
 class MyRouter {
   static const String home = 'home';
   static const String splash = '/splash';
-  static const String camera = 'camera';
+  static const String setting = '/setting';
 
   //DOC
   static const String baseScreen = '/base-screen';
@@ -53,17 +53,6 @@ class MyRouter {
         } else {
           return errorRoute("Input for Home - routing is not ScreenArguments");
         }
-      case camera:
-        if (args is CameraArguments) {
-          CameraDescription mCamera = args.camera;
-          return MaterialPageRoute(
-              builder: (_) => CameraScreen(camera: mCamera),
-              settings:
-                  RouteSettings(name: camera, arguments: settings.arguments));
-        } else {
-          return errorRoute(
-              "Input for Camera - routing is not ScreenArguments");
-        }
       case baseScreen:
         return MaterialPageRoute(builder: (_) => const BaseScreen());
       case login:
@@ -74,6 +63,8 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => ForgotPassScreen());
       case checkYourMail:
         return MaterialPageRoute(builder: (_) => const CheckYourMailScreen());
+      case setting:
+        return MaterialPageRoute(builder: (_) => const SettingScreen());
       default:
         return errorRoute("No route-name founded");
     }

@@ -3,11 +3,12 @@ import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
-import 'package:flutter_app/constants/value_const.dart';
 import 'package:flutter_app/ui/pages/login/widgets/login_form_field.dart';
 import 'package:flutter_app/ui/pages/login/widgets/sign_in_btn.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../constants/export_constants.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -49,9 +50,7 @@ class LoginScreen extends StatelessWidget {
 
                       Text("Document approval and distribution system",
                           textAlign: TextAlign.center,
-                          style:
-                              FontConst.MEDIUM_BLACK2.copyWith(fontSize: 18)),
-
+                          style: headLineSmall(context)),
                       const SizedBox(
                         height: 34,
                       ),
@@ -82,8 +81,7 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                   child: Text(
                                     "Forgot your password?",
-                                    style: FontConst.regular.copyWith(
-                                        color: Theme.of(context).primaryColor),
+                                    style: bodyLarge(context),
                                   ),
                                   onPressed: () {
                                     Navigator.pushNamed(
@@ -97,8 +95,7 @@ class LoginScreen extends StatelessWidget {
                                 visible: state is AuthError ? true : false,
                                 child: Text(
                                   "Failed to Login",
-                                  style: FontConst.medium
-                                      .copyWith(color: Colors.red),
+                                  style: bodyLargeBold(context)?.copyWith(color: Colors.red),
                                 ),
                               ),
 
@@ -112,6 +109,11 @@ class LoginScreen extends StatelessWidget {
                                     usernameEditingController,
                                 passwordTextEditingController:
                                     passwordEditingController,
+                              ),
+                              ElevatedButton(onPressed: () {
+                                Navigator.pushReplacementNamed(context, MyRouter.setting);
+                              }, child: Text('Test'),
+
                               )
                             ],
                           ))

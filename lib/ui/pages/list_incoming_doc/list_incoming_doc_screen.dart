@@ -37,7 +37,7 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
               children: [
                 Text(
                   "Hiện tại bạn có:",
-                  style: FontConst.REGULAR_BLACK2.copyWith(fontSize: 20),
+                  style: bodyLarge(context)?.copyWith(fontSize: 20),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
@@ -48,15 +48,15 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
                     children: [
                       Text(
                         "$numUnHandle văn bản chưa xử lý",
-                        style: FontConst.REGULAR_BLACK2.copyWith(fontSize: 18),
+                        style: bodyLarge(context)?.copyWith(fontSize: 18),
                       ),
                       Text(
                         "$numCoopHandle văn bản cần phối hợp thực hiện",
-                        style: FontConst.REGULAR_BLACK2.copyWith(fontSize: 18),
+                        style: bodyLarge(context)?.copyWith(fontSize: 18),
                       ),
                       Text(
                         "$numExpired văn bản quá hạn",
-                        style: FontConst.REGULAR_BLACK2.copyWith(fontSize: 18),
+                        style: bodyLarge(context)?.copyWith(fontSize: 18),
                       ),
                     ],
                   ),
@@ -66,7 +66,7 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
                 ),
                 Text(
                   "Danh sách văn bản đến",
-                  style: FontConst.REGULAR_BLACK2.copyWith(fontSize: 20),
+                  style: bodyLarge(context)?.copyWith(fontSize: 20),
                 ),
                 const SizedBox(
                   height: StyleConst.defaultPadding / 2,
@@ -96,7 +96,7 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
                       ),
                       Text(
                         "TIÊU THỨC TÌM KIẾM",
-                        style: FontConst.MEDIUM_BLACK2.copyWith(fontSize: 15),
+                        style: bodyLargeBold(context)?.copyWith(fontSize: 15),
                       )
                     ],
                   ),

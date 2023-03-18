@@ -37,7 +37,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                     bottom: StyleConst.defaultPadding / 2),
                 child: Text(
                   "Username",
-                  style: FontConst.SEMIBOLD_BLACK_18,
+                  style: bodyLargeBold(context),
                 ),
               ),
 
@@ -73,7 +73,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                     top: StyleConst.defaultPadding),
                 child: Text(
                   "Password",
-                  style: FontConst.SEMIBOLD_BLACK_18,
+                  style: bodyLargeBold(context),
                 ),
               ),
               //password textField
