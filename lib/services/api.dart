@@ -76,6 +76,39 @@ class Api {
     }
   }
 
+  Future<dynamic> get(
+      {required String url,
+      Map<String, dynamic>? headers,
+      String? contentType,
+      CancelToken? cancelToken}) async {
+    try {
+      //Sua do de goi API test
+      final response = await api.get(url,
+          options: Options(headers: headers, contentType: contentType),
+          cancelToken: cancelToken);
+      switch (response.statusCode) {
+        case 200:
+          return response.data;
+        case 201:
+          throw NoHaveDataException(response.data['message'].toString());
+        case 401:
+          throw UnauthorizedException(response.data['message'].toString());
+        case 419:
+          throw AccessTokenExpiredException(
+              response.data['message'].toString());
+        case 500:
+          throw FailedException(response.data['message'].toString());
+      }
+    } on DioError catch (err) {
+      switch (err.type) {
+        case DioErrorType.cancel:
+          throw FailedException("Request is cancelled");
+        default:
+          throw FailedException(err.response?.data["message"]);
+      }
+    }
+  }
+
   Future<bool> refreshTokenApi(String refreshToken) async {
     try {
       final reponse = await api.post("/security/auth/token/refresh",

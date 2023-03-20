@@ -1,8 +1,8 @@
 class SearchCriteria {
   String? incomingNumber;
   String? originalSymbolNumber;
-  String? documentType;
-  String? distributionOrg;
+  int? documentTypeId;
+  int? distributionOrgId;
   String? arrivingDateFrom;
   String? arrivingDateTo;
   String? processingDurationFrom;
@@ -13,8 +13,8 @@ class SearchCriteria {
   SearchCriteria({
     this.incomingNumber,
     this.originalSymbolNumber,
-    this.documentType,
-    this.distributionOrg,
+    this.documentTypeId,
+    this.distributionOrgId,
     this.arrivingDateFrom,
     this.arrivingDateTo,
     this.processingDurationFrom,
@@ -29,8 +29,8 @@ class SearchCriteria {
           runtimeType == other.runtimeType &&
           incomingNumber == other.incomingNumber &&
           originalSymbolNumber == other.originalSymbolNumber &&
-          documentType == other.documentType &&
-          distributionOrg == other.distributionOrg &&
+          documentTypeId == other.documentTypeId &&
+          distributionOrgId == other.distributionOrgId &&
           arrivingDateFrom == other.arrivingDateFrom &&
           arrivingDateTo == other.arrivingDateTo &&
           processingDurationFrom == other.processingDurationFrom &&
@@ -41,8 +41,8 @@ class SearchCriteria {
   int get hashCode =>
       incomingNumber.hashCode ^
       originalSymbolNumber.hashCode ^
-      documentType.hashCode ^
-      distributionOrg.hashCode ^
+      documentTypeId.hashCode ^
+      distributionOrgId.hashCode ^
       arrivingDateFrom.hashCode ^
       arrivingDateTo.hashCode ^
       processingDurationFrom.hashCode ^
@@ -54,8 +54,8 @@ class SearchCriteria {
     return 'SearchCriteria{' +
         ' incomingNumber: $incomingNumber,' +
         ' originalSymbolNumber: $originalSymbolNumber,' +
-        ' documentType: $documentType,' +
-        ' distributionOrg: $distributionOrg,' +
+        ' documentTypeId: $documentTypeId,' +
+        ' distributionOrgId: $distributionOrgId,' +
         ' arrivingDateFrom: $arrivingDateFrom,' +
         ' arrivingDateTo: $arrivingDateTo,' +
         ' processingDurationFrom: $processingDurationFrom,' +
@@ -67,8 +67,8 @@ class SearchCriteria {
   SearchCriteria copyWith({
     String? incomingNumber,
     String? originalSymbolNumber,
-    String? documentType,
-    String? distributionOrg,
+    int? documentTypeId,
+    int? distributionOrgId,
     String? arrivingDateFrom,
     String? arrivingDateTo,
     String? processingDurationFrom,
@@ -78,8 +78,8 @@ class SearchCriteria {
     return SearchCriteria(
       incomingNumber: incomingNumber ?? this.incomingNumber,
       originalSymbolNumber: originalSymbolNumber ?? this.originalSymbolNumber,
-      documentType: documentType ?? this.documentType,
-      distributionOrg: distributionOrg ?? this.distributionOrg,
+      documentTypeId: documentTypeId ?? this.documentTypeId,
+      distributionOrgId: distributionOrgId ?? this.distributionOrgId,
       arrivingDateFrom: arrivingDateFrom ?? this.arrivingDateFrom,
       arrivingDateTo: arrivingDateTo ?? this.arrivingDateTo,
       processingDurationFrom:
@@ -93,8 +93,8 @@ class SearchCriteria {
     return {
       'incomingNumber': this.incomingNumber,
       'originalSymbolNumber': this.originalSymbolNumber,
-      'documentType': this.documentType,
-      'distributionOrg': this.distributionOrg,
+      'documentTypeId': this.documentTypeId,
+      'distributionOrgId': this.distributionOrgId,
       'arrivingDateFrom': this.arrivingDateFrom,
       'arrivingDateTo': this.arrivingDateTo,
       'processingDurationFrom': this.processingDurationFrom,
@@ -107,8 +107,8 @@ class SearchCriteria {
     return SearchCriteria(
       incomingNumber: map['incomingNumber'] as String,
       originalSymbolNumber: map['originalSymbolNumber'] as String,
-      documentType: map['documentType'] as String,
-      distributionOrg: map['distributionOrg'] as String,
+      documentTypeId: map['documentTypeId'] as int,
+      distributionOrgId: map['distributionOrgId'] as int,
       arrivingDateFrom: map['arrivingDateFrom'] as String,
       arrivingDateTo: map['arrivingDateTo'] as String,
       processingDurationFrom: map['processingDurationFrom'] as String,

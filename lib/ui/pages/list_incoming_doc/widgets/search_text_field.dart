@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/color_const.dart';
+import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
 
 class SearchTextField extends StatefulWidget {
@@ -30,7 +31,12 @@ class _SearchTextFieldState extends State<SearchTextField> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(flex: 1, child: Text(widget.title)),
+        Expanded(
+            flex: 1,
+            child: Text(
+              widget.title,
+              style: bodyLarge(context),
+            )),
         Expanded(
             flex: 3,
             child: TextField(

@@ -5,6 +5,7 @@ import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/document_tile.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/shimmer_document_tile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:number_paginator/number_paginator.dart';
 
 class BuildListIncomingDocument extends StatefulWidget {
   const BuildListIncomingDocument({Key? key}) : super(key: key);
@@ -45,17 +46,31 @@ class _BuildListIncomingDocumentState extends State<BuildListIncomingDocument> {
             );
           } else if (state is ListIncomingSuccess) {
             return Column(children: [
-              ...state.listDocs.map((e) => Column(
-                    children: [
-                      DocumentTile(
-                        incomingDocument: e,
-                      ),
-                      const SizedBox(
-                        height: StyleConst.defaultPadding,
-                      )
-                    ],
-                  )),
-              Text("for pagination")
+              ...state.paginationIncomingDocument.listIncomingDocument!
+                  .map((e) => Column(
+                        children: [
+                          DocumentTile(
+                            incomingDocument: e,
+                          ),
+                          const SizedBox(
+                            height: StyleConst.defaultPadding,
+                          )
+                        ],
+                      )),
+              NumberPaginator(
+                numberPages: state.paginationIncomingDocument.totalPages!,
+                initialPage: listIncomingBloc.initialPage,
+                config: NumberPaginatorUIConfig(
+                    buttonSelectedBackgroundColor:
+                        Theme.of(context).primaryColor),
+                onPageChange: (newPage) {
+                  if (listIncomingBloc.initialPage != newPage) {
+                    setState(() {
+                      listIncomingBloc.initialPage = newPage;
+                    });
+                  }
+                },
+              )
             ]);
           } else if (state is ListEmptySuccess) {
             return Center(

@@ -8,13 +8,11 @@ class SuggestionRepository extends BaseRepository {
 
   Future<List<DocumentType>> getDocumentTypesList() async {
     try {
-      final response = await provider.post(
+      final response = await provider.get(
         url: "/document-types",
         cancelToken: cancelToken,
       );
-      print("tai sao");
       Iterable l = response;
-
       return List<DocumentType>.from(l.map((e) => DocumentType.fromJson(e)));
     } catch (err) {
       print(err);
@@ -24,7 +22,7 @@ class SuggestionRepository extends BaseRepository {
 
   Future<List<DistributionOrg>> getDistributionOrgList() async {
     try {
-      final response = await provider.post(
+      final response = await provider.get(
         url: "/distribution-organizations",
         cancelToken: cancelToken,
       );
@@ -33,7 +31,6 @@ class SuggestionRepository extends BaseRepository {
       return List<DistributionOrg>.from(
           l.map((e) => DistributionOrg.fromJson(e)));
     } catch (err) {
-      print(err);
       rethrow;
     }
   }

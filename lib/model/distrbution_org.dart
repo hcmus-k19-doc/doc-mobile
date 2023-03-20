@@ -1,6 +1,6 @@
 class DistributionOrg {
   int? id;
-  Null? version;
+  int? version;
   String? name;
 
   DistributionOrg({this.id, this.version, this.name});

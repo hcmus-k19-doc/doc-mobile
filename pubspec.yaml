@@ -33,49 +33,53 @@ dependencies:
   #Multiple language: https://docs.flutter.dev/development/accessibility-and-localization/internationalization
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0
+  intl: 0.17.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: 1.0.2
 
   #API
-  dio: ^5.0.2
+  dio: 5.0.2
 
   #Local key-value storage
-  shared_preferences: ^2.0.15
+  shared_preferences: 2.0.15
 
   #Provider for DI: https://medium.com/ebaytech/ebay-motors-state-management-bd85cfc602a2
-  provider: ^6.0.3
+  provider: 6.0.3
 
   #BLoC for state management
-  bloc: ^8.0.3
-  flutter_bloc: ^8.0.1
-  equatable: ^2.0.5
+  bloc: 8.0.3
+  flutter_bloc: 8.0.1
+  equatable: 2.0.5
 
   #JSON parse: https://docs.flutter.dev/development/data-and-backend/json
   json_annotation: ^4.5.0
-  build_runner: ^2.2.0
+  build_runner: 2.2.0
   build_test: ^2.1.0
-  json_serializable: ^6.3.1
-  get: ^4.6.5
+  json_serializable: 6.3.1
+  get: 4.6.5
 
   #Get device info and access to camera
-  device_info_plus: ^8.0.0
-  camera: ^0.10.0+4
+  device_info_plus: 8.0.0
+  camera: 0.10.0+4
   path: ^1.8.1
-  path_provider: ^2.0.11
+  path_provider: 2.0.11
 
   #local secure storage
-  flutter_secure_storage: ^8.0.0
+  flutter_secure_storage: 8.0.0
 
   #jwt_decode
-  jwt_decoder: ^2.0.1
+  jwt_decoder: 2.0.1
 
   #shimmer
-  shimmer: ^2.0.0
-  #autocomplete
-  flutter_typeahead: ^4.3.7
+  shimmer: 2.0.0
+
+  #dropdownsearch
+  dropdown_search: 5.0.6
+
+  #pagination
+  number_paginator: ^0.2.3
 
 dev_dependencies:
   flutter_test:

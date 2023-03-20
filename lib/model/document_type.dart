@@ -1,6 +1,6 @@
 class DocumentType {
   int? id;
-  Null? version;
+  int? version;
   String? type;
 
   DocumentType({this.id, this.version, this.type});

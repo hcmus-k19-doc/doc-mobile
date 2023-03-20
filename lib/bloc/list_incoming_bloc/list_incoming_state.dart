@@ -11,8 +11,8 @@ class ListIncomingInitial extends ListIncomingState {}
 class ListIncomingLoading extends ListIncomingState {}
 
 class ListIncomingSuccess extends ListIncomingState {
-  List<IncomingDocument> listDocs;
-  ListIncomingSuccess(this.listDocs);
+  PaginationIncomingDocument paginationIncomingDocument;
+  ListIncomingSuccess(this.paginationIncomingDocument);
 }
 
 class ListEmptySuccess extends ListIncomingState {}
