@@ -81,7 +81,8 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                   child: Text(
                                     "Forgot your password?",
-                                    style: bodyLarge(context),
+                                    style: bodyLarge(context)
+                                        ?.copyWith(color: Colors.blue),
                                   ),
                                   onPressed: () {
                                     Navigator.pushNamed(
@@ -95,7 +96,8 @@ class LoginScreen extends StatelessWidget {
                                 visible: state is AuthError ? true : false,
                                 child: Text(
                                   "Failed to Login",
-                                  style: bodyLargeBold(context)?.copyWith(color: Colors.red),
+                                  style: bodyLargeBold(context)
+                                      ?.copyWith(color: Colors.red),
                                 ),
                               ),
 
@@ -110,10 +112,12 @@ class LoginScreen extends StatelessWidget {
                                 passwordTextEditingController:
                                     passwordEditingController,
                               ),
-                              ElevatedButton(onPressed: () {
-                                Navigator.pushReplacementNamed(context, MyRouter.setting);
-                              }, child: Text('Test'),
-
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, MyRouter.setting);
+                                },
+                                child: Text('Test'),
                               )
                             ],
                           ))

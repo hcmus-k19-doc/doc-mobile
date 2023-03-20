@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
+import 'package:flutter_app/bloc/suggestion_bloc/suggestion_bloc.dart';
 import 'package:flutter_app/constants/color_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/search_criteria.dart';
+import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/autocomplete_search_text_field.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/search_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -38,108 +40,143 @@ class _SearchModalState extends State<SearchModal> {
 
   final TextEditingController summaryController = TextEditingController();
 
+  late SuggestionBloc suggestionBloc;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    suggestionBloc = BlocProvider.of<SuggestionBloc>(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: MediaQuery.of(context).viewInsets,
-      child: Container(
-        padding: const EdgeInsets.all(StyleConst.defaultPadding),
-        height: MediaQuery.of(context).size.height / 1.5,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SearchTextField(
-                title: "Số đến theo sổ",
-                textController: incomingNumberController,
-              ),
-              const SizedBox(
-                height: StyleConst.defaultPadding,
-              ),
-              SearchTextField(
-                title: "Loại văn bản",
-                textController: documentTypeController,
-                trailingIcon: Icons.arrow_drop_down,
-                onPressTrailingIcon: selectDocumentType,
-              ),
-              const SizedBox(
-                height: StyleConst.defaultPadding,
-              ),
-              SearchTextField(
-                title: "Khoảng ngày đến",
-                readOnly: true,
-                trailingIcon: Icons.calendar_month,
-                textController: arrivingDateRangeController,
-                onPressTrailingIcon: () => pickDateRage(
-                    arrivingDateRange, arrivingDateRangeController, true),
-              ),
-              const SizedBox(
-                height: StyleConst.defaultPadding,
-              ),
-              SearchTextField(
-                title: "Số ký hiệu gốc",
-                textController: originalSymbolNumberController,
-              ),
-              const SizedBox(
-                height: StyleConst.defaultPadding,
-              ),
-              SearchTextField(
-                title: "Cơ quan ban hành",
-                textController: distributionOrgController,
-                trailingIcon: Icons.arrow_drop_down,
-                onPressTrailingIcon: selectDistributionOrg,
-              ),
-              const SizedBox(
-                height: StyleConst.defaultPadding,
-              ),
-              SearchTextField(
-                title: "Thời hạn xử lý",
-                readOnly: true,
-                trailingIcon: Icons.calendar_month,
-                textController: processingDateController,
-                onPressTrailingIcon: () => pickDateRage(
-                    processingDateRange, processingDateController, false),
-              ),
-              const SizedBox(
-                height: StyleConst.defaultPadding,
-              ),
-              SearchTextField(
-                title: "Trích yếu",
-                textController: summaryController,
-                maxLinesTextField: 3,
-              ),
-              const SizedBox(
-                height: StyleConst.defaultPadding,
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          StyleConst.defaultRadius), // <-- Radius
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: StyleConst.defaultPadding / 2), // and this
-                  ),
-                  onPressed: () {
-                    startSearching();
-                    Navigator.pop(context);
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Text("Tìm kiếm"),
-                      SizedBox(
-                        width: StyleConst.defaultPadding / 2,
-                      ),
-                      Icon(Icons.search)
-                    ],
-                  ),
+    return BlocListener<SuggestionBloc, SuggestionState>(
+      listener: (context, state) {
+        if (state is SuggestionEmit) {
+          print(state.distributionOrgs);
+          print(state.documentTypes);
+        }
+      },
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: MediaQuery.of(context).viewInsets,
+          child: Container(
+            padding: const EdgeInsets.all(StyleConst.defaultPadding),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                        padding: const EdgeInsets.only(
+                            bottom: StyleConst.defaultPadding / 2),
+                        constraints: const BoxConstraints(),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.cancel_outlined))
+                  ],
                 ),
-              )
-            ],
+                SearchTextField(
+                  title: "Số đến theo sổ",
+                  textController: incomingNumberController,
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding,
+                ),
+                AutoCompleteSearchTextField(
+                  textEditingController: documentTypeController,
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding,
+                ),
+                SearchTextField(
+                  title: "Loại văn bản",
+                  textController: documentTypeController,
+                  trailingIcon: Icons.arrow_drop_down,
+                  onPressTrailingIcon: selectDocumentType,
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding,
+                ),
+                SearchTextField(
+                  title: "Khoảng ngày đến",
+                  readOnly: true,
+                  trailingIcon: Icons.calendar_month,
+                  textController: arrivingDateRangeController,
+                  onPressTrailingIcon: () => pickDateRage(
+                      arrivingDateRange, arrivingDateRangeController, true),
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding,
+                ),
+                SearchTextField(
+                  title: "Số ký hiệu gốc",
+                  textController: originalSymbolNumberController,
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding,
+                ),
+                SearchTextField(
+                  title: "Cơ quan ban hành",
+                  textController: distributionOrgController,
+                  trailingIcon: Icons.arrow_drop_down,
+                  onPressTrailingIcon: selectDistributionOrg,
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding,
+                ),
+                SearchTextField(
+                  title: "Thời hạn xử lý",
+                  readOnly: true,
+                  trailingIcon: Icons.calendar_month,
+                  textController: processingDateController,
+                  onPressTrailingIcon: () => pickDateRage(
+                      processingDateRange, processingDateController, false),
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding,
+                ),
+                SearchTextField(
+                  title: "Trích yếu",
+                  textController: summaryController,
+                  maxLinesTextField: 3,
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            StyleConst.defaultRadius), // <-- Radius
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal:
+                              StyleConst.defaultPadding / 2), // and this
+                    ),
+                    onPressed: () {
+                      startSearching();
+                      Navigator.pop(context);
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
+                        Text("Tìm kiếm"),
+                        SizedBox(
+                          width: StyleConst.defaultPadding / 2,
+                        ),
+                        Icon(Icons.search)
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

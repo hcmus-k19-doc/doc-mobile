@@ -55,13 +55,15 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
               onPressed: () {
                 if (widget.formKey.currentState!.validate()) {
                   print("send link reset pass");
-                  Navigator.pushReplacementNamed(context, MyRouter.checkYourMail);
+                  Navigator.pushReplacementNamed(
+                      context, MyRouter.checkYourMail);
                 }
               },
               child: Center(
                 child: Text(
                   "Send Instructions",
-                  style: bodyLargeBold(context)?.copyWith(fontSize: 18),
+                  style: bodyLargeBold(context)
+                      ?.copyWith(fontSize: 18, color: Colors.white),
                 ),
               )),
         )

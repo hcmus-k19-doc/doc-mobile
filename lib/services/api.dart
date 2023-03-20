@@ -66,6 +66,7 @@ class Api {
           throw FailedException(response.data['message'].toString());
       }
     } on DioError catch (err) {
+      print(err.message);
       switch (err.type) {
         case DioErrorType.cancel:
           throw FailedException("Request is cancelled");

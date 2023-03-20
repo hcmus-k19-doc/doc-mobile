@@ -52,7 +52,8 @@ class SignInBtn extends StatelessWidget {
                       )
                     : Text(
                         "Login",
-                        style: bodyLarge(context)?.copyWith(fontSize: 18),
+                        style: bodyLargeBold(context)
+                            ?.copyWith(fontSize: 18, color: Colors.white),
                       ),
               )),
         );

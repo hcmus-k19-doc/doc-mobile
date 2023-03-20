@@ -33,7 +33,7 @@ class CheckYourMailScreen extends StatelessWidget {
                 ),
                 Text(
                   "Check your mail",
-                  style: bodyLargeBold(context),
+                  style: bodyLargeBold(context)?.copyWith(fontSize: 24),
                 ),
                 const SizedBox(
                   height: StyleConst.defaultPadding / 2,
@@ -42,7 +42,8 @@ class CheckYourMailScreen extends StatelessWidget {
                   "We have sent a password recover\n"
                   "instructions to your email.",
                   textAlign: TextAlign.center,
-                  style: bodyLarge(context)?.copyWith(fontSize: 18),
+                  style: bodyLarge(context)
+                      ?.copyWith(fontSize: 18, color: Colors.grey[700]),
                 ),
                 const SizedBox(
                   height: StyleConst.defaultPadding,
@@ -62,7 +63,8 @@ class CheckYourMailScreen extends StatelessWidget {
                     },
                     child: Text(
                       "Back to login",
-                      style: bodyLarge(context)?.copyWith(fontSize: 18),
+                      style: bodyLarge(context)
+                          ?.copyWith(fontSize: 18, color: Colors.white),
                     )),
                 const Spacer(),
                 Text(
@@ -81,9 +83,10 @@ class CheckYourMailScreen extends StatelessWidget {
                       text: "try another email address",
                       style: bodyLarge(context)?.copyWith(
                           fontSize: 14, color: Theme.of(context).primaryColor),
-                      recognizer: TapGestureRecognizer()..onTap = () {
-                        print("Send back email");
-                      })
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          print("Send back email");
+                        })
                 ]))
               ],
             ),

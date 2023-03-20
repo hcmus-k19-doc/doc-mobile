@@ -74,7 +74,8 @@ dependencies:
 
   #shimmer
   shimmer: ^2.0.0
-
+  #autocomplete
+  flutter_typeahead: ^4.3.7
 
 dev_dependencies:
   flutter_test:

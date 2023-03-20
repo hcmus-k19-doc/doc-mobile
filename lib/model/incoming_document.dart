@@ -1,3 +1,6 @@
+import 'package:flutter_app/model/distrbution_org.dart';
+import 'package:flutter_app/model/document_type.dart';
+
 class IncomingDocument {
   int? id;
   Null? version;
@@ -63,50 +66,6 @@ class IncomingDocument {
     if (this.sendingLevel != null) {
       data['sendingLevel'] = this.sendingLevel!.toJson();
     }
-    return data;
-  }
-}
-
-class DocumentType {
-  int? id;
-  Null? version;
-  String? type;
-
-  DocumentType({this.id, this.version, this.type});
-
-  DocumentType.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    version = json['version'];
-    type = json['type'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['version'] = this.version;
-    data['type'] = this.type;
-    return data;
-  }
-}
-
-class DistributionOrg {
-  int? id;
-  Null? version;
-  String? name;
-
-  DistributionOrg({this.id, this.version, this.name});
-
-  DistributionOrg.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    version = json['version'];
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['version'] = this.version;
-    data['name'] = this.name;
     return data;
   }
 }
