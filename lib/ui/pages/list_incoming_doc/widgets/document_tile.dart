@@ -4,9 +4,11 @@ import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
 
 class DocumentTile extends StatefulWidget {
-  const DocumentTile({Key? key, required this.incomingDocument})
+  const DocumentTile(
+      {Key? key, required this.incomingDocument, required this.numberOrderTile})
       : super(key: key);
   final IncomingDocument incomingDocument;
+  final int numberOrderTile;
 
   @override
   State<DocumentTile> createState() => _DocumentTileState();
@@ -26,7 +28,7 @@ class _DocumentTileState extends State<DocumentTile> {
           side: const BorderSide(color: Colors.black, width: 0.5)),
       leading: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [Text("${widget.incomingDocument.id}.")],
+        children: [Text("${widget.numberOrderTile}.")],
       ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -28,6 +28,8 @@ class PaginationListDocument extends StatefulWidget {
 
 class _PaginationListDocumentState extends State<PaginationListDocument> {
   int currentPage = 0;
+  int orderNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -51,33 +53,37 @@ class _PaginationListDocumentState extends State<PaginationListDocument> {
               )
             else if (listIncomingState is ListIncomingDocSuccess)
               Column(
-                children: listIncomingState.listIncomingDocument
-                    .map((e) => Column(
-                          children: [
-                            DocumentTile(
-                              incomingDocument: e,
-                            ),
-                            const SizedBox(
-                              height: StyleConst.defaultPadding,
-                            )
-                          ],
-                        ))
-                    .toList(),
+                children: listIncomingState.listIncomingDocument.map((e) {
+                  orderNumber++;
+                  return Column(
+                    children: [
+                      DocumentTile(
+                        incomingDocument: e,
+                        numberOrderTile: orderNumber,
+                      ),
+                      const SizedBox(
+                        height: StyleConst.defaultPadding,
+                      )
+                    ],
+                  );
+                }).toList(),
               )
             else if (listIncomingState is ListIncomingDocInitial)
               Column(
-                children: widget.listInitialDocument
-                    .map((e) => Column(
-                          children: [
-                            DocumentTile(
-                              incomingDocument: e,
-                            ),
-                            const SizedBox(
-                              height: StyleConst.defaultPadding,
-                            )
-                          ],
-                        ))
-                    .toList(),
+                children: widget.listInitialDocument.map((e) {
+                  orderNumber++;
+                  return Column(
+                    children: [
+                      DocumentTile(
+                        incomingDocument: e,
+                        numberOrderTile: orderNumber,
+                      ),
+                      const SizedBox(
+                        height: StyleConst.defaultPadding,
+                      )
+                    ],
+                  );
+                }).toList(),
               )
             else
               Center(
@@ -90,13 +96,15 @@ class _PaginationListDocumentState extends State<PaginationListDocument> {
             NumberPaginator(
               numberPages: widget.totalPages,
               initialPage: currentPage,
+              config: NumberPaginatorUIConfig(
+                  buttonSelectedBackgroundColor:
+                      Theme.of(context).primaryColor),
               onPageChange: (newPage) {
-                setState(() {
-                  currentPage = newPage;
-                  BlocProvider.of<ListIncomingDocBloc>(context).add(
-                      FetchIncomingDocumentOnPage(
-                          currentPage, widget.searchCriteria));
-                });
+                currentPage = newPage;
+                orderNumber = currentPage * widget.listInitialDocument.length;
+                BlocProvider.of<ListIncomingDocBloc>(context).add(
+                    FetchIncomingDocumentOnPage(
+                        currentPage, widget.searchCriteria));
               },
             )
           ]);
