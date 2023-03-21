@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
+import 'package:flutter_app/bloc/pagination_list_incoming_bloc/pagination_list_incoming_bloc.dart';
 import 'package:flutter_app/bloc/suggestion_bloc/suggestion_bloc.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/distrbution_org.dart';
@@ -41,7 +41,7 @@ class _SearchModalState extends State<SearchModal> {
   final TextEditingController summaryController = TextEditingController();
 
   late SuggestionBloc suggestionBloc;
-  late ListIncomingBloc listIncomingBloc;
+  late PaginationListIncomingBloc listIncomingBloc;
   DocumentType? searchDocTypeVal;
   DistributionOrg? searchDisOrgVal;
   @override
@@ -49,7 +49,7 @@ class _SearchModalState extends State<SearchModal> {
     // TODO: implement initState
     super.initState();
     suggestionBloc = BlocProvider.of<SuggestionBloc>(context);
-    listIncomingBloc = BlocProvider.of<ListIncomingBloc>(context);
+    listIncomingBloc = BlocProvider.of<PaginationListIncomingBloc>(context);
   }
 
   @override
@@ -225,7 +225,7 @@ class _SearchModalState extends State<SearchModal> {
 
     listIncomingBloc.searchCriteria?.distributionOrgId = searchDisOrgVal?.id;
 
-    BlocProvider.of<ListIncomingBloc>(context)
-        .add(FetchIncomingListDocumentEvent());
+    BlocProvider.of<PaginationListIncomingBloc>(context)
+        .add(FetchPaginationIncomingListDocumentEvent());
   }
 }

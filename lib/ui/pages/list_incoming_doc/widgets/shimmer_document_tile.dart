@@ -13,7 +13,7 @@ class ShimmerLoadingDocTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(StyleConst.defaultRadius)),
       padding: const EdgeInsets.symmetric(
           horizontal: StyleConst.defaultPadding,
-          vertical: StyleConst.defaultPadding / 2),
+          vertical: StyleConst.defaultPadding / 1.6),
       child: Shimmer.fromColors(
         baseColor: Colors.grey[300]!,
         highlightColor: Colors.grey[100]!,

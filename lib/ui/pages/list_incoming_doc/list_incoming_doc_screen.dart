@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
+import 'package:flutter_app/bloc/pagination_list_incoming_bloc/pagination_list_incoming_bloc.dart';
 import 'package:flutter_app/bloc/suggestion_bloc/suggestion_bloc.dart';
 import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
@@ -20,11 +20,17 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
   int numCoopHandle = 1;
   int numExpired = 3;
 
+  late PaginationListIncomingBloc listIncomingBloc;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    listIncomingBloc = BlocProvider.of<PaginationListIncomingBloc>(context);
+    listIncomingBloc.add(FetchPaginationIncomingListDocumentEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
-    ListIncomingBloc listIncomingBloc =
-        BlocProvider.of<ListIncomingBloc>(context);
-    listIncomingBloc.add(FetchIncomingListDocumentEvent());
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(StyleConst.defaultPadding),

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_app/model/incoming_document.dart';
-import 'package:flutter_app/model/list_coming_document.dart';
+import 'package:flutter_app/model/pagination_coming_document.dart';
 import 'package:flutter_app/model/search_criteria.dart';
 import 'package:flutter_app/repositories/base_repository.dart';
 
@@ -25,6 +25,24 @@ class IncomingDocumentRepository extends BaseRepository {
       tempPagination.listIncomingDocument = List<IncomingDocument>.from(
           l.map((e) => IncomingDocument.fromJson(e))).toList();
       return tempPagination;
+    } catch (err) {
+      rethrow;
+    }
+  }
+
+  Future<List<IncomingDocument>> getDocumentOnPage(
+      int page, SearchCriteria? searchCriteria) async {
+    try {
+      final response = await provider.post(
+          url: "/search",
+          cancelToken: cancelToken,
+          queryParams: {"page": page},
+          data: searchCriteria?.toMap());
+
+      Iterable l = response["payload"];
+
+      return List<IncomingDocument>.from(
+          l.map((e) => IncomingDocument.fromJson(e))).toList();
     } catch (err) {
       rethrow;
     }

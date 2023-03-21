@@ -46,11 +46,13 @@ class Api {
       Map<String, dynamic>? headers,
       String? contentType,
       Map<String, dynamic>? data,
+      Map<String, dynamic>? queryParams,
       CancelToken? cancelToken}) async {
     try {
       final response = await api.post(url,
           options: Options(headers: headers, contentType: contentType),
           data: data,
+          queryParameters: queryParams,
           cancelToken: cancelToken);
       switch (response.statusCode) {
         case 200:
