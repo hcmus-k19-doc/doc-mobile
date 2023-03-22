@@ -13,6 +13,8 @@ class ConstValue {
 
 class ImagesPath {
   static const logo = "assets/images/logo.png";
+  static const vietnam = "assets/images/vietnam.png";
+  static const english = "assets/images/britain.png";
 }
 
 class ButtonType {

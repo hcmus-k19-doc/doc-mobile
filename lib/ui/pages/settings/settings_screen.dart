@@ -14,6 +14,9 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  bool _isLightMode = true;
+  bool _isVietnamese = true;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -119,10 +122,10 @@ class _SettingScreenState extends State<SettingScreen> {
                     textAlign: TextAlign.start,
                     softWrap: true,
                   ),
-                  MenuWidget(title: 'Account settings', callback: () {}),
-                  MenuWidget(title: 'My wallet', callback: () {}),
+                  MenuWidget(title: 'Edit account', callback: () {}),
+                  MenuWidget(title: 'Menu 1', callback: () {}),
                   MenuWidget(
-                      title: 'Become a tutor',
+                      title: 'Menu 2 (navigate to home)',
                       callback: () {
                         //TODO FIX NAVIGATOR
                         Navigator.pushReplacementNamed(context, MyRouter.baseScreen);
@@ -137,10 +140,102 @@ class _SettingScreenState extends State<SettingScreen> {
                     textAlign: TextAlign.start,
                     softWrap: true,
                   ),
-                  MenuWidget(title: 'Notifications', callback: () {}),
-                  MenuWidget(title: 'Language', callback: () {}),
-                  MenuWidget(title: 'Dark mode', callback: () {}),
-                  MenuWidget(title: 'Application information', callback: () {}),
+                  MenuWidget(title: 'Notifications (implement after reminder screen)', callback: () {}),
+                  ExpansionTile(
+                    title:  Text(
+                      "Language",
+                      style: bodyLarge(context),
+                    ),
+
+                    tilePadding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
+                    children: <Widget>[
+                      ListTile(title: Text("Vietnamese",
+                          style: bodyLarge(context)),
+                        contentPadding: const EdgeInsets.fromLTRB(2, 0, 4, 0),
+                        leading: Image.asset(
+                          ImagesPath.vietnam,
+                          fit: BoxFit.fitHeight,
+                          height: 18,
+                        ),
+                        trailing: _isVietnamese? const Icon(Icons.radio_button_checked, color: Colors.blue, size: 18):
+                        const Icon(Icons.radio_button_off, color: Colors.black45, size: 18),
+                        onTap: (){
+                          setState(() {
+                            _isVietnamese = true;
+                          });
+                        },
+                      ),
+                      ListTile(title: Text("English",
+                          style: bodyLarge(context)),
+                        contentPadding: const EdgeInsets.fromLTRB(2, 0, 4, 0),
+                        leading: Image.asset(
+                          ImagesPath.english,
+                          fit: BoxFit.fitHeight,
+                          height: 18,
+                        ),
+                        trailing: !_isVietnamese? const Icon(Icons.radio_button_checked, color: Colors.blue, size: 18,):
+                        const Icon(Icons.radio_button_off, color: Colors.black45, size: 18),
+                        onTap: (){
+                          setState(() {
+                            _isVietnamese = false;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  ExpansionTile(
+                    title:  Text(
+                      "Dark mode",
+                      style: bodyLarge(context),
+                    ),
+
+                    tilePadding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
+                    children: <Widget>[
+                      ListTile(title: Text("Light mode",
+                          style: bodyLarge(context)),
+                        contentPadding: const EdgeInsets.fromLTRB(2, 0, 4, 0),
+                        leading: const Icon(Icons.sunny, color: Colors.yellow),
+                        trailing: _isLightMode? const Icon(Icons.radio_button_checked, color: Colors.blue, size: 18):
+                        const Icon(Icons.radio_button_off, color: Colors.black45, size: 18),
+                        onTap: (){
+                        setState(() {
+                          _isLightMode = true;
+                        });
+                        },
+                      ),
+                      ListTile(title: Text("Dark mode",
+                          style: bodyLarge(context)),
+                        contentPadding: const EdgeInsets.fromLTRB(2, 0, 4, 0),
+                        leading: const Icon(Icons.nights_stay, color: Colors.lightBlue,),
+                        trailing: !_isLightMode? const Icon(Icons.radio_button_checked, color: Colors.blue, size: 18,):
+                        const Icon(Icons.radio_button_off, color: Colors.black45, size: 18),
+                        onTap: (){
+                          setState(() {
+                            _isLightMode = false;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  ExpansionTile(
+                    title:  Text(
+                      "Application information",
+                      style: bodyLarge(context),
+                    ),
+
+                    tilePadding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
+                    children: <Widget>[
+                      ListTile(title: RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: "Version: ",
+                                style: bodyLargeBold(context)),
+                            TextSpan(
+                                text: " 1.0.0",
+                                style: bodyLarge(context))
+                          ])),),
+                    ],
+                  ),
                   const SizedBox(
                     height: 16,
                   ),
@@ -151,10 +246,35 @@ class _SettingScreenState extends State<SettingScreen> {
                     textAlign: TextAlign.start,
                     softWrap: true,
                   ),
-                  MenuWidget(title: 'Privacy policies', callback: () {}),
-                  MenuWidget(title: 'Terms & conditions', callback: () {}),
-                  MenuWidget(title: 'Contact for support', callback: () {}),
-                  MenuWidget(title: 'FAQs', callback: () {}),
+                  MenuWidget(title: 'Web version', callback: () {}),
+                  ExpansionTile(
+                title:  Text(
+                  "Contact for support",
+                  style: bodyLarge(context),
+                ),
+
+                tilePadding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
+                children: <Widget>[
+                  ListTile(title: RichText(
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: "Hotline:",
+                            style: bodyLargeBold(context)),
+                        TextSpan(
+                            text: " 0988012170",
+                            style: bodyLarge(context))
+                      ])),),
+                  ListTile(title: RichText(
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: "Email:",
+                            style: bodyLargeBold(context)),
+                        TextSpan(
+                            text: " hcmus@edu.com.vn",
+                            style: bodyLarge(context))
+                      ])),),
+                ],
+               ),
                 ],
               ),
             )

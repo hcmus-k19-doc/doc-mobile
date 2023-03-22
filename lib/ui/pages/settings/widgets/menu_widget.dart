@@ -19,17 +19,17 @@ class MenuWidget extends StatelessWidget {
             style: bodyLarge(context),
           ),
           onTap: callback,
-          contentPadding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+          contentPadding: const EdgeInsets.fromLTRB(0, 4, 0, 2),
           visualDensity: const VisualDensity(horizontal: 0, vertical: -2),
-          trailing: const Icon(Icons.navigate_next),
+          trailing: const Icon(Icons.expand_more),
         ),
-        const Divider(
-          height: 1,
-          thickness: 1,
-        ),
-        const SizedBox(
-          height: 4,
-        )
+        // const Divider(
+        //   height: 1,
+        //   thickness: 1,
+        // ),
+        // const SizedBox(
+        //   height: 4,
+        // )
       ],
     );
   }
