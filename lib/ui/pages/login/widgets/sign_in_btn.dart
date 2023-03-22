@@ -26,7 +26,7 @@ class SignInBtn extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(StyleConst.defaultPadding12),
                   elevation: 2,
                   backgroundColor: Theme.of(context).primaryColor,
                   shape: RoundedRectangleBorder(

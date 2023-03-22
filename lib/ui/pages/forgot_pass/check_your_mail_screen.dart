@@ -36,7 +36,7 @@ class CheckYourMailScreen extends StatelessWidget {
                   style: bodyLargeBold(context)?.copyWith(fontSize: 24),
                 ),
                 const SizedBox(
-                  height: StyleConst.defaultPadding24 / 2,
+                  height: StyleConst.defaultPadding12,
                 ),
                 Text(
                   "We have sent a password recover\n"
@@ -72,7 +72,7 @@ class CheckYourMailScreen extends StatelessWidget {
                   style: bodyLarge(context)?.copyWith(fontSize: 14),
                 ),
                 const SizedBox(
-                  height: StyleConst.defaultPadding24 / 3,
+                  height: StyleConst.defaultPadding8,
                 ),
                 RichText(
                     text: TextSpan(children: [

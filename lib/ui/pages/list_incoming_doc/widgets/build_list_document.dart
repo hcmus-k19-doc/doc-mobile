@@ -44,7 +44,7 @@ class _BuildListIncomingDocumentState extends State<BuildListIncomingDocument> {
                         children: [
                           DocumentTile(incomingDocument: e),
                           const SizedBox(
-                            height: StyleConst.defaultPadding12,
+                            height: StyleConst.defaultPadding8,
                           )
                         ],
                       ))
@@ -59,7 +59,7 @@ class _BuildListIncomingDocumentState extends State<BuildListIncomingDocument> {
                         children: [
                           DocumentTile(incomingDocument: e),
                           const SizedBox(
-                            height: StyleConst.defaultPadding12,
+                            height: StyleConst.defaultPadding8,
                           )
                         ],
                       )),
@@ -72,7 +72,7 @@ class _BuildListIncomingDocumentState extends State<BuildListIncomingDocument> {
                     children: [
                       DocumentTile(incomingDocument: e),
                       const SizedBox(
-                        height: StyleConst.defaultPadding12,
+                        height: StyleConst.defaultPadding8,
                       )
                     ],
                   )),

@@ -20,13 +20,23 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
       children: [
         TextFormField(
           validator: (value) {
-            if (value != null && !value.isValidEmail) {
-              return 'Email must follow standard format';
-            } else {
-              return null;
-            }
+            // if (value != null && !value.isValidEmail) {
+            //   return 'Email must follow standard format';
+            // } else {
+            //   return null;
+            // }
+            return null;
           },
           decoration: InputDecoration(
+              labelText: "Email",
+              labelStyle: MaterialStateTextStyle.resolveWith(
+                  (Set<MaterialState> states) {
+                final Color color = states.contains(MaterialState.focused)
+                    ? Theme.of(context).primaryColor
+                    : Theme.of(context).hintColor;
+                return bodyLarge(context)!.copyWith(color: color, fontSize: 20);
+              }),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                       color: Theme.of(context).primaryColor, width: 2),

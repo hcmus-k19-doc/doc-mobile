@@ -11,7 +11,6 @@ class SearchTextField extends StatefulWidget {
       this.onPressTrailingIcon,
       this.maxLinesTextField,
       this.textController,
-      this.focusNode,
       this.readOnly})
       : super(key: key);
   final String title;
@@ -20,7 +19,6 @@ class SearchTextField extends StatefulWidget {
   final int? maxLinesTextField;
   final TextEditingController? textController;
   final bool? readOnly;
-  final FocusNode? focusNode;
 
   @override
   State<SearchTextField> createState() => _SearchTextFieldState();
@@ -29,41 +27,37 @@ class SearchTextField extends StatefulWidget {
 class _SearchTextFieldState extends State<SearchTextField> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-            flex: 1,
-            child: Text(
-              widget.title,
-              style: bodyLarge(context),
-            )),
-        Expanded(
-            flex: 3,
-            child: TextField(
-                readOnly: widget.readOnly ?? false,
-                maxLines: widget.maxLinesTextField,
-                controller: widget.textController,
-                focusNode: widget.focusNode,
-                decoration: InputDecoration(
-                    suffixIcon: widget.trailingIcon != null
-                        ? IconButton(
-                            icon: Icon(widget.trailingIcon),
-                            onPressed: widget.onPressTrailingIcon,
-                          )
-                        : null,
-                    isDense: true,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Theme.of(context).primaryColor, width: 2),
-                        borderRadius:
-                            BorderRadius.circular(StyleConst.defaultRadius25)),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: ColorConst.lightGrey),
-                        borderRadius:
-                            BorderRadius.circular(StyleConst.defaultRadius25)),
-                    hintStyle:
-                        const TextStyle(color: ColorConst.textFieldHintColor))))
-      ],
-    );
+    return TextField(
+        readOnly: widget.readOnly ?? false,
+        maxLines: widget.maxLinesTextField,
+        controller: widget.textController,
+        style: bodyLarge(context),
+        decoration: InputDecoration(
+            labelText: widget.title,
+            labelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              final Color color = states.contains(MaterialState.focused)
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).hintColor;
+              return bodyLarge(context)!.copyWith(color: color);
+            }),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            suffixIcon: widget.trailingIcon != null
+                ? IconButton(
+                    icon: Icon(widget.trailingIcon),
+                    onPressed: widget.onPressTrailingIcon,
+                  )
+                : null,
+            isDense: true,
+            focusedBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Theme.of(context).primaryColor, width: 2),
+                borderRadius:
+                    BorderRadius.circular(StyleConst.defaultRadius25)),
+            border: OutlineInputBorder(
+                borderSide: BorderSide(color: ColorConst.lightGrey),
+                borderRadius:
+                    BorderRadius.circular(StyleConst.defaultRadius25)),
+            hintStyle: const TextStyle(color: ColorConst.textFieldHintColor)));
   }
 }

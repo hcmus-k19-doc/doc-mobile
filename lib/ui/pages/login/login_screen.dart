@@ -102,7 +102,7 @@ class LoginScreen extends StatelessWidget {
                               ),
 
                               const SizedBox(
-                                height: StyleConst.defaultPadding24 / 2,
+                                height: StyleConst.defaultPadding12,
                               ),
 
                               SignInBtn(

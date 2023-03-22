@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
 import 'package:flutter_app/bloc/suggestion_bloc/suggestion_bloc.dart';
+import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/distrbution_org.dart';
 import 'package:flutter_app/model/document_type.dart';
@@ -58,8 +59,9 @@ class _SearchModalState extends State<SearchModal> {
       builder: (context, state) {
         return SingleChildScrollView(
           child: Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: Container(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Padding(
               padding: const EdgeInsets.all(StyleConst.defaultPadding24),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -85,6 +87,7 @@ class _SearchModalState extends State<SearchModal> {
                     height: StyleConst.defaultPadding24,
                   ),
                   DropdownSearchDocument(
+                    title: "Loại văn bản",
                     onChanged: selectDocumentType,
                     listSuggestion:
                         state is SuggestionEmit ? state.documentTypes : [],
@@ -111,6 +114,7 @@ class _SearchModalState extends State<SearchModal> {
                     height: StyleConst.defaultPadding24,
                   ),
                   DropdownSearchOrg(
+                    title: "Cơ quan ban hành",
                     onChanged: selectDistributionOrg,
                     listSuggestions:
                         state is SuggestionEmit ? state.distributionOrgs : [],
@@ -156,12 +160,16 @@ class _SearchModalState extends State<SearchModal> {
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
-                          Text("Tìm kiếm"),
-                          SizedBox(
+                        children: [
+                          Text(
+                            "Tìm kiếm",
+                            style: bodyLarge(context)
+                                ?.copyWith(color: Colors.white),
+                          ),
+                          const SizedBox(
                             width: StyleConst.defaultPadding24 / 2,
                           ),
-                          Icon(Icons.search)
+                          const Icon(Icons.search)
                         ],
                       ),
                     ),
@@ -186,7 +194,7 @@ class _SearchModalState extends State<SearchModal> {
   Future<void> pickDateRage(DateTimeRange? dateRange,
       TextEditingController dateController, bool isArriving) async {
     dateRange = await showDateRangePicker(
-        locale: Locale('en', 'IN'),
+        locale: const Locale('en', 'IN'),
         fieldStartHintText: "dd/MM/yyyy",
         fieldEndHintText: "dd/MM/yyyy",
         currentDate: DateTime.now(),

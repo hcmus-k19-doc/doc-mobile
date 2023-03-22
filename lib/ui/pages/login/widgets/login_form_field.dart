@@ -30,17 +30,6 @@ class _LoginFormFieldState extends State<LoginFormField> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //username or email textField
-
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: StyleConst.defaultPadding24 / 2),
-                child: Text(
-                  "Username",
-                  style: bodyLargeBold(context),
-                ),
-              ),
-
               TextFormField(
                 controller: widget.usernameTextEditingController,
                 validator: (value) {
@@ -53,6 +42,16 @@ class _LoginFormFieldState extends State<LoginFormField> {
                 },
                 enabled: state is AuthLoading ? false : true,
                 decoration: InputDecoration(
+                    labelText: "Username",
+                    labelStyle: MaterialStateTextStyle.resolveWith(
+                        (Set<MaterialState> states) {
+                      final Color color = states.contains(MaterialState.focused)
+                          ? Theme.of(context).primaryColor
+                          : Theme.of(context).hintColor;
+                      return bodyLarge(context)!
+                          .copyWith(color: color, fontSize: 20);
+                    }),
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             color: Theme.of(context).primaryColor, width: 2),
@@ -67,14 +66,8 @@ class _LoginFormFieldState extends State<LoginFormField> {
                         const TextStyle(color: ColorConst.textFieldHintColor)),
               ),
 
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: StyleConst.defaultPadding24 / 2,
-                    top: StyleConst.defaultPadding24),
-                child: Text(
-                  "Password",
-                  style: bodyLargeBold(context),
-                ),
+              const SizedBox(
+                height: StyleConst.defaultPadding24,
               ),
               //password textField
               TextFormField(
@@ -91,6 +84,16 @@ class _LoginFormFieldState extends State<LoginFormField> {
                 },
                 enabled: state is AuthLoading ? false : true,
                 decoration: InputDecoration(
+                    labelText: "Password",
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    labelStyle: MaterialStateTextStyle.resolveWith(
+                        (Set<MaterialState> states) {
+                      final Color color = states.contains(MaterialState.focused)
+                          ? Theme.of(context).primaryColor
+                          : Theme.of(context).hintColor;
+                      return bodyLarge(context)!
+                          .copyWith(color: color, fontSize: 20);
+                    }),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             color: Theme.of(context).primaryColor, width: 2),

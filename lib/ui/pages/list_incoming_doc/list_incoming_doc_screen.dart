@@ -69,18 +69,18 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
           }
         },
         child: Padding(
-          padding: const EdgeInsets.all(StyleConst.defaultPadding24),
+          padding: const EdgeInsets.all(StyleConst.defaultPadding20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Hiện tại bạn có:",
-                style: bodyLargeBold(context)?.copyWith(fontSize: 20),
+                style: headLineSmall(context),
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: StyleConst.defaultPadding24,
-                    top: StyleConst.defaultPadding24 / 2),
+                    left: StyleConst.defaultPadding16,
+                    top: StyleConst.defaultPadding8),
                 child: RichText(
                   text: TextSpan(
                       style: bodyLarge(context)?.copyWith(fontSize: 20),
@@ -101,8 +101,7 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: StyleConst.defaultPadding24 / 2),
+                padding: EdgeInsets.only(bottom: StyleConst.defaultPadding16),
                 child: Divider(
                   thickness: 2,
                 ),
@@ -112,10 +111,10 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
                 children: [
                   Text(
                     "Danh sách văn bản đến",
-                    style: bodyLargeBold(context)?.copyWith(fontSize: 20),
+                    style: headLineSmall(context),
                   ),
                   const SizedBox(
-                    width: StyleConst.defaultPadding24 / 2,
+                    width: StyleConst.defaultPadding12,
                   ),
                   InkWell(
                     onTap: () {
@@ -145,7 +144,7 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
                 ],
               ),
               const SizedBox(
-                height: StyleConst.defaultPadding24 / 2,
+                height: StyleConst.defaultPadding8,
               ),
               const BuildListIncomingDocument(),
             ],

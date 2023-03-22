@@ -33,8 +33,7 @@ class _BaseScreenState extends State<BaseScreen> {
         appBar: AppBar(
           title: Text(
             _title,
-            style: bodyLargeBold(context)
-                ?.copyWith(color: Colors.white, fontSize: 20),
+            style: headLineSmall(context)?.copyWith(color: Colors.white),
           ),
         ),
         drawer: MenuDrawer(onNewDrawerIndex: setNewDrawerIndex),

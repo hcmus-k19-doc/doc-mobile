@@ -13,11 +13,14 @@ class ForgotPassScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Forgot Password"),
+        title: Text(
+          "Forgot Password",
+          style: headLineSmall(context)?.copyWith(color: Colors.white),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(StyleConst.defaultPadding24),
+          padding: const EdgeInsets.all(StyleConst.defaultPadding20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -25,26 +28,19 @@ class ForgotPassScreen extends StatelessWidget {
                 "Reset pasword",
                 style: bodyLargeBold(context)?.copyWith(fontSize: 20),
               ),
-              const SizedBox(
-                height: StyleConst.defaultPadding24,
-              ),
-              Text(
-                "Enter the email associated with your account and we'll send "
-                "an email with instructions to reset your password.",
-                style: bodyLarge(context)
-                    ?.copyWith(fontSize: 18, color: Colors.grey[700]),
-              ),
-              const SizedBox(
-                height: StyleConst.defaultPadding24,
-              ),
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: StyleConst.defaultPadding24 / 2),
+                    left: StyleConst.defaultPadding8,
+                    top: StyleConst.defaultPadding8),
                 child: Text(
-                  "Email address",
+                  "Enter the email associated with your account and we'll send "
+                  "an email with instructions to reset your password.",
                   style: bodyLarge(context)
                       ?.copyWith(fontSize: 18, color: Colors.grey[700]),
                 ),
+              ),
+              const SizedBox(
+                height: StyleConst.defaultPadding24,
               ),
               Form(
                   key: _formKey,
