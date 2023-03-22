@@ -17,7 +17,7 @@ class ForgotPassScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(StyleConst.defaultPadding),
+          padding: const EdgeInsets.all(StyleConst.defaultPadding24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -26,7 +26,7 @@ class ForgotPassScreen extends StatelessWidget {
                 style: bodyLargeBold(context)?.copyWith(fontSize: 20),
               ),
               const SizedBox(
-                height: StyleConst.defaultPadding,
+                height: StyleConst.defaultPadding24,
               ),
               Text(
                 "Enter the email associated with your account and we'll send "
@@ -35,11 +35,11 @@ class ForgotPassScreen extends StatelessWidget {
                     ?.copyWith(fontSize: 18, color: Colors.grey[700]),
               ),
               const SizedBox(
-                height: StyleConst.defaultPadding,
+                height: StyleConst.defaultPadding24,
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: StyleConst.defaultPadding / 2),
+                    bottom: StyleConst.defaultPadding24 / 2),
                 child: Text(
                   "Email address",
                   style: bodyLarge(context)

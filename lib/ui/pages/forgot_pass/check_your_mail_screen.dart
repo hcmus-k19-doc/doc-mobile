@@ -11,7 +11,7 @@ class CheckYourMailScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(StyleConst.defaultPadding),
+          padding: const EdgeInsets.all(StyleConst.defaultPadding24),
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -20,23 +20,23 @@ class CheckYourMailScreen extends StatelessWidget {
                 Container(
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
-                            Radius.circular(StyleConst.defaultRadius)),
+                            Radius.circular(StyleConst.defaultRadius25)),
                         color: Theme.of(context).primaryColor.withOpacity(0.1)),
-                    padding: const EdgeInsets.all(StyleConst.defaultPadding),
+                    padding: const EdgeInsets.all(StyleConst.defaultPadding24),
                     child: Icon(
                       Icons.mark_email_unread,
                       color: Theme.of(context).primaryColor,
                       size: 45,
                     )),
                 const SizedBox(
-                  height: StyleConst.defaultPadding,
+                  height: StyleConst.defaultPadding24,
                 ),
                 Text(
                   "Check your mail",
                   style: bodyLargeBold(context)?.copyWith(fontSize: 24),
                 ),
                 const SizedBox(
-                  height: StyleConst.defaultPadding / 2,
+                  height: StyleConst.defaultPadding24 / 2,
                 ),
                 Text(
                   "We have sent a password recover\n"
@@ -46,18 +46,18 @@ class CheckYourMailScreen extends StatelessWidget {
                       ?.copyWith(fontSize: 18, color: Colors.grey[700]),
                 ),
                 const SizedBox(
-                  height: StyleConst.defaultPadding,
+                  height: StyleConst.defaultPadding24,
                 ),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                             vertical: 16,
-                            horizontal: StyleConst.defaultPadding),
+                            horizontal: StyleConst.defaultPadding24),
                         elevation: 2,
                         backgroundColor: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
-                                StyleConst.defaultRadius))),
+                                StyleConst.defaultRadius25))),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -72,7 +72,7 @@ class CheckYourMailScreen extends StatelessWidget {
                   style: bodyLarge(context)?.copyWith(fontSize: 14),
                 ),
                 const SizedBox(
-                  height: StyleConst.defaultPadding / 3,
+                  height: StyleConst.defaultPadding24 / 3,
                 ),
                 RichText(
                     text: TextSpan(children: [

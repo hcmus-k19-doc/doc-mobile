@@ -56,11 +56,11 @@ class _SearchTextFieldState extends State<SearchTextField> {
                         borderSide: BorderSide(
                             color: Theme.of(context).primaryColor, width: 2),
                         borderRadius:
-                            BorderRadius.circular(StyleConst.defaultRadius)),
+                            BorderRadius.circular(StyleConst.defaultRadius25)),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: ColorConst.lightGrey),
                         borderRadius:
-                            BorderRadius.circular(StyleConst.defaultRadius)),
+                            BorderRadius.circular(StyleConst.defaultRadius25)),
                     hintStyle:
                         const TextStyle(color: ColorConst.textFieldHintColor))))
       ],

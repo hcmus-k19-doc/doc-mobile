@@ -34,7 +34,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
 
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: StyleConst.defaultPadding / 2),
+                    bottom: StyleConst.defaultPadding24 / 2),
                 child: Text(
                   "Username",
                   style: bodyLargeBold(context),
@@ -57,11 +57,11 @@ class _LoginFormFieldState extends State<LoginFormField> {
                         borderSide: BorderSide(
                             color: Theme.of(context).primaryColor, width: 2),
                         borderRadius:
-                            BorderRadius.circular(StyleConst.defaultRadius)),
+                            BorderRadius.circular(StyleConst.defaultRadius25)),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: ColorConst.lightGrey),
                         borderRadius:
-                            BorderRadius.circular(StyleConst.defaultRadius)),
+                            BorderRadius.circular(StyleConst.defaultRadius25)),
                     hintText: 'Ex: abc123xyz',
                     hintStyle:
                         const TextStyle(color: ColorConst.textFieldHintColor)),
@@ -69,8 +69,8 @@ class _LoginFormFieldState extends State<LoginFormField> {
 
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: StyleConst.defaultPadding / 2,
-                    top: StyleConst.defaultPadding),
+                    bottom: StyleConst.defaultPadding24 / 2,
+                    top: StyleConst.defaultPadding24),
                 child: Text(
                   "Password",
                   style: bodyLargeBold(context),
@@ -95,7 +95,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                         borderSide: BorderSide(
                             color: Theme.of(context).primaryColor, width: 2),
                         borderRadius:
-                            BorderRadius.circular(StyleConst.defaultRadius)),
+                            BorderRadius.circular(StyleConst.defaultRadius25)),
                     suffixIcon: IconButton(
                       icon: Icon(_passwordVisible
                           ? Icons.visibility
@@ -109,7 +109,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: ColorConst.lightGrey),
                         borderRadius:
-                            BorderRadius.circular(StyleConst.defaultRadius)),
+                            BorderRadius.circular(StyleConst.defaultRadius25)),
                     hintText: "*********",
                     hintStyle:
                         const TextStyle(color: ColorConst.textFieldHintColor)),

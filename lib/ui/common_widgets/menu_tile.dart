@@ -12,9 +12,11 @@ class MenuTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTileTheme(
         child: ExpansionTile(
-          title: Text("${parentTitle}",),
-          childrenPadding: EdgeInsets.only(left: StyleConst.defaultPadding),
-          children: subMenu,
-        ));
+      title: Text(
+        "${parentTitle}",
+      ),
+      childrenPadding: EdgeInsets.only(left: StyleConst.defaultPadding24),
+      children: subMenu,
+    ));
   }
 }

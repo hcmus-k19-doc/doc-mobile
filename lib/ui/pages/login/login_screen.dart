@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
               body: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: StyleConst.defaultPadding),
+                      horizontal: StyleConst.defaultPadding24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -102,7 +102,7 @@ class LoginScreen extends StatelessWidget {
                               ),
 
                               const SizedBox(
-                                height: StyleConst.defaultPadding / 2,
+                                height: StyleConst.defaultPadding24 / 2,
                               ),
 
                               SignInBtn(

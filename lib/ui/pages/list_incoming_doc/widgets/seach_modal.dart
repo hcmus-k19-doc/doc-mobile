@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bloc/pagination_list_incoming_bloc/pagination_list_incoming_bloc.dart';
+import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
 import 'package:flutter_app/bloc/suggestion_bloc/suggestion_bloc.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/distrbution_org.dart';
@@ -41,15 +41,14 @@ class _SearchModalState extends State<SearchModal> {
   final TextEditingController summaryController = TextEditingController();
 
   late SuggestionBloc suggestionBloc;
-  late PaginationListIncomingBloc listIncomingBloc;
   DocumentType? searchDocTypeVal;
   DistributionOrg? searchDisOrgVal;
+  SearchCriteria? searchCriteria = SearchCriteria();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     suggestionBloc = BlocProvider.of<SuggestionBloc>(context);
-    listIncomingBloc = BlocProvider.of<PaginationListIncomingBloc>(context);
   }
 
   @override
@@ -61,7 +60,7 @@ class _SearchModalState extends State<SearchModal> {
           child: Padding(
             padding: MediaQuery.of(context).viewInsets,
             child: Container(
-              padding: const EdgeInsets.all(StyleConst.defaultPadding),
+              padding: const EdgeInsets.all(StyleConst.defaultPadding24),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -70,7 +69,7 @@ class _SearchModalState extends State<SearchModal> {
                     children: [
                       IconButton(
                           padding: const EdgeInsets.only(
-                              bottom: StyleConst.defaultPadding / 2),
+                              bottom: StyleConst.defaultPadding24 / 2),
                           constraints: const BoxConstraints(),
                           onPressed: () {
                             Navigator.pop(context);
@@ -83,7 +82,7 @@ class _SearchModalState extends State<SearchModal> {
                     textController: incomingNumberController,
                   ),
                   const SizedBox(
-                    height: StyleConst.defaultPadding,
+                    height: StyleConst.defaultPadding24,
                   ),
                   DropdownSearchDocument(
                     onChanged: selectDocumentType,
@@ -91,7 +90,7 @@ class _SearchModalState extends State<SearchModal> {
                         state is SuggestionEmit ? state.documentTypes : [],
                   ),
                   const SizedBox(
-                    height: StyleConst.defaultPadding,
+                    height: StyleConst.defaultPadding24,
                   ),
                   SearchTextField(
                     title: "Khoảng ngày đến",
@@ -102,14 +101,14 @@ class _SearchModalState extends State<SearchModal> {
                         arrivingDateRange, arrivingDateRangeController, true),
                   ),
                   const SizedBox(
-                    height: StyleConst.defaultPadding,
+                    height: StyleConst.defaultPadding24,
                   ),
                   SearchTextField(
                     title: "Số ký hiệu gốc",
                     textController: originalSymbolNumberController,
                   ),
                   const SizedBox(
-                    height: StyleConst.defaultPadding,
+                    height: StyleConst.defaultPadding24,
                   ),
                   DropdownSearchOrg(
                     onChanged: selectDistributionOrg,
@@ -117,7 +116,7 @@ class _SearchModalState extends State<SearchModal> {
                         state is SuggestionEmit ? state.distributionOrgs : [],
                   ),
                   const SizedBox(
-                    height: StyleConst.defaultPadding,
+                    height: StyleConst.defaultPadding24,
                   ),
                   SearchTextField(
                     title: "Thời hạn xử lý",
@@ -128,7 +127,7 @@ class _SearchModalState extends State<SearchModal> {
                         processingDateRange, processingDateController, false),
                   ),
                   const SizedBox(
-                    height: StyleConst.defaultPadding,
+                    height: StyleConst.defaultPadding24,
                   ),
                   SearchTextField(
                     title: "Trích yếu",
@@ -136,7 +135,7 @@ class _SearchModalState extends State<SearchModal> {
                     maxLinesTextField: 3,
                   ),
                   const SizedBox(
-                    height: StyleConst.defaultPadding,
+                    height: StyleConst.defaultPadding24,
                   ),
                   Align(
                     alignment: Alignment.centerRight,
@@ -145,11 +144,11 @@ class _SearchModalState extends State<SearchModal> {
                         backgroundColor: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
-                              StyleConst.defaultRadius), // <-- Radius
+                              StyleConst.defaultRadius25), // <-- Radius
                         ),
                         padding: const EdgeInsets.symmetric(
                             horizontal:
-                                StyleConst.defaultPadding / 2), // and this
+                                StyleConst.defaultPadding24 / 2), // and this
                       ),
                       onPressed: () {
                         startSearching();
@@ -160,7 +159,7 @@ class _SearchModalState extends State<SearchModal> {
                         children: const [
                           Text("Tìm kiếm"),
                           SizedBox(
-                            width: StyleConst.defaultPadding / 2,
+                            width: StyleConst.defaultPadding24 / 2,
                           ),
                           Icon(Icons.search)
                         ],
@@ -196,14 +195,14 @@ class _SearchModalState extends State<SearchModal> {
         lastDate: DateTime(2100));
     if (dateRange == null) return;
     if (isArriving) {
-      listIncomingBloc.searchCriteria?.arrivingDateFrom =
+      searchCriteria?.arrivingDateFrom =
           DateFormat('dd-MM-yyyy').format(dateRange.start);
-      listIncomingBloc.searchCriteria?.arrivingDateTo =
+      searchCriteria?.arrivingDateTo =
           DateFormat('dd-MM-yyyy').format(dateRange.end);
     } else {
-      listIncomingBloc.searchCriteria?.processingDurationFrom =
+      searchCriteria?.processingDurationFrom =
           DateFormat('dd-MM-yyyy').format(dateRange.start);
-      listIncomingBloc.searchCriteria?.processingDurationTo =
+      searchCriteria?.processingDurationTo =
           DateFormat('dd-MM-yyyy').format(dateRange.end);
     }
     setState(() {
@@ -213,19 +212,17 @@ class _SearchModalState extends State<SearchModal> {
   }
 
   void startSearching() {
-    listIncomingBloc.searchCriteria?.incomingNumber =
-        incomingNumberController.text;
+    searchCriteria?.incomingNumber = incomingNumberController.text;
 
-    listIncomingBloc.searchCriteria?.originalSymbolNumber =
-        originalSymbolNumberController.text;
+    searchCriteria?.originalSymbolNumber = originalSymbolNumberController.text;
 
-    listIncomingBloc.searchCriteria?.summary = summaryController.text;
+    searchCriteria?.summary = summaryController.text;
 
-    listIncomingBloc.searchCriteria?.documentTypeId = searchDocTypeVal?.id;
+    searchCriteria?.documentTypeId = searchDocTypeVal?.id;
 
-    listIncomingBloc.searchCriteria?.distributionOrgId = searchDisOrgVal?.id;
+    searchCriteria?.distributionOrgId = searchDisOrgVal?.id;
 
-    BlocProvider.of<PaginationListIncomingBloc>(context)
-        .add(FetchPaginationIncomingListDocumentEvent());
+    BlocProvider.of<ListIncomingBloc>(context)
+        .add(FilterIncomingListDocumentEvent(searchCriteria));
   }
 }

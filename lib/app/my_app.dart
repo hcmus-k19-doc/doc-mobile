@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
-import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_doc_bloc.dart';
-import 'package:flutter_app/bloc/pagination_list_incoming_bloc/pagination_list_incoming_bloc.dart';
+import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
 import 'package:flutter_app/constants/hex_color.dart';
 import 'package:flutter_app/model/search_criteria.dart';
 import 'package:flutter_app/repositories/auth_repository.dart';
@@ -52,19 +51,13 @@ class MyAppState extends State<MyApp> {
           FocusManager.instance.primaryFocus?.unfocus();
         }
       },
-      // child: MultiRepositoryProvider(
-      //   providers: [
-      //     RepositoryProvider<UserRepository>(
-      //         create: (context) => UserRepository(config.baseUrl)),
-      //     //
-      //   ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
               create: (context) => AuthBloc(AuthRepository(
                   "${UrlConst.DOC_SERVICE_URL}/security/auth/token"))),
           BlocProvider(
-              create: (context) => PaginationListIncomingBloc(
+              create: (context) => ListIncomingBloc(
                   IncomingDocumentRepository(
                       "${UrlConst.DOC_SERVICE_URL}/incoming-documents"),
                   SearchCriteria())),

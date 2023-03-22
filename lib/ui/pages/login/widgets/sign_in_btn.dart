@@ -31,7 +31,7 @@ class SignInBtn extends StatelessWidget {
                   backgroundColor: Theme.of(context).primaryColor,
                   shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.circular(StyleConst.defaultRadius))),
+                          BorderRadius.circular(StyleConst.defaultRadius25))),
               onPressed: state is AuthLoading
                   ? null
                   : () {
@@ -44,8 +44,8 @@ class SignInBtn extends StatelessWidget {
               child: Center(
                 child: state is AuthLoading
                     ? const SizedBox(
-                        height: StyleConst.defaultPadding,
-                        width: StyleConst.defaultPadding,
+                        height: StyleConst.defaultPadding24,
+                        width: StyleConst.defaultPadding24,
                         child: CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation(Colors.white),
                         ),

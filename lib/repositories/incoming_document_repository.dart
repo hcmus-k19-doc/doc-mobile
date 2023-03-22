@@ -9,13 +9,14 @@ import 'package:flutter_app/repositories/base_repository.dart';
 class IncomingDocumentRepository extends BaseRepository {
   IncomingDocumentRepository(super.baseUrl);
 
-  Future<PaginationIncomingDocument> getPaginationIncomingDocumentList(
-      SearchCriteria? searchCriteria) async {
+  Future<PaginationIncomingDocument> fetchPaginationIncomingDocumentList(
+      SearchCriteria? searchCriteria, int page) async {
     try {
       final response = await provider.post(
           url: "/search",
           cancelToken: cancelToken,
-          data: searchCriteria?.toMap());
+          data: searchCriteria?.toMap(),
+          queryParams: {"page": page});
 
       PaginationIncomingDocument tempPagination = PaginationIncomingDocument();
       Iterable l = response["payload"];

@@ -4,11 +4,9 @@ import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
 
 class DocumentTile extends StatefulWidget {
-  const DocumentTile(
-      {Key? key, required this.incomingDocument, required this.numberOrderTile})
+  const DocumentTile({Key? key, required this.incomingDocument})
       : super(key: key);
   final IncomingDocument incomingDocument;
-  final int numberOrderTile;
 
   @override
   State<DocumentTile> createState() => _DocumentTileState();
@@ -21,15 +19,11 @@ class _DocumentTileState extends State<DocumentTile> {
   Widget build(BuildContext context) {
     return ExpansionTile(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(StyleConst.defaultRadius),
+          borderRadius: BorderRadius.circular(StyleConst.defaultRadius25),
           side: const BorderSide(color: Colors.black, width: 0.5)),
       collapsedShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(StyleConst.defaultRadius),
+          borderRadius: BorderRadius.circular(StyleConst.defaultRadius25),
           side: const BorderSide(color: Colors.black, width: 0.5)),
-      leading: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [Text("${widget.numberOrderTile}.")],
-      ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -80,7 +74,7 @@ class _DocumentTileState extends State<DocumentTile> {
           thickness: 1,
         ),
         Padding(
-          padding: const EdgeInsets.all(StyleConst.defaultPadding),
+          padding: const EdgeInsets.all(StyleConst.defaultPadding24),
           child: Column(
             children: [
               Row(
@@ -100,7 +94,7 @@ class _DocumentTileState extends State<DocumentTile> {
                 ],
               ),
               const SizedBox(
-                height: StyleConst.defaultPadding / 2,
+                height: StyleConst.defaultPadding24 / 2,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +114,7 @@ class _DocumentTileState extends State<DocumentTile> {
                 ],
               ),
               const SizedBox(
-                height: StyleConst.defaultPadding / 2,
+                height: StyleConst.defaultPadding24 / 2,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,7 +133,7 @@ class _DocumentTileState extends State<DocumentTile> {
                 ],
               ),
               const SizedBox(
-                height: StyleConst.defaultPadding / 2,
+                height: StyleConst.defaultPadding24 / 2,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,7 +153,7 @@ class _DocumentTileState extends State<DocumentTile> {
                 ],
               ),
               const SizedBox(
-                height: StyleConst.defaultPadding / 2,
+                height: StyleConst.defaultPadding24 / 2,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,7 +168,7 @@ class _DocumentTileState extends State<DocumentTile> {
                 ],
               ),
               const SizedBox(
-                height: StyleConst.defaultPadding / 2,
+                height: StyleConst.defaultPadding24 / 2,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,7 +187,7 @@ class _DocumentTileState extends State<DocumentTile> {
                 ],
               ),
               const SizedBox(
-                height: StyleConst.defaultPadding / 2,
+                height: StyleConst.defaultPadding24 / 2,
               ),
               Align(
                 alignment: Alignment.centerRight,
@@ -203,11 +197,11 @@ class _DocumentTileState extends State<DocumentTile> {
                       backgroundColor: Theme.of(context).primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
-                            StyleConst.defaultRadius), // <-- Radius
+                            StyleConst.defaultRadius25), // <-- Radius
                       ),
                       padding: const EdgeInsets.symmetric(
                           horizontal:
-                              StyleConst.defaultPadding / 2), // and this
+                              StyleConst.defaultPadding24 / 2), // and this
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -218,7 +212,7 @@ class _DocumentTileState extends State<DocumentTile> {
                               bodyLarge(context)?.copyWith(color: Colors.white),
                         ),
                         const SizedBox(
-                          width: StyleConst.defaultPadding / 2,
+                          width: StyleConst.defaultPadding24 / 2,
                         ),
                         const Icon(Icons.arrow_circle_right_outlined)
                       ],
