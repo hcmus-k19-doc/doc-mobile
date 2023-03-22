@@ -14,3 +14,9 @@ class ConstValue {
 class ImagesPath {
   static const logo = "assets/images/logo.png";
 }
+
+class ButtonType {
+  static const outlinedButton = "outlinedButton";
+  static const filledButton = "filledButton";
+  static const filledWhiteButton = "filledWhiteButton";
+}

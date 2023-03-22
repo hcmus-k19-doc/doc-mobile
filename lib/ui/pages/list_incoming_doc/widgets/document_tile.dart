@@ -21,7 +21,7 @@ class _DocumentTileState extends State<DocumentTile> {
       elevation: 3,
       clipBehavior: Clip.hardEdge,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(StyleConst.defaultRadius25)),
+          borderRadius: BorderRadius.circular(StyleConst.defaultRadius15)),
       child: ExpansionTile(
         title: Padding(
           padding: const EdgeInsets.all(StyleConst.defaultPadding4),
@@ -186,7 +186,7 @@ class _DocumentTileState extends State<DocumentTile> {
                         backgroundColor: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
-                              StyleConst.defaultRadius25), // <-- Radius
+                              StyleConst.defaultRadius15), // <-- Radius
                         ),
                         padding: const EdgeInsets.symmetric(
                             horizontal:

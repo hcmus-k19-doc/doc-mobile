@@ -148,7 +148,7 @@ class _SearchModalState extends State<SearchModal> {
                         backgroundColor: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
-                              StyleConst.defaultRadius25), // <-- Radius
+                              StyleConst.defaultRadius15), // <-- Radius
                         ),
                         padding: const EdgeInsets.symmetric(
                             horizontal:

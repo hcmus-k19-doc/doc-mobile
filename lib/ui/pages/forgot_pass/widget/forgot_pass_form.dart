@@ -3,7 +3,6 @@ import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/constants/color_const.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
-import 'package:flutter_app/utils/validation_extension.dart';
 
 class ForgotPassForm extends StatefulWidget {
   const ForgotPassForm({Key? key, required this.formKey}) : super(key: key);
@@ -41,11 +40,11 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
                   borderSide: BorderSide(
                       color: Theme.of(context).primaryColor, width: 2),
                   borderRadius:
-                      BorderRadius.circular(StyleConst.defaultRadius25)),
+                      BorderRadius.circular(StyleConst.defaultRadius15)),
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: ColorConst.lightGrey),
                   borderRadius:
-                      BorderRadius.circular(StyleConst.defaultRadius25)),
+                      BorderRadius.circular(StyleConst.defaultRadius15)),
               hintText: 'Ex: abc@gmail.com',
               hintStyle: const TextStyle(color: ColorConst.textFieldHintColor)),
         ),
@@ -61,7 +60,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
                   backgroundColor: Theme.of(context).primaryColor,
                   shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.circular(StyleConst.defaultRadius25))),
+                          BorderRadius.circular(StyleConst.defaultRadius15))),
               onPressed: () {
                 if (widget.formKey.currentState!.validate()) {
                   print("send link reset pass");

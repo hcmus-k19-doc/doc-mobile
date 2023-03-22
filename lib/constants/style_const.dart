@@ -6,5 +6,5 @@ class StyleConst {
   static const double defaultPadding20 = 20;
   static const double defaultPadding24 = 24;
 
-  static const double defaultRadius25 = 25;
+  static const double defaultRadius15 = 15;
 }

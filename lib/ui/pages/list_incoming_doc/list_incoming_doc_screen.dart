@@ -122,7 +122,7 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
                                   top: Radius.circular(
-                                      StyleConst.defaultRadius25))),
+                                      StyleConst.defaultRadius15))),
                           isScrollControlled: true,
                           context: context,
                           builder: (context) {

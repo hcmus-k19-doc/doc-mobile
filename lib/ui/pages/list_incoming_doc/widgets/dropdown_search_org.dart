@@ -44,11 +44,11 @@ class DropdownSearchOrg extends StatelessWidget {
                   borderSide: BorderSide(
                       color: Theme.of(context).primaryColor, width: 2),
                   borderRadius:
-                      BorderRadius.circular(StyleConst.defaultRadius25)),
+                      BorderRadius.circular(StyleConst.defaultRadius15)),
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: ColorConst.lightGrey),
                   borderRadius:
-                      BorderRadius.circular(StyleConst.defaultRadius25)),
+                      BorderRadius.circular(StyleConst.defaultRadius15)),
               hintStyle:
                   const TextStyle(color: ColorConst.textFieldHintColor))),
     );

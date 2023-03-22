@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'hex_color.dart';
 
 class ColorConst {
-  static const MaterialColor statusBar = MaterialColor(0xF76A05, {});
-
   // General color
   static final HexColor defaultColor = HexColor("#F36F21");
   static final HexColor green = HexColor("#2EC492");

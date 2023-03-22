@@ -114,7 +114,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  Navigator.pushReplacementNamed(
+                                  Navigator.pushNamed(
                                       context, MyRouter.setting);
                                 },
                                 child: Text('Test'),

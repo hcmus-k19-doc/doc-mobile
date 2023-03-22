@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 
   static void initSystemDefault() {
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: ColorConst.statusBar),
+      const SystemUiOverlayStyle(statusBarColor: Colors.blue),
     );
   }
 

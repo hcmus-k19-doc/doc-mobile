@@ -20,7 +20,7 @@ class CheckYourMailScreen extends StatelessWidget {
                 Container(
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
-                            Radius.circular(StyleConst.defaultRadius25)),
+                            Radius.circular(StyleConst.defaultRadius15)),
                         color: Theme.of(context).primaryColor.withOpacity(0.1)),
                     padding: const EdgeInsets.all(StyleConst.defaultPadding24),
                     child: Icon(
@@ -57,7 +57,7 @@ class CheckYourMailScreen extends StatelessWidget {
                         backgroundColor: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
-                                StyleConst.defaultRadius25))),
+                                StyleConst.defaultRadius15))),
                     onPressed: () {
                       Navigator.pop(context);
                     },

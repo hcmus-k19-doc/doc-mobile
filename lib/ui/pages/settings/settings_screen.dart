@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/ui/common_widgets/confirm_dialog.dart';
 import 'package:flutter_app/ui/pages/settings/widgets/menu_widget.dart';
 
 import '../../../app/router.dart';
 import '../../../constants/export_constants.dart';
+import '../../../utils/utils.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -63,26 +65,26 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                     ),
-                    InkWell(
-                      child: Container(
-                          margin: const EdgeInsets.only(left: 8),
-                          padding: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            shape: BoxShape.rectangle,
-                            // border: Border.all(width: 2, color: Colors.white,)
-                          ),
-                          child: const Icon(
-                            Icons.edit,
-                            color: Colors.blue,
-                            size: 24,
-                          )),
-                      onTap: () {
-                        //TODO FIX ROUTE
-                        Navigator.of(context).pushNamed(MyRouter.home);
-                      },
-                    ),
+                    // InkWell(
+                    //   child: Container(
+                    //       margin: const EdgeInsets.only(left: 8),
+                    //       padding: const EdgeInsets.all(4),
+                    //       decoration: const BoxDecoration(
+                    //         color: Colors.white,
+                    //         borderRadius: BorderRadius.all(Radius.circular(5)),
+                    //         shape: BoxShape.rectangle,
+                    //         // border: Border.all(width: 2, color: Colors.white,)
+                    //       ),
+                    //       child: const Icon(
+                    //         Icons.edit,
+                    //         color: Colors.blue,
+                    //         size: 24,
+                    //       )),
+                    //   onTap: () {
+                    //     //TODO FIX ROUTE
+                    //     Navigator.of(context).pushNamed(MyRouter.home);
+                    //   },
+                    // ),
                     InkWell(
                       child: Container(
                           margin: const EdgeInsets.only(left: 16),
@@ -123,7 +125,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       title: 'Become a tutor',
                       callback: () {
                         //TODO FIX NAVIGATOR
-                        Navigator.of(context).pushNamed(MyRouter.home);
+                        Navigator.pushReplacementNamed(context, MyRouter.baseScreen);
                       }),
                   const SizedBox(
                     height: 16,
@@ -163,23 +165,23 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   void onPressedLogOut(BuildContext context, Size size) {
-    // showDialog(
-    //     context: context,
-    //     builder: (BuildContext context) {
-    //       return ConfirmDialog(
-    //         size: size,
-    //         content: "Do you want to log out?",
-    //         title: 'Logout',
-    //         onRightButton: () {
-    //           pushUntilLogin(context);
-    //         },
-    //         onLeftButton: () {
-    //           Navigator.of(context).pop();
-    //         },
-    //         leftButton: 'No',
-    //         rightButton: 'Yes',
-    //         hasLeftButton: true,
-    //       );
-    //     });
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmDialog(
+            size: size,
+            content: "Do you want to log out?",
+            title: 'Logout',
+            onRightButton: () {
+              pushUntilLogin(context);
+            },
+            onLeftButton: () {
+              Navigator.of(context).pop();
+            },
+            leftButton: 'No',
+            rightButton: 'Yes',
+            hasLeftButton: true,
+          );
+        });
   }
 }

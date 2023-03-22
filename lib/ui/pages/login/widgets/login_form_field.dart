@@ -56,11 +56,11 @@ class _LoginFormFieldState extends State<LoginFormField> {
                         borderSide: BorderSide(
                             color: Theme.of(context).primaryColor, width: 2),
                         borderRadius:
-                            BorderRadius.circular(StyleConst.defaultRadius25)),
+                            BorderRadius.circular(StyleConst.defaultRadius15)),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: ColorConst.lightGrey),
                         borderRadius:
-                            BorderRadius.circular(StyleConst.defaultRadius25)),
+                            BorderRadius.circular(StyleConst.defaultRadius15)),
                     hintText: 'Ex: abc123xyz',
                     hintStyle:
                         const TextStyle(color: ColorConst.textFieldHintColor)),
@@ -98,7 +98,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                         borderSide: BorderSide(
                             color: Theme.of(context).primaryColor, width: 2),
                         borderRadius:
-                            BorderRadius.circular(StyleConst.defaultRadius25)),
+                            BorderRadius.circular(StyleConst.defaultRadius15)),
                     suffixIcon: IconButton(
                       icon: Icon(_passwordVisible
                           ? Icons.visibility
@@ -112,7 +112,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: ColorConst.lightGrey),
                         borderRadius:
-                            BorderRadius.circular(StyleConst.defaultRadius25)),
+                            BorderRadius.circular(StyleConst.defaultRadius15)),
                     hintText: "*********",
                     hintStyle:
                         const TextStyle(color: ColorConst.textFieldHintColor)),

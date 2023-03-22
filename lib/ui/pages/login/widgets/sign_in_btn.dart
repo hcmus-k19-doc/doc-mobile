@@ -31,7 +31,7 @@ class SignInBtn extends StatelessWidget {
                   backgroundColor: Theme.of(context).primaryColor,
                   shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.circular(StyleConst.defaultRadius25))),
+                          BorderRadius.circular(StyleConst.defaultRadius15))),
               onPressed: state is AuthLoading
                   ? null
                   : () {

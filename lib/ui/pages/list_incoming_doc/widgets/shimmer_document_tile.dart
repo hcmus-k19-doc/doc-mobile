@@ -10,7 +10,7 @@ class ShimmerLoadingDocTile extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 0.5),
-          borderRadius: BorderRadius.circular(StyleConst.defaultRadius25)),
+          borderRadius: BorderRadius.circular(StyleConst.defaultRadius15)),
       padding: const EdgeInsets.symmetric(
           horizontal: StyleConst.defaultPadding24,
           vertical: StyleConst.defaultPadding24 / 1.6),
