@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
               body: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: StyleConst.defaultPadding),
+                      horizontal: StyleConst.defaultPadding24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -81,7 +81,8 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                   child: Text(
                                     "Forgot your password?",
-                                    style: bodyLarge(context),
+                                    style: bodyLarge(context)
+                                        ?.copyWith(color: Colors.blue),
                                   ),
                                   onPressed: () {
                                     Navigator.pushNamed(
@@ -95,12 +96,13 @@ class LoginScreen extends StatelessWidget {
                                 visible: state is AuthError ? true : false,
                                 child: Text(
                                   "Failed to Login",
-                                  style: bodyLargeBold(context)?.copyWith(color: Colors.red),
+                                  style: bodyLargeBold(context)
+                                      ?.copyWith(color: Colors.red),
                                 ),
                               ),
 
                               const SizedBox(
-                                height: StyleConst.defaultPadding / 2,
+                                height: StyleConst.defaultPadding12,
                               ),
 
                               SignInBtn(
@@ -110,10 +112,12 @@ class LoginScreen extends StatelessWidget {
                                 passwordTextEditingController:
                                     passwordEditingController,
                               ),
-                              ElevatedButton(onPressed: () {
-                                Navigator.pushReplacementNamed(context, MyRouter.setting);
-                              }, child: Text('Test'),
-
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, MyRouter.setting);
+                                },
+                                child: Text('Test'),
                               )
                             ],
                           ))

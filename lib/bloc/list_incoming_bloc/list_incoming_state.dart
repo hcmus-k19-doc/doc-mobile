@@ -2,6 +2,7 @@ part of 'list_incoming_bloc.dart';
 
 abstract class ListIncomingState extends Equatable {
   const ListIncomingState();
+
   @override
   List<Object?> get props => [];
 }
@@ -11,12 +12,20 @@ class ListIncomingInitial extends ListIncomingState {}
 class ListIncomingLoading extends ListIncomingState {}
 
 class ListIncomingSuccess extends ListIncomingState {
-  List<IncomingDocument> listDocs;
-  ListIncomingSuccess(this.listDocs);
+  final PaginationIncomingDocument paginationIncomingDocument;
+
+  const ListIncomingSuccess(this.paginationIncomingDocument);
+
+  @override
+  List<Object?> get props => [paginationIncomingDocument];
 }
 
-class ListIncomingFailure extends ListIncomingState {
-  final Object responeExeption;
+class ListIncomingEmpty extends ListIncomingState {}
 
-  const ListIncomingFailure(this.responeExeption);
+class ListIncomingFetchMore extends ListIncomingState {}
+
+class ListIncomingFailure extends ListIncomingState {
+  final Object responseExeption;
+
+  const ListIncomingFailure(this.responseExeption);
 }

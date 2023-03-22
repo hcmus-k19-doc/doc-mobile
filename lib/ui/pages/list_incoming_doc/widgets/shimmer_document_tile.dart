@@ -10,10 +10,10 @@ class ShimmerLoadingDocTile extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 0.5),
-          borderRadius: BorderRadius.circular(StyleConst.defaultRadius)),
-      padding: EdgeInsets.symmetric(
-          horizontal: StyleConst.defaultPadding,
-          vertical: StyleConst.defaultPadding / 2),
+          borderRadius: BorderRadius.circular(StyleConst.defaultRadius25)),
+      padding: const EdgeInsets.symmetric(
+          horizontal: StyleConst.defaultPadding24,
+          vertical: StyleConst.defaultPadding24 / 1.6),
       child: Shimmer.fromColors(
         baseColor: Colors.grey[300]!,
         highlightColor: Colors.grey[100]!,
@@ -22,23 +22,23 @@ class ShimmerLoadingDocTile extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              height: 10,
+              height: 12,
               color: Colors.white,
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Container(
               width: double.infinity,
-              height: 10,
+              height: 12,
               color: Colors.white,
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Container(
               width: double.infinity,
-              height: 10,
+              height: 12,
               color: Colors.white,
             ),
           ],

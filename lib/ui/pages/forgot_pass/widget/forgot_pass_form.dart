@@ -20,27 +20,37 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
       children: [
         TextFormField(
           validator: (value) {
-            if (value != null && !value.isValidEmail) {
-              return 'Email must follow standard format';
-            } else {
-              return null;
-            }
+            // if (value != null && !value.isValidEmail) {
+            //   return 'Email must follow standard format';
+            // } else {
+            //   return null;
+            // }
+            return null;
           },
           decoration: InputDecoration(
+              labelText: "Email",
+              labelStyle: MaterialStateTextStyle.resolveWith(
+                  (Set<MaterialState> states) {
+                final Color color = states.contains(MaterialState.focused)
+                    ? Theme.of(context).primaryColor
+                    : Theme.of(context).hintColor;
+                return bodyLarge(context)!.copyWith(color: color, fontSize: 20);
+              }),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                       color: Theme.of(context).primaryColor, width: 2),
                   borderRadius:
-                      BorderRadius.circular(StyleConst.defaultRadius)),
+                      BorderRadius.circular(StyleConst.defaultRadius25)),
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: ColorConst.lightGrey),
                   borderRadius:
-                      BorderRadius.circular(StyleConst.defaultRadius)),
+                      BorderRadius.circular(StyleConst.defaultRadius25)),
               hintText: 'Ex: abc@gmail.com',
               hintStyle: const TextStyle(color: ColorConst.textFieldHintColor)),
         ),
         const SizedBox(
-          height: StyleConst.defaultPadding,
+          height: StyleConst.defaultPadding24,
         ),
         SizedBox(
           width: double.infinity,
@@ -51,17 +61,19 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
                   backgroundColor: Theme.of(context).primaryColor,
                   shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.circular(StyleConst.defaultRadius))),
+                          BorderRadius.circular(StyleConst.defaultRadius25))),
               onPressed: () {
                 if (widget.formKey.currentState!.validate()) {
                   print("send link reset pass");
-                  Navigator.pushReplacementNamed(context, MyRouter.checkYourMail);
+                  Navigator.pushReplacementNamed(
+                      context, MyRouter.checkYourMail);
                 }
               },
               child: Center(
                 child: Text(
                   "Send Instructions",
-                  style: bodyLargeBold(context)?.copyWith(fontSize: 18),
+                  style: bodyLargeBold(context)
+                      ?.copyWith(fontSize: 18, color: Colors.white),
                 ),
               )),
         )

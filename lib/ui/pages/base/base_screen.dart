@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
@@ -30,7 +31,10 @@ class _BaseScreenState extends State<BaseScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(_title),
+          title: Text(
+            _title,
+            style: headLineSmall(context)?.copyWith(color: Colors.white),
+          ),
         ),
         drawer: MenuDrawer(onNewDrawerIndex: setNewDrawerIndex),
         body: PageView(
