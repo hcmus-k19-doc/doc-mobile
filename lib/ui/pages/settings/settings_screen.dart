@@ -16,6 +16,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   bool _isLightMode = true;
   bool _isVietnamese = true;
+  final List<bool> _notifications = [true, true, false];
 
   @override
   Widget build(BuildContext context) {
@@ -36,30 +37,20 @@ class _SettingScreenState extends State<SettingScreen> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Colors.white,
-                      child: CircleAvatar(
-                        radius: 28,
-                        backgroundColor: Colors.white,
-                        foregroundImage: NetworkImage(
-                            "https://i.imgur.com/M8p5g08_d.webp?maxwidth=760&fidelity=grand"),
-                      ),
-                    ),
                     Expanded(
                       child: Container(
-                        padding: const EdgeInsets.only(left: 16),
+                        // padding: const EdgeInsets.only(left: 16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Kimetsu no Yaiba Yaiba Yaiba Yaiba Yaiba Yaiba Yaiba Yaiba Yaiba',
+                              'Nguyễn Đức Nam',
                               style: bodyLargeBold(context)
                                   ?.copyWith(color: Colors.white, fontSize: 18),
                               maxLines: 1,
                             ),
                             Text(
-                              'Tutor',
+                              'Văn thư',
                               style: bodyLarge(context)
                                   ?.copyWith(color: Colors.white),
                               maxLines: 1,
@@ -68,26 +59,6 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                     ),
-                    // InkWell(
-                    //   child: Container(
-                    //       margin: const EdgeInsets.only(left: 8),
-                    //       padding: const EdgeInsets.all(4),
-                    //       decoration: const BoxDecoration(
-                    //         color: Colors.white,
-                    //         borderRadius: BorderRadius.all(Radius.circular(5)),
-                    //         shape: BoxShape.rectangle,
-                    //         // border: Border.all(width: 2, color: Colors.white,)
-                    //       ),
-                    //       child: const Icon(
-                    //         Icons.edit,
-                    //         color: Colors.blue,
-                    //         size: 24,
-                    //       )),
-                    //   onTap: () {
-                    //     //TODO FIX ROUTE
-                    //     Navigator.of(context).pushNamed(MyRouter.home);
-                    //   },
-                    // ),
                     InkWell(
                       child: Container(
                           margin: const EdgeInsets.only(left: 16),
@@ -122,8 +93,52 @@ class _SettingScreenState extends State<SettingScreen> {
                     textAlign: TextAlign.start,
                     softWrap: true,
                   ),
-                  MenuWidget(title: 'Edit account', callback: () {}),
-                  MenuWidget(title: 'Menu 1', callback: () {}),
+                  ExpansionTile(
+                    title:  Text(
+                      "Basic information",
+                      style: bodyLarge(context),
+                    ),
+                    initiallyExpanded: true,
+                    tilePadding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
+                    children: <Widget>[
+                      ListTile(title: RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: "Họ và tên: ",
+                                style: bodyLargeBold(context)),
+                            TextSpan(
+                                text: "Nguyễn Đức Nam",
+                                style: bodyLarge(context))
+                          ])),),
+                      ListTile(title: RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: "Chức vụ: ",
+                                style: bodyLargeBold(context)),
+                            TextSpan(
+                                text: "Văn thư",
+                                style: bodyLarge(context))
+                          ])),),
+                      ListTile(title: RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: "Phòng ban: ",
+                                style: bodyLargeBold(context)),
+                            TextSpan(
+                                text: "Khoa CNTT",
+                                style: bodyLarge(context))
+                          ])),),
+                      ListTile(title: RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: "Ngày sinh: ",
+                                style: bodyLargeBold(context)),
+                            TextSpan(
+                                text: "19/04/2001",
+                                style: bodyLarge(context))
+                          ])),),
+                    ],
+                  ),
                   MenuWidget(
                       title: 'Menu 2 (navigate to home)',
                       callback: () {
@@ -140,13 +155,67 @@ class _SettingScreenState extends State<SettingScreen> {
                     textAlign: TextAlign.start,
                     softWrap: true,
                   ),
-                  MenuWidget(title: 'Notifications (implement after reminder screen)', callback: () {}),
+                  ExpansionTile(
+                    title:  Text(
+                      "Notifications",
+                      style: bodyLarge(context),
+                    ),
+                    tilePadding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
+                    childrenPadding: const EdgeInsets.fromLTRB(12, 0, 2, 0),
+                    children: <Widget>[
+                      ListTile(title: Text("Receive in-app notification",
+                          style: bodyLarge(context)),
+                        contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        trailing:  Switch(
+                          // This bool value toggles the switch.
+                          value: _notifications[0],
+                          activeColor: Colors.blue,
+                          onChanged: (bool value) {
+                            // This is called when the user toggles the switch.
+                            setState(() {
+                              _notifications[0] = value;
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(title: Text("Receive email",
+                          style: bodyLarge(context)),
+                        contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        trailing:  Switch(
+                          // This bool value toggles the switch.
+                          value: _notifications[1],
+                          activeColor: Colors.blue,
+                          onChanged: (bool value) {
+                            // This is called when the user toggles the switch.
+                            setState(() {
+                              _notifications[1] = value;
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(title: Text("Receive SMS text",
+                          style: bodyLarge(context)),
+                        contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        trailing:  Switch(
+                          // This bool value toggles the switch.
+                          value: _notifications[2],
+                          activeColor: Colors.blue,
+                          onChanged: (bool value) {
+                            // This is called when the user toggles the switch.
+                            setState(() {
+                              _notifications[2] = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                   ExpansionTile(
                     title:  Text(
                       "Language",
                       style: bodyLarge(context),
                     ),
-
+                    childrenPadding: const EdgeInsets.fromLTRB(12, 0, 2, 0),
                     tilePadding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
                     children: <Widget>[
                       ListTile(title: Text("Vietnamese",
@@ -188,7 +257,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       "Dark mode",
                       style: bodyLarge(context),
                     ),
-
+                    childrenPadding: const EdgeInsets.fromLTRB(12, 0, 2, 0),
                     tilePadding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
                     children: <Widget>[
                       ListTile(title: Text("Light mode",
@@ -215,6 +284,34 @@ class _SettingScreenState extends State<SettingScreen> {
                           });
                         },
                       ),
+                      ExpansionTile(
+                        title:  Text(
+                          "Contact for support",
+                          style: bodyLarge(context),
+                        ),
+
+                        tilePadding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
+                        children: <Widget>[
+                          ListTile(title: RichText(
+                              text: TextSpan(children: [
+                                TextSpan(
+                                    text: "Hotline:",
+                                    style: bodyLargeBold(context)),
+                                TextSpan(
+                                    text: " 0988012170",
+                                    style: bodyLarge(context))
+                              ])),),
+                          ListTile(title: RichText(
+                              text: TextSpan(children: [
+                                TextSpan(
+                                    text: "Email:",
+                                    style: bodyLargeBold(context)),
+                                TextSpan(
+                                    text: " hcmus@edu.com.vn",
+                                    style: bodyLarge(context))
+                              ])),),
+                        ],
+                      ),
                     ],
                   ),
                   ExpansionTile(
@@ -236,45 +333,6 @@ class _SettingScreenState extends State<SettingScreen> {
                           ])),),
                     ],
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    "Overview",
-                    style: headLineSmall(context)?.copyWith(
-                        height: ConstValue.courseNameTextScale, fontSize: 18),
-                    textAlign: TextAlign.start,
-                    softWrap: true,
-                  ),
-                  MenuWidget(title: 'Web version', callback: () {}),
-                  ExpansionTile(
-                title:  Text(
-                  "Contact for support",
-                  style: bodyLarge(context),
-                ),
-
-                tilePadding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
-                children: <Widget>[
-                  ListTile(title: RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
-                            text: "Hotline:",
-                            style: bodyLargeBold(context)),
-                        TextSpan(
-                            text: " 0988012170",
-                            style: bodyLarge(context))
-                      ])),),
-                  ListTile(title: RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
-                            text: "Email:",
-                            style: bodyLargeBold(context)),
-                        TextSpan(
-                            text: " hcmus@edu.com.vn",
-                            style: bodyLarge(context))
-                      ])),),
-                ],
-               ),
                 ],
               ),
             )
