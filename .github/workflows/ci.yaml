@@ -24,8 +24,8 @@ jobs:
 
       - run: flutter pub get
       - run: flutter clean
-      - run: flutter build apk
-      - run: flutter build appbundle
+      - run: flutter build apk -t lib/app/main.dart
+      - run: flutter build appbundle -t lib/app/main.dart
 
 
       
