@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (state is AuthError || state is UnAuthenticated) {
           Navigator.pushReplacementNamed(context, MyRouter.login);
         } else if (state is Authenticated) {
-          Navigator.pushReplacementNamed(context, MyRouter.baseScreen);
+          Navigator.pushReplacementNamed(context, MyRouter.homeScreen);
         }
       },
       child: Scaffold(
