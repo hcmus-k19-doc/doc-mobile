@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
         bloc: authBloc,
         listener: (context, state) {
           if (state is Authenticated) {
-            Navigator.pushReplacementNamed(context, MyRouter.baseScreen);
+            Navigator.pushReplacementNamed(context, MyRouter.homeScreen);
           }
         },
         builder: (context, state) {

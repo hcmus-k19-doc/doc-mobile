@@ -4,14 +4,14 @@ import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
 
-class BaseScreen extends StatefulWidget {
-  const BaseScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<BaseScreen> createState() => _BaseScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _BaseScreenState extends State<BaseScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   List<Widget> pages = [const ListIncomingDocScreen(), const TestScreen()];
 
   int _currentIndex = 0;
