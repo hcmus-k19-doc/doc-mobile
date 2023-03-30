@@ -3,6 +3,7 @@ import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInBtn extends StatelessWidget {
   const SignInBtn(
@@ -51,7 +52,7 @@ class SignInBtn extends StatelessWidget {
                         ),
                       )
                     : Text(
-                        "Login",
+                        AppLocalizations.of(context)!.loginSummitText,
                         style: bodyLargeBold(context)
                             ?.copyWith(fontSize: 18, color: Colors.white),
                       ),
