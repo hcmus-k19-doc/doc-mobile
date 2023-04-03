@@ -1,3 +1,48 @@
 {
-    "helloWorld": "Xin chao!"
+	"loginTitle": "Hệ thống phê duyệt và phát hành văn thư",
+	"username": "Tên đăng nhập",
+	"password": "Mật khẩu",
+	"loginSummitText": "Đăng nhập",
+	"failToLogin": "Xảy ra lỗi trong quá trình đăng nhập",
+	"mainPage": "{menu, select, LABEL{Văn bản đến} INCOMING_DOCUMENT_LIST{Danh sách văn bản đến} PROCESSES_INCOMING_DOCUMENT{Xử lý văn bản đến} OUTGOING_DOCUMENT{Văn bản đi} INTERNAL_DOCUMENT{Văn bản nội bộ} other{}}",
+	"@mainPage": {
+		"placeholders": {
+			"menu": {
+				"type": "String"
+			}
+		}
+	},
+	"currentlyYouHave": "Hiện tại bạn có",
+	"sendingLevel": "{sendingLevel, select, CITY{Thành phố} DISTRICT{Quận huyện} SCHOOL{Trường} other{hello}}",
+	"@sendingLevel": {
+		"placeholders": {
+			"sendingLevel": {
+				"type": "String"
+			}
+		}
+	},
+	"documentType": "{documentType, select, CONTRACT{Hợp đồng} INSTRUCTION{Công văn} INVOICE{Hóa đơn} LETTER{Thư} PAYMENT{Phiếu chi} RECEIPT{Phiếu thu} other{Khác}}",
+	"@documentType": {
+		"placeholders": {
+			"documentType": {
+				"type": "String"
+			}
+		}
+	},
+	"processingStatus": "{processingStatus, select, UNPROCESSED{Chưa xử lý} IN_PROGRESS{Đang xử lý} CLOSED{Đã xử lý} other{}}",
+	"@processingStatus": {
+		"placeholders": {
+			"processingStatus": {
+				"type": "String"
+			}
+		}
+	},
+	"searchCriteriaBar": "{searchCriteria, select, incoming_number{Số văn bản đến} original_symbol_number{Số ký hiệu gốc} document_type{Loại văn bản} distribution_organization{Cơ quan ban hành} arriving_date{Ngày đến} processing_duration{Thời hạn xử lý} summary{Trích yếu} search_summit{Tìm kiếm} other{}}",
+	"@searchCriteriaBar": {
+		"placeholders": {
+			"searchCriteria": {
+				"type": "String"
+			}
+		}
+	}
 }

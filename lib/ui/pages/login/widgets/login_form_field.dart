@@ -4,6 +4,7 @@ import 'package:flutter_app/constants/color_const.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginFormField extends StatefulWidget {
   const LoginFormField(
@@ -42,7 +43,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                 },
                 enabled: state is AuthLoading ? false : true,
                 decoration: InputDecoration(
-                    labelText: "Username",
+                    labelText: AppLocalizations.of(context)!.username,
                     labelStyle: MaterialStateTextStyle.resolveWith(
                         (Set<MaterialState> states) {
                       final Color color = states.contains(MaterialState.focused)
@@ -84,7 +85,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                 },
                 enabled: state is AuthLoading ? false : true,
                 decoration: InputDecoration(
-                    labelText: "Password",
+                    labelText: AppLocalizations.of(context)!.password,
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     labelStyle: MaterialStateTextStyle.resolveWith(
                         (Set<MaterialState> states) {

@@ -24,7 +24,7 @@ class CameraArguments {
 }
 
 class MyRouter {
-  static const String splash = '/splash';
+  static const String splash = '/';
   static const String setting = '/setting';
 
   //DOC

@@ -3,6 +3,7 @@ import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,15 +16,23 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> pages = [const ListIncomingDocScreen(), const TestScreen()];
 
   int _currentIndex = 0;
-  String _title = "Danh sách văn bản đến";
+  late String _title;
 
   late PageController _pageController;
+  late AppLocalizations appLocalizations;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _pageController = PageController(initialPage: _currentIndex);
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    appLocalizations = AppLocalizations.of(context)!;
+    _title = appLocalizations.mainPage("INCOMING_DOCUMENT_LIST");
   }
 
   @override
@@ -49,7 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
   setNewDrawerIndex(int newIndex, String newTitile) {
     setState(() {
       _currentIndex = newIndex;
-      _title = newTitile;
+      print(newTitile);
+      _title = appLocalizations.mainPage(newTitile);
       _pageController.jumpToPage(_currentIndex);
     });
   }

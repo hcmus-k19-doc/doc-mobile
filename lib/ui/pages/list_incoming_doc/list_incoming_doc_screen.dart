@@ -7,6 +7,7 @@ import 'package:flutter_app/repositories/suggestion_repository.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/build_list_document.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/seach_modal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ListIncomingDocScreen extends StatefulWidget {
   const ListIncomingDocScreen({Key? key}) : super(key: key);
@@ -110,7 +111,8 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Danh sách văn bản đến",
+                    AppLocalizations.of(context)!
+                        .mainPage("INCOMING_DOCUMENT_LIST"),
                     style: headLineSmall(context),
                   ),
                   const SizedBox(
