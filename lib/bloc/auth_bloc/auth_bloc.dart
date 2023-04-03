@@ -1,13 +1,8 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_app/model/token.dart';
 import 'package:flutter_app/repositories/auth_repository.dart';
-import 'package:flutter_app/services/api.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 
 part 'auth_event.dart';
 
@@ -15,6 +10,7 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthRepository repository;
+  Token? token;
 
   AuthBloc(this.repository) : super(UnAuthenticated()) {
     on<CheckTokenEvent>((event, emit) async {
@@ -23,13 +19,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         SecuredLocalStorage _storage = SecuredLocalStorage();
 
-        await repository.checkAuthentication(
+        token = await repository.checkAuthentication(
             event.accessTokenStorage, event.refreshTokenStorage);
-        if (repository.accessToken != null && repository.refreshToken != null) {
+        if (token != null) {
           await _storage.saveString(
-              KEY_CONST.ACCESS_TOKEN_KEY, repository.accessToken!);
+              KEY_CONST.ACCESS_TOKEN_KEY, token!.accessToken!);
           await _storage.saveString(
-              KEY_CONST.REFRESH_TOKEN_KEY, repository.refreshToken!);
+              KEY_CONST.REFRESH_TOKEN_KEY, token!.refreshToken!);
           emit(Authenticated());
         } else {
           await _storage.deleteAll();
@@ -44,21 +40,29 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (state is UnAuthenticated || state is AuthError) {
         emit(AuthLoading());
         try {
-          await repository.login(event.username, event.password);
-          if (repository.accessToken != null &&
-              repository.refreshToken != null) {
-            SecuredLocalStorage _storage = SecuredLocalStorage();
-            await _storage.saveString(
-                KEY_CONST.ACCESS_TOKEN_KEY, repository.accessToken!);
-            await _storage.saveString(
-                KEY_CONST.REFRESH_TOKEN_KEY, repository.refreshToken!);
-            emit(Authenticated());
-          } else {
-            emit(AuthError());
-          }
+          token = await repository.login(event.username, event.password);
+          SecuredLocalStorage _storage = SecuredLocalStorage();
+          await _storage.saveString(
+              KEY_CONST.ACCESS_TOKEN_KEY, token!.accessToken!);
+          await _storage.saveString(
+              KEY_CONST.REFRESH_TOKEN_KEY, token!.refreshToken!);
+          emit(Authenticated());
         } catch (err) {
           emit(AuthError());
         }
+      }
+    });
+    on<LogoutEvent>((event, emit) async {
+      await SecuredLocalStorage().deleteAll();
+      emit(UnAuthenticated());
+      try {
+        String tempRefreshToken = token!.refreshToken!;
+        print(tempRefreshToken);
+        token = null;
+        print(token?.refreshToken ?? "");
+        await repository.logout(tempRefreshToken);
+      } catch (error) {
+        print(error);
       }
     });
   }

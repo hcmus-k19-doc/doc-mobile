@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 
 class MenuTile extends StatelessWidget {
@@ -10,13 +11,16 @@ class MenuTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTileTheme(
+    return Theme(
+        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
-      title: Text(
-        "${parentTitle}",
-      ),
-      childrenPadding: EdgeInsets.only(left: StyleConst.defaultPadding24),
-      children: subMenu,
-    ));
+          title: Text(
+            parentTitle,
+            style: headLineSmall(context),
+          ),
+          childrenPadding:
+              const EdgeInsets.only(left: StyleConst.defaultPadding24),
+          children: subMenu,
+        ));
   }
 }
