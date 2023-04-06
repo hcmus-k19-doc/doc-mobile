@@ -57,9 +57,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(UnAuthenticated());
       try {
         String tempRefreshToken = token!.refreshToken!;
-        print(tempRefreshToken);
         token = null;
-        print(token?.refreshToken ?? "");
         await repository.logout(tempRefreshToken);
       } catch (error) {
         print(error);

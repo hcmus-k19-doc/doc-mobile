@@ -27,7 +27,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void didChangeDependencies() async {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     accessTokenLocalStorage =
         await SecuredLocalStorage().readString(KEY_CONST.ACCESS_TOKEN_KEY);

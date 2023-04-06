@@ -128,12 +128,14 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
                           isScrollControlled: true,
                           context: context,
                           builder: (context) {
-                            return BlocProvider(
-                                create: (context) => SuggestionBloc(
-                                    SuggestionRepository(
-                                        UrlConst.DOC_SERVICE_URL))
-                                  ..add(FetchSuggestionEvent()),
-                                child: const SearchModal());
+                            return MultiBlocProvider(providers: [
+                              BlocProvider(
+                                  create: (context) => SuggestionBloc(
+                                      SuggestionRepository(
+                                          UrlConst.DOC_SERVICE_URL))
+                                    ..add(FetchSuggestionEvent())),
+                              BlocProvider.value(value: listIncomingBloc)
+                            ], child: const SearchModal());
                           });
                     },
                     splashFactory: NoSplash.splashFactory,
