@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_app/constants/api_const.dart';
 import 'package:flutter_app/exceptions.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -84,7 +85,6 @@ class Api {
       String? contentType,
       CancelToken? cancelToken}) async {
     try {
-      //Sua do de goi API test
       final response = await api.get(url,
           options: Options(headers: headers, contentType: contentType),
           cancelToken: cancelToken);
@@ -113,11 +113,12 @@ class Api {
 
   Future<bool> refreshTokenApi(String refreshToken) async {
     try {
-      final reponse = await api.post("/security/auth/token/refresh",
-          options: Options(
-            contentType: Headers.formUrlEncodedContentType,
-          ),
-          data: {'refreshToken': refreshToken});
+      final reponse = await Dio()
+          .post("${UrlConst.DOC_SERVICE_URL}/security/auth/token/refresh",
+              options: Options(
+                contentType: Headers.formUrlEncodedContentType,
+              ),
+              data: {'refreshToken': refreshToken});
       if (reponse.statusCode == 200) {
         //get new access token
         accessToken = reponse.data["access_token"];

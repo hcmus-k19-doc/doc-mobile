@@ -25,3 +25,9 @@ class LoginEvent extends AuthEvent {
   // TODO: implement props
   List<Object?> get props => [];
 }
+
+class LogoutEvent extends AuthEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}

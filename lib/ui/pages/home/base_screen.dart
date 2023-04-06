@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/router.dart';
+import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
+import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
 import 'package:flutter_app/constants/export_constants.dart';
+import 'package:flutter_app/model/search_criteria.dart';
+import 'package:flutter_app/repositories/incoming_document_repository.dart';
 import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,7 +19,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> pages = [const ListIncomingDocScreen(), const TestScreen()];
+  List<Widget> pages = [
+    BlocProvider(
+      create: (context) => ListIncomingBloc(
+          IncomingDocumentRepository(
+              "${UrlConst.DOC_SERVICE_URL}/incoming-documents"),
+          SearchCriteria()),
+      child: const ListIncomingDocScreen(),
+    ),
+    const TestScreen()
+  ];
 
   int _currentIndex = 0;
   late String _title;
@@ -37,19 +52,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            _title,
-            style: headLineSmall(context)?.copyWith(color: Colors.white),
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is UnAuthenticated) {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(MyRouter.login, (route) => false);
+        }
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              _title,
+              style: headLineSmall(context)?.copyWith(color: Colors.white),
+            ),
           ),
-        ),
-        drawer: MenuDrawer(onNewDrawerIndex: setNewDrawerIndex),
-        body: PageView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _pageController,
-          children: pages,
+          drawer: MenuDrawer(onNewDrawerIndex: setNewDrawerIndex),
+          body: PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: _pageController,
+            children: pages,
+          ),
         ),
       ),
     );

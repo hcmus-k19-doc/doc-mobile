@@ -35,8 +35,7 @@ class _DocumentTileState extends State<DocumentTile> {
                     color: _isExpanded ? Colors.blueAccent : Colors.black),
               ),
               Text(
-                AppLocalizations.of(context)!.documentType(
-                    "${widget.incomingDocument.documentType?.type}"),
+                "${widget.incomingDocument.documentType?.type}",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded ? Colors.blueAccent : Colors.black),
               ),
