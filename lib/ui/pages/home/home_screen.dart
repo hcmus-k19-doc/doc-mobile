@@ -7,7 +7,7 @@ import 'package:flutter_app/model/search_criteria.dart';
 import 'package:flutter_app/repositories/incoming_document_repository.dart';
 import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
-import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
+import 'package:flutter_app/ui/pages/reminder_calendar/reminder_calendar_screem.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SearchCriteria()),
       child: const ListIncomingDocScreen(),
     ),
-    const TestScreen()
+    const ReminderCalendarScreen()
   ];
 
   int _currentIndex = 0;
@@ -81,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
   setNewDrawerIndex(int newIndex, String newTitile) {
     setState(() {
       _currentIndex = newIndex;
-      print(newTitile);
       _title = appLocalizations.mainPage(newTitile);
       _pageController.jumpToPage(_currentIndex);
     });

@@ -30,12 +30,11 @@ class MenuDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   title: Text(
-                    AppLocalizations.of(context)!
-                        .mainPage("PROCESSES_INCOMING_DOCUMENT"),
+                    AppLocalizations.of(context)!.mainPage("REMINDER"),
                     style: bodyLarge(context),
                   ),
                   onTap: () {
-                    onClickDrawer(1, "PROCESSES_INCOMING_DOCUMENT", context);
+                    onClickDrawer(1, "REMINDER", context);
                   },
                 )
               ]),

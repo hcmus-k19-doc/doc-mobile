@@ -2,7 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/check_your_mail_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/forgot_pass_screen.dart';
-import 'package:flutter_app/ui/pages/home/base_screen.dart';
+import 'package:flutter_app/ui/pages/home/home_screen.dart';
 import 'package:flutter_app/ui/pages/login/login_screen.dart';
 import 'package:flutter_app/ui/pages/settings/settings_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
