@@ -13,3 +13,13 @@ class FetchReminderMonth extends DocumentReminderEvent {
   // TODO: implement props
   List<Object?> get props => [];
 }
+
+class FetchReminderDay extends DocumentReminderEvent {
+  final DateTime currentDay;
+
+  const FetchReminderDay(this.currentDay);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}

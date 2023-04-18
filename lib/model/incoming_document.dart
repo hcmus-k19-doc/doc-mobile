@@ -3,7 +3,7 @@ import 'package:flutter_app/model/document_type.dart';
 
 class IncomingDocument {
   int? id;
-  String? version;
+  num? version;
   String? status;
   String? processingDuration;
   String? incomingNumber;
@@ -50,7 +50,8 @@ class IncomingDocument {
         ? SendingLevel.fromJson(json['sendingLevel'])
         : null;
     folder = json['folder'];
-    attachments = json['attachments'].cast<String>();
+    attachments =
+        json["attachments"] != null ? json['attachments'].cast<String>() : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -80,7 +81,7 @@ class IncomingDocument {
 
 class SendingLevel {
   int? id;
-  Null? version;
+  num? version;
   String? level;
 
   SendingLevel({this.id, this.version, this.level});

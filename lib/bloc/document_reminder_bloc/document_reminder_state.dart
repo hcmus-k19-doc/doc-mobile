@@ -2,6 +2,7 @@ part of 'document_reminder_bloc.dart';
 
 abstract class DocumentReminderState extends Equatable {
   const DocumentReminderState();
+
   @override
   List<Object> get props => [];
 }
@@ -11,13 +12,25 @@ class DocumentReminderInitial extends DocumentReminderState {}
 class DocumentReminderMonthLoading extends DocumentReminderState {}
 
 class DocumentReminderMonthSuccess extends DocumentReminderState {
-  final LinkedHashMap<DateTime, List<String>> reminders;
-
-  const DocumentReminderMonthSuccess(this.reminders);
+  const DocumentReminderMonthSuccess();
 }
 
 class DocumentReminderMonthError extends DocumentReminderState {
   final String message;
 
   const DocumentReminderMonthError(this.message);
+}
+
+class DocumentReminderDayLoading extends DocumentReminderState {}
+
+class DocumentReminderDaySuccess extends DocumentReminderState {
+  final Map<String, List<IncomingDocument>> mapReminder;
+
+  const DocumentReminderDaySuccess(this.mapReminder);
+}
+
+class DocumentReminderDayError extends DocumentReminderState {
+  final String message;
+
+  const DocumentReminderDayError(this.message);
 }

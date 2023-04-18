@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:flutter_app/model/incoming_document.dart';
 import 'package:flutter_app/repositories/base_repository.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -26,6 +27,24 @@ class DocumentReminderRepository extends BaseRepository {
       });
       return tempReminder;
     } catch (err) {
+      rethrow;
+    }
+  }
+
+  Future<Map<String, List<IncomingDocument>>> getDocumentReminderDetailDay(
+      DateTime day) async {
+    try {
+      var response = await provider.get(
+          url: "/details/${DateFormat("yyyy-MM-dd").format(day)}");
+      Map<String, List<IncomingDocument>> mapReminders = {};
+      response.forEach((key, value) {
+        Iterable l = value;
+        List<IncomingDocument> tempListReminder = List<IncomingDocument>.from(
+            l.map((e) => IncomingDocument.fromJson(e))).toList();
+        mapReminders[key] = tempListReminder;
+      });
+      return mapReminders;
+    } catch (error) {
       rethrow;
     }
   }

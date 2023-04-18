@@ -1,24 +1,12 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/document_reminder_bloc/document_reminder_bloc.dart';
 import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/ui/pages/reminder_calendar/widgets/reminder_tile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-
-/// Example event class.
-class Event {
-  final String title;
-
-  const Event(this.title);
-
-  @override
-  String toString() => title;
-}
-//testing
 
 class BuildCalendar extends StatefulWidget {
   const BuildCalendar({Key? key}) : super(key: key);
@@ -29,10 +17,9 @@ class BuildCalendar extends StatefulWidget {
 
 class _BuildCalendarState extends State<BuildCalendar> {
   late DateTime _firstDay, _lastDay, _today;
-  late LinkedHashMap<DateTime, List<Event>> events;
   late DocumentReminderBloc documentReminderBloc;
-  List<Event> _selectedEvents = [];
-  bool isLoading = false;
+
+  // List<Event> _selectedEvents = [];
 
   @override
   void initState() {
@@ -43,64 +30,14 @@ class _BuildCalendarState extends State<BuildCalendar> {
     _today = DateTime.now();
     documentReminderBloc = BlocProvider.of<DocumentReminderBloc>(context)
       ..add(FetchReminderMonth(_today));
-    initEvent();
-    _selectedEvents = events[_today] ?? [];
-  }
-
-  void initEvent() {
-    events = LinkedHashMap<DateTime, List<Event>>(
-      equals: isSameDay,
-      hashCode: getHashCode,
-    );
-    final firstDayMonth = DateTime(_today.year, _today.month, 1);
-    final lastDayMonth = DateTime(_today.year, _today.month + 1, 0);
-    for (int i = 1; i <= lastDayMonth.day; i++) {
-      if (i * 5 > lastDayMonth.day) {
-        break;
-      }
-      final day = DateTime.utc(firstDayMonth.year, firstDayMonth.month, i * 5);
-      if (events[day] == null) {
-        events[day] = [];
-      }
-      final List<Event> tempListEvent =
-          List.generate(i % 4 + 1, (index) => Event('Event $i | ${index + 1}'));
-      events[day]!.addAll(tempListEvent);
-    }
-  }
-
-  int getHashCode(DateTime key) {
-    return key.day * 1000000 + key.month * 10000 + key.year;
-  }
-
-  void fetchNewEvent() async {
-    setState(() {
-      events.clear();
-      _selectedEvents.clear();
-      isLoading = true;
-    });
-    await Future.delayed(const Duration(seconds: 2));
-    final firstDayMonth = DateTime(_today.year, _today.month, 1);
-    final lastDayMonth = DateTime(_today.year, _today.month + 1, 0);
-    for (int i = 1; i <= lastDayMonth.day; i++) {
-      if (i * 5 > lastDayMonth.day) {
-        break;
-      }
-      final day = DateTime.utc(firstDayMonth.year, firstDayMonth.month, i * 5);
-      if (events[day] == null) {
-        events[day] = [];
-      }
-      final List<Event> tempListEvent =
-          List.generate(i % 4 + 1, (index) => Event('Event $i | ${index + 1}'));
-      events[day]!.addAll(tempListEvent);
-    }
-    setState(() {
-      isLoading = false;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DocumentReminderBloc, DocumentReminderState>(
+    return BlocConsumer<DocumentReminderBloc, DocumentReminderState>(
+      listener: (context, state) {
+        if (state is DocumentReminderMonthSuccess) {}
+      },
       builder: (context, state) {
         return Column(
           children: [
@@ -118,10 +55,8 @@ class _BuildCalendarState extends State<BuildCalendar> {
                       headerStyle: const HeaderStyle(
                           formatButtonVisible: false, titleCentered: true),
                       onDaySelected: (selectedDay, focusedDay) {
-                        setState(() {
-                          _today = selectedDay;
-                          _selectedEvents = events[_today] ?? [];
-                        });
+                        _today = selectedDay;
+                        documentReminderBloc.add(FetchReminderDay(_today));
                       },
                       calendarStyle: CalendarStyle(
                           selectedTextStyle:
@@ -137,8 +72,8 @@ class _BuildCalendarState extends State<BuildCalendar> {
                                   .withOpacity(0.15),
                               shape: BoxShape.circle)),
                       eventLoader: (day) {
-                        if (state is DocumentReminderMonthSuccess) {
-                          return state.reminders[day] ?? [];
+                        if (documentReminderBloc.listReminders.isNotEmpty) {
+                          return documentReminderBloc.listReminders[day] ?? [];
                         } else {
                           return [];
                         }
@@ -185,10 +120,8 @@ class _BuildCalendarState extends State<BuildCalendar> {
                         );
                       }),
                       onPageChanged: (focusedDay) {
-                        setState(() {
-                          _today = focusedDay;
-                        });
-                        fetchNewEvent();
+                        _today = focusedDay;
+                        documentReminderBloc.add(FetchReminderMonth(_today));
                       },
                     ),
                     if (state is DocumentReminderMonthLoading)
@@ -205,23 +138,9 @@ class _BuildCalendarState extends State<BuildCalendar> {
               },
             ),
             const SizedBox(height: StyleConst.defaultPadding8),
-            Column(
-              children: [
-                ..._selectedEvents.map((e) => Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 4.0,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: ListTile(
-                        onTap: () => print(e.title),
-                        title: Text(e.title),
-                      ),
-                    ))
-              ],
+            const Padding(
+              padding: EdgeInsets.all(StyleConst.defaultPadding12),
+              child: ReminderTile(),
             )
           ],
         );
