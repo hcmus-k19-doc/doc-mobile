@@ -24,10 +24,7 @@ class Api {
       return handler.next(options);
     }, onError: (DioError error, handler) async {
       //only run if access Token expired or invalid.
-      //Need to discuss with Nam to have the message of Expired Token
-
-      if (error.response?.statusCode == 401 &&
-          error.response?.data["message"] == "ACCESS_TOKEN.INVALID") {
+      if (error.response?.statusCode == 401) {
         String? refreshToken =
             await _storage.readString(KEY_CONST.REFRESH_TOKEN_KEY);
 
