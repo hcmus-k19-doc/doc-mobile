@@ -44,5 +44,13 @@
 				"type": "String"
 			}
 		}
+	},
+	"documentReminderStatus": "{reminderStatus, select, ACTIVE{Đang chờ xử lý} CLOSE_TO_EXPIRATION{Sắp hết hạn} EXPIRED{Đã quá hạn} other{}}",
+	"@documentReminderStatus": {
+		"placeholders": {
+			"reminderStatus": {
+				"type": "String"
+			}
+		}
 	}
 }

@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter_app/model/incoming_document.dart';
+import 'package:flutter_app/model/reminder_detail.dart';
 import 'package:flutter_app/repositories/base_repository.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -12,7 +13,7 @@ class DocumentReminderRepository extends BaseRepository {
       DateTime currentMonth) async {
     try {
       final response = await provider.get(
-          url: "/${DateFormat("yyyy-MM").format(currentMonth)}");
+          url: "/${DateFormat("MM/yyyy").format(currentMonth)}");
       LinkedHashMap<DateTime, List<String>> tempReminder =
           LinkedHashMap<DateTime, List<String>>(
         equals: isSameDay,
@@ -31,16 +32,17 @@ class DocumentReminderRepository extends BaseRepository {
     }
   }
 
-  Future<Map<String, List<IncomingDocument>>> getDocumentReminderDetailDay(
+  Future<Map<String, List<ReminderDetail>>> getDocumentReminderDetailDay(
       DateTime day) async {
     try {
       var response = await provider.get(
           url: "/details/${DateFormat("yyyy-MM-dd").format(day)}");
-      Map<String, List<IncomingDocument>> mapReminders = {};
+      Map<String, List<ReminderDetail>> mapReminders = {};
       response.forEach((key, value) {
         Iterable l = value;
-        List<IncomingDocument> tempListReminder = List<IncomingDocument>.from(
-            l.map((e) => IncomingDocument.fromJson(e))).toList();
+        List<ReminderDetail> tempListReminder =
+            List<ReminderDetail>.from(l.map((e) => ReminderDetail.fromJson(e)))
+                .toList();
         mapReminders[key] = tempListReminder;
       });
       return mapReminders;

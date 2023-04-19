@@ -52,6 +52,7 @@ class Api {
           data: data,
           queryParameters: queryParams,
           cancelToken: cancelToken);
+
       switch (response.statusCode) {
         case 200:
           return response.data;
@@ -66,7 +67,6 @@ class Api {
           throw FailedException(response.data['message'].toString());
       }
     } on DioError catch (err) {
-      print(err.message);
       switch (err.type) {
         case DioErrorType.cancel:
           throw FailedException("Request is cancelled");
@@ -111,7 +111,7 @@ class Api {
   Future<bool> refreshTokenApi(String refreshToken) async {
     try {
       final reponse = await Dio()
-          .post("${UrlConst.DOC_SERVICE_URL}/security/auth/token/refresh",
+          .post("${UrlConst.DOC_SERVICE_URL}/security/auth/refresh-token",
               options: Options(
                 contentType: Headers.formUrlEncodedContentType,
               ),

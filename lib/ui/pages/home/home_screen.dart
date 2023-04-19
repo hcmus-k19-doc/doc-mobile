@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
-import 'package:flutter_app/bloc/document_reminder_bloc/document_reminder_bloc.dart';
 import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
 import 'package:flutter_app/constants/export_constants.dart';
+import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/search_criteria.dart';
-import 'package:flutter_app/repositories/document_reminder_repository.dart';
 import 'package:flutter_app/repositories/incoming_document_repository.dart';
 import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
-import 'package:flutter_app/ui/pages/reminder_calendar/reminder_calendar_screem.dart';
+import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -29,11 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SearchCriteria()),
       child: const ListIncomingDocScreen(),
     ),
-    BlocProvider(
-        create: (BuildContext context) => DocumentReminderBloc(
-            DocumentReminderRepository(
-                "${UrlConst.DOC_SERVICE_URL}/document-reminders/current-user")),
-        child: const ReminderCalendarScreen())
+    const TestScreen()
   ];
 
   int _currentIndex = 0;
@@ -72,6 +68,28 @@ class _HomeScreenState extends State<HomeScreen> {
               _title,
               style: headLineSmall(context)?.copyWith(color: Colors.white),
             ),
+            actions: [
+              Center(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(right: StyleConst.defaultPadding16),
+                  child: badges.Badge(
+                    badgeContent: Text(
+                      "5",
+                      style: bodyLarge(context)
+                          ?.copyWith(color: Colors.white, height: 0),
+                    ),
+                    child: IconButton(
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        onPressed: () {
+                          Navigator.pushNamed(context, MyRouter.reminder);
+                        },
+                        icon: const Icon(Icons.notifications)),
+                  ),
+                ),
+              )
+            ],
           ),
           drawer: MenuDrawer(onNewDrawerIndex: setNewDrawerIndex),
           body: PageView(

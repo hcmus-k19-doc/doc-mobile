@@ -1,9 +1,13 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/bloc/document_reminder_bloc/document_reminder_bloc.dart';
+import 'package:flutter_app/constants/api_const.dart';
+import 'package:flutter_app/repositories/document_reminder_repository.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/check_your_mail_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/forgot_pass_screen.dart';
 import 'package:flutter_app/ui/pages/home/home_screen.dart';
 import 'package:flutter_app/ui/pages/login/login_screen.dart';
+import 'package:flutter_app/ui/pages/reminder_calendar/reminder_calendar_screem.dart';
 import 'package:flutter_app/ui/pages/settings/settings_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path/path.dart';
@@ -32,6 +36,7 @@ class MyRouter {
   static const String login = '/login';
   static const String forgotPassword = "/forgot-password";
   static const String checkYourMail = "/check-your-mail";
+  static const String reminder = "/reminder";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var args = settings.arguments;
@@ -52,6 +57,13 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => const CheckYourMailScreen());
       case setting:
         return MaterialPageRoute(builder: (_) => const SettingScreen());
+      case reminder:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                create: (BuildContext context) => DocumentReminderBloc(
+                    DocumentReminderRepository(
+                        "${UrlConst.DOC_SERVICE_URL}/document-reminders/current-user")),
+                child: const ReminderCalendarScreen()));
       default:
         return errorRoute("No route-name founded");
     }

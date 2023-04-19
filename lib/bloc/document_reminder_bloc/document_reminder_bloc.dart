@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/incoming_document.dart';
+import 'package:flutter_app/model/reminder_detail.dart';
 import 'package:flutter_app/repositories/document_reminder_repository.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 part 'document_reminder_event.dart';
 
@@ -16,6 +16,7 @@ class DocumentReminderBloc
   DocumentReminderRepository reminderRepository;
   LinkedHashMap<DateTime, List<String>> listReminders =
       LinkedHashMap<DateTime, List<String>>();
+  String filterValue = "ACTIVE";
 
   DocumentReminderBloc(this.reminderRepository)
       : super(DocumentReminderInitial()) {
@@ -39,18 +40,28 @@ class DocumentReminderBloc
         if (state is! DocumentReminderDayLoading) {
           emit(DocumentReminderDayLoading());
           try {
-            Map<String, List<IncomingDocument>> mapReminder =
+            Map<String, List<ReminderDetail>> mapReminder =
                 await reminderRepository
                     .getDocumentReminderDetailDay(event.currentDay);
-            emit(DocumentReminderDaySuccess(mapReminder));
+            print(mapReminder["ACTIVE"]);
+            emit(DocumentReminderDaySuccess(mapReminder, filterValue));
           } catch (error) {
-            print(error);
             emit(DocumentReminderDayError(error.toString()));
           }
         }
       } else {
         emit(DocumentReminderDayLoading());
-        emit(const DocumentReminderDaySuccess({}));
+        emit(DocumentReminderDaySuccess(const {}, filterValue));
+      }
+    });
+    on<FilterReminderEvent>((event, emit) {
+      filterValue = event.filterValue;
+      if (state is DocumentReminderDaySuccess) {
+        final tempState = state as DocumentReminderDaySuccess;
+        emit(DocumentReminderDaySuccess(tempState.mapReminder, filterValue));
+      } else {
+        emit(DocumentReminderDayLoading());
+        emit(DocumentReminderDaySuccess(const {}, filterValue));
       }
     });
   }

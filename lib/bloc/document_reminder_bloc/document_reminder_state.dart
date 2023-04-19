@@ -24,9 +24,12 @@ class DocumentReminderMonthError extends DocumentReminderState {
 class DocumentReminderDayLoading extends DocumentReminderState {}
 
 class DocumentReminderDaySuccess extends DocumentReminderState {
-  final Map<String, List<IncomingDocument>> mapReminder;
+  final Map<String, List<ReminderDetail>> mapReminder;
+  final String filterValue;
 
-  const DocumentReminderDaySuccess(this.mapReminder);
+  const DocumentReminderDaySuccess(this.mapReminder, this.filterValue);
+  @override
+  List<Object> get props => [filterValue];
 }
 
 class DocumentReminderDayError extends DocumentReminderState {

@@ -23,3 +23,13 @@ class FetchReminderDay extends DocumentReminderEvent {
   // TODO: implement props
   List<Object?> get props => [];
 }
+
+class FilterReminderEvent extends DocumentReminderEvent {
+  final String filterValue;
+
+  const FilterReminderEvent(this.filterValue);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [filterValue];
+}
