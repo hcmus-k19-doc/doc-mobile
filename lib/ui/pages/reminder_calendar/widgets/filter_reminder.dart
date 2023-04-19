@@ -39,12 +39,16 @@ class _FilterReminderState extends State<FilterReminder> {
           child: Align(
             alignment: Alignment.centerRight,
             child: Container(
-              padding: const EdgeInsets.only(left: StyleConst.defaultPadding8),
+              padding: const EdgeInsets.only(
+                  left: StyleConst.defaultPadding8,
+                  top: StyleConst.defaultPadding8,
+                  bottom: StyleConst.defaultPadding8),
               decoration: BoxDecoration(
                   borderRadius:
                       BorderRadius.circular(StyleConst.defaultRadius15),
                   border: Border.all(color: Colors.grey)),
               child: DropdownButton(
+                  isDense: true,
                   value: dropdownValue,
                   underline: const SizedBox(),
                   items: list

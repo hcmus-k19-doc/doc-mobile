@@ -43,7 +43,6 @@ class DocumentReminderBloc
             Map<String, List<ReminderDetail>> mapReminder =
                 await reminderRepository
                     .getDocumentReminderDetailDay(event.currentDay);
-            print(mapReminder["ACTIVE"]);
             emit(DocumentReminderDaySuccess(mapReminder, filterValue));
           } catch (error) {
             emit(DocumentReminderDayError(error.toString()));
