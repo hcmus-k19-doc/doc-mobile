@@ -25,10 +25,10 @@ class DocumentReminderBloc
         emit(DocumentReminderMonthLoading());
         try {
           listReminders = await reminderRepository
-              .getReminderBasedOnMonthYear(event.currentMonth);
+              .getReminderBasedOnMonthYear(event.currentDate);
           emit(const DocumentReminderMonthSuccess());
-          if (DateUtils.isSameDay(DateTime.now(), event.currentMonth)) {
-            add(FetchReminderDay(event.currentMonth));
+          if (listReminders[event.currentDate] != null) {
+            add(FetchReminderDay(event.currentDate));
           }
         } catch (error) {
           emit(DocumentReminderMonthError(error.toString()));
@@ -36,13 +36,13 @@ class DocumentReminderBloc
       }
     });
     on<FetchReminderDay>((event, emit) async {
-      if (listReminders[event.currentDay] != null) {
+      if (listReminders[event.currentDate] != null) {
         if (state is! DocumentReminderDayLoading) {
           emit(DocumentReminderDayLoading());
           try {
             Map<String, List<ReminderDetail>> mapReminder =
                 await reminderRepository
-                    .getDocumentReminderDetailDay(event.currentDay);
+                    .getDocumentReminderDetailDay(event.currentDate);
             emit(DocumentReminderDaySuccess(mapReminder, filterValue));
           } catch (error) {
             emit(DocumentReminderDayError(error.toString()));

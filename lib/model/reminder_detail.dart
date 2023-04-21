@@ -5,7 +5,7 @@ class ReminderDetail {
   String? summary;
   String? expirationDate;
   String? status;
-  String? processingDocumentId;
+  int? processingDocumentId;
 
   ReminderDetail(
       {this.id,

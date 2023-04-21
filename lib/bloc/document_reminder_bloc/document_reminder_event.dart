@@ -5,9 +5,9 @@ abstract class DocumentReminderEvent extends Equatable {
 }
 
 class FetchReminderMonth extends DocumentReminderEvent {
-  final DateTime currentMonth;
+  final DateTime currentDate;
 
-  const FetchReminderMonth(this.currentMonth);
+  const FetchReminderMonth(this.currentDate);
 
   @override
   // TODO: implement props
@@ -15,9 +15,9 @@ class FetchReminderMonth extends DocumentReminderEvent {
 }
 
 class FetchReminderDay extends DocumentReminderEvent {
-  final DateTime currentDay;
+  final DateTime currentDate;
 
-  const FetchReminderDay(this.currentDay);
+  const FetchReminderDay(this.currentDate);
 
   @override
   // TODO: implement props

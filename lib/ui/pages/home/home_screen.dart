@@ -70,24 +70,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             actions: [
               Center(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.only(right: StyleConst.defaultPadding16),
-                  child: badges.Badge(
-                    badgeContent: Text(
-                      "5",
-                      style: bodyLarge(context)
-                          ?.copyWith(color: Colors.white, height: 0),
-                    ),
-                    child: IconButton(
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                        onPressed: () {
-                          Navigator.pushNamed(context, MyRouter.reminder);
-                        },
-                        icon: const Icon(Icons.notifications)),
-                  ),
-                ),
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, MyRouter.reminder);
+                    },
+                    icon: const Icon(Icons.notifications)),
               )
             ],
           ),
