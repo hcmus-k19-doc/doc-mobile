@@ -10,7 +10,7 @@ Future<void> main() async {
   runApp(
     const AppConfig(
         appName: "DOC",
-        debugTag: true,
+        debugTag: false,
         initialRoute: MyRouter.splash,
         baseUrl: "http://localhost:8080/api/v1",
         child: MyApp()),

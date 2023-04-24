@@ -3,9 +3,9 @@ import 'package:flutter_app/model/document_type.dart';
 
 class IncomingDocument {
   int? id;
-  Null? version;
+  num? version;
   String? status;
-  Null? processingDuration;
+  String? processingDuration;
   String? incomingNumber;
   DocumentType? documentType;
   String? originalSymbolNumber;
@@ -13,6 +13,8 @@ class IncomingDocument {
   String? arrivingDate;
   String? summary;
   SendingLevel? sendingLevel;
+  String? folder;
+  List<String>? attachments;
 
   IncomingDocument(
       {this.id,
@@ -25,7 +27,9 @@ class IncomingDocument {
       this.distributionOrg,
       this.arrivingDate,
       this.summary,
-      this.sendingLevel});
+      this.sendingLevel,
+      this.folder,
+      this.attachments});
 
   IncomingDocument.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -34,45 +38,50 @@ class IncomingDocument {
     processingDuration = json['processingDuration'];
     incomingNumber = json['incomingNumber'];
     documentType = json['documentType'] != null
-        ? new DocumentType.fromJson(json['documentType'])
+        ? DocumentType.fromJson(json['documentType'])
         : null;
     originalSymbolNumber = json['originalSymbolNumber'];
     distributionOrg = json['distributionOrg'] != null
-        ? new DistributionOrg.fromJson(json['distributionOrg'])
+        ? DistributionOrg.fromJson(json['distributionOrg'])
         : null;
     arrivingDate = json['arrivingDate'];
     summary = json['summary'];
     sendingLevel = json['sendingLevel'] != null
-        ? new SendingLevel.fromJson(json['sendingLevel'])
+        ? SendingLevel.fromJson(json['sendingLevel'])
         : null;
+    folder = json['folder'];
+    attachments =
+        json["attachments"] != null ? json['attachments'].cast<String>() : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['version'] = this.version;
-    data['status'] = this.status;
-    data['processingDuration'] = this.processingDuration;
-    data['incomingNumber'] = this.incomingNumber;
-    if (this.documentType != null) {
-      data['documentType'] = this.documentType!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['version'] = version;
+    data['status'] = status;
+    data['processingDuration'] = processingDuration;
+    data['incomingNumber'] = incomingNumber;
+    if (documentType != null) {
+      data['documentType'] = documentType!.toJson();
     }
-    data['originalSymbolNumber'] = this.originalSymbolNumber;
-    if (this.distributionOrg != null) {
-      data['distributionOrg'] = this.distributionOrg!.toJson();
+    data['originalSymbolNumber'] = originalSymbolNumber;
+    if (distributionOrg != null) {
+      data['distributionOrg'] = distributionOrg!.toJson();
     }
-    data['arrivingDate'] = this.arrivingDate;
-    data['summary'] = this.summary;
-    if (this.sendingLevel != null) {
-      data['sendingLevel'] = this.sendingLevel!.toJson();
+    data['arrivingDate'] = arrivingDate;
+    data['summary'] = summary;
+    if (sendingLevel != null) {
+      data['sendingLevel'] = sendingLevel!.toJson();
     }
+    data['folder'] = folder;
+    data['attachments'] = attachments;
     return data;
   }
 }
 
 class SendingLevel {
   int? id;
-  Null? version;
+  num? version;
   String? level;
 
   SendingLevel({this.id, this.version, this.level});
@@ -84,10 +93,10 @@ class SendingLevel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['version'] = this.version;
-    data['level'] = this.level;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['version'] = version;
+    data['level'] = level;
     return data;
   }
 }
