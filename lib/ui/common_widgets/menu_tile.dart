@@ -16,7 +16,7 @@ class MenuTile extends StatelessWidget {
         child: ExpansionTile(
           title: Text(
             parentTitle,
-            style: headLineSmall(context),
+            style: bodyLargeBold(context)!.copyWith(fontSize: 20),
           ),
           childrenPadding:
               const EdgeInsets.only(left: StyleConst.defaultPadding24),

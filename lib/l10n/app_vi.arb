@@ -4,7 +4,7 @@
 	"password": "Mật khẩu",
 	"loginSummitText": "Đăng nhập",
 	"failToLogin": "Xảy ra lỗi trong quá trình đăng nhập",
-	"mainPage": "{menu, select, LABEL{Văn bản đến} REMINDER{Nhắc việc} INCOMING_DOCUMENT_LIST{Danh sách văn bản đến} PROCESSES_INCOMING_DOCUMENT{Xử lý văn bản đến} OUTGOING_DOCUMENT{Văn bản đi} INTERNAL_DOCUMENT{Văn bản nội bộ} other{}}",
+	"mainPage": "{menu, select, LABEL{Văn bản đến} REMINDER{Nhắc việc} INCOMING_DOCUMENT_LIST{Danh sách văn bản đến} PROCESSES_INCOMING_DOCUMENT{Xử lý văn bản đến} OUTGOING_DOCUMENT{Văn bản đi} INTERNAL_DOCUMENT{Văn bản nội bộ} MY_PROFILE{Thông tin cá nhân} other{}}",
 	"@mainPage": {
 		"placeholders": {
 			"menu": {
@@ -52,5 +52,9 @@
 				"type": "String"
 			}
 		}
-	}
+	},
+	"logout": "Đăng xuất",
+	"name": "Tên",
+	"userID": "ID người dùng",
+	"role": "Vai trò"
 }

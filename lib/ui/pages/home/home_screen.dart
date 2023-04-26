@@ -9,6 +9,7 @@ import 'package:flutter_app/repositories/incoming_document_repository.dart';
 import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
+import 'package:flutter_app/ui/pages/profile/profile_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:badges/badges.dart' as badges;
@@ -29,7 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
           SearchCriteria()),
       child: const ListIncomingDocScreen(),
     ),
-    const TestScreen()
+    const TestScreen(),
+    const ProfileScreen()
   ];
 
   int _currentIndex = 0;

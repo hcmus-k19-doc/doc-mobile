@@ -61,13 +61,24 @@ class MenuDrawer extends StatelessWidget {
                 )
               ]),
           const Spacer(),
+          ListTile(
+            leading: const Icon(Icons.person),
+            title: Text(
+              AppLocalizations.of(context)!.mainPage("MY_PROFILE"),
+              style: bodyLargeBold(context)?.copyWith(height: 0),
+            ),
+            onTap: () {
+              onClickDrawer(2, "MY_PROFILE", context);
+            },
+          ),
           const Divider(
             thickness: 1,
+            height: 0,
           ),
           ListTile(
             leading: const Icon(Icons.logout),
             title: Text(
-              "Logout",
+              AppLocalizations.of(context)!.logout,
               style: bodyLargeBold(context)?.copyWith(height: 0),
             ),
             onTap: () {
