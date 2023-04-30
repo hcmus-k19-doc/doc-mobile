@@ -11,6 +11,7 @@ import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/dropdown_search_o
 import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/search_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchModal extends StatefulWidget {
   const SearchModal({Key? key}) : super(key: key);
@@ -80,14 +81,16 @@ class _SearchModalState extends State<SearchModal> {
                     ],
                   ),
                   SearchTextField(
-                    title: "Số đến theo sổ",
+                    title: AppLocalizations.of(context)!
+                        .searchCriteriaBar("incoming_number"),
                     textController: incomingNumberController,
                   ),
                   const SizedBox(
                     height: StyleConst.defaultPadding24,
                   ),
                   DropdownSearchDocument(
-                    title: "Loại văn bản",
+                    title: AppLocalizations.of(context)!
+                        .searchCriteriaBar("document_type"),
                     onChanged: selectDocumentType,
                     listSuggestion:
                         state is SuggestionEmit ? state.documentTypes : [],
@@ -96,7 +99,8 @@ class _SearchModalState extends State<SearchModal> {
                     height: StyleConst.defaultPadding24,
                   ),
                   SearchTextField(
-                    title: "Khoảng ngày đến",
+                    title: AppLocalizations.of(context)!
+                        .searchCriteriaBar("arriving_date"),
                     readOnly: true,
                     trailingIcon: Icons.calendar_month,
                     textController: arrivingDateRangeController,
@@ -107,14 +111,16 @@ class _SearchModalState extends State<SearchModal> {
                     height: StyleConst.defaultPadding24,
                   ),
                   SearchTextField(
-                    title: "Số ký hiệu gốc",
+                    title: AppLocalizations.of(context)!
+                        .searchCriteriaBar("original_symbol_number"),
                     textController: originalSymbolNumberController,
                   ),
                   const SizedBox(
                     height: StyleConst.defaultPadding24,
                   ),
                   DropdownSearchOrg(
-                    title: "Cơ quan ban hành",
+                    title: AppLocalizations.of(context)!
+                        .searchCriteriaBar("distribution_organization"),
                     onChanged: selectDistributionOrg,
                     listSuggestions:
                         state is SuggestionEmit ? state.distributionOrgs : [],
@@ -123,7 +129,8 @@ class _SearchModalState extends State<SearchModal> {
                     height: StyleConst.defaultPadding24,
                   ),
                   SearchTextField(
-                    title: "Thời hạn xử lý",
+                    title: AppLocalizations.of(context)!
+                        .searchCriteriaBar("processing_duration"),
                     readOnly: true,
                     trailingIcon: Icons.calendar_month,
                     textController: processingDateController,
@@ -134,7 +141,8 @@ class _SearchModalState extends State<SearchModal> {
                     height: StyleConst.defaultPadding24,
                   ),
                   SearchTextField(
-                    title: "Trích yếu",
+                    title: AppLocalizations.of(context)!
+                        .searchCriteriaBar("summary"),
                     textController: summaryController,
                     maxLinesTextField: 3,
                   ),
@@ -162,7 +170,8 @@ class _SearchModalState extends State<SearchModal> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            "Tìm kiếm",
+                            AppLocalizations.of(context)!
+                                .searchCriteriaBar("search_summit"),
                             style: bodyLarge(context)
                                 ?.copyWith(color: Colors.white),
                           ),

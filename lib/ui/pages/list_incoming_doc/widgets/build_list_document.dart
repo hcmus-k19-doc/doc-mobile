@@ -3,7 +3,6 @@ import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/document_tile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 class BuildListIncomingDocument extends StatefulWidget {
   const BuildListIncomingDocument({Key? key}) : super(key: key);

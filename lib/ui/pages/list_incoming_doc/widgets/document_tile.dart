@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DocumentTile extends StatefulWidget {
   const DocumentTile({Key? key, required this.incomingDocument})
@@ -78,7 +79,8 @@ class _DocumentTileState extends State<DocumentTile> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.incomingDocument.sendingLevel?.level}",
+                          AppLocalizations.of(context)!.sendingLevel(
+                              "${widget.incomingDocument.sendingLevel?.level}"),
                           style: bodyLarge(context),
                         ))
                   ],
@@ -170,7 +172,8 @@ class _DocumentTileState extends State<DocumentTile> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.incomingDocument.status}",
+                          AppLocalizations.of(context)!.processingStatus(
+                              "${widget.incomingDocument.status}"),
                           style: bodyLarge(context),
                         ))
                   ],

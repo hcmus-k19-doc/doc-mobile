@@ -27,13 +27,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void didChangeDependencies() async {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     accessTokenLocalStorage =
         await SecuredLocalStorage().readString(KEY_CONST.ACCESS_TOKEN_KEY);
 
     refressTokenLocalStorage =
         await SecuredLocalStorage().readString(KEY_CONST.REFRESH_TOKEN_KEY);
+    Clipboard.setData(ClipboardData(text: accessTokenLocalStorage));
     authBloc.add(
         CheckTokenEvent(accessTokenLocalStorage, refressTokenLocalStorage));
   }
@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (state is AuthError || state is UnAuthenticated) {
           Navigator.pushReplacementNamed(context, MyRouter.login);
         } else if (state is Authenticated) {
-          Navigator.pushReplacementNamed(context, MyRouter.baseScreen);
+          Navigator.pushReplacementNamed(context, MyRouter.homeScreen);
         }
       },
       child: Scaffold(

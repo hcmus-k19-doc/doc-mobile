@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class TestScreen extends StatelessWidget {
@@ -7,8 +5,8 @@ class TestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Use for only testing changing pageview"),
+    return Container(
+      child: const Text("testing screen"),
     );
   }
 }

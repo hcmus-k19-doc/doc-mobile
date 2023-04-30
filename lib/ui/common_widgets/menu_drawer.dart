@@ -1,49 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
+import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/ui/common_widgets/menu_tile.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MenuDrawer extends StatelessWidget {
-  MenuDrawer({Key? key, required this.onNewDrawerIndex}) : super(key: key);
-  Function onNewDrawerIndex;
+  const MenuDrawer({Key? key, required this.onNewDrawerIndex})
+      : super(key: key);
+  final Function onNewDrawerIndex;
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
+      child: Column(
         children: [
-          MenuTile(parentTitle: "VĂN BẢN ĐẾN", subMenu: [
-            ListTile(
-              title: Text("DANH SÁCH VB ĐẾN"),
-              onTap: () {
-                onClickDrawer(0, "Danh sách văn bản đến", context);
-              },
+          MenuTile(
+              parentTitle: AppLocalizations.of(context)!.mainPage("LABEL"),
+              subMenu: [
+                ListTile(
+                  title: Text(
+                    AppLocalizations.of(context)!
+                        .mainPage("INCOMING_DOCUMENT_LIST"),
+                    style: bodyLarge(context),
+                  ),
+                  onTap: () {
+                    onClickDrawer(0, "INCOMING_DOCUMENT_LIST", context);
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    "Testing Screen",
+                    style: bodyLarge(context),
+                  ),
+                  onTap: () {
+                    onClickDrawer(1, "Testing Screen", context);
+                  },
+                )
+              ]),
+          const Divider(
+            thickness: 1,
+          ),
+          MenuTile(
+              parentTitle:
+                  AppLocalizations.of(context)!.mainPage("OUTGOING_DOCUMENT"),
+              subMenu: [
+                ListTile(
+                  title: Text(
+                    "DANH SÁCH VB ĐI",
+                    style: bodyLarge(context),
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: Text(
+                    "XỬ LÝ VB ĐI",
+                    style: bodyLarge(context),
+                  ),
+                  onTap: () {},
+                )
+              ]),
+          const Spacer(),
+          const Divider(
+            thickness: 1,
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: Text(
+              "Logout",
+              style: bodyLargeBold(context)?.copyWith(height: 0),
             ),
-            ListTile(
-              title: Text("XỬ LÝ VB ĐẾN"),
-              onTap: () {
-                onClickDrawer(1, "Testing page", context);
-              },
-            )
-          ]),
-          MenuTile(parentTitle: "VĂN BẢN ĐI", subMenu: [
-            ListTile(
-              title: Text("DANH SÁCH VB ĐI"),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text("XỬ LÝ VB ĐI"),
-              onTap: () {},
-            )
-          ]),
+            onTap: () {
+              BlocProvider.of<AuthBloc>(context).add(LogoutEvent());
+            },
+          )
         ],
       ),
     );
   }
 
-  void onClickDrawer(int drawerIndex, String titlePage, BuildContext context)
-  {
+  void onClickDrawer(int drawerIndex, String titlePage, BuildContext context) {
     onNewDrawerIndex(drawerIndex, titlePage);
     Navigator.pop(context);
   }
 }
-
-

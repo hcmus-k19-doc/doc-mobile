@@ -7,6 +7,7 @@ import 'package:flutter_app/ui/pages/login/widgets/login_form_field.dart';
 import 'package:flutter_app/ui/pages/login/widgets/sign_in_btn.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../constants/export_constants.dart';
 
@@ -28,7 +29,7 @@ class LoginScreen extends StatelessWidget {
         bloc: authBloc,
         listener: (context, state) {
           if (state is Authenticated) {
-            Navigator.pushReplacementNamed(context, MyRouter.baseScreen);
+            Navigator.pushReplacementNamed(context, MyRouter.homeScreen);
           }
         },
         builder: (context, state) {
@@ -48,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                         height: screenSize.height / 3,
                       ),
 
-                      Text("Document approval and distribution system",
+                      Text(AppLocalizations.of(context)!.loginTitle,
                           textAlign: TextAlign.center,
                           style: headLineSmall(context)),
                       const SizedBox(
@@ -95,7 +96,7 @@ class LoginScreen extends StatelessWidget {
                               Visibility(
                                 visible: state is AuthError ? true : false,
                                 child: Text(
-                                  "Failed to Login",
+                                  AppLocalizations.of(context)!.failToLogin,
                                   style: bodyLargeBold(context)
                                       ?.copyWith(color: Colors.red),
                                 ),

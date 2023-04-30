@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_app/constants/api_const.dart';
 import 'package:flutter_app/exceptions.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -23,10 +24,7 @@ class Api {
       return handler.next(options);
     }, onError: (DioError error, handler) async {
       //only run if access Token expired or invalid.
-      //Need to discuss with Nam to have the message of Expired Token
-
-      if (error.response?.statusCode == 401 &&
-          error.response?.data["message"] == "ACCESS_TOKEN.INVALID") {
+      if (error.response?.statusCode == 401) {
         String? refreshToken =
             await _storage.readString(KEY_CONST.REFRESH_TOKEN_KEY);
 
@@ -54,6 +52,7 @@ class Api {
           data: data,
           queryParameters: queryParams,
           cancelToken: cancelToken);
+
       switch (response.statusCode) {
         case 200:
           return response.data;
@@ -68,7 +67,6 @@ class Api {
           throw FailedException(response.data['message'].toString());
       }
     } on DioError catch (err) {
-      print(err.message);
       switch (err.type) {
         case DioErrorType.cancel:
           throw FailedException("Request is cancelled");
@@ -84,7 +82,6 @@ class Api {
       String? contentType,
       CancelToken? cancelToken}) async {
     try {
-      //Sua do de goi API test
       final response = await api.get(url,
           options: Options(headers: headers, contentType: contentType),
           cancelToken: cancelToken);
@@ -113,11 +110,12 @@ class Api {
 
   Future<bool> refreshTokenApi(String refreshToken) async {
     try {
-      final reponse = await api.post("/security/auth/token/refresh",
-          options: Options(
-            contentType: Headers.formUrlEncodedContentType,
-          ),
-          data: {'refreshToken': refreshToken});
+      final reponse = await Dio()
+          .post("${UrlConst.DOC_SERVICE_URL}/security/auth/refresh-token",
+              options: Options(
+                contentType: Headers.formUrlEncodedContentType,
+              ),
+              data: {'refreshToken': refreshToken});
       if (reponse.statusCode == 200) {
         //get new access token
         accessToken = reponse.data["access_token"];

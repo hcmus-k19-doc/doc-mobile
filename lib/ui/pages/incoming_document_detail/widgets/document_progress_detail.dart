@@ -32,7 +32,7 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
         title: Padding(
           padding: const EdgeInsets.all(StyleConst.defaultPadding4),
           child: Text(
-            "Thông tin văn bản",
+            "Thông tin luân chuyển",
             style: bodyLargeBold(context)?.copyWith(fontSize: 18,
                 color: _isExpanded ? Colors.black : Colors.black),
           ),

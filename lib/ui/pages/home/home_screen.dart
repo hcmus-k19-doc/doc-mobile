@@ -1,91 +1,99 @@
-import 'dart:io';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../../../constants/export_constants.dart';
+import 'package:flutter_app/app/router.dart';
+import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
+import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
+import 'package:flutter_app/constants/export_constants.dart';
+import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/model/search_criteria.dart';
+import 'package:flutter_app/repositories/incoming_document_repository.dart';
+import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
+import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
+import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key, required this.title, required this.number}) : super(key: key);
-  final int number;
-  final String title;
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
-  String getInfo = "";
+  List<Widget> pages = [
+    BlocProvider(
+      create: (context) => ListIncomingBloc(
+          IncomingDocumentRepository(
+              "${UrlConst.DOC_SERVICE_URL}/incoming-documents"),
+          SearchCriteria()),
+      child: const ListIncomingDocScreen(),
+    ),
+    const TestScreen()
+  ];
 
-  static Future<String> getDeviceDetails() async {
-    String deviceName = "";
-    String deviceVersion = "";
-    String identifier = "";
-    final deviceInfoPlugin = DeviceInfoPlugin();
-    try {
-      if (Platform.isAndroid) {
-        var build = await deviceInfoPlugin.androidInfo;
-        deviceName = build.model;
-        deviceVersion = build.version.sdkInt.toString();
-        identifier = build.id;  //UUID for Android
-      } else if (Platform.isIOS) {
-        var build = await deviceInfoPlugin.iosInfo;
-        deviceName = build.model.toString();
-        deviceVersion = build.systemVersion.toString();
-        identifier = build.identifierForVendor.toString();  //UUID for iOS
-      }
-    } on PlatformException {
-      print('Failed to get platform version');
-    }
+  int _currentIndex = 0;
+  late String _title;
 
-    String result = "Device name: $deviceName, version: $deviceVersion, UUID: $identifier";
+  late PageController _pageController;
+  late AppLocalizations appLocalizations;
 
-//if (!mounted) return;
-    return result;
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: _currentIndex);
   }
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-      getDeviceDetails().then((value) => { getInfo = value});
-    });
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    appLocalizations = AppLocalizations.of(context)!;
+    _title = appLocalizations.mainPage("INCOMING_DOCUMENT_LIST");
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_counter == 0) _counter = widget.number;
-    var deviceInfo = getInfo;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Device info:',
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is UnAuthenticated) {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(MyRouter.login, (route) => false);
+        }
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              _title,
+              style: headLineSmall(context)?.copyWith(color: Colors.white),
             ),
-            Container(
-              margin: const EdgeInsets.only(left:30, bottom: 20, right: 20, top:10),
-              child: Text(
-              deviceInfo,
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+            actions: [
+              Center(
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, MyRouter.reminder);
+                    },
+                    icon: const Icon(Icons.notifications)),
+              )
+            ],
+          ),
+          drawer: MenuDrawer(onNewDrawerIndex: setNewDrawerIndex),
+          body: PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: _pageController,
+            children: pages,
+          ),
         ),
       ),
-      backgroundColor: ColorConst.white,
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
     );
+  }
+
+  setNewDrawerIndex(int newIndex, String newTitile) {
+    setState(() {
+      _currentIndex = newIndex;
+      _title = appLocalizations.mainPage(newTitile);
+      _pageController.jumpToPage(_currentIndex);
+    });
   }
 }

@@ -1,15 +1,18 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/ui/pages/base/base_screen.dart';
+import 'package:flutter_app/bloc/document_reminder_bloc/document_reminder_bloc.dart';
+import 'package:flutter_app/constants/api_const.dart';
+import 'package:flutter_app/repositories/document_reminder_repository.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/check_your_mail_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/forgot_pass_screen.dart';
-import 'package:flutter_app/ui/pages/incoming_document_detail/inc_doc_detail_screen.dart';
+import 'package:flutter_app/ui/pages/home/home_screen.dart';
 import 'package:flutter_app/ui/pages/login/login_screen.dart';
+import 'package:flutter_app/ui/pages/reminder_calendar/reminder_calendar_screem.dart';
 import 'package:flutter_app/ui/pages/settings/settings_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path/path.dart';
 
-import '../ui/pages/home/home_screen.dart';
+import '../ui/pages/incoming_document_detail/inc_doc_detail_screen.dart';
 import '../ui/pages/splash/splash_screen.dart';
 
 class HomeArguments {
@@ -25,53 +28,51 @@ class IncomingDocumentDetailArgs {
   const IncomingDocumentDetailArgs({required this.documentId});
 }
 
+
 class MyRouter {
-  static const String home = 'home';
-  static const String splash = '/splash';
+  static const String splash = '/';
   static const String setting = '/setting';
 
   //DOC
-  static const String baseScreen = '/base-screen';
+  static const String homeScreen = '/home-screen';
   static const String login = '/login';
   static const String forgotPassword = "/forgot-password";
   static const String checkYourMail = "/check-your-mail";
-  static const String incomingDocumentDetail = "/incoming-document-detail";
+  static const String reminder = "/reminder";
+  static const String incomingDocumentDetail = "/incomingDocumentDetail";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var args = settings.arguments;
     switch (settings.name) {
+      case incomingDocumentDetail:
+        if (args is IncomingDocumentDetailArgs) {
+          return MaterialPageRoute(builder: (_) => IncomingDocumentDetail(documentId: args.documentId,));
+        } else {
+          return errorRoute("Wrong arguments for IncomingDocumentDetail");
+        }
       case splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
-
-      case home:
-        if (args is HomeArguments) {
-          String mTitle = args.title;
-          int mNumber = args.number;
-          return MaterialPageRoute(
-              builder: (_) => HomeScreen(title: mTitle, number: mNumber),
-              settings: RouteSettings(name: home, arguments: settings.arguments));
-        } else {
-          return errorRoute("Input for Home is not ScreenArguments");
-        }
-      case baseScreen:
-        return MaterialPageRoute(builder: (_) => const BaseScreen());
+      // case home:
+      //   return MaterialPageRoute(builder: (_) => HomeScreen(title: settings.arguments, number: null,));
+      case homeScreen:
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
       case login:
-        return MaterialPageRoute(builder: (_) => LoginScreen());
+        return MaterialPageRoute(
+          builder: (_) => LoginScreen(),
+        );
       case forgotPassword:
         return MaterialPageRoute(builder: (_) => ForgotPassScreen());
       case checkYourMail:
         return MaterialPageRoute(builder: (_) => const CheckYourMailScreen());
       case setting:
         return MaterialPageRoute(builder: (_) => const SettingScreen());
-      case incomingDocumentDetail:
-        if (args is IncomingDocumentDetailArgs) {
-          int mId = args.documentId;
-          return MaterialPageRoute(
-              builder: (_) => IncomingDocumentDetail(documentId: mId),
-              settings: RouteSettings(name: incomingDocumentDetail, arguments: settings.arguments));
-        } else {
-          return errorRoute("Input for incomingDocumentDetail is not IncomingDocumentDetailArgs");
-        }
+      case reminder:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                create: (BuildContext context) => DocumentReminderBloc(
+                    DocumentReminderRepository(
+                        "${UrlConst.DOC_SERVICE_URL}/document-reminders/current-user")),
+                child: const ReminderCalendarScreen()));
       default:
         return errorRoute("No route-name founded");
     }
