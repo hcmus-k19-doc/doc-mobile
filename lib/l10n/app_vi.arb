@@ -56,5 +56,14 @@
 	"logout": "Đăng xuất",
 	"name": "Tên",
 	"userID": "ID người dùng",
-	"role": "Vai trò"
+	"role": "Vai trò",
+	"selectRoleProfile": "{role, select, GIAM_DOC{Giám đốc} CHUYEN_VIEN{Chuyên viên} TRUONG_PHONG{Trưởng phòng} VAN_THU{Văn thư} other{}}",
+	"@selectRoleProfile": {
+		"placeholders": {
+			"role": {
+				"type": "String"
+			}
+		}
+	},
+	"department": "Cơ quan"
 }
