@@ -48,4 +48,17 @@ class IncomingDocumentRepository extends BaseRepository {
       rethrow;
     }
   }
+
+  Future<IncomingDocument> getIncomingDocumentDetailById(
+      int id) async {
+    try {
+      final response = await provider.get(
+          url: "/$id",
+          cancelToken: cancelToken);
+
+      return IncomingDocument.fromJson(response);
+    } catch (err) {
+      rethrow;
+    }
+  }
 }

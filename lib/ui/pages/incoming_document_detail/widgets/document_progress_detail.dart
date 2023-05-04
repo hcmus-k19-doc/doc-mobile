@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
-import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/first_step.dart';
+import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/stepper_widget.dart';
 
 import '../../../../constants/export_constants.dart';
 import '../../../common_widgets/elevated_button.dart';

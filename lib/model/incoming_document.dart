@@ -13,8 +13,12 @@ class IncomingDocument {
   String? arrivingDate;
   String? summary;
   SendingLevel? sendingLevel;
-  String? folder;
+  Folder? folder;
   List<String>? attachments;
+  String? distributionDate;
+  String? arrivingTime;
+  String? urgency;
+  String? confidentiality;
 
   IncomingDocument(
       {this.id,
@@ -29,7 +33,11 @@ class IncomingDocument {
       this.summary,
       this.sendingLevel,
       this.folder,
-      this.attachments});
+      this.attachments,
+      this.distributionDate,
+      this.arrivingTime,
+      this.urgency,
+      this.confidentiality});
 
   IncomingDocument.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -49,9 +57,15 @@ class IncomingDocument {
     sendingLevel = json['sendingLevel'] != null
         ? SendingLevel.fromJson(json['sendingLevel'])
         : null;
-    folder = json['folder'];
+    folder = json['folder'] != null
+        ? Folder.fromJson(json['folder'])
+        : null;
     attachments =
         json["attachments"] != null ? json['attachments'].cast<String>() : null;
+    distributionDate = json['distributionDate'];
+    arrivingTime = json['arrivingTime'];
+    urgency = json['urgency'];
+    confidentiality = json['confidentiality'];
   }
 
   Map<String, dynamic> toJson() {
@@ -73,8 +87,14 @@ class IncomingDocument {
     if (sendingLevel != null) {
       data['sendingLevel'] = sendingLevel!.toJson();
     }
-    data['folder'] = folder;
+    if (folder != null) {
+      data['folder'] = folder!.toJson();
+    }
     data['attachments'] = attachments;
+    data['distributionDate'] = distributionDate;
+    data['arrivingTime'] = arrivingTime;
+    data['urgency'] = urgency;
+    data['confidentiality'] = confidentiality;
     return data;
   }
 }
@@ -97,6 +117,34 @@ class SendingLevel {
     data['id'] = id;
     data['version'] = version;
     data['level'] = level;
+    return data;
+  }
+}
+
+class Folder {
+  int? id;
+  int? version;
+  String? folderName;
+  int? nextNumber;
+  int? year;
+
+  Folder({this.id, this.version, this.folderName, this.nextNumber, this.year});
+
+  Folder.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    version = json['version'];
+    folderName = json['folderName'];
+    nextNumber = json['nextNumber'];
+    year = json['year'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['version'] = version;
+    data['folderName'] = folderName;
+    data['nextNumber'] = nextNumber;
+    data['year'] = year;
     return data;
   }
 }
