@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/constants/api_const.dart';
 import 'package:flutter_app/exceptions.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
@@ -32,6 +33,9 @@ class Api {
           if (await refreshTokenApi(refreshToken)) {
             //success get new access token retry a request
             return handler.resolve(await _retry(error.requestOptions));
+          } else {
+            await _performLogout();
+            return handler.reject(error);
           }
         }
       }
@@ -128,7 +132,7 @@ class Api {
         return false;
       }
     } catch (err) {
-      rethrow;
+      return false;
     }
   }
 
@@ -141,5 +145,10 @@ class Api {
         data: requestOptions.data,
         queryParameters: requestOptions.queryParameters,
         options: options);
+  }
+
+  Future<void> _performLogout() async {
+    // await _storage.deleteAll();
+    //navigate to login page
   }
 }

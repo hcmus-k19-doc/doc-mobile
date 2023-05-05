@@ -65,5 +65,9 @@
 			}
 		}
 	},
-	"department": "Cơ quan"
+	"department": "Cơ quan",
+	"changePassword": "Thay đổi mật khẩu",
+	"currentPassword": "Mật khẩu hiện tại",
+	"newPassword": "Mật khẩu mới",
+	"confirmNewPassword": "Xác nhận mật khẩu mới"
 }

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 
-class TitleTextFieldWidget extends StatelessWidget {
-  const TitleTextFieldWidget(
+class TitleTextFormField extends StatelessWidget {
+  const TitleTextFormField(
       {Key? key,
       required this.title,
-      required this.initialText,
-      required this.isTextFieldEnable})
+      this.validator,
+      required this.textController})
       : super(key: key);
   final String title;
-  final String initialText;
-  final bool isTextFieldEnable;
+  final TextEditingController textController;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,9 @@ class TitleTextFieldWidget extends StatelessWidget {
               .copyWith(color: Theme.of(context).primaryColor, fontSize: 16),
         ),
         TextFormField(
-          enabled: isTextFieldEnable,
-          controller: TextEditingController()..text = initialText,
+          controller: textController,
+          validator: validator,
+          obscureText: true,
           decoration: const InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.only(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/bloc/profile_bloc/profile_bloc.dart';
+import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/ui/pages/profile/widgets/title_textfield_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,13 +86,17 @@ class ProfileScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, MyRouter.changePassword);
+                        },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(
                                     StyleConst.defaultRadius15))),
-                        child:
-                            const Text("Change password (will change later)"),
+                        child: Text(
+                            AppLocalizations.of(context)!.changePassword,
+                            style: bodyLargeBold(context)!
+                                .copyWith(color: Colors.white, height: 0)),
                       ),
                     )
                   ],
