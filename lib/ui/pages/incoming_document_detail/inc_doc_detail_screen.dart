@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/ui/common_widgets/elevated_button.dart';
 import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_attachments.dart';
 import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_progress_detail.dart';
 import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_tile_detail.dart';
@@ -59,18 +60,40 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                         child: DocumentTileDetail(
                           incomingDocument: detailDocument,
                         )),
-                    Container(
-                        padding:
-                            const EdgeInsets.all(StyleConst.defaultPadding16),
-                        child: DocumentAttachment(
-                          incomingDocument: detailDocument,
-                        )),
+                    DocumentAttachment(
+                      incomingDocument: detailDocument,
+                    ),
                     Container(
                         padding:
                             const EdgeInsets.all(StyleConst.defaultPadding16),
                         child: DocumentProgressDetail(
                           incomingDocument: detailDocument,
                         )),
+                        Container(
+                            padding:
+                            const EdgeInsets.all(StyleConst.defaultPadding16),
+                            child: Row(
+                              children:[
+                                Expanded(child: CustomElevatedButton(
+                                  callback:() {
+                                    //TODO CALL API APPROVE
+                                  },
+                                  title: 'Approve',
+                                  radius: 15,
+                                  buttonType: ButtonType.filledButton,
+                                )),
+                                const SizedBox(width: 18,),
+                                Expanded(child: CustomElevatedButton(
+                                  callback:  () {
+                                    //TODO CALL API COMMENTS
+                                  },
+                                  title: 'Comment',
+                                  radius: 15,
+                                  buttonType: ButtonType.filledButton,
+                                )),
+                              ]
+                            )),
+
                   ])),
               backgroundColor: ColorConst.white,
             );
