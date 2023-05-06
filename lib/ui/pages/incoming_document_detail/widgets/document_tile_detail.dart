@@ -14,6 +14,16 @@ class DocumentTileDetail extends StatefulWidget {
 
 class _DocumentTileDetailState extends State<DocumentTileDetail> {
   bool _isExpanded = false;
+  Map<String, String> convertLevel = {
+    'LOW':'Thấp',
+    'MEDIUM':'Trung bình',
+    'HIGH':'Cao',
+  };
+  Map<String, String> convertSendingLevel = {
+    'CITY':'Thành phố',
+    'DISTRICT':'Quận',
+    'SCHOOL':'Trường',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +67,51 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Cấp gửi:",
-                      style: bodyLarge(context),
-                    )),
+                          "Số theo sổ VB:",
+                          style: bodyLarge(context),
+                        )),
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.incomingDocument.sendingLevel?.level}",
+                          "${widget.incomingDocument.incomingNumber}",
+                          style: bodyLarge(context),
+                        ))
+                  ],
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding12,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        child: Text(
+                          "Số ký hiệu gốc:",
+                          style: bodyLarge(context),
+                        )),
+                    Flexible(
+                        flex: 2,
+                        child: Text(
+                          "${widget.incomingDocument.originalSymbolNumber}",
+                          style: bodyLarge(context),
+                        ))
+                  ],
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding12,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        child: Text(
+                          "Loại văn bản:",
+                          style: bodyLarge(context),
+                        )),
+                    Flexible(
+                        flex: 2,
+                        child: Text(
+                          "${widget.incomingDocument.documentType?.type}",
                           style: bodyLarge(context),
                         ))
                   ],
@@ -86,6 +134,45 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                         style: bodyLarge(context),
                       ),
                     )
+                  ],
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding12,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        child: Text(
+                          "Ngày phát hành:",
+                          style: bodyLarge(context),
+                        )),
+                    Flexible(
+                      flex: 2,
+                      child: Text(
+                        "${widget.incomingDocument.distributionDate}",
+                        style: bodyLarge(context),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding12,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        child: Text(
+                          "Cấp gửi:",
+                          style: bodyLarge(context),
+                        )),
+                    Flexible(
+                        flex: 2,
+                        child: Text(
+                          "${convertSendingLevel[widget.incomingDocument.sendingLevel?.level]}",
+                          style: bodyLarge(context),
+                        ))
                   ],
                 ),
                 const SizedBox(
@@ -132,13 +219,57 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                        child: Text("Toàn văn:", style: bodyLarge(context))),
-                    Flexible(
-                        flex: 2,
                         child: Text(
-                          "",
+                          "Hồ sơ công việc:",
                           style: bodyLarge(context),
-                        ))
+                        )),
+                    Flexible(
+                      flex: 2,
+                      child: Text(
+                        "${widget.incomingDocument.folder?.folderName}",
+                        style: bodyLarge(context),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding12,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        child: Text(
+                          "Độ mật:",
+                          style: bodyLarge(context),
+                        )),
+                    Flexible(
+                      flex: 2,
+                      child: Text(
+                        "${convertLevel[widget.incomingDocument.confidentiality]}",
+                        style: bodyLarge(context),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: StyleConst.defaultPadding12,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        child: Text(
+                          "Độ khẩn:",
+                          style: bodyLarge(context),
+                        )),
+                    Flexible(
+                      flex: 2,
+                      child: Text(
+                        "${convertLevel[widget.incomingDocument.urgency]}",
+                        style: bodyLarge(context),
+                      ),
+                    )
                   ],
                 ),
                 const SizedBox(

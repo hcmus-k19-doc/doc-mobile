@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_attachments.dart';
 import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_progress_detail.dart';
 import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_tile_detail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,9 +62,15 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                     Container(
                         padding:
                             const EdgeInsets.all(StyleConst.defaultPadding16),
+                        child: DocumentAttachment(
+                          incomingDocument: detailDocument,
+                        )),
+                    Container(
+                        padding:
+                            const EdgeInsets.all(StyleConst.defaultPadding16),
                         child: DocumentProgressDetail(
                           incomingDocument: detailDocument,
-                        ))
+                        )),
                   ])),
               backgroundColor: ColorConst.white,
             );
