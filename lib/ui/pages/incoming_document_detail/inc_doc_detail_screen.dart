@@ -78,7 +78,7 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                                   callback:() {
                                     //TODO CALL API APPROVE
                                   },
-                                  title: 'Approve',
+                                  title: 'Phê duyệt',
                                   radius: 15,
                                   buttonType: ButtonType.filledButton,
                                 )),
@@ -87,7 +87,7 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                                   callback:  () {
                                     //TODO CALL API COMMENTS
                                   },
-                                  title: 'Comment',
+                                  title: 'Góp ý',
                                   radius: 15,
                                   buttonType: ButtonType.filledButton,
                                 )),
