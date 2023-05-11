@@ -11,8 +11,18 @@ class IncomingDetailLoadingState extends IncomingDetailState {}
 
 class IncomingDetailSuccessState extends IncomingDetailState {
   final IncomingDocument incomingDocumentDetail;
+  final List<ProcessingDetail> processingDetail;
 
-  const IncomingDetailSuccessState(this.incomingDocumentDetail);
+  const IncomingDetailSuccessState(this.incomingDocumentDetail, this.processingDetail);
+
+  @override
+  List<Object?> get props => [incomingDocumentDetail];
+}
+
+class IncomingDetailProcessingSuccessState extends IncomingDetailState {
+  final IncomingDocument incomingDocumentDetail;
+
+  const IncomingDetailProcessingSuccessState(this.incomingDocumentDetail);
 
   @override
   List<Object?> get props => [incomingDocumentDetail];

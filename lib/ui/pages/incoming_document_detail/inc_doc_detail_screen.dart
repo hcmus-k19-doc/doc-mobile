@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/model/processing_detail.dart';
 import 'package:flutter_app/ui/common_widgets/elevated_button.dart';
 import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_attachments.dart';
 import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_progress_detail.dart';
@@ -40,6 +41,7 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
           }
           if (state is IncomingDetailSuccessState) {
             IncomingDocument detailDocument = state.incomingDocumentDetail;
+            List<ProcessingDetail> processingDetail = state.processingDetail;
             return Scaffold(
               appBar: AppBar(
                 title: Text(
@@ -67,7 +69,7 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                         padding:
                             const EdgeInsets.all(StyleConst.defaultPadding16),
                         child: DocumentProgressDetail(
-                          incomingDocument: detailDocument,
+                          processingDetail: processingDetail,
                         )),
                         Container(
                             padding:

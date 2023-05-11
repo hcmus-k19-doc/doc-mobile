@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_app/exceptions.dart';
 import 'package:flutter_app/model/incoming_document.dart';
 import 'package:flutter_app/model/pagination_coming_document.dart';
+import 'package:flutter_app/model/processing_detail.dart';
 import 'package:flutter_app/model/search_criteria.dart';
 import 'package:flutter_app/repositories/incoming_document_repository.dart';
 
@@ -21,7 +22,8 @@ class IncomingDetailBloc extends Bloc<IncomingDetailEvent, IncomingDetailState> 
      emit(IncomingDetailLoadingState());
      try {
        final incomingDocument = await repository.getIncomingDocumentDetailById(documentId);
-       emit(IncomingDetailSuccessState(incomingDocument));
+       final processingDetail = await repository.getIncomingDocumentProcessByI(documentId);
+       emit(IncomingDetailSuccessState(incomingDocument, processingDetail));
      } catch (e) {
        emit(IncomingDetailFailureState(e.toString()));
      }
