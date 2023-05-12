@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/processing_detail.dart';
+import 'package:flutter_app/repositories/comment_repository.dart';
 import 'package:flutter_app/ui/common_widgets/elevated_button.dart';
 import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_attachments.dart';
 import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_progress_detail.dart';
@@ -28,7 +29,8 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
         create: (context) => IncomingDetailBloc(
             IncomingDocumentRepository(
                 "${UrlConst.DOC_SERVICE_URL}/incoming-documents"),
-            widget.documentId)
+            widget.documentId
+        )
           ..add(FetchIncomingDetailEvent()),
         child: BlocBuilder<IncomingDetailBloc, IncomingDetailState>(
             builder: (context, state) {
@@ -46,34 +48,10 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                       ?.copyWith(color: Colors.white, fontSize: 18),
                 ),
               ),
-              body: Container(
-                  padding: const EdgeInsets.all(StyleConst.defaultPadding16),
-                  child: Row(children: [
-                    Expanded(
-                        child: CustomElevatedButton(
-                      callback: () {
-                        //TODO CALL API APPROVE
-                      },
-                      title: 'Phê duyệt',
-                      radius: 15,
-                      buttonType: ButtonType.filledButton,
-                    )),
-                    const SizedBox(
-                      width: 18,
-                    ),
-                    Expanded(
-                        child: CustomElevatedButton(
-                      callback: () {
-                        onClickCommentButton();
-                      },
-                      title: 'Góp ý',
-                      radius: 15,
-                      buttonType: ButtonType.filledButton,
-                    )),
-                  ])),
-              // Center(
-              //     child: Text(state.responseException,
-              //         style: headLineSmall(context)))
+              body:
+              Center(
+                  child: Text(state.responseException,
+                      style: headLineSmall(context)))
             );
           }
           if (state is IncomingDetailSuccessState) {
@@ -108,32 +86,31 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                         child: DocumentProgressDetail(
                           processingDetail: processingDetail,
                         )),
-                    Container(
-                        padding:
-                            const EdgeInsets.all(StyleConst.defaultPadding16),
-                        child: Row(children: [
-                          Expanded(
-                              child: CustomElevatedButton(
-                            callback: () {
-                              //TODO CALL API APPROVE
-                            },
-                            title: 'Phê duyệt',
-                            radius: 15,
-                            buttonType: ButtonType.filledButton,
-                          )),
-                          const SizedBox(
-                            width: 18,
-                          ),
-                          Expanded(
-                              child: CustomElevatedButton(
-                            callback: () {
-                              //TODO CALL API COMMENTS
-                            },
-                            title: 'Góp ý',
-                            radius: 15,
-                            buttonType: ButtonType.filledButton,
-                          )),
-                        ])),
+                        Container(
+                            padding: const EdgeInsets.all(StyleConst.defaultPadding16),
+                            child: Row(children: [
+                              Expanded(
+                                  child: CustomElevatedButton(
+                                    callback: () {
+                                      //TODO CALL API APPROVE
+                                    },
+                                    title: 'Phê duyệt',
+                                    radius: 15,
+                                    buttonType: ButtonType.filledButton,
+                                  )),
+                              const SizedBox(
+                                width: 18,
+                              ),
+                              Expanded(
+                                  child: CustomElevatedButton(
+                                    callback: () {
+                                      onClickCommentButton();
+                                    },
+                                    title: 'Góp ý',
+                                    radius: 15,
+                                    buttonType: ButtonType.filledButton,
+                                  )),
+                            ])),
                   ])),
               backgroundColor: ColorConst.white,
             );

@@ -17,16 +17,6 @@ class DocumentProgressDetail extends StatefulWidget {
 
 class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
   bool _isExpanded = false;
-  final List<ProcessingDetail> test = [
-    ProcessingDetail(
-        step: 1,
-        processingUser: ProcessingUser(
-            fullName: "John Doe", department: "Phòng kế hoạch đầu tư")),
-    ProcessingDetail(
-        step: 2,
-        processingUser: ProcessingUser(
-            fullName: "John Doe", department: "Phòng kế hoạch đầu tư")),
-  ];
   final List<String> upcomingProcess = [
     "Giám đốc",
     "Chánh văn phòng",
@@ -74,31 +64,28 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
-                      itemCount: test.length,
-                      // itemCount: widget.processingDetail.length,
+                      // itemCount: test.length,
+                      itemCount: widget.processingDetail.length,
                       itemBuilder: (BuildContext context, int index) {
                         return TimelineTile(
                           nodeAlign: TimelineNodeAlign.start,
-                          contents: Card(
-                            child: Container(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(upcomingProcess[index] ?? "",
-                                      style: bodyLargeBold(context)),
-                                  Text(
-                                      "Tên: ${test[index].processingUser?.fullName}" ??
-                                          "",
-                                      style: bodyLarge(context)),
-                                  Text(
-                                      test[index].processingUser?.department ??
-                                          "",
-                                      style: bodyLarge(context)),
-                                ],
-                              ),
-                              // child: Text(widget.processingDetail[index].processingUser?.fullName??""),
+                          contents: Container(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(upcomingProcess[index] ?? "",
+                                        style: bodyLargeBold(context)?.copyWith(fontSize: 16)),
+                                    Text(
+                                        "${widget.processingDetail[index].processingUser?.fullName} - ${widget.processingDetail[index].processingUser?.department}",
+                                        style: bodyLarge(context)),
+                                  ],
+                                ),
+                              ],
                             ),
+                            // child: Text(widget.processingDetail[index].processingUser?.fullName??""),
                           ),
                           node: const TimelineNode(
                             indicator: DotIndicator(),
@@ -112,14 +99,14 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
-                      itemCount: upcomingProcess.length - test.length,
+                      itemCount: upcomingProcess.length - widget.processingDetail.length,
                       itemBuilder: (BuildContext context, int index) {
                         return SizedBox(
                           child: TimelineTile(
                             nodeAlign: TimelineNodeAlign.start,
                             contents: Padding(
                               padding: const EdgeInsets.all(16.0),
-                              child: Text(upcomingProcess[index + test.length],
+                              child: Text(upcomingProcess[index + widget.processingDetail.length],
                                   style: bodyLarge(context)),
                             ),
                             node: const TimelineNode(

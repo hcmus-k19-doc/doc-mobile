@@ -1,15 +1,15 @@
+import 'package:flutter_app/model/comment_detail.dart';
 import 'package:flutter_app/repositories/base_repository.dart';
 
 class CommentRepository extends BaseRepository {
   CommentRepository(super.baseUrl);
 
-  Future<List<String>> getIncomingDocumentCommentsById(int id) async {
+  Future<List<Comment>> getIncomingDocumentCommentsById(int id) async {
     try {
       final response = await provider.get(
           url: "/incoming-documents/$id", cancelToken: cancelToken);
 
-      // return IncomingDocument.fromJson(response);
-      return ["Comments 1", "Comments 2"];
+      return  List<Comment>.from(response.map((e) => Comment.fromJson(e))).toList();
     } catch (err) {
       rethrow;
     }
