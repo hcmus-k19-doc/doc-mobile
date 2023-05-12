@@ -55,20 +55,52 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
           ),
           Padding(
             padding: const EdgeInsets.all(StyleConst.defaultPadding16),
-            child: FixedTimeline.tileBuilder(
-              builder: TimelineTileBuilder.connectedFromStyle(
-                contentsAlign: ContentsAlign.basic,
-                contentsBuilder: (context, index) => Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('${widget.processingDetail.first.processingUser?.department}'),
-                  ),
-                ),
-                connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
-                indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
-                itemCount: 3,
-              ),
-            ),
+            child: Column(
+              children: [
+                ListView.builder(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    itemCount: widget.processingDetail.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Row(
+                        children: [
+                          SizedBox(
+                            height: 80.0,
+                            child: TimelineNode(
+                              indicator: Card(
+                                margin: EdgeInsets.zero,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(widget.processingDetail[index].processingUser?.fullName??""),
+                                ),
+                              ),
+                              startConnector: const SolidLineConnector(),
+                              endConnector: const SolidLineConnector(),
+                            ),
+                          )
+                        ],
+                      );
+                    }),
+                if(widget.processingDetail.isEmpty)
+                  SizedBox(
+                    height: 80.0,
+                    child: TimelineNode(
+                      indicator: Card(
+                        margin: EdgeInsets.zero,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Van thu"),
+                        ),
+                      ),
+                      startConnector: const SolidLineConnector(),
+                      endConnector: const SolidLineConnector(),
+                    ),
+                  )
+              ],
+            )
+
             ),
         ],
       ),
