@@ -19,15 +19,6 @@ class IncomingDetailSuccessState extends IncomingDetailState {
   List<Object?> get props => [incomingDocumentDetail];
 }
 
-class IncomingDetailProcessingSuccessState extends IncomingDetailState {
-  final IncomingDocument incomingDocumentDetail;
-
-  const IncomingDetailProcessingSuccessState(this.incomingDocumentDetail);
-
-  @override
-  List<Object?> get props => [incomingDocumentDetail];
-}
-
 class IncomingDetailFailureState extends IncomingDetailState {
   final String responseException;
 
