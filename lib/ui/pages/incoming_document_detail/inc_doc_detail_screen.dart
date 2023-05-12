@@ -48,9 +48,29 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
               ),
               body: Container(
                   padding: const EdgeInsets.all(StyleConst.defaultPadding16),
-                  child: DocumentProgressDetail(
-                    processingDetail: [],
-                  )),
+                  child: Row(children: [
+                    Expanded(
+                        child: CustomElevatedButton(
+                      callback: () {
+                        //TODO CALL API APPROVE
+                      },
+                      title: 'Phê duyệt',
+                      radius: 15,
+                      buttonType: ButtonType.filledButton,
+                    )),
+                    const SizedBox(
+                      width: 18,
+                    ),
+                    Expanded(
+                        child: CustomElevatedButton(
+                      callback: () {
+                        onClickCommentButton();
+                      },
+                      title: 'Góp ý',
+                      radius: 15,
+                      buttonType: ButtonType.filledButton,
+                    )),
+                  ])),
               // Center(
               //     child: Text(state.responseException,
               //         style: headLineSmall(context)))
@@ -120,5 +140,17 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
           }
           return const Center(child: Text("Đã xảy ra lỗi không xác định"));
         }));
+  }
+
+  void onClickCommentButton() {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+                top: Radius.circular(StyleConst.defaultRadius15))),
+        isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return Container(child: Text("Hehe"));
+        });
   }
 }

@@ -22,13 +22,14 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
         step: 1,
         processingUser: ProcessingUser(
             fullName: "John Doe", department: "Phòng kế hoạch đầu tư")),
-    // ProcessingDetail(
-    //     step: 2,
-    //     processingUser: ProcessingUser(fullName: "A", department: "Phong KD")),
+    ProcessingDetail(
+        step: 2,
+        processingUser: ProcessingUser(
+            fullName: "John Doe", department: "Phòng kế hoạch đầu tư")),
   ];
   final List<String> upcomingProcess = [
-    "Văn thư",
-    "Trưởng phòng",
+    "Giám đốc",
+    "Chánh văn phòng",
     "Chuyên viên"
   ];
 
@@ -84,10 +85,12 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                      test[index].processingUser?.fullName ??
-                                          "",
+                                  Text(upcomingProcess[index] ?? "",
                                       style: bodyLargeBold(context)),
+                                  Text(
+                                      "Tên: ${test[index].processingUser?.fullName}" ??
+                                          "",
+                                      style: bodyLarge(context)),
                                   Text(
                                       test[index].processingUser?.department ??
                                           "",
@@ -118,7 +121,6 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
                               padding: const EdgeInsets.all(16.0),
                               child: Text(upcomingProcess[index + test.length],
                                   style: bodyLarge(context)),
-                              // child: Text(widget.processingDetail[index].processingUser?.fullName??""),
                             ),
                             node: const TimelineNode(
                               indicator: DotIndicator(color: Colors.grey),
