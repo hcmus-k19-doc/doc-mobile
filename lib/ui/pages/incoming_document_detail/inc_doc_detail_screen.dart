@@ -13,7 +13,8 @@ import '../../../model/incoming_document.dart';
 import '../../../repositories/incoming_document_repository.dart';
 
 class IncomingDocumentDetail extends StatefulWidget {
-  const IncomingDocumentDetail({Key? key, required this.documentId}) : super(key: key);
+  const IncomingDocumentDetail({Key? key, required this.documentId})
+      : super(key: key);
   final int documentId;
 
   @override
@@ -37,7 +38,23 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
             );
           }
           if (state is IncomingDetailFailureState) {
-            return Center(child: Text(state.responseException));
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(
+                  "Chi tiết văn bản đến",
+                  style: headLineSmall(context)
+                      ?.copyWith(color: Colors.white, fontSize: 18),
+                ),
+              ),
+              body: Container(
+                  padding: const EdgeInsets.all(StyleConst.defaultPadding16),
+                  child: DocumentProgressDetail(
+                    processingDetail: [],
+                  )),
+              // Center(
+              //     child: Text(state.responseException,
+              //         style: headLineSmall(context)))
+            );
           }
           if (state is IncomingDetailSuccessState) {
             IncomingDocument detailDocument = state.incomingDocumentDetail;
@@ -71,31 +88,32 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                         child: DocumentProgressDetail(
                           processingDetail: processingDetail,
                         )),
-                        Container(
-                            padding:
+                    Container(
+                        padding:
                             const EdgeInsets.all(StyleConst.defaultPadding16),
-                            child: Row(
-                              children:[
-                                Expanded(child: CustomElevatedButton(
-                                  callback:() {
-                                    //TODO CALL API APPROVE
-                                  },
-                                  title: 'Phê duyệt',
-                                  radius: 15,
-                                  buttonType: ButtonType.filledButton,
-                                )),
-                                const SizedBox(width: 18,),
-                                Expanded(child: CustomElevatedButton(
-                                  callback:  () {
-                                    //TODO CALL API COMMENTS
-                                  },
-                                  title: 'Góp ý',
-                                  radius: 15,
-                                  buttonType: ButtonType.filledButton,
-                                )),
-                              ]
-                            )),
-
+                        child: Row(children: [
+                          Expanded(
+                              child: CustomElevatedButton(
+                            callback: () {
+                              //TODO CALL API APPROVE
+                            },
+                            title: 'Phê duyệt',
+                            radius: 15,
+                            buttonType: ButtonType.filledButton,
+                          )),
+                          const SizedBox(
+                            width: 18,
+                          ),
+                          Expanded(
+                              child: CustomElevatedButton(
+                            callback: () {
+                              //TODO CALL API COMMENTS
+                            },
+                            title: 'Góp ý',
+                            radius: 15,
+                            buttonType: ButtonType.filledButton,
+                          )),
+                        ])),
                   ])),
               backgroundColor: ColorConst.white,
             );
