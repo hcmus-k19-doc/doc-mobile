@@ -139,7 +139,8 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (BuildContext context) {
         return Padding(
-          padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Container(
             color: Colors.white,
             padding: const EdgeInsets.all(24),
@@ -174,86 +175,96 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                       }
                       if (state is CommentSuccessState) {
                         return Column(
-                            children: [
-                              LimitedBox
-                                (
-                                maxHeight: size.height*0.4,
-                                child: state.commentDetail.isNotEmpty?ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-
-                                  itemCount: state.commentDetail.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    var comment = state.commentDetail[index];
-                                    return Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        RichText(
-                                          text: TextSpan(
-                                            text: "${comment.createdBy}",
-                                            style: bodyLargeBold(context),
-                                            children: <TextSpan>[
-                                              TextSpan(
-                                                  text: "- ${comment.createdDate}",
-                                                  style: bodyLargeItalic(context)
-                                                      ?.copyWith(
-                                                          color: Colors.grey)),
-                                            ],
-                                          ),
-                                        ),
-                                        // Text("${comment.createdBy} - ${comment.createdDate}",style: bodyLargeBold(context)),
-                                        Text("${comment.content}",
-                                            style: bodyLarge(context)),
-                                        const SizedBox(height: 8),
-                                      ],
-                                    );
-                                  }):
-                              Center(child: Text("Chưa có bình luận nào", style: bodyLargeItalic(context)?.copyWith(color: Colors.grey))),
-                      ),const SizedBox(
-                                height: 8,
-                              ),
-                              const Divider(
-                                height: 1,
-                                thickness: 1,
-                                color: Colors.black26,
-                              ),
-                              Container(
-                                padding: const EdgeInsets.fromLTRB(
-                                    0, 16.0, 0.0, 0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Expanded(
-                                      child: TextField(
-                                        controller: txtController,
-                                        decoration: const InputDecoration(
-                                          fillColor: Colors.blue,
-                                          border: OutlineInputBorder(),
-                                        ),
-                                        maxLines: null,
-                                        keyboardType: TextInputType.text,
+                          children: [
+                            LimitedBox(
+                              maxHeight: size.height * 0.6 -
+                                  MediaQuery.of(context).viewInsets.bottom,
+                              child: state.commentDetail.isNotEmpty
+                                  ? ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: state.commentDetail.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        var comment =
+                                            state.commentDetail[index];
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            RichText(
+                                              text: TextSpan(
+                                                text: "${comment.createdBy}",
+                                                style: bodyLargeBold(context),
+                                                children: <TextSpan>[
+                                                  TextSpan(
+                                                      text:
+                                                          "  -  ${comment.createdDate}",
+                                                      style: bodyLargeItalic(
+                                                              context)
+                                                          ?.copyWith(
+                                                              color:
+                                                                  Colors.grey)),
+                                                ],
+                                              ),
+                                            ),
+                                            // Text("${comment.createdBy} - ${comment.createdDate}",style: bodyLargeBold(context)),
+                                            Text("${comment.content}",
+                                                style: bodyLarge(context)),
+                                            const SizedBox(height: 8),
+                                          ],
+                                        );
+                                      })
+                                  : Center(
+                                      child: Text("Chưa có bình luận nào",
+                                          style: bodyLargeItalic(context)
+                                              ?.copyWith(color: Colors.grey))),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            const Divider(
+                              height: 1,
+                              thickness: 1,
+                              color: Colors.black26,
+                            ),
+                            Container(
+                              padding:
+                                  const EdgeInsets.fromLTRB(0, 16.0, 0.0, 0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Expanded(
+                                    child: TextField(
+                                      controller: txtController,
+                                      decoration: const InputDecoration(
+                                        fillColor: Colors.blue,
+                                        border: OutlineInputBorder(),
                                       ),
+                                      maxLines: null,
+                                      keyboardType: TextInputType.text,
                                     ),
-                                    IconButton(
-                                      icon: const Icon(Icons.send),
-                                      iconSize: 24.0,
-                                      color: Colors.blue,
-                                      onPressed: () async {
-                                        var sendingPrompt =
-                                            txtController.text.toString();
-                                        txtController.clear();
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.send),
+                                    iconSize: 24.0,
+                                    color: Colors.blue,
+                                    onPressed: () async {
+                                      var sendingPrompt =
+                                          txtController.text.toString();
+                                      txtController.clear();
 
-                                        if (sendingPrompt.isNotEmpty) {
-                                          commentBloc
-                                              .add(PostCommentEvent(sendingPrompt));
-                                        }
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
+                                      if (sendingPrompt.isNotEmpty) {
+                                        commentBloc.add(
+                                            PostCommentEvent(sendingPrompt));
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
                         );
                       }
                       if (state is PostCommentSuccessState) {
