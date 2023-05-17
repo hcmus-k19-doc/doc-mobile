@@ -7,12 +7,14 @@ import 'package:flutter_app/ui/pages/change_pass/change_pass_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/check_your_mail_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/forgot_pass_screen.dart';
 import 'package:flutter_app/ui/pages/home/home_screen.dart';
+import 'package:flutter_app/ui/pages/incoming_document_detail/pdf_viewer_screen.dart';
 import 'package:flutter_app/ui/pages/login/login_screen.dart';
 import 'package:flutter_app/ui/pages/reminder_calendar/reminder_calendar_screem.dart';
 import 'package:flutter_app/ui/pages/settings/settings_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path/path.dart';
 
+import '../ui/pages/incoming_document_detail/inc_doc_detail_screen.dart';
 import '../ui/pages/splash/splash_screen.dart';
 
 class HomeArguments {
@@ -22,10 +24,17 @@ class HomeArguments {
   const HomeArguments({required this.title, required this.number});
 }
 
-class CameraArguments {
-  final CameraDescription camera;
+class IncomingDocumentDetailArgs {
+  final int documentId;
 
-  const CameraArguments({required this.camera});
+  const IncomingDocumentDetailArgs({required this.documentId});
+}
+
+class PdfViewerArguments {
+  final String title;
+  final String pdfUrl;
+
+  const PdfViewerArguments({required this.title, required this.pdfUrl});
 }
 
 class MyRouter {
@@ -39,14 +48,30 @@ class MyRouter {
   static const String checkYourMail = "/check-your-mail";
   static const String reminder = "/reminder";
   static const String changePassword = "/change-password";
+  static const String incomingDocumentDetail = "/incomingDocumentDetail";
+  static const String pdfViewer = "/pdfViewer";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var args = settings.arguments;
     switch (settings.name) {
+      case incomingDocumentDetail:
+        if (args is IncomingDocumentDetailArgs) {
+          return MaterialPageRoute(
+              builder: (_) => IncomingDocumentDetail(
+                    documentId: args.documentId,
+                  ));
+        } else {
+          return errorRoute("Wrong arguments for IncomingDocumentDetail");
+        }
+      case pdfViewer:
+        if (args is PdfViewerArguments) {
+          return MaterialPageRoute(
+              builder: (_) => PdfViewer(title: args.title, url: args.pdfUrl));
+        } else {
+          return errorRoute("Wrong arguments for PdfViewer");
+        }
       case splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
-      // case home:
-      //   return MaterialPageRoute(builder: (_) => HomeScreen(title: settings.arguments, number: null,));
       case homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case login:

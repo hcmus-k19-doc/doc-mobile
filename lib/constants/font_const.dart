@@ -26,6 +26,15 @@ TextStyle? bodyLarge(BuildContext context) {
       backgroundColor: DefaultColor().backgroundColor);
 }
 
+TextStyle? bodyLargeItalic(BuildContext context) {
+  return Theme.of(context).textTheme.bodyLarge?.copyWith(
+      fontWeight: FontWeight.w400,
+      fontStyle: FontStyle.italic,
+      height: ConstValue.descriptionTextScale,
+      color: DefaultColor().fontColor,
+      backgroundColor: DefaultColor().backgroundColor);
+}
+
 TextStyle? bodyLargeBold(BuildContext context) {
   return Theme.of(context).textTheme.bodyLarge?.copyWith(
       fontWeight: FontWeight.w500,
