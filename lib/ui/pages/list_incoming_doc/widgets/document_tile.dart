@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
@@ -184,7 +185,9 @@ class _DocumentTileState extends State<DocumentTile> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(MyRouter.incomingDocumentDetail, arguments: IncomingDocumentDetailArgs(documentId: widget.incomingDocument.id?? -1));
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
