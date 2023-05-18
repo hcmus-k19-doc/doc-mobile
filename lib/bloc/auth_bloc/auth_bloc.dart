@@ -37,19 +37,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
     on<LoginEvent>((event, emit) async {
-      if (state is UnAuthenticated || state is AuthError) {
-        emit(AuthLoading());
-        try {
-          token = await repository.login(event.username, event.password);
-          SecuredLocalStorage _storage = SecuredLocalStorage();
-          await _storage.saveString(
-              KEY_CONST.ACCESS_TOKEN_KEY, token!.accessToken!);
-          await _storage.saveString(
-              KEY_CONST.REFRESH_TOKEN_KEY, token!.refreshToken!);
-          emit(Authenticated());
-        } catch (err) {
-          emit(AuthError());
-        }
+      emit(AuthLoading());
+      try {
+        token = await repository.login(event.username, event.password);
+        SecuredLocalStorage _storage = SecuredLocalStorage();
+        await _storage.saveString(
+            KEY_CONST.ACCESS_TOKEN_KEY, token!.accessToken!);
+        await _storage.saveString(
+            KEY_CONST.REFRESH_TOKEN_KEY, token!.refreshToken!);
+        emit(Authenticated());
+      } catch (err) {
+        emit(AuthError());
       }
     });
     on<LogoutEvent>((event, emit) async {

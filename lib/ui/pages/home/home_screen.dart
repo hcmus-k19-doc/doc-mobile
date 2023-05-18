@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
+import 'package:flutter_app/bloc/profile_bloc/profile_bloc.dart';
 import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/search_criteria.dart';
 import 'package:flutter_app/repositories/incoming_document_repository.dart';
+import 'package:flutter_app/repositories/user_repository.dart';
 import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
+import 'package:flutter_app/ui/pages/profile/profile_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:badges/badges.dart' as badges;
@@ -29,7 +32,13 @@ class _HomeScreenState extends State<HomeScreen> {
           SearchCriteria()),
       child: const ListIncomingDocScreen(),
     ),
-    const TestScreen()
+    const TestScreen(),
+    BlocProvider(
+      create: (context) =>
+          ProfileBloc(UserRepository("${UrlConst.DOC_SERVICE_URL}/users"))
+            ..add(FetchCurrentProfile()),
+      child: const ProfileScreen(),
+    )
   ];
 
   int _currentIndex = 0;
