@@ -84,16 +84,55 @@ class Api {
       {required String url,
       Map<String, dynamic>? headers,
       String? contentType,
+      Map<String, dynamic>? data,
       CancelToken? cancelToken}) async {
     try {
       final response = await api.get(url,
           options: Options(headers: headers, contentType: contentType),
+          data: data,
           cancelToken: cancelToken);
       switch (response.statusCode) {
         case 200:
           return response.data;
         case 201:
           throw NoHaveDataException(response.data['message'].toString());
+        case 401:
+          throw UnauthorizedException(response.data['message'].toString());
+        case 419:
+          throw AccessTokenExpiredException(
+              response.data['message'].toString());
+        case 500:
+          throw FailedException(response.data['message'].toString());
+      }
+    } on DioError catch (err) {
+      switch (err.type) {
+        case DioErrorType.cancel:
+          throw FailedException("Request is cancelled");
+        default:
+          throw FailedException(err.response?.data["message"]);
+      }
+    }
+  }
+
+  Future<dynamic> put(
+      {required String url,
+      Map<String, dynamic>? headers,
+      String? contentType,
+      Map<String, dynamic>? data,
+      Map<String, dynamic>? queryParams,
+      CancelToken? cancelToken}) async {
+    try {
+      final response = await api.put(url,
+          options: Options(headers: headers, contentType: contentType),
+          data: data,
+          queryParameters: queryParams,
+          cancelToken: cancelToken);
+
+      switch (response.statusCode) {
+        case 200:
+          return response.data;
+        case 201:
+          return response.data;
         case 401:
           throw UnauthorizedException(response.data['message'].toString());
         case 419:

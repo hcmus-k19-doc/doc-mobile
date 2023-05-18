@@ -1,8 +1,10 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/bloc/change_pass/change_pass_bloc.dart';
 import 'package:flutter_app/bloc/document_reminder_bloc/document_reminder_bloc.dart';
 import 'package:flutter_app/constants/api_const.dart';
 import 'package:flutter_app/repositories/document_reminder_repository.dart';
+import 'package:flutter_app/repositories/user_repository.dart';
 import 'package:flutter_app/ui/pages/change_pass/change_pass_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/check_your_mail_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/forgot_pass_screen.dart';
@@ -92,7 +94,12 @@ class MyRouter {
                         "${UrlConst.DOC_SERVICE_URL}/document-reminders/current-user")),
                 child: const ReminderCalendarScreen()));
       case changePassword:
-        return MaterialPageRoute(builder: (_) => ChangePasswordScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => ChangePassBloc(
+                      UserRepository("${UrlConst.DOC_SERVICE_URL}/users")),
+                  child: ChangePasswordScreen(),
+                ));
       default:
         return errorRoute("No route-name founded");
     }
