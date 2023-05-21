@@ -4,9 +4,9 @@ import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/processing_detail.dart';
 import 'package:flutter_app/repositories/comment_repository.dart';
 import 'package:flutter_app/ui/common_widgets/elevated_button.dart';
-import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_attachments.dart';
-import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_progress_detail.dart';
-import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_tile_detail.dart';
+import 'package:flutter_app/ui/pages/document_detail/widgets/document_attachments.dart';
+import 'package:flutter_app/ui/pages/document_detail/widgets/document_progress_detail.dart';
+import 'package:flutter_app/ui/pages/document_detail/widgets/document_tile_detail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/incoming_detail_bloc/incoming_detail_bloc.dart';

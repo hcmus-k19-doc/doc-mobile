@@ -186,7 +186,8 @@ class _DocumentTileState extends State<DocumentTile> {
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(MyRouter.incomingDocumentDetail, arguments: IncomingDocumentDetailArgs(documentId: widget.incomingDocument.id?? -1));
+                        Navigator.of(context).pushNamed(MyRouter.outgoingDocumentDetail, arguments: DocumentDetailArgs(documentId: widget.incomingDocument.id?? -1));
+                        // Navigator.of(context).pushNamed(MyRouter.incomingDocumentDetail, arguments: DocumentDetailArgs(documentId: widget.incomingDocument.id?? -1));
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor,

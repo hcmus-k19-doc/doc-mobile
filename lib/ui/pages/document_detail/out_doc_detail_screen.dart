@@ -1,49 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/comment_bloc/comment_bloc.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/model/outgoing_document.dart';
 import 'package:flutter_app/model/processing_detail.dart';
 import 'package:flutter_app/repositories/comment_repository.dart';
 import 'package:flutter_app/ui/common_widgets/elevated_button.dart';
-import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_attachments.dart';
-import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_progress_detail.dart';
-import 'package:flutter_app/ui/pages/incoming_document_detail/widgets/document_tile_detail.dart';
+import 'package:flutter_app/ui/pages/document_detail/widgets/document_attachments.dart';
+import 'package:flutter_app/ui/pages/document_detail/widgets/document_progress_detail.dart';
+import 'package:flutter_app/ui/pages/document_detail/widgets/document_tile_detail.dart';
+import 'package:flutter_app/ui/pages/document_detail/widgets/out_document_tile_detail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/incoming_detail_bloc/incoming_detail_bloc.dart';
+import '../../../bloc/outgoing_detail_bloc/outgoing_detail_bloc.dart';
 import '../../../constants/export_constants.dart';
 import '../../../model/incoming_document.dart';
 import '../../../repositories/incoming_document_repository.dart';
+import '../../../repositories/outgoing_document_repository.dart';
 
-class ProcessingDocumentDetail extends StatefulWidget {
-  const ProcessingDocumentDetail({Key? key, required this.documentId})
+class OutgoingDocumentDetail extends StatefulWidget {
+  const OutgoingDocumentDetail({Key? key, required this.documentId})
       : super(key: key);
   final int documentId;
 
   @override
-  State<ProcessingDocumentDetail> createState() => _ProcessingDocumentDetailState();
+  State<OutgoingDocumentDetail> createState() => _OutgoingDocumentDetailState();
 }
 
-class _ProcessingDocumentDetailState extends State<ProcessingDocumentDetail> {
+class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => IncomingDetailBloc(
-            IncomingDocumentRepository(
-                "${UrlConst.DOC_SERVICE_URL}/incoming-documents"),
+        create: (context) => OutgoingDetailBloc(
+            OutgoingDocumentRepository(
+                "${UrlConst.DOC_SERVICE_URL}/outgoing-documents"),
             widget.documentId)
-          ..add(FetchIncomingDetailEvent()),
-        child: BlocBuilder<IncomingDetailBloc, IncomingDetailState>(
+          ..add(FetchOutgoingDetailEvent()),
+        child: BlocBuilder<OutgoingDetailBloc, OutgoingDetailState>(
             builder: (context, state) {
-          if (state is IncomingDetailLoadingState) {
+          if (state is OutgoingDetailLoadingState) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
-          if (state is IncomingDetailFailureState) {
+          if (state is OutgoingDetailFailureState) {
             return Scaffold(
                 appBar: AppBar(
                   title: Text(
-                    "Chi tiết văn bản đến",
+                    "Chi tiết văn bản ",
                     style: headLineSmall(context)
                         ?.copyWith(color: Colors.white, fontSize: 18),
                   ),
@@ -52,9 +56,9 @@ class _ProcessingDocumentDetailState extends State<ProcessingDocumentDetail> {
                     child: Text(state.responseException,
                         style: headLineSmall(context))));
           }
-          if (state is IncomingDetailSuccessState) {
-            IncomingDocument detailDocument = state.incomingDocumentDetail;
-            List<ProcessingDetail> processingDetail = state.processingDetail;
+          if (state is OutgoingDetailSuccessState) {
+            OutgoingDocument detailDocument = state.outgoingDocumentDetail;
+            // List<ProcessingDetail> processingDetail = state.processingDetail;
             return Scaffold(
               resizeToAvoidBottomInset: false,
               appBar: AppBar(
@@ -73,18 +77,18 @@ class _ProcessingDocumentDetailState extends State<ProcessingDocumentDetail> {
                     Container(
                         padding:
                             const EdgeInsets.all(StyleConst.defaultPadding16),
-                        child: DocumentTileDetail(
-                          incomingDocument: detailDocument,
+                        child: OutDocumentTileDetail(
+                          outgoingDocument: detailDocument,
                         )),
-                    DocumentAttachment(
-                      incomingDocument: detailDocument,
+                    const DocumentAttachment(
+                      incomingDocument: null,
                     ),
-                    Container(
-                        padding:
-                            const EdgeInsets.all(StyleConst.defaultPadding16),
-                        child: DocumentProgressDetail(
-                          processingDetail: processingDetail,
-                        )),
+                    // Container(
+                    //     padding:
+                    //         const EdgeInsets.all(StyleConst.defaultPadding16),
+                    //     child: DocumentProgressDetail(
+                    //       processingDetail: processingDetail,
+                    //     )),
                     Container(
                         padding:
                             const EdgeInsets.all(StyleConst.defaultPadding16),
