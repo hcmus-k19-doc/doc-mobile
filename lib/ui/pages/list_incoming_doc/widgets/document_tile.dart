@@ -31,7 +31,7 @@ class _DocumentTileState extends State<DocumentTile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "${widget.incomingDocument.originalSymbolNumber}",
+                "Số ký hiệu gốc: ${widget.incomingDocument.originalSymbolNumber}",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded ? Colors.blueAccent : Colors.black),
               ),

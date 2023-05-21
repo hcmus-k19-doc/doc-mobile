@@ -9,7 +9,7 @@ import 'package:flutter_app/ui/pages/change_pass/change_pass_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/check_your_mail_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/forgot_pass_screen.dart';
 import 'package:flutter_app/ui/pages/home/home_screen.dart';
-import 'package:flutter_app/ui/pages/incoming_document_detail/pdf_viewer_screen.dart';
+import 'package:flutter_app/ui/common_widgets/pdf_viewer_screen.dart';
 import 'package:flutter_app/ui/pages/login/login_screen.dart';
 import 'package:flutter_app/ui/pages/reminder_calendar/reminder_calendar_screem.dart';
 import 'package:flutter_app/ui/pages/settings/settings_screen.dart';

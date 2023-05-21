@@ -84,17 +84,17 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
                     top: StyleConst.defaultPadding8),
                 child: RichText(
                   text: TextSpan(
-                      style: bodyLarge(context)?.copyWith(fontSize: 20),
+                      style: bodyLarge(context)?.copyWith(fontSize: 18),
                       children: [
-                        TextSpan(text: "${numUnHandle} văn bản "),
+                        TextSpan(text: "$numUnHandle văn bản "),
                         const TextSpan(
                             text: "chưa xử lý\n",
                             style: TextStyle(color: Colors.green)),
-                        TextSpan(text: "${numCoopHandle} văn bản "),
+                        TextSpan(text: "$numCoopHandle văn bản "),
                         const TextSpan(
                             text: "cần phối hợp xử lý\n",
                             style: TextStyle(color: Colors.cyan)),
-                        TextSpan(text: "${numExpired} văn bản "),
+                        TextSpan(text: "$numExpired văn bản "),
                         const TextSpan(
                             text: "quá hạn\n",
                             style: TextStyle(color: Colors.red)),

@@ -25,6 +25,12 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
     'SCHOOL':'Trường',
   };
 
+  Map<String, String> statusLevel = {
+    'IN_PROGRESS': 'Đang xử lý',
+    'RELEASED': 'Đã phát hành',
+    'UNPROCESSED':'Chưa xử lý'
+  };
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -68,7 +74,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Expanded(
                         child: Text(
                           "Số theo sổ VB:",
-                          style: bodyLarge(context),
+                          style: bodyLargeBold(context),
                         )),
                     Flexible(
                         flex: 2,
@@ -87,7 +93,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Expanded(
                         child: Text(
                           "Số ký hiệu gốc:",
-                          style: bodyLarge(context),
+                          style: bodyLargeBold(context),
                         )),
                     Flexible(
                         flex: 2,
@@ -106,7 +112,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Expanded(
                         child: Text(
                           "Loại văn bản:",
-                          style: bodyLarge(context),
+                          style: bodyLargeBold(context),
                         )),
                     Flexible(
                         flex: 2,
@@ -125,7 +131,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Expanded(
                         child: Text(
                       "Ngày đến:",
-                      style: bodyLarge(context),
+                      style: bodyLargeBold(context),
                     )),
                     Flexible(
                       flex: 2,
@@ -145,7 +151,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Expanded(
                         child: Text(
                           "Ngày phát hành:",
-                          style: bodyLarge(context),
+                          style: bodyLargeBold(context),
                         )),
                     Flexible(
                       flex: 2,
@@ -165,7 +171,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Expanded(
                         child: Text(
                           "Cấp gửi:",
-                          style: bodyLarge(context),
+                          style: bodyLargeBold(context),
                         )),
                     Flexible(
                         flex: 2,
@@ -184,7 +190,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Expanded(
                         child: Text(
                       "Nơi phát hành:",
-                      style: bodyLarge(context),
+                      style: bodyLargeBold(context),
                     )),
                     Flexible(
                         flex: 2,
@@ -201,7 +207,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Expanded(
                         child: Text(
                       "Trích yếu",
-                      style: bodyLarge(context),
+                      style: bodyLargeBold(context),
                     )),
                     Flexible(
                       flex: 2,
@@ -221,7 +227,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Expanded(
                         child: Text(
                           "Hồ sơ công việc:",
-                          style: bodyLarge(context),
+                          style: bodyLargeBold(context),
                         )),
                     Flexible(
                       flex: 2,
@@ -241,7 +247,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Expanded(
                         child: Text(
                           "Độ mật:",
-                          style: bodyLarge(context),
+                          style: bodyLargeBold(context),
                         )),
                     Flexible(
                       flex: 2,
@@ -261,7 +267,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Expanded(
                         child: Text(
                           "Độ khẩn:",
-                          style: bodyLarge(context),
+                          style: bodyLargeBold(context),
                         )),
                     Flexible(
                       flex: 2,
@@ -281,12 +287,12 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Expanded(
                         child: Text(
                       "Trạng thái:",
-                      style: bodyLarge(context),
+                      style: bodyLargeBold(context),
                     )),
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.incomingDocument.status}",
+                          statusLevel[widget.incomingDocument.status]??"Không xác định",
                           style: bodyLarge(context),
                         ))
                   ],

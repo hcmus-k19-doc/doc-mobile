@@ -14,16 +14,16 @@ import '../../../constants/export_constants.dart';
 import '../../../model/incoming_document.dart';
 import '../../../repositories/incoming_document_repository.dart';
 
-class IncomingDocumentDetail extends StatefulWidget {
-  const IncomingDocumentDetail({Key? key, required this.documentId})
+class ProcessingDocumentDetail extends StatefulWidget {
+  const ProcessingDocumentDetail({Key? key, required this.documentId})
       : super(key: key);
   final int documentId;
 
   @override
-  State<IncomingDocumentDetail> createState() => _IncomingDocumentDetailState();
+  State<ProcessingDocumentDetail> createState() => _ProcessingDocumentDetailState();
 }
 
-class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
+class _ProcessingDocumentDetailState extends State<ProcessingDocumentDetail> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -89,11 +89,10 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                         padding:
                             const EdgeInsets.all(StyleConst.defaultPadding16),
                         child: Row(children: [
-                          if (detailDocument.status != "RELEASED")
                           Expanded(
                               child: CustomElevatedButton(
                             callback: () {
-                              onClickPublish();
+                              //TODO CALL API APPROVE
                             },
                             title: 'Phê duyệt',
                             radius: 15,
@@ -119,10 +118,6 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
           }
           return const Center(child: Text("Đã xảy ra lỗi không xác định"));
         }));
-  }
-
-  void onClickPublish() {
-
   }
 
   void onClickCommentButton(Size size) {
