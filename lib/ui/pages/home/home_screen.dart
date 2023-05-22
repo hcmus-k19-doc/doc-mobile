@@ -9,6 +9,7 @@ import 'package:flutter_app/model/search_criteria.dart';
 import 'package:flutter_app/repositories/incoming_document_repository.dart';
 import 'package:flutter_app/repositories/user_repository.dart';
 import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
+import 'package:flutter_app/ui/pages/account/account_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
 import 'package:flutter_app/ui/pages/profile/profile_screen.dart';
@@ -33,12 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
       child: const ListIncomingDocScreen(),
     ),
     const TestScreen(),
-    BlocProvider(
-      create: (context) =>
-          ProfileBloc(UserRepository("${UrlConst.DOC_SERVICE_URL}/users"))
-            ..add(FetchCurrentProfile()),
-      child: const ProfileScreen(),
-    )
+    const AccountScreen()
+  ];
+
+  List<String> listTitle = [
+    "INCOMING_DOCUMENT_LIST",
+    "OUTGOING_DOCUMENT",
+    "TEST",
   ];
 
   int _currentIndex = 0;
@@ -87,7 +89,19 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             ],
           ),
-          drawer: MenuDrawer(onNewDrawerIndex: setNewDrawerIndex),
+          // drawer: MenuDrawer(onNewDrawerIndex: setNewDrawerIndex),
+          bottomNavigationBar: BottomNavigationBar(
+            items: const [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home), label: "Văn bản đến"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.schedule), label: "Văn bản đi"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), label: "Tài khoản"),
+            ],
+            currentIndex: _currentIndex,
+            onTap: _onTapBottomNavigation,
+          ),
           body: PageView(
             physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
@@ -96,6 +110,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  _onTapBottomNavigation(int index) {
+    setState(() {
+      _currentIndex = index;
+      _title = appLocalizations.mainPage(listTitle[index]);
+      _pageController.jumpToPage(_currentIndex);
+    });
   }
 
   setNewDrawerIndex(int newIndex, String newTitile) {

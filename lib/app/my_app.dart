@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:flutter_app/repositories/auth_repository.dart';
+import 'package:flutter_app/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -50,8 +51,10 @@ class MyAppState extends State<MyApp> {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => AuthBloc(AuthRepository(
-                  "${UrlConst.DOC_SERVICE_URL}/security/auth/token"))),
+              create: (context) => AuthBloc(
+                  AuthRepository(
+                      "${UrlConst.DOC_SERVICE_URL}/security/auth/token"),
+                  UserRepository("${UrlConst.DOC_SERVICE_URL}/users"))),
         ],
         child: _buildMyApp(context),
         // )

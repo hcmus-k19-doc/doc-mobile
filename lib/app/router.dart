@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/change_pass/change_pass_bloc.dart';
 import 'package:flutter_app/bloc/document_reminder_bloc/document_reminder_bloc.dart';
+import 'package:flutter_app/bloc/profile_bloc/profile_bloc.dart';
 import 'package:flutter_app/constants/api_const.dart';
 import 'package:flutter_app/repositories/document_reminder_repository.dart';
 import 'package:flutter_app/repositories/user_repository.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_app/ui/pages/forgot_pass/forgot_pass_screen.dart';
 import 'package:flutter_app/ui/pages/home/home_screen.dart';
 import 'package:flutter_app/ui/common_widgets/pdf_viewer_screen.dart';
 import 'package:flutter_app/ui/pages/login/login_screen.dart';
+import 'package:flutter_app/ui/pages/profile/profile_screen.dart';
 import 'package:flutter_app/ui/pages/reminder_calendar/reminder_calendar_screem.dart';
 import 'package:flutter_app/ui/pages/settings/settings_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,6 +54,7 @@ class MyRouter {
   static const String changePassword = "/change-password";
   static const String incomingDocumentDetail = "/incomingDocumentDetail";
   static const String pdfViewer = "/pdfViewer";
+  static const String profile = "/profile";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var args = settings.arguments;
@@ -99,6 +102,14 @@ class MyRouter {
                   create: (context) => ChangePassBloc(
                       UserRepository("${UrlConst.DOC_SERVICE_URL}/users")),
                   child: ChangePasswordScreen(),
+                ));
+      case profile:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => ProfileBloc(
+                      UserRepository("${UrlConst.DOC_SERVICE_URL}/users"))
+                    ..add(FetchCurrentProfile()),
+                  child: const ProfileScreen(),
                 ));
       default:
         return errorRoute("No route-name founded");
