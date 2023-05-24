@@ -19,16 +19,19 @@ class ReminderCalendarScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: const [
-            BuildCalendar(),
-            SizedBox(height: StyleConst.defaultPadding8),
-            FilterReminder(),
-            Padding(
-              padding: EdgeInsets.all(StyleConst.defaultPadding12),
-              child: BuildListReminderTile(),
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(top: StyleConst.defaultPadding12),
+          child: Column(
+            children: const [
+              FilterReminder(),
+              BuildCalendar(),
+              SizedBox(height: StyleConst.defaultPadding8),
+              Padding(
+                padding: EdgeInsets.all(StyleConst.defaultPadding12),
+                child: BuildListReminderTile(),
+              )
+            ],
+          ),
         ),
       ),
     );

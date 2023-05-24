@@ -7,11 +7,11 @@ class TitleTextFieldWidget extends StatelessWidget {
       {Key? key,
       required this.title,
       required this.initialText,
-      required this.isTextFieldEnable})
+      required this.isTextReadOnly})
       : super(key: key);
   final String title;
   final String initialText;
-  final bool isTextFieldEnable;
+  final bool isTextReadOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class TitleTextFieldWidget extends StatelessWidget {
               .copyWith(color: Theme.of(context).primaryColor, fontSize: 16),
         ),
         TextFormField(
-          enabled: isTextFieldEnable,
+          readOnly: isTextReadOnly,
           controller: TextEditingController()..text = initialText,
           decoration: const InputDecoration(
               isDense: true,

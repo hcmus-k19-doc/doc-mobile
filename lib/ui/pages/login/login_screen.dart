@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                       //App name Text
                       Image.asset(
                         ImagesPath.logo,
-                        height: screenSize.height / 3,
+                        height: screenSize.height / 4,
                       ),
 
                       Text(AppLocalizations.of(context)!.loginTitle,
@@ -68,31 +68,33 @@ class LoginScreen extends StatelessWidget {
                                     passwordEditingController,
                               ),
 
-                              Container(
-                                alignment: Alignment.centerRight,
-                                child: TextButton(
-                                  style: ButtonStyle(
-                                    overlayColor: MaterialStateProperty
-                                        .resolveWith<Color>(
-                                      (Set<MaterialState> states) {
-                                        return Colors.transparent;
-                                      },
-                                    ),
-                                    splashFactory: NoSplash.splashFactory,
-                                  ),
-                                  child: Text(
-                                    "Forgot your password?",
-                                    style: bodyLarge(context)
-                                        ?.copyWith(color: Colors.blue),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, MyRouter.forgotPassword);
-                                  },
-                                ),
-                              ),
+                              // Container(
+                              //   alignment: Alignment.centerRight,
+                              //   child: TextButton(
+                              //     style: ButtonStyle(
+                              //       overlayColor: MaterialStateProperty
+                              //           .resolveWith<Color>(
+                              //         (Set<MaterialState> states) {
+                              //           return Colors.transparent;
+                              //         },
+                              //       ),
+                              //       splashFactory: NoSplash.splashFactory,
+                              //     ),
+                              //     child: Text(
+                              //       "Forgot your password?",
+                              //       style: bodyLarge(context)
+                              //           ?.copyWith(color: Colors.blue),
+                              //     ),
+                              //     onPressed: () {
+                              //       Navigator.pushNamed(
+                              //           context, MyRouter.forgotPassword);
+                              //     },
+                              //   ),
+                              // ),
                               //Sign in btn
-
+                              const SizedBox(
+                                height: StyleConst.defaultPadding20,
+                              ),
                               Visibility(
                                 visible: state is AuthError ? true : false,
                                 child: Text(
