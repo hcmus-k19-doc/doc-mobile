@@ -46,6 +46,7 @@ class _SearchModalState extends State<SearchModal> {
   DocumentType? searchDocTypeVal;
   DistributionOrg? searchDisOrgVal;
   SearchCriteria? searchCriteria = SearchCriteria();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -193,11 +194,15 @@ class _SearchModalState extends State<SearchModal> {
   }
 
   void selectDocumentType(DocumentType? tempDocumentType) {
-    searchDocTypeVal = tempDocumentType;
+    if (tempDocumentType?.id != -1) {
+      searchDocTypeVal = tempDocumentType;
+    }
   }
 
   void selectDistributionOrg(DistributionOrg? tempDistributionOrg) {
-    searchDisOrgVal = tempDistributionOrg;
+    if (tempDistributionOrg?.id != -1) {
+      searchDisOrgVal = tempDistributionOrg;
+    }
   }
 
   Future<void> pickDateRage(DateTimeRange? dateRange,

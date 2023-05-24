@@ -38,7 +38,7 @@ class ProfileScreen extends StatelessWidget {
                       TitleTextFieldWidget(
                         title: AppLocalizations.of(context)!.name,
                         initialText: state.currentProfile.fullName!,
-                        isTextFieldEnable: false,
+                        isTextReadOnly: true,
                       ),
                       const SizedBox(
                         height: StyleConst.defaultPadding16,
@@ -46,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
                       TitleTextFieldWidget(
                         title: AppLocalizations.of(context)!.username,
                         initialText: state.currentProfile.username!,
-                        isTextFieldEnable: false,
+                        isTextReadOnly: true,
                       ),
                       const SizedBox(
                         height: StyleConst.defaultPadding16,
@@ -54,7 +54,7 @@ class ProfileScreen extends StatelessWidget {
                       TitleTextFieldWidget(
                         title: "Email",
                         initialText: state.currentProfile.email!,
-                        isTextFieldEnable: false,
+                        isTextReadOnly: true,
                       ),
                       const SizedBox(
                         height: StyleConst.defaultPadding16,
@@ -62,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
                       TitleTextFieldWidget(
                         title: AppLocalizations.of(context)!.userID,
                         initialText: state.currentProfile.id.toString(),
-                        isTextFieldEnable: false,
+                        isTextReadOnly: true,
                       ),
                       const SizedBox(
                         height: StyleConst.defaultPadding16,
@@ -71,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
                         title: AppLocalizations.of(context)!.role,
                         initialText: AppLocalizations.of(context)!
                             .selectRoleProfile(state.currentProfile.role!),
-                        isTextFieldEnable: false,
+                        isTextReadOnly: true,
                       ),
                       const SizedBox(
                         height: StyleConst.defaultPadding16,
@@ -80,7 +80,7 @@ class ProfileScreen extends StatelessWidget {
                         title: AppLocalizations.of(context)!.department,
                         initialText:
                             state.currentProfile.department!.departmentName!,
-                        isTextFieldEnable: false,
+                        isTextReadOnly: true,
                       ),
                       const SizedBox(
                         height: StyleConst.defaultPadding24,
