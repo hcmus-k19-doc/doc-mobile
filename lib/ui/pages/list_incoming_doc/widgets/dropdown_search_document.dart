@@ -16,15 +16,24 @@ class DropdownSearchDocument extends StatelessWidget {
   final List<DocumentType> listSuggestion;
   final void Function(DocumentType?) onChanged;
   final String title;
+  DocumentType? selectedDoc;
+  GlobalKey<DropdownSearchState<DocumentType>> dropdownKey =
+      GlobalKey<DropdownSearchState<DocumentType>>();
 
   @override
   Widget build(BuildContext context) {
     return DropdownSearch<DocumentType>(
-      onChanged: onChanged,
-      clearButtonProps: const ClearButtonProps(
-          icon: Icon(Icons.cancel_outlined),
-          isVisible: true,
-          splashColor: Colors.transparent),
+      key: dropdownKey,
+      onChanged: (value) {
+        if (value?.id == -1) {
+          selectedDoc = null;
+          dropdownKey.currentState?.clear();
+        } else {
+          selectedDoc = value;
+        }
+        onChanged(selectedDoc);
+      },
+      selectedItem: selectedDoc,
       popupProps: const PopupProps.menu(
           fit: FlexFit.loose, showSearchBox: true, searchDelay: Duration.zero),
       itemAsString: (value) => value.type!,

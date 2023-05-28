@@ -6,7 +6,7 @@ import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/distrbution_org.dart';
 
 class DropdownSearchOrg extends StatelessWidget {
-  const DropdownSearchOrg(
+  DropdownSearchOrg(
       {Key? key,
       required this.listSuggestions,
       required this.onChanged,
@@ -15,14 +15,26 @@ class DropdownSearchOrg extends StatelessWidget {
   final List<DistributionOrg> listSuggestions;
   final void Function(DistributionOrg?) onChanged;
   final String title;
+  DistributionOrg? selectedOrg;
+  GlobalKey<DropdownSearchState<DistributionOrg>> dropdownKey =
+      GlobalKey<DropdownSearchState<DistributionOrg>>();
+
   @override
   Widget build(BuildContext context) {
     return DropdownSearch<DistributionOrg>(
-      onChanged: onChanged,
-      clearButtonProps: const ClearButtonProps(
-          icon: Icon(Icons.cancel_outlined),
-          isVisible: true,
-          splashColor: Colors.transparent),
+      key: dropdownKey,
+      onChanged: (value) {
+        if (value?.id == -1) {
+          selectedOrg = null;
+          dropdownKey.currentState?.clear();
+        } else {
+          selectedOrg = value;
+        }
+        print("selectedOrg is null ${selectedOrg == null}");
+
+        onChanged(selectedOrg);
+      },
+      selectedItem: selectedOrg,
       popupProps: const PopupProps.menu(
           fit: FlexFit.loose, showSearchBox: true, searchDelay: Duration.zero),
       itemAsString: (value) => value.name!,

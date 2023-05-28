@@ -26,99 +26,91 @@ class IncomingDocumentDetail extends StatefulWidget {
 class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => IncomingDetailBloc(
-            IncomingDocumentRepository(
-                "${UrlConst.DOC_SERVICE_URL}/incoming-documents"),
-            widget.documentId)
-          ..add(FetchIncomingDetailEvent()),
-        child: BlocBuilder<IncomingDetailBloc, IncomingDetailState>(
-            builder: (context, state) {
-          if (state is IncomingDetailLoadingState) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is IncomingDetailFailureState) {
-            return Scaffold(
-                appBar: AppBar(
-                  title: Text(
-                    "Chi tiết văn bản đến",
-                    style: headLineSmall(context)
-                        ?.copyWith(color: Colors.white, fontSize: 18),
-                  ),
-                ),
-                body: Center(
-                    child: Text(state.responseException,
-                        style: headLineSmall(context))));
-          }
-          if (state is IncomingDetailSuccessState) {
-            IncomingDocument detailDocument = state.incomingDocumentDetail;
-            List<ProcessingDetail> processingDetail = state.processingDetail;
-            return Scaffold(
-              resizeToAvoidBottomInset: false,
-              appBar: AppBar(
-                title: Text(
-                  "Chi tiết văn bản đến",
-                  style: headLineSmall(context)
-                      ?.copyWith(color: Colors.white, fontSize: 18),
-                ),
-              ),
-              body: SingleChildScrollView(
-                  child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                    Container(
-                        padding:
-                            const EdgeInsets.all(StyleConst.defaultPadding16),
-                        child: DocumentTileDetail(
-                          incomingDocument: detailDocument,
-                        )),
-                    DocumentAttachment(
-                      incomingDocument: detailDocument,
-                    ),
-                    Container(
-                        padding:
-                            const EdgeInsets.all(StyleConst.defaultPadding16),
-                        child: DocumentProgressDetail(
-                          processingDetail: processingDetail,
-                        )),
-                    Container(
-                        padding:
-                            const EdgeInsets.all(StyleConst.defaultPadding16),
-                        child: Row(children: [
-                          if (detailDocument.status != "RELEASED")
-                          Expanded(
-                              child: CustomElevatedButton(
-                            callback: () {
-                              onClickPublish();
-                            },
-                            title: 'Phê duyệt',
-                            radius: 15,
-                            buttonType: ButtonType.filledButton,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: ColorConst.white,
+        appBar: AppBar(
+          title: Text(
+            "Chi tiết văn bản đến",
+            style: headLineSmall(context)
+                ?.copyWith(color: Colors.white, fontSize: 18),
+          ),
+        ),
+        body: BlocProvider(
+          create: (context) => IncomingDetailBloc(
+              IncomingDocumentRepository(
+                  "${UrlConst.DOC_SERVICE_URL}/incoming-documents"),
+              widget.documentId)
+            ..add(FetchIncomingDetailEvent()),
+          child: BlocBuilder<IncomingDetailBloc, IncomingDetailState>(
+              builder: (context, state) {
+            if (state is IncomingDetailLoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is IncomingDetailFailureState) {
+              return Center(
+                      child: Text(state.responseException,
+                          style: headLineSmall(context)));
+            }
+            if (state is IncomingDetailSuccessState) {
+              IncomingDocument detailDocument = state.incomingDocumentDetail;
+              List<ProcessingDetail> processingDetail = state.processingDetail;
+              return SingleChildScrollView(
+                    child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                      Container(
+                          padding:
+                              const EdgeInsets.all(StyleConst.defaultPadding16),
+                          child: DocumentTileDetail(
+                            incomingDocument: detailDocument,
                           )),
-                          const SizedBox(
-                            width: 18,
-                          ),
-                          Expanded(
-                              child: CustomElevatedButton(
-                            callback: () {
-                              Size size = MediaQuery.of(context).size;
-                              onClickCommentButton(size);
-                            },
-                            title: 'Góp ý',
-                            radius: 15,
-                            buttonType: ButtonType.filledButton,
+                      DocumentAttachment(
+                        incomingDocument: detailDocument,
+                      ),
+                      Container(
+                          padding:
+                              const EdgeInsets.all(StyleConst.defaultPadding16),
+                          child: DocumentProgressDetail(
+                            processingDetail: processingDetail,
                           )),
-                        ])),
-                  ])),
-              backgroundColor: ColorConst.white,
-            );
-          }
-          return const Center(child: Text("Đã xảy ra lỗi không xác định"));
-        }));
+                      Container(
+                          padding:
+                              const EdgeInsets.all(StyleConst.defaultPadding16),
+                          child: Row(children: [
+                            if (detailDocument.status != "RELEASED")
+                            Expanded(
+                                child: CustomElevatedButton(
+                              callback: () {
+                                onClickPublish();
+                              },
+                              title: 'Phê duyệt',
+                              radius: 15,
+                              buttonType: ButtonType.filledButton,
+                            )),
+                            const SizedBox(
+                              width: 18,
+                            ),
+                            Expanded(
+                                child: CustomElevatedButton(
+                              callback: () {
+                                Size size = MediaQuery.of(context).size;
+                                onClickCommentButton(size);
+                              },
+                              title: 'Góp ý',
+                              radius: 15,
+                              buttonType: ButtonType.filledButton,
+                            )),
+                          ])),
+                    ]));
+            }
+            return const Center(child: Text("Đã xảy ra lỗi không xác định"));
+          })),
+    );
   }
 
   void onClickPublish() {

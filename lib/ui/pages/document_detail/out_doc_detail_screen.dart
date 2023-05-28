@@ -30,98 +30,90 @@ class OutgoingDocumentDetail extends StatefulWidget {
 class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => OutgoingDetailBloc(
-            OutgoingDocumentRepository(
-                "${UrlConst.DOC_SERVICE_URL}/outgoing-documents"),
-            widget.documentId)
-          ..add(FetchOutgoingDetailEvent()),
-        child: BlocBuilder<OutgoingDetailBloc, OutgoingDetailState>(
-            builder: (context, state) {
-          if (state is OutgoingDetailLoadingState) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is OutgoingDetailFailureState) {
-            return Scaffold(
-                appBar: AppBar(
-                  title: Text(
-                    "Chi tiết văn bản ",
-                    style: headLineSmall(context)
-                        ?.copyWith(color: Colors.white, fontSize: 18),
-                  ),
-                ),
-                body: Center(
-                    child: Text(state.responseException,
-                        style: headLineSmall(context))));
-          }
-          if (state is OutgoingDetailSuccessState) {
-            OutgoingDocument detailDocument = state.outgoingDocumentDetail;
-            // List<ProcessingDetail> processingDetail = state.processingDetail;
-            return Scaffold(
-              resizeToAvoidBottomInset: false,
-              appBar: AppBar(
-                title: Text(
-                  "Chi tiết văn bản đến",
-                  style: headLineSmall(context)
-                      ?.copyWith(color: Colors.white, fontSize: 18),
-                ),
-              ),
-              body: SingleChildScrollView(
-                  child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                    Container(
-                        padding:
-                            const EdgeInsets.all(StyleConst.defaultPadding16),
-                        child: OutDocumentTileDetail(
-                          outgoingDocument: detailDocument,
-                        )),
-                    const DocumentAttachment(
-                      incomingDocument: null,
-                    ),
-                    // Container(
-                    //     padding:
-                    //         const EdgeInsets.all(StyleConst.defaultPadding16),
-                    //     child: DocumentProgressDetail(
-                    //       processingDetail: processingDetail,
-                    //     )),
-                    Container(
-                        padding:
-                            const EdgeInsets.all(StyleConst.defaultPadding16),
-                        child: Row(children: [
-                          Expanded(
-                              child: CustomElevatedButton(
-                            callback: () {
-                              //TODO CALL API APPROVE
-                            },
-                            title: 'Phê duyệt',
-                            radius: 15,
-                            buttonType: ButtonType.filledButton,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: ColorConst.white,
+        appBar: AppBar(
+          title: Text(
+            "Chi tiết văn bản ",
+            style: headLineSmall(context)
+                ?.copyWith(color: Colors.white, fontSize: 18),
+          ),
+        ),
+        body: BlocProvider(
+          create: (context) => OutgoingDetailBloc(
+              OutgoingDocumentRepository(
+                  "${UrlConst.DOC_SERVICE_URL}/outgoing-documents"),
+              widget.documentId)
+            ..add(FetchOutgoingDetailEvent()),
+          child: BlocBuilder<OutgoingDetailBloc, OutgoingDetailState>(
+              builder: (context, state) {
+            if (state is OutgoingDetailLoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is OutgoingDetailFailureState) {
+              return Center(
+                      child: Text(state.responseException,
+                          style: headLineSmall(context)));
+            }
+            if (state is OutgoingDetailSuccessState) {
+              OutgoingDocument detailDocument = state.outgoingDocumentDetail;
+              // List<ProcessingDetail> processingDetail = state.processingDetail;
+              return SingleChildScrollView(
+                    child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                      Container(
+                          padding:
+                              const EdgeInsets.all(StyleConst.defaultPadding16),
+                          child: OutDocumentTileDetail(
+                            outgoingDocument: detailDocument,
                           )),
-                          const SizedBox(
-                            width: 18,
-                          ),
-                          Expanded(
-                              child: CustomElevatedButton(
-                            callback: () {
-                              Size size = MediaQuery.of(context).size;
-                              onClickCommentButton(size);
-                            },
-                            title: 'Góp ý',
-                            radius: 15,
-                            buttonType: ButtonType.filledButton,
-                          )),
-                        ])),
-                  ])),
-              backgroundColor: ColorConst.white,
-            );
-          }
-          return const Center(child: Text("Đã xảy ra lỗi không xác định"));
-        }));
+                      const DocumentAttachment(
+                        incomingDocument: null,
+                      ),
+                      // Container(
+                      //     padding:
+                      //         const EdgeInsets.all(StyleConst.defaultPadding16),
+                      //     child: DocumentProgressDetail(
+                      //       processingDetail: processingDetail,
+                      //     )),
+                      Container(
+                          padding:
+                              const EdgeInsets.all(StyleConst.defaultPadding16),
+                          child: Row(children: [
+                            Expanded(
+                                child: CustomElevatedButton(
+                              callback: () {
+                                //TODO CALL API APPROVE
+                              },
+                              title: 'Phê duyệt',
+                              radius: 15,
+                              buttonType: ButtonType.filledButton,
+                            )),
+                            const SizedBox(
+                              width: 18,
+                            ),
+                            Expanded(
+                                child: CustomElevatedButton(
+                              callback: () {
+                                Size size = MediaQuery.of(context).size;
+                                onClickCommentButton(size);
+                              },
+                              title: 'Góp ý',
+                              radius: 15,
+                              buttonType: ButtonType.filledButton,
+                            )),
+                          ])),
+                    ]));
+            }
+            return const Center(child: Text("Đã xảy ra lỗi không xác định"));
+          })),
+    );
   }
 
   void onClickCommentButton(Size size) {
