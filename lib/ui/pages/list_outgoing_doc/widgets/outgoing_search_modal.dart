@@ -1,43 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
+import 'package:flutter_app/bloc/list_outgoing_bloc/list_outgoing_bloc.dart';
 import 'package:flutter_app/bloc/suggestion_bloc/suggestion_bloc.dart';
-import 'package:flutter_app/constants/export_constants.dart';
+import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/distrbution_org.dart';
 import 'package:flutter_app/model/document_type.dart';
+import 'package:flutter_app/model/outgoing_search_criteria.dart';
 import 'package:flutter_app/model/search_criteria.dart';
 import 'package:flutter_app/ui/common_widgets/dropdown_search_document.dart';
 import 'package:flutter_app/ui/common_widgets/dropdown_search_org.dart';
 import 'package:flutter_app/ui/common_widgets/search_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
-class SearchModal extends StatefulWidget {
-  const SearchModal({Key? key}) : super(key: key);
+class OutgoingSearchModal extends StatefulWidget {
+  const OutgoingSearchModal({Key? key}) : super(key: key);
 
   @override
-  State<SearchModal> createState() => _SearchModalState();
+  State<OutgoingSearchModal> createState() => _OutgoingSearchModalState();
 }
 
-class _SearchModalState extends State<SearchModal> {
-  final TextEditingController incomingNumberController =
+class _OutgoingSearchModalState extends State<OutgoingSearchModal> {
+  final TextEditingController outgoingNumberController =
       TextEditingController();
 
   final TextEditingController documentTypeController = TextEditingController();
 
-  DateTimeRange? arrivingDateRange;
-  final TextEditingController arrivingDateRangeController =
+  DateTimeRange? releaseDateRange;
+  final TextEditingController releaseDateRangeController =
       TextEditingController();
 
   final TextEditingController originalSymbolNumberController =
-      TextEditingController();
-
-  final TextEditingController distributionOrgController =
-      TextEditingController();
-
-  DateTimeRange? processingDateRange;
-  final TextEditingController processingDateController =
       TextEditingController();
 
   final TextEditingController summaryController = TextEditingController();
@@ -45,7 +39,7 @@ class _SearchModalState extends State<SearchModal> {
   late SuggestionBloc suggestionBloc;
   DocumentType? searchDocTypeVal;
   DistributionOrg? searchDisOrgVal;
-  SearchCriteria? searchCriteria = SearchCriteria();
+  OutgoingSearchCriteria? outgoingSearchCriteria = OutgoingSearchCriteria();
 
   @override
   void initState() {
@@ -83,8 +77,8 @@ class _SearchModalState extends State<SearchModal> {
                   ),
                   SearchTextField(
                     title: AppLocalizations.of(context)!
-                        .searchCriteriaBar("incoming_number"),
-                    textController: incomingNumberController,
+                        .searchCriteriaBar("outgoing_number"),
+                    textController: outgoingNumberController,
                   ),
                   const SizedBox(
                     height: StyleConst.defaultPadding24,
@@ -101,12 +95,12 @@ class _SearchModalState extends State<SearchModal> {
                   ),
                   SearchTextField(
                     title: AppLocalizations.of(context)!
-                        .searchCriteriaBar("arriving_date"),
+                        .searchCriteriaBar("release_date"),
                     readOnly: true,
                     trailingIcon: Icons.calendar_month,
-                    textController: arrivingDateRangeController,
+                    textController: releaseDateRangeController,
                     onPressTrailingIcon: () => pickDateRage(
-                        arrivingDateRange, arrivingDateRangeController, true),
+                        releaseDateRange, releaseDateRangeController),
                   ),
                   const SizedBox(
                     height: StyleConst.defaultPadding24,
@@ -115,28 +109,6 @@ class _SearchModalState extends State<SearchModal> {
                     title: AppLocalizations.of(context)!
                         .searchCriteriaBar("original_symbol_number"),
                     textController: originalSymbolNumberController,
-                  ),
-                  const SizedBox(
-                    height: StyleConst.defaultPadding24,
-                  ),
-                  DropdownSearchOrg(
-                    title: AppLocalizations.of(context)!
-                        .searchCriteriaBar("distribution_organization"),
-                    onChanged: selectDistributionOrg,
-                    listSuggestions:
-                        state is SuggestionEmit ? state.distributionOrgs : [],
-                  ),
-                  const SizedBox(
-                    height: StyleConst.defaultPadding24,
-                  ),
-                  SearchTextField(
-                    title: AppLocalizations.of(context)!
-                        .searchCriteriaBar("processing_duration"),
-                    readOnly: true,
-                    trailingIcon: Icons.calendar_month,
-                    textController: processingDateController,
-                    onPressTrailingIcon: () => pickDateRage(
-                        processingDateRange, processingDateController, false),
                   ),
                   const SizedBox(
                     height: StyleConst.defaultPadding24,
@@ -156,8 +128,8 @@ class _SearchModalState extends State<SearchModal> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              StyleConst.defaultRadius15), // <-- Radius
+                          borderRadius:
+                              BorderRadius.circular(StyleConst.defaultRadius15),
                         ),
                         padding: const EdgeInsets.symmetric(
                             horizontal:
@@ -205,8 +177,8 @@ class _SearchModalState extends State<SearchModal> {
     }
   }
 
-  Future<void> pickDateRage(DateTimeRange? dateRange,
-      TextEditingController dateController, bool isArriving) async {
+  Future<void> pickDateRage(
+      DateTimeRange? dateRange, TextEditingController dateController) async {
     dateRange = await showDateRangePicker(
         locale: const Locale('en', 'IN'),
         fieldStartHintText: "dd/MM/yyyy",
@@ -216,17 +188,10 @@ class _SearchModalState extends State<SearchModal> {
         firstDate: DateTime(1900),
         lastDate: DateTime(2100));
     if (dateRange == null) return;
-    if (isArriving) {
-      searchCriteria?.arrivingDateFrom =
-          DateFormat('dd-MM-yyyy').format(dateRange.start);
-      searchCriteria?.arrivingDateTo =
-          DateFormat('dd-MM-yyyy').format(dateRange.end);
-    } else {
-      searchCriteria?.processingDurationFrom =
-          DateFormat('dd-MM-yyyy').format(dateRange.start);
-      searchCriteria?.processingDurationTo =
-          DateFormat('dd-MM-yyyy').format(dateRange.end);
-    }
+    outgoingSearchCriteria?.releaseDateFrom =
+        DateFormat('dd-MM-yyyy').format(dateRange.start);
+    outgoingSearchCriteria?.releaseDateTo =
+        DateFormat('dd-MM-yyyy').format(dateRange.end);
     setState(() {
       dateController.text =
           "${DateFormat('dd/MM/yyyy').format(dateRange!.start)} - ${DateFormat('dd/MM/yyyy').format(dateRange!.end)} ";
@@ -234,17 +199,16 @@ class _SearchModalState extends State<SearchModal> {
   }
 
   void startSearching() {
-    searchCriteria?.incomingNumber = incomingNumberController.text;
+    outgoingSearchCriteria?.outgoingNumber = outgoingNumberController.text;
 
-    searchCriteria?.originalSymbolNumber = originalSymbolNumberController.text;
+    outgoingSearchCriteria?.originalSymbolNumber =
+        originalSymbolNumberController.text;
 
-    searchCriteria?.summary = summaryController.text;
+    outgoingSearchCriteria?.summary = summaryController.text;
 
-    searchCriteria?.documentTypeId = searchDocTypeVal?.id;
+    outgoingSearchCriteria?.documentTypeId = searchDocTypeVal?.id;
 
-    searchCriteria?.distributionOrgId = searchDisOrgVal?.id;
-
-    BlocProvider.of<ListIncomingBloc>(context)
-        .add(FilterIncomingListDocumentEvent(searchCriteria));
+    BlocProvider.of<ListOutgoingBloc>(context)
+        .add(FilterOutgoingListDocumentEvent(outgoingSearchCriteria));
   }
 }

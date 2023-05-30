@@ -1,47 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
+import 'package:flutter_app/bloc/list_outgoing_bloc/list_outgoing_bloc.dart';
 import 'package:flutter_app/constants/style_const.dart';
-import 'package:flutter_app/ui/pages/list_incoming_doc/widgets/document_tile.dart';
+import 'package:flutter_app/ui/pages/list_outgoing_doc/widgets/outgoing_document_tile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BuildListIncomingDocument extends StatefulWidget {
-  const BuildListIncomingDocument({Key? key}) : super(key: key);
+class BuildListOutgoingDocument extends StatefulWidget {
+  const BuildListOutgoingDocument({Key? key}) : super(key: key);
 
   @override
-  State<BuildListIncomingDocument> createState() =>
-      _BuildListIncomingDocumentState();
+  State<BuildListOutgoingDocument> createState() =>
+      _BuildListOutgoingDocumentState();
 }
 
-class _BuildListIncomingDocumentState extends State<BuildListIncomingDocument> {
-  late ListIncomingBloc listIncomingBloc;
+class _BuildListOutgoingDocumentState extends State<BuildListOutgoingDocument> {
+  late ListOutgoingBloc listOutgoingBloc;
   int currentPage = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    listIncomingBloc = BlocProvider.of<ListIncomingBloc>(context);
+    listOutgoingBloc = BlocProvider.of<ListOutgoingBloc>(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ListIncomingBloc, ListIncomingState>(
-        bloc: listIncomingBloc,
+    return BlocConsumer<ListOutgoingBloc, ListOutgoingState>(
+        bloc: listOutgoingBloc,
         listener: (context, state) {
-          if (state is ListIncomingInitial) {
+          if (state is ListOutgoingInitial) {
             currentPage = 0;
           }
         },
         builder: (context, state) {
-          if (state is ListIncomingLoading) {
+          if (state is ListOutgoingLoading) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (state is ListIncomingSuccess) {
+          if (state is ListOutgoingSuccess) {
             return Column(
-              children: listIncomingBloc.listIncomingDocument
+              children: listOutgoingBloc.listOutgoingDocument
                   .map((e) => Column(
                         children: [
-                          DocumentTile(incomingDocument: e),
+                          OutgoingDocumentTile(outgoingDocument: e),
                           const SizedBox(
                             height: StyleConst.defaultPadding8,
                           )
@@ -50,13 +50,13 @@ class _BuildListIncomingDocumentState extends State<BuildListIncomingDocument> {
                   .toList(),
             );
           }
-          if (state is ListIncomingFetchMore) {
+          if (state is ListOutgoingFetchMore) {
             return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ...listIncomingBloc.listIncomingDocument.map((e) => Column(
+                  ...listOutgoingBloc.listOutgoingDocument.map((e) => Column(
                         children: [
-                          DocumentTile(incomingDocument: e),
+                          OutgoingDocumentTile(outgoingDocument: e),
                           const SizedBox(
                             height: StyleConst.defaultPadding8,
                           )
@@ -65,11 +65,11 @@ class _BuildListIncomingDocumentState extends State<BuildListIncomingDocument> {
                   const CircularProgressIndicator(),
                 ]);
           }
-          if (state is ListIncomingEmpty) {
+          if (state is ListOutgoingEmpty) {
             return Column(children: [
-              ...listIncomingBloc.listIncomingDocument.map((e) => Column(
+              ...listOutgoingBloc.listOutgoingDocument.map((e) => Column(
                     children: [
-                      DocumentTile(incomingDocument: e),
+                      OutgoingDocumentTile(outgoingDocument: e),
                       const SizedBox(
                         height: StyleConst.defaultPadding8,
                       )
@@ -78,7 +78,7 @@ class _BuildListIncomingDocumentState extends State<BuildListIncomingDocument> {
               Text("No data"),
             ]);
           }
-          if (state is ListIncomingFailure) {
+          if (state is ListOutgoingFailure) {
             return const Text("Xảy ra lỗi trong lúc lấy dữ liệu");
           }
           return const SizedBox();

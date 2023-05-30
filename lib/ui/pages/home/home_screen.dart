@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
+import 'package:flutter_app/bloc/list_outgoing_bloc/list_outgoing_bloc.dart';
 import 'package:flutter_app/bloc/profile_bloc/profile_bloc.dart';
 import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/model/outgoing_search_criteria.dart';
 import 'package:flutter_app/model/search_criteria.dart';
 import 'package:flutter_app/repositories/incoming_document_repository.dart';
+import 'package:flutter_app/repositories/outgoing_document_reposiroty.dart';
 import 'package:flutter_app/repositories/user_repository.dart';
 import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
 import 'package:flutter_app/ui/pages/account/account_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
+import 'package:flutter_app/ui/pages/list_outgoing_doc/list_outgoing_doc_screen.dart';
 import 'package:flutter_app/ui/pages/profile/profile_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -33,7 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
           SearchCriteria()),
       child: const ListIncomingDocScreen(),
     ),
-    const TestScreen(),
+    BlocProvider(
+      create: (_) => ListOutgoingBloc(
+          OutgoingDocumentRepository(
+              "${UrlConst.DOC_SERVICE_URL}/outgoing-documents"),
+          OutgoingSearchCriteria()),
+      child: const ListOutgoingDocScreen(),
+    ),
     const AccountScreen()
   ];
 
