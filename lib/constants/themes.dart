@@ -39,7 +39,7 @@ ColorScheme darkTheme() {
 }
 
 class SettingsProvider extends ChangeNotifier {
-  Locale _locale = const Locale("en", "US");
+  Locale _locale = const Locale("vi", "VN");
 
   Locale get locale => _locale;
 

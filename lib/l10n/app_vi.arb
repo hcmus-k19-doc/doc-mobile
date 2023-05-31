@@ -53,7 +53,6 @@
 			}
 		}
 	},
-	"logout": "Đăng xuất",
 	"name": "Tên",
 	"userID": "ID người dùng",
 	"role": "Vai trò",
@@ -70,6 +69,7 @@
 	"currentPassword": "Mật khẩu hiện tại",
 	"newPassword": "Mật khẩu mới",
 	"confirmNewPassword": "Xác nhận mật khẩu mới",
+
 	"language": "Ngôn ngữ",
 	"application": "Ứng dụng",
 	"contactForSupport": "Hỗ trợ liên lạc",
@@ -81,5 +81,10 @@
 	"lightMode": "Nền sáng",
 	"darkMode": "Nền tối",
 	"version": "Phiên bản",
-	"themeMode": "Chế độ nền"
+	"themeMode": "Chế độ nền",
+
+	"confirmLogout": "Bạn có muốn đăng xuất?",
+	"logout": "Đăng xuất",
+	"no": "Huỷ bỏ",
+	"yes": "Đồng ý"
 }

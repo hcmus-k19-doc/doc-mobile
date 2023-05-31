@@ -3,6 +3,8 @@
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   },
+
+
   "language": "Language",
   "application": "Application",
   "contactForSupport": "Contact for support",
@@ -13,5 +15,10 @@
   "english": "English",
   "lightMode": "Light mode",
   "version": "Version",
-  "themeMode": "Theme mode"
+  "themeMode": "Theme mode",
+
+  "confirmLogout": "Do you want to leave?",
+  "logout": "Logout",
+  "no": "Cancel",
+  "yes": "Agree"
 }

@@ -26,6 +26,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
     if (!_hasLoadedMode) {
       _isLightMode = settingsProvider.themeMode == ThemeMode.light;
+      _isVietnamese = settingsProvider.locale.languageCode == "vi";
       _hasLoadedMode = true;
     }
 

@@ -49,8 +49,8 @@ class AccountScreen extends StatelessWidget {
         builder: (BuildContext context) {
           return ConfirmDialog(
             size: size,
-            content: "Bạn có muốn đăng xuất?",
-            title: 'Đăng xuất',
+            content: AppLocalizations.of(context)!.confirmLogout,
+            title: AppLocalizations.of(context)!.logout,
             onRightButton: () {
               BlocProvider.of<AuthBloc>(context).add(LogoutEvent());
               pushUntilLogin(context);
@@ -58,8 +58,8 @@ class AccountScreen extends StatelessWidget {
             onLeftButton: () {
               Navigator.of(context).pop();
             },
-            leftButton: 'Huỷ bỏ',
-            rightButton: 'Thoát',
+            leftButton: AppLocalizations.of(context)!.no,
+            rightButton: AppLocalizations.of(context)!.yes,
             hasLeftButton: true,
           );
         });
