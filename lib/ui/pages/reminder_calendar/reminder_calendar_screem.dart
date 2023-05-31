@@ -11,27 +11,19 @@ class ReminderCalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.mainPage("REMINDER"),
-          style: headLineSmall(context)?.copyWith(color: Colors.white),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: StyleConst.defaultPadding12),
-          child: Column(
-            children: const [
-              FilterReminder(),
-              BuildCalendar(),
-              SizedBox(height: StyleConst.defaultPadding8),
-              Padding(
-                padding: EdgeInsets.all(StyleConst.defaultPadding12),
-                child: BuildListReminderTile(),
-              )
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.only(top: StyleConst.defaultPadding12),
+        child: Column(
+          children: const [
+            FilterReminder(),
+            BuildCalendar(),
+            SizedBox(height: StyleConst.defaultPadding8),
+            Padding(
+              padding: EdgeInsets.all(StyleConst.defaultPadding12),
+              child: BuildListReminderTile(),
+            )
+          ],
         ),
       ),
     );
