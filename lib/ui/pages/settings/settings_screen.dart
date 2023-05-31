@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/export_constants.dart';
+import '../../../constants/themes.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -12,12 +15,19 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   bool _isLightMode = true;
   bool _isVietnamese = true;
+  bool _hasLoadedMode = false;
   final List<bool> _notifications = [true, true, false];
 
   @override
   Widget build(BuildContext context) {
     EdgeInsets tilePadding = const EdgeInsets.fromLTRB(0, 0, 2, 0);
     EdgeInsets childrenPadding = const EdgeInsets.fromLTRB(12, 0, 2, 0);
+    final settingsProvider = Provider.of<SettingsProvider>(context);
+
+    if (!_hasLoadedMode) {
+      _isLightMode = settingsProvider.themeMode == ThemeMode.light;
+      _hasLoadedMode = true;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -44,14 +54,15 @@ class _SettingScreenState extends State<SettingScreen> {
                     ExpansionTile(
                       initiallyExpanded: true,
                       title: Text(
-                        "Ứng dụng",
+                        AppLocalizations.of(context)!.application,
                         style: bodyLarge(context),
                       ),
                       tilePadding: tilePadding,
                       childrenPadding: childrenPadding,
                       children: <Widget>[
                         ListTile(
-                          title: Text("Lưu phiên đăng nhập",
+                          title: Text(
+                              AppLocalizations.of(context)!.saveLoginSession,
                               style: bodyLarge(context)),
                           contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           trailing: Switch(
@@ -67,7 +78,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                         ),
                         ListTile(
-                          title: Text("Nhận thông báo từ ứng dụng",
+                          title: Text(
+                              AppLocalizations.of(context)!.receiveInAppNoti,
                               style: bodyLarge(context)),
                           contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           trailing: Switch(
@@ -83,7 +95,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                         ),
                         ListTile(
-                          title: Text("Nhận thông báo qua Mail/SMS",
+                          title: Text(
+                              AppLocalizations.of(context)!.receiveEmail,
                               style: bodyLarge(context)),
                           contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           trailing: Switch(
@@ -103,14 +116,15 @@ class _SettingScreenState extends State<SettingScreen> {
                     ExpansionTile(
                       initiallyExpanded: true,
                       title: Text(
-                        "Ngôn ngữ",
+                        AppLocalizations.of(context)!.language,
                         style: bodyLarge(context),
                       ),
                       childrenPadding: childrenPadding,
                       tilePadding: tilePadding,
                       children: <Widget>[
                         ListTile(
-                          title: Text("Vietnamese", style: bodyLarge(context)),
+                          title: Text(AppLocalizations.of(context)!.vietnamese,
+                              style: bodyLarge(context)),
                           contentPadding: const EdgeInsets.fromLTRB(2, 0, 4, 0),
                           leading: Image.asset(
                             ImagesPath.vietnam,
@@ -125,11 +139,16 @@ class _SettingScreenState extends State<SettingScreen> {
                           onTap: () {
                             setState(() {
                               _isVietnamese = true;
+                              if (settingsProvider.locale.languageCode !=
+                                  "vi") {
+                                settingsProvider.setLocale(const Locale("vi"));
+                              }
                             });
                           },
                         ),
                         ListTile(
-                          title: Text("English", style: bodyLarge(context)),
+                          title: Text(AppLocalizations.of(context)!.english,
+                              style: bodyLarge(context)),
                           contentPadding: const EdgeInsets.fromLTRB(2, 0, 4, 0),
                           leading: Image.asset(
                             ImagesPath.english,
@@ -147,6 +166,10 @@ class _SettingScreenState extends State<SettingScreen> {
                           onTap: () {
                             setState(() {
                               _isVietnamese = false;
+                              if (settingsProvider.locale.languageCode ==
+                                  "vi") {
+                                settingsProvider.setLocale(const Locale("en"));
+                              }
                             });
                           },
                         ),
@@ -155,14 +178,15 @@ class _SettingScreenState extends State<SettingScreen> {
                     ExpansionTile(
                       initiallyExpanded: true,
                       title: Text(
-                        "Chế độ nền",
+                        AppLocalizations.of(context)!.themeMode,
                         style: bodyLarge(context),
                       ),
                       childrenPadding: childrenPadding,
                       tilePadding: tilePadding,
                       children: <Widget>[
                         ListTile(
-                          title: Text("Nền sáng", style: bodyLarge(context)),
+                          title: Text(AppLocalizations.of(context)!.lightMode,
+                              style: bodyLarge(context)),
                           contentPadding: const EdgeInsets.fromLTRB(2, 0, 4, 0),
                           leading:
                               const Icon(Icons.sunny, color: Colors.yellow),
@@ -174,11 +198,13 @@ class _SettingScreenState extends State<SettingScreen> {
                           onTap: () {
                             setState(() {
                               _isLightMode = true;
+                              settingsProvider.toggleTheme(false);
                             });
                           },
                         ),
                         ListTile(
-                          title: Text("Nền tối", style: bodyLarge(context)),
+                          title: Text(AppLocalizations.of(context)!.darkMode,
+                              style: bodyLarge(context)),
                           contentPadding: const EdgeInsets.fromLTRB(2, 0, 4, 0),
                           leading: const Icon(
                             Icons.nights_stay,
@@ -195,6 +221,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           onTap: () {
                             setState(() {
                               _isLightMode = false;
+                              settingsProvider.toggleTheme(true);
                             });
                           },
                         ),
@@ -203,7 +230,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     ExpansionTile(
                       initiallyExpanded: true,
                       title: Text(
-                        "Hỗ trợ",
+                        AppLocalizations.of(context)!.contactForSupport,
                         style: bodyLarge(context),
                       ),
                       tilePadding: tilePadding,
@@ -233,7 +260,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     ExpansionTile(
                       initiallyExpanded: true,
                       title: Text(
-                        "Phiên bản ứng dụng",
+                        AppLocalizations.of(context)!.version,
                         style: bodyLarge(context),
                       ),
                       tilePadding: tilePadding,

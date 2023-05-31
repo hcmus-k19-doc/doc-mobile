@@ -69,5 +69,17 @@
 	"changePassword": "Thay đổi mật khẩu",
 	"currentPassword": "Mật khẩu hiện tại",
 	"newPassword": "Mật khẩu mới",
-	"confirmNewPassword": "Xác nhận mật khẩu mới"
+	"confirmNewPassword": "Xác nhận mật khẩu mới",
+	"language": "Ngôn ngữ",
+	"application": "Ứng dụng",
+	"contactForSupport": "Hỗ trợ liên lạc",
+	"receiveInAppNoti": "Nhận thông báo từ ứng dụng",
+	"receiveEmail": "Nhận thông báo qua email/SMS",
+	"saveLoginSession": "Lưu phiên đăng nhập",
+	"vietnamese": "Tiếng Việt",
+	"english": "Tiếng Anh",
+	"lightMode": "Nền sáng",
+	"darkMode": "Nền tối",
+	"version": "Phiên bản",
+	"themeMode": "Chế độ nền"
 }
