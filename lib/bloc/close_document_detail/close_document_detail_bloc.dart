@@ -1,4 +1,7 @@
 import 'package:flutter_app/bloc/incoming_detail_bloc/incoming_detail_bloc.dart';
+import 'dart:async';
+
+import 'package:bloc/bloc.dart';
 import 'package:flutter_app/repositories/incoming_document_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -12,6 +15,7 @@ class CloseDocumentDetailBloc extends Bloc<CloseDocumentDetailEvent, CloseDocume
   int documentId;
 
   CloseDocumentDetailBloc(this.incomingRepository, this.documentId) : super(IncomingDocumentClosing()) {
+
     on<CloseIncomingDetailEvent>((event, emit) async {
       emit(IncomingDocumentClosing());
       try {

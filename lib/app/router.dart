@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/change_pass/change_pass_bloc.dart';
 import 'package:flutter_app/bloc/document_reminder_bloc/document_reminder_bloc.dart';
@@ -6,17 +5,18 @@ import 'package:flutter_app/bloc/profile_bloc/profile_bloc.dart';
 import 'package:flutter_app/constants/api_const.dart';
 import 'package:flutter_app/repositories/document_reminder_repository.dart';
 import 'package:flutter_app/repositories/user_repository.dart';
+import 'package:flutter_app/ui/common_widgets/pdf_viewer_screen.dart';
 import 'package:flutter_app/ui/pages/change_pass/change_pass_screen.dart';
+import 'package:flutter_app/ui/pages/document_detail/out_doc_detail_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/check_your_mail_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/forgot_pass_screen.dart';
 import 'package:flutter_app/ui/pages/home/home_screen.dart';
-import 'package:flutter_app/ui/common_widgets/pdf_viewer_screen.dart';
 import 'package:flutter_app/ui/pages/login/login_screen.dart';
-import 'package:flutter_app/ui/pages/document_detail/out_doc_detail_screen.dart';
 import 'package:flutter_app/ui/pages/profile/profile_screen.dart';
 import 'package:flutter_app/ui/pages/reminder_calendar/reminder_calendar_screem.dart';
 import 'package:flutter_app/ui/pages/settings/settings_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../ui/pages/document_detail/inc_doc_detail_screen.dart';
 import '../ui/pages/splash/splash_screen.dart';
 
@@ -72,8 +72,8 @@ class MyRouter {
         if (args is DocumentDetailArgs) {
           return MaterialPageRoute(
               builder: (_) => OutgoingDocumentDetail(
-                documentId: args.documentId,
-              ));
+                    documentId: args.documentId,
+                  ));
         } else {
           return errorRoute("Wrong arguments for IncomingDocumentDetail");
         }

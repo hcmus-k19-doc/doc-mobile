@@ -4,7 +4,7 @@
 	"password": "Mật khẩu",
 	"loginSummitText": "Đăng nhập",
 	"failToLogin": "Xảy ra lỗi trong quá trình đăng nhập",
-	"mainPage": "{menu, select, LABEL{Văn bản đến} REMINDER{Nhắc việc} INCOMING_DOCUMENT_LIST{Danh sách văn bản đến} PROCESSES_INCOMING_DOCUMENT{Xử lý văn bản đến} OUTGOING_DOCUMENT{Văn bản đi} INTERNAL_DOCUMENT{Văn bản nội bộ} MY_PROFILE{Thông tin cá nhân} other{}}",
+	"mainPage": "{menu, select, LABEL{Văn bản đến} REMINDER{Nhắc việc} INCOMING_DOCUMENT_LIST{Danh sách văn bản đến} PROCESSES_INCOMING_DOCUMENT{Xử lý văn bản đến} OUTGOING_DOCUMENT{Văn bản đi} INTERNAL_DOCUMENT{Văn bản nội bộ} MY_PROFILE{Thông tin cá nhân} SETTINGS{Cài đặt} other{}}",
 	"@mainPage": {
 		"placeholders": {
 			"menu": {
@@ -53,7 +53,6 @@
 			}
 		}
 	},
-	"logout": "Đăng xuất",
 	"name": "Tên",
 	"userID": "ID người dùng",
 	"role": "Vai trò",
@@ -69,5 +68,23 @@
 	"changePassword": "Thay đổi mật khẩu",
 	"currentPassword": "Mật khẩu hiện tại",
 	"newPassword": "Mật khẩu mới",
-	"confirmNewPassword": "Xác nhận mật khẩu mới"
+	"confirmNewPassword": "Xác nhận mật khẩu mới",
+
+	"language": "Ngôn ngữ",
+	"application": "Ứng dụng",
+	"contactForSupport": "Hỗ trợ liên lạc",
+	"receiveInAppNoti": "Nhận thông báo từ ứng dụng",
+	"receiveEmail": "Nhận thông báo qua email/SMS",
+	"saveLoginSession": "Lưu phiên đăng nhập",
+	"vietnamese": "Tiếng Việt",
+	"english": "Tiếng Anh",
+	"lightMode": "Nền sáng",
+	"darkMode": "Nền tối",
+	"version": "Phiên bản",
+	"themeMode": "Chế độ nền",
+
+	"confirmLogout": "Bạn có muốn đăng xuất?",
+	"logout": "Đăng xuất",
+	"no": "Huỷ bỏ",
+	"yes": "Đồng ý"
 }

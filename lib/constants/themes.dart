@@ -38,13 +38,22 @@ ColorScheme darkTheme() {
   );
 }
 
-class ThemeManager with ChangeNotifier {
+class SettingsProvider extends ChangeNotifier {
+  Locale _locale = const Locale("vi", "VN");
+
+  Locale get locale => _locale;
+
   ThemeMode _themeMode = getDeviceThemeMode();
 
-  get themeMode => _themeMode;
+  ThemeMode get themeMode => _themeMode;
 
-  toggleTheme(bool isDark) {
+  void toggleTheme(bool isDark) {
     _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+    notifyListeners();
+  }
+
+  void setLocale(Locale locale) {
+    _locale = locale;
     notifyListeners();
   }
 }
