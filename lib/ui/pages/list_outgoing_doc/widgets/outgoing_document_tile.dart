@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/outgoing_document.dart';
@@ -185,7 +186,11 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
                       onPressed: () {
-                        print("Navigate to outgoing doc");
+                        Navigator.of(context).pushNamed(
+                            MyRouter.outgoingDocumentDetail,
+                            arguments: DocumentDetailArgs(
+                                documentId: widget.outgoingDocument.id ?? -1));
+
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor,
