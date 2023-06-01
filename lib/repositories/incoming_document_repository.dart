@@ -75,4 +75,14 @@ class IncomingDocumentRepository extends BaseRepository {
       rethrow;
     }
   }
+
+  Future<void> closeIncomingDocument(int id) async {
+    try {
+      final response = await provider.put(
+          url: "/close-document/$id", cancelToken: cancelToken);
+      return;
+    } catch (err) {
+      rethrow;
+    }
+  }
 }

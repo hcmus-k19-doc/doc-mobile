@@ -1,15 +1,10 @@
-part of 'close_document_detail.dart';
+part of 'close_document_detail_bloc.dart';
 
-abstract class IncomingDetailEvent extends Equatable {
-  const IncomingDetailEvent();
+abstract class CloseDocumentDetailEvent extends Equatable {
+  const CloseDocumentDetailEvent();
 }
 
-class FetchIncomingDetailEvent extends IncomingDetailEvent {
-  @override
-  List<Object?> get props => [];
-}
-
-class CloseIncomingDetailEvent extends IncomingDetailEvent {
+class CloseIncomingDetailEvent extends CloseDocumentDetailEvent {
   @override
   List<Object?> get props => [];
 }

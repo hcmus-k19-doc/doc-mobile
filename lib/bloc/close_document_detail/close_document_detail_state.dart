@@ -1,34 +1,22 @@
-part of 'close_document_detail.dart';
+part of 'close_document_detail_bloc.dart';
 
-abstract class IncomingDetailState extends Equatable {
-  const IncomingDetailState();
+abstract class CloseDocumentDetailState extends Equatable {
+  const CloseDocumentDetailState();
 
   @override
   List<Object?> get props => [];
 }
 
-class IncomingDetailLoadingState extends IncomingDetailState {}
-
-class IncomingDetailSuccessState extends IncomingDetailState {
-  final IncomingDocument incomingDocumentDetail;
-  final List<ProcessingDetail> processingDetail;
-
-  const IncomingDetailSuccessState(this.incomingDocumentDetail, this.processingDetail);
-
-  @override
-  List<Object?> get props => [incomingDocumentDetail];
-}
-
-class IncomingDetailFailureState extends IncomingDetailState {
-  final String responseException;
-
-  const IncomingDetailFailureState(this.responseException);
-}
-
-class IncomingDocumentClosing extends IncomingDetailState {}
-
-class IncomingDocumentClosed extends IncomingDetailState {
+class IncomingDocumentClosedSuccess extends CloseDocumentDetailState {
   final String result;
 
-  const IncomingDocumentClosed(this.result);
+  const IncomingDocumentClosedSuccess(this.result);
 }
+
+class IncomingDocumentClosedFail extends CloseDocumentDetailState {
+  final String result;
+
+  const IncomingDocumentClosedFail(this.result);
+}
+
+class IncomingDocumentClosing extends CloseDocumentDetailState {}

@@ -91,7 +91,7 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
                               callback: () {
                                 //TODO CALL API APPROVE
                               },
-                              title: 'Phê duyệt',
+                              title: 'Phát hành',
                               radius: 15,
                               buttonType: ButtonType.filledButton,
                             )),

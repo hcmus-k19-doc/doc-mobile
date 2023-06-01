@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
+import 'package:flutter_app/bloc/close_document_detail/close_document_detail_bloc.dart';
 import 'package:flutter_app/bloc/comment_bloc/comment_bloc.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/processing_detail.dart';
 import 'package:flutter_app/repositories/comment_repository.dart';
+import 'package:flutter_app/ui/common_widgets/confirm_dialog.dart';
 import 'package:flutter_app/ui/common_widgets/elevated_button.dart';
 import 'package:flutter_app/ui/pages/document_detail/widgets/document_attachments.dart';
 import 'package:flutter_app/ui/pages/document_detail/widgets/document_progress_detail.dart';
@@ -82,13 +85,13 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                           padding:
                               const EdgeInsets.all(StyleConst.defaultPadding16),
                           child: Row(children: [
-                            if (detailDocument.status != "RELEASED")
+                            if (detailDocument.status != "RELEASED" && isChuyenVien(context))
                             Expanded(
                                 child: CustomElevatedButton(
                               callback: () {
-                                onClickPublish();
+                                onClickPublish(context, MediaQuery.of(context).size);
                               },
-                              title: 'Phê duyệt',
+                              title: 'Kết thúc',
                               radius: 15,
                               buttonType: ButtonType.filledButton,
                             )),
@@ -113,8 +116,46 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
     );
   }
 
-  void onClickPublish() {
+  void onClickPublish(BuildContext context, Size size) {
+    CloseDocumentDetailBloc closeDocumentDetailBloc = CloseDocumentDetailBloc(
+        IncomingDocumentRepository("${UrlConst.DOC_SERVICE_URL}/incoming-documents"),
+        widget.documentId)..add(CloseIncomingDetailEvent());
 
+    showDialog(
+        context: context,
+        builder: (BuildContext context)
+    {
+      return BlocBuilder<CloseDocumentDetailBloc, CloseDocumentDetailState>(
+          bloc: closeDocumentDetailBloc,
+          builder: (context, state) {
+            if (state is IncomingDocumentClosing) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            else  {
+              String content = "Không xác định";
+              if (state is IncomingDocumentClosedFail) {
+                content = state.result;
+              } else if (state is IncomingDocumentClosedSuccess) {
+                content = state.result;
+              }
+              return  ConfirmDialog(
+                size: size,
+                content: content,
+                title: 'Kết thúc văn bản',
+                onRightButton: () {
+                  Navigator.of(context).pop();
+                },
+                onLeftButton: () {},
+                leftButton: '',
+                rightButton: 'Đóng',
+                hasLeftButton: false,
+              );
+            }
+          });
+    }
+    );
   }
 
   void onClickCommentButton(Size size) {
@@ -281,5 +322,14 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
         );
       },
     );
+  }
+
+  bool isChuyenVien(BuildContext context) {
+    AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
+    if (authBloc.profile?.role == "CHUYEN_VIEN") {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
