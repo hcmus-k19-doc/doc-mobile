@@ -9,6 +9,7 @@ import 'package:flutter_app/ui/pages/document_detail/widgets/document_attachment
 import 'package:flutter_app/ui/pages/document_detail/widgets/out_document_tile_detail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../bloc/auth_bloc/auth_bloc.dart';
 import '../../../bloc/outgoing_detail_bloc/outgoing_detail_bloc.dart';
 import '../../../constants/export_constants.dart';
 import '../../../repositories/outgoing_document_repository.dart';
@@ -69,20 +70,14 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
                       const DocumentAttachment(
                         incomingDocument: null,
                       ),
-                      // Container(
-                      //     padding:
-                      //         const EdgeInsets.all(StyleConst.defaultPadding16),
-                      //     child: DocumentProgressDetail(
-                      //       processingDetail: processingDetail,
-                      //     )),
                       Container(
                           padding:
                               const EdgeInsets.all(StyleConst.defaultPadding16),
                           child: Row(children: [
+                            if (detailDocument.status != "RELEASED" && isVanThu(context))
                             Expanded(
                                 child: CustomElevatedButton(
                               callback: () {
-                                //TODO CALL API APPROVE
                               },
                               title: 'Phát hành',
                               radius: 15,
@@ -128,5 +123,14 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
         return CommentBottomDialog(commentBloc: commentBloc, size: size);
       },
     );
+  }
+
+  bool isVanThu(BuildContext context) {
+    AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
+    if (authBloc.profile?.role == "VAN_THU") {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

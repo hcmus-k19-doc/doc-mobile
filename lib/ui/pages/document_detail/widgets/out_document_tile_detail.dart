@@ -80,7 +80,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.outgoingDocument.outgoingNumber}",
+                          widget.outgoingDocument.outgoingNumber??"Không xác định",
                           style: bodyLarge(context),
                         ))
                   ],
@@ -99,7 +99,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.outgoingDocument.originalSymbolNumber}",
+                          widget.outgoingDocument.originalSymbolNumber??"Không xác định",
                           style: bodyLarge(context),
                         ))
                   ],
@@ -118,7 +118,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.outgoingDocument.documentType?.type}",
+                          widget.outgoingDocument.documentType?.type??"Không xác định",
                           style: bodyLarge(context),
                         ))
                   ],
@@ -137,7 +137,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        "${widget.outgoingDocument.createdDate}",
+                        widget.outgoingDocument.createdDate??"Không xác định",
                         style: bodyLarge(context),
                       ),
                     )
@@ -157,7 +157,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        "${widget.outgoingDocument.releaseDate}",
+                        widget.outgoingDocument.releaseDate??"Không xác định",
                         style: bodyLarge(context),
                       ),
                     )
@@ -177,7 +177,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.outgoingDocument.publishingDepartment?.departmentName}",
+                          widget.outgoingDocument.publishingDepartment?.departmentName??"Không xác định",
                           style: bodyLarge(context),
                         ))
                   ],
@@ -196,7 +196,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.outgoingDocument.recipient}",
+                          widget.outgoingDocument.recipient??"Không xác định",
                           style: bodyLarge(context),
                         ))
                   ],
@@ -213,7 +213,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.outgoingDocument.signer}",
+                          widget.outgoingDocument.signer??"Không xác định",
                           style: bodyLarge(context),
                         ))
                   ],
@@ -230,7 +230,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        "${widget.outgoingDocument.summary}",
+                        widget.outgoingDocument.summary??"Không xác định",
                         style: bodyLarge(context),
                       ),
                     )
@@ -250,7 +250,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        "${widget.outgoingDocument.folder?.folderName}",
+                        widget.outgoingDocument.folder?.folderName??"Không xác định",
                         style: bodyLarge(context),
                       ),
                     )
