@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
+import 'package:flutter_app/bloc/document_reminder_bloc/document_reminder_bloc.dart';
 import 'package:flutter_app/bloc/list_incoming_bloc/list_incoming_bloc.dart';
+import 'package:flutter_app/bloc/list_outgoing_bloc/list_outgoing_bloc.dart';
 import 'package:flutter_app/bloc/profile_bloc/profile_bloc.dart';
 import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/model/outgoing_search_criteria.dart';
 import 'package:flutter_app/model/search_criteria.dart';
+import 'package:flutter_app/repositories/document_reminder_repository.dart';
 import 'package:flutter_app/repositories/incoming_document_repository.dart';
+import 'package:flutter_app/repositories/outgoing_document_reposiroty.dart';
 import 'package:flutter_app/repositories/user_repository.dart';
 import 'package:flutter_app/ui/common_widgets/menu_drawer.dart';
 import 'package:flutter_app/ui/pages/account/account_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/test_screen.dart';
+import 'package:flutter_app/ui/pages/list_outgoing_doc/list_outgoing_doc_screen.dart';
 import 'package:flutter_app/ui/pages/profile/profile_screen.dart';
+import 'package:flutter_app/ui/pages/reminder_calendar/reminder_calendar_screem.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:badges/badges.dart' as badges;
@@ -33,14 +40,26 @@ class _HomeScreenState extends State<HomeScreen> {
           SearchCriteria()),
       child: const ListIncomingDocScreen(),
     ),
-    const TestScreen(),
+    BlocProvider(
+      create: (_) => ListOutgoingBloc(
+          OutgoingDocumentRepository(
+              "${UrlConst.DOC_SERVICE_URL}/outgoing-documents"),
+          OutgoingSearchCriteria()),
+      child: const ListOutgoingDocScreen(),
+    ),
+    BlocProvider(
+        create: (BuildContext context) => DocumentReminderBloc(
+            DocumentReminderRepository(
+                "${UrlConst.DOC_SERVICE_URL}/document-reminders/current-user")),
+        child: const ReminderCalendarScreen()),
     const AccountScreen()
   ];
 
   List<String> listTitle = [
     "INCOMING_DOCUMENT_LIST",
     "OUTGOING_DOCUMENT",
-    "TEST",
+    "REMINDER",
+    "ACCOUNT",
   ];
 
   int _currentIndex = 0;
@@ -79,24 +98,19 @@ class _HomeScreenState extends State<HomeScreen> {
               _title,
               style: headLineSmall(context)?.copyWith(color: Colors.white),
             ),
-            actions: [
-              Center(
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, MyRouter.reminder);
-                    },
-                    icon: const Icon(Icons.notifications)),
-              )
-            ],
           ),
           // drawer: MenuDrawer(onNewDrawerIndex: setNewDrawerIndex),
           bottomNavigationBar: BottomNavigationBar(
-            items: const [
-              BottomNavigationBarItem(
+            type: BottomNavigationBarType.fixed,
+            items: [
+              const BottomNavigationBarItem(
                   icon: Icon(Icons.home), label: "Văn bản đến"),
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                   icon: Icon(Icons.schedule), label: "Văn bản đi"),
               BottomNavigationBarItem(
+                  icon: const Icon(Icons.notifications),
+                  label: appLocalizations.mainPage("REMINDER")),
+              const BottomNavigationBarItem(
                   icon: Icon(Icons.person), label: "Tài khoản"),
             ],
             currentIndex: _currentIndex,

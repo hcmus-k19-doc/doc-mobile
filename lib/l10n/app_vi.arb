@@ -4,7 +4,7 @@
 	"password": "Mật khẩu",
 	"loginSummitText": "Đăng nhập",
 	"failToLogin": "Xảy ra lỗi trong quá trình đăng nhập",
-	"mainPage": "{menu, select, LABEL{Văn bản đến} REMINDER{Nhắc việc} INCOMING_DOCUMENT_LIST{Danh sách văn bản đến} PROCESSES_INCOMING_DOCUMENT{Xử lý văn bản đến} OUTGOING_DOCUMENT{Văn bản đi} INTERNAL_DOCUMENT{Văn bản nội bộ} MY_PROFILE{Thông tin cá nhân} SETTINGS{Cài đặt} other{}}",
+	"mainPage": "{menu, select, LABEL{Văn bản đến} ACCOUNT{Tài khoản} REMINDER{Nhắc việc} INCOMING_DOCUMENT_LIST{Danh sách văn bản đến} PROCESSES_INCOMING_DOCUMENT{Xử lý văn bản đến} OUTGOING_DOCUMENT{Văn bản đi} INTERNAL_DOCUMENT{Văn bản nội bộ} MY_PROFILE{Thông tin cá nhân} SETTINGS{Cài đặt} OUTGOING_DOCUMENT_LIST{Danh sách văn bản đi} other{} other{}}",
 	"@mainPage": {
 		"placeholders": {
 			"menu": {
@@ -37,7 +37,7 @@
 			}
 		}
 	},
-	"searchCriteriaBar": "{searchCriteria, select, incoming_number{Số văn bản đến} original_symbol_number{Số ký hiệu gốc} document_type{Loại văn bản} distribution_organization{Cơ quan ban hành} arriving_date{Ngày đến} processing_duration{Thời hạn xử lý} summary{Trích yếu} search_summit{Tìm kiếm} other{}}",
+	"searchCriteriaBar": "{searchCriteria, select, incoming_number{Số văn bản đến} outgoing_number{Số văn bản đi} release_date{Ngày phát hành} original_symbol_number{Số ký hiệu gốc} document_type{Loại văn bản} distribution_organization{Cơ quan ban hành} arriving_date{Ngày đến} processing_duration{Thời hạn xử lý} summary{Trích yếu} search_summit{Tìm kiếm} other{}}",
 	"@searchCriteriaBar": {
 		"placeholders": {
 			"searchCriteria": {

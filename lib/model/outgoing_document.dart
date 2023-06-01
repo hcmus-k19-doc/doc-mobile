@@ -1,5 +1,6 @@
-import 'document_type.dart';
-import 'incoming_document.dart';
+import 'package:flutter_app/model/document_type.dart';
+import 'package:flutter_app/model/folder.dart';
+import 'package:flutter_app/model/publishing_department.dart';
 
 class OutgoingDocument {
   int? id;
@@ -18,24 +19,30 @@ class OutgoingDocument {
   String? releaseDate;
   PublishingDepartment? publishingDepartment;
   String? status;
+  List<String>? attachments;
+  bool? isDocTransferred;
+  bool? isDocCollaborator;
 
   OutgoingDocument(
       {this.id,
-        this.version,
-        this.createdDate,
-        this.createdBy,
-        this.outgoingNumber,
-        this.originalSymbolNumber,
-        this.recipient,
-        this.signer,
-        this.summary,
-        this.urgency,
-        this.confidentiality,
-        this.documentType,
-        this.folder,
-        this.releaseDate,
-        this.publishingDepartment,
-        this.status});
+      this.version,
+      this.createdDate,
+      this.createdBy,
+      this.outgoingNumber,
+      this.originalSymbolNumber,
+      this.recipient,
+      this.signer,
+      this.summary,
+      this.urgency,
+      this.confidentiality,
+      this.documentType,
+      this.folder,
+      this.releaseDate,
+      this.publishingDepartment,
+      this.status,
+      this.attachments,
+      this.isDocTransferred,
+      this.isDocCollaborator});
 
   OutgoingDocument.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -52,13 +59,16 @@ class OutgoingDocument {
     documentType = json['documentType'] != null
         ? DocumentType.fromJson(json['documentType'])
         : null;
-    folder =
-    json['folder'] != null ? Folder.fromJson(json['folder']) : null;
+    folder = json['folder'] != null ? Folder.fromJson(json['folder']) : null;
     releaseDate = json['releaseDate'];
     publishingDepartment = json['publishingDepartment'] != null
         ? PublishingDepartment.fromJson(json['publishingDepartment'])
         : null;
     status = json['status'];
+    attachments =
+        json["attachments"] != null ? json['attachments'].cast<String>() : null;
+    isDocTransferred = json['isDocTransferred'];
+    isDocCollaborator = json['isDocCollaborator'];
   }
 
   Map<String, dynamic> toJson() {
@@ -85,70 +95,9 @@ class OutgoingDocument {
       data['publishingDepartment'] = publishingDepartment!.toJson();
     }
     data['status'] = status;
-    return data;
-  }
-}
-
-class PublishingDepartment {
-  int? id;
-  int? version;
-  String? createdDate;
-  String? createdBy;
-  String? departmentName;
-  ManagerInfo? truongPhong;
-  String? description;
-
-  PublishingDepartment(
-      {this.id,
-        this.version,
-        this.createdDate,
-        this.createdBy,
-        this.departmentName,
-        this.truongPhong,
-        this.description});
-
-  PublishingDepartment.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    version = json['version'];
-    createdDate = json['createdDate'];
-    createdBy = json['createdBy'];
-    departmentName = json['departmentName'];
-    truongPhong = json['truongPhong'] != null
-        ? ManagerInfo.fromJson(json['truongPhong'])
-        : null;
-    description = json['description'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['version'] = version;
-    data['createdDate'] = createdDate;
-    data['createdBy'] = createdBy;
-    data['departmentName'] = departmentName;
-    if (truongPhong != null) {
-      data['truongPhong'] = truongPhong!.toJson();
-    }
-    data['description'] = description;
-    return data;
-  }
-}
-
-class ManagerInfo {
-  int? id;
-  String? fullName;
-
-  ManagerInfo({this.id, this.fullName});
-
-  ManagerInfo.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    fullName = json['fullName'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['fullName'] = fullName;
+    data['attachments'] = attachments;
+    data['isDocTransferred'] = isDocTransferred;
+    data['isDocCollaborator'] = isDocCollaborator;
     return data;
   }
 }
