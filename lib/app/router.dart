@@ -50,7 +50,6 @@ class MyRouter {
   static const String login = '/login';
   static const String forgotPassword = "/forgot-password";
   static const String checkYourMail = "/check-your-mail";
-  static const String reminder = "/reminder";
   static const String changePassword = "/change-password";
   static const String incomingDocumentDetail = "/incomingDocumentDetail";
   static const String pdfViewer = "/pdfViewer";
@@ -89,13 +88,6 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => const CheckYourMailScreen());
       case setting:
         return MaterialPageRoute(builder: (_) => const SettingScreen());
-      case reminder:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                create: (BuildContext context) => DocumentReminderBloc(
-                    DocumentReminderRepository(
-                        "${UrlConst.DOC_SERVICE_URL}/document-reminders/current-user")),
-                child: const ReminderCalendarScreen()));
       case changePassword:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
