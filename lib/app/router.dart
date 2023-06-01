@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/change_pass/change_pass_bloc.dart';
 import 'package:flutter_app/bloc/document_reminder_bloc/document_reminder_bloc.dart';
@@ -6,19 +5,19 @@ import 'package:flutter_app/bloc/profile_bloc/profile_bloc.dart';
 import 'package:flutter_app/constants/api_const.dart';
 import 'package:flutter_app/repositories/document_reminder_repository.dart';
 import 'package:flutter_app/repositories/user_repository.dart';
+import 'package:flutter_app/ui/common_widgets/pdf_viewer_screen.dart';
 import 'package:flutter_app/ui/pages/change_pass/change_pass_screen.dart';
+import 'package:flutter_app/ui/pages/document_detail/out_doc_detail_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/check_your_mail_screen.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/forgot_pass_screen.dart';
 import 'package:flutter_app/ui/pages/home/home_screen.dart';
-import 'package:flutter_app/ui/common_widgets/pdf_viewer_screen.dart';
 import 'package:flutter_app/ui/pages/login/login_screen.dart';
 import 'package:flutter_app/ui/pages/profile/profile_screen.dart';
 import 'package:flutter_app/ui/pages/reminder_calendar/reminder_calendar_screem.dart';
 import 'package:flutter_app/ui/pages/settings/settings_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:path/path.dart';
 
-import '../ui/pages/incoming_document_detail/inc_doc_detail_screen.dart';
+import '../ui/pages/document_detail/inc_doc_detail_screen.dart';
 import '../ui/pages/splash/splash_screen.dart';
 
 class HomeArguments {
@@ -28,10 +27,10 @@ class HomeArguments {
   const HomeArguments({required this.title, required this.number});
 }
 
-class IncomingDocumentDetailArgs {
+class DocumentDetailArgs {
   final int documentId;
 
-  const IncomingDocumentDetailArgs({required this.documentId});
+  const DocumentDetailArgs({required this.documentId});
 }
 
 class PdfViewerArguments {
@@ -52,6 +51,7 @@ class MyRouter {
   static const String checkYourMail = "/check-your-mail";
   static const String changePassword = "/change-password";
   static const String incomingDocumentDetail = "/incomingDocumentDetail";
+  static const String outgoingDocumentDetail = "/outgoingDocumentDetail";
   static const String pdfViewer = "/pdfViewer";
   static const String profile = "/profile";
 
@@ -59,9 +59,18 @@ class MyRouter {
     var args = settings.arguments;
     switch (settings.name) {
       case incomingDocumentDetail:
-        if (args is IncomingDocumentDetailArgs) {
+        if (args is DocumentDetailArgs) {
           return MaterialPageRoute(
               builder: (_) => IncomingDocumentDetail(
+                    documentId: args.documentId,
+                  ));
+        } else {
+          return errorRoute("Wrong arguments for IncomingDocumentDetail");
+        }
+      case outgoingDocumentDetail:
+        if (args is DocumentDetailArgs) {
+          return MaterialPageRoute(
+              builder: (_) => OutgoingDocumentDetail(
                     documentId: args.documentId,
                   ));
         } else {

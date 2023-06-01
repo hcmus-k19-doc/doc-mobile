@@ -8,7 +8,7 @@ import '../../../../app/router.dart';
 class DocumentAttachment extends StatefulWidget {
   const DocumentAttachment({Key? key, required this.incomingDocument})
       : super(key: key);
-  final IncomingDocument incomingDocument;
+  final IncomingDocument? incomingDocument;
 
   @override
   State<DocumentAttachment> createState() => _DocumentAttachmentState();

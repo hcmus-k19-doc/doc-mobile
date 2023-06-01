@@ -2,5 +2,23 @@
   "helloWorld": "Hello World!",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
-  }
+  },
+
+
+  "language": "Language",
+  "application": "Application",
+  "contactForSupport": "Contact for support",
+  "receiveInAppNoti": "Receive in-app notification",
+  "receiveEmail": "Receive notification through email/SMS",
+  "saveLoginSession": "Save login session",
+  "vietnamese": "Vietnamese",
+  "english": "English",
+  "lightMode": "Light mode",
+  "version": "Version",
+  "themeMode": "Theme mode",
+
+  "confirmLogout": "Do you want to leave?",
+  "logout": "Logout",
+  "no": "Cancel",
+  "yes": "Agree"
 }

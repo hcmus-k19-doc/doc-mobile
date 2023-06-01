@@ -5,11 +5,12 @@ import 'package:flutter_app/repositories/auth_repository.dart';
 import 'package:flutter_app/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
+import '../constants/export_constants.dart';
 import '../constants/themes.dart';
 import '../utils/utils.dart';
 import 'config.dart';
-import '../constants/export_constants.dart';
 import 'router.dart';
 
 class MyApp extends StatefulWidget {
@@ -32,13 +33,11 @@ class MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final config = AppConfig.of(context)!;
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
@@ -56,7 +55,10 @@ class MyAppState extends State<MyApp> {
                       "${UrlConst.DOC_SERVICE_URL}/security/auth/token"),
                   UserRepository("${UrlConst.DOC_SERVICE_URL}/users"))),
         ],
-        child: _buildMyApp(context),
+        child: ChangeNotifierProvider(
+            create: (context) => SettingsProvider(),
+            child: Consumer<SettingsProvider>(
+                builder: (context, model, child) => _buildMyApp(context))),
         // )
       ),
     );
@@ -72,13 +74,15 @@ class MyAppState extends State<MyApp> {
         //Android
         title: config.appName,
         debugShowCheckedModeBanner: config.debugTag,
-        theme: ThemeData(fontFamily: 'Roboto', colorScheme: lightTheme()),
-        darkTheme: ThemeData(fontFamily: 'Roboto', colorScheme: darkTheme()),
+        theme:
+            Provider.of<SettingsProvider>(context).themeMode == ThemeMode.light
+                ? ThemeData(fontFamily: 'Roboto', colorScheme: lightTheme())
+                : ThemeData(fontFamily: 'Roboto', colorScheme: darkTheme()),
         themeMode: getDeviceThemeMode(),
         onGenerateRoute: MyRouter.generateRoute,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        locale: const Locale("vi"),
+        locale: Provider.of<SettingsProvider>(context).locale,
         navigatorKey: navigatorKey,
         // navigatorObservers: [routeObserver],
         initialRoute: config.initialRoute.toString());
