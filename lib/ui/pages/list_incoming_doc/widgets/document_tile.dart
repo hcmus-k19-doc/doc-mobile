@@ -4,6 +4,7 @@ import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class DocumentTile extends StatefulWidget {
   const DocumentTile({Key? key, required this.incomingDocument})
@@ -16,6 +17,13 @@ class DocumentTile extends StatefulWidget {
 
 class _DocumentTileState extends State<DocumentTile> {
   bool _isExpanded = false;
+  DateFormat inputFormat = DateFormat('yyyy-MM-dd');
+  DateFormat outputFormat = DateFormat('dd-MM-yyyy');
+
+  String reformatDate(String? originalDate) {
+    DateTime date = inputFormat.parse(originalDate!);
+    return outputFormat.format(date);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +49,7 @@ class _DocumentTileState extends State<DocumentTile> {
                     color: _isExpanded ? Colors.blueAccent : Colors.black),
               ),
               Text(
-                "Còn 5 ngày",
+                "Thời hạn xử lý: ${widget.incomingDocument.processingDuration ?? "01-01-1970"}",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded ? Colors.blueAccent : Colors.black),
               )
@@ -74,33 +82,13 @@ class _DocumentTileState extends State<DocumentTile> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Cấp gửi:",
-                      style: bodyLarge(context),
-                    )),
-                    Flexible(
-                        flex: 2,
-                        child: Text(
-                          AppLocalizations.of(context)!.sendingLevel(
-                              "${widget.incomingDocument.sendingLevel?.level}"),
-                          style: bodyLarge(context),
-                        ))
-                  ],
-                ),
-                const SizedBox(
-                  height: StyleConst.defaultPadding12,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        child: Text(
                       "Ngày đến:",
                       style: bodyLarge(context),
                     )),
                     Flexible(
                       flex: 2,
                       child: Text(
-                        "${widget.incomingDocument.arrivingDate}",
+                        reformatDate(widget.incomingDocument.arrivingDate),
                         style: bodyLarge(context),
                       ),
                     )
@@ -146,22 +134,22 @@ class _DocumentTileState extends State<DocumentTile> {
                 const SizedBox(
                   height: StyleConst.defaultPadding12,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        child: Text("Toàn văn:", style: bodyLarge(context))),
-                    Flexible(
-                        flex: 2,
-                        child: Text(
-                          "",
-                          style: bodyLarge(context),
-                        ))
-                  ],
-                ),
-                const SizedBox(
-                  height: StyleConst.defaultPadding12,
-                ),
+                // Row(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     Expanded(
+                //         child: Text("Toàn văn:", style: bodyLarge(context))),
+                //     Flexible(
+                //         flex: 2,
+                //         child: Text(
+                //           "",
+                //           style: bodyLarge(context),
+                //         ))
+                //   ],
+                // ),
+                // const SizedBox(
+                //   height: StyleConst.defaultPadding12,
+                // ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

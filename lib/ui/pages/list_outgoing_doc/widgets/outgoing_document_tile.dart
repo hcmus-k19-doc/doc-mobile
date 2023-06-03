@@ -4,6 +4,7 @@ import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/outgoing_document.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class OutgoingDocumentTile extends StatefulWidget {
   const OutgoingDocumentTile({Key? key, required this.outgoingDocument})
@@ -16,6 +17,7 @@ class OutgoingDocumentTile extends StatefulWidget {
 
 class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
   bool _isExpanded = false;
+  DateFormat outputFormat = DateFormat('dd-MM-yyyy');
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +43,15 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                     color: _isExpanded ? Colors.blueAccent : Colors.black),
               ),
               Text(
-                "Còn 5 ngày",
+                "Số phát hành: ${widget.outgoingDocument.outgoingNumber ?? ""}",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded ? Colors.blueAccent : Colors.black),
-              )
+              ),
+              // Text(
+              //   "Còn 5 ngày",
+              //   style: bodyLarge(context)?.copyWith(
+              //       color: _isExpanded ? Colors.blueAccent : Colors.black),
+              // )
             ],
           ),
         ),
@@ -74,33 +81,15 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Cấp gửi:",
-                      style: bodyLarge(context),
-                    )),
-                    Flexible(
-                        flex: 2,
-                        child: Text(
-                          AppLocalizations.of(context)!.sendingLevel(
-                              "${widget.outgoingDocument.recipient}"),
-                          style: bodyLarge(context),
-                        ))
-                  ],
-                ),
-                const SizedBox(
-                  height: StyleConst.defaultPadding12,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        child: Text(
                       "Ngày đến:",
                       style: bodyLarge(context),
                     )),
                     Flexible(
                       flex: 2,
                       child: Text(
-                        "${widget.outgoingDocument.createdBy}",
+                        outputFormat.format(DateTime.parse(
+                            widget.outgoingDocument.createdDate ??
+                                "01-01-1970")),
                         style: bodyLarge(context),
                       ),
                     )
@@ -137,7 +126,7 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        "${widget.outgoingDocument.summary}",
+                        "${widget.outgoingDocument.summary}", //
                         style: bodyLarge(context),
                       ),
                     )
@@ -146,22 +135,22 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                 const SizedBox(
                   height: StyleConst.defaultPadding12,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        child: Text("Toàn văn:", style: bodyLarge(context))),
-                    Flexible(
-                        flex: 2,
-                        child: Text(
-                          "",
-                          style: bodyLarge(context),
-                        ))
-                  ],
-                ),
-                const SizedBox(
-                  height: StyleConst.defaultPadding12,
-                ),
+                // Row(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     Expanded(
+                //         child: Text("Toàn văn:", style: bodyLarge(context))),
+                //     Flexible(
+                //         flex: 2,
+                //         child: Text(
+                //           "",
+                //           style: bodyLarge(context),
+                //         ))
+                //   ],
+                // ),
+                // const SizedBox(
+                //   height: StyleConst.defaultPadding12,
+                // ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
