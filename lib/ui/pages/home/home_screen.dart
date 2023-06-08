@@ -98,6 +98,13 @@ class _HomeScreenState extends State<HomeScreen> {
               _title,
               style: headLineSmall(context)?.copyWith(color: Colors.white),
             ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(MyRouter.transferHistory);
+                  },
+                  icon: const Icon(Icons.notifications))
+            ],
           ),
           // drawer: MenuDrawer(onNewDrawerIndex: setNewDrawerIndex),
           bottomNavigationBar: BottomNavigationBar(
@@ -108,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const BottomNavigationBarItem(
                   icon: Icon(Icons.schedule), label: "Văn bản đi"),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.notifications),
+                  icon: const Icon(Icons.calendar_month),
                   label: appLocalizations.mainPage("REMINDER")),
               const BottomNavigationBarItem(
                   icon: Icon(Icons.person), label: "Tài khoản"),

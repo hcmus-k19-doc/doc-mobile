@@ -15,6 +15,7 @@ import 'package:flutter_app/ui/pages/login/login_screen.dart';
 import 'package:flutter_app/ui/pages/profile/profile_screen.dart';
 import 'package:flutter_app/ui/pages/reminder_calendar/reminder_calendar_screem.dart';
 import 'package:flutter_app/ui/pages/settings/settings_screen.dart';
+import 'package:flutter_app/ui/pages/transfer_history/transfer_history_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../ui/pages/document_detail/inc_doc_detail_screen.dart';
@@ -54,6 +55,7 @@ class MyRouter {
   static const String outgoingDocumentDetail = "/outgoingDocumentDetail";
   static const String pdfViewer = "/pdfViewer";
   static const String profile = "/profile";
+  static const String transferHistory = "/transfer-history";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var args = settings.arguments;
@@ -112,6 +114,8 @@ class MyRouter {
                     ..add(FetchCurrentProfile()),
                   child: const ProfileScreen(),
                 ));
+      case transferHistory:
+        return MaterialPageRoute(builder: (_) => const TransferHistoryScreen());
       default:
         return errorRoute("No route-name founded");
     }
