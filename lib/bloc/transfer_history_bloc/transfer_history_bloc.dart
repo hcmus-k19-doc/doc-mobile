@@ -12,9 +12,29 @@ class TransferHistoryBloc
   UserRepository userRepository;
   List<TransferHistory> listTransferHistory = [];
   int page = 0;
+  int? numTransferHistory;
 
   TransferHistoryBloc(this.userRepository) : super(TransferHistoryInitial()) {
     on<FetchTransferHistoryEvent>((event, emit) async {
+      page = 0;
+      listTransferHistory = [];
+      try {
+        emit(TransferHistoryLoading());
+        final response = await userRepository.fetchTransferHistoryList(
+            page, event.userId, 10);
+        page++;
+        if (response.isEmpty) {
+          emit(TransferHistoryEmpty());
+        } else {
+          listTransferHistory.addAll(response);
+          emit(TransferHistorySuccess(listTransferHistory));
+        }
+      } catch (error) {
+        emit(TransferHistoryFailure(error));
+      }
+    });
+
+    on<FetchMoreTransferHistoryEvent>((event, emit) async {
       if (state is! TransferHistoryEmpty) {
         try {
           if (state is TransferHistoryInitial) {
@@ -24,8 +44,8 @@ class TransferHistoryBloc
             emit(TransferHistoryFetchMore());
           }
 
-          final response =
-              await userRepository.fetchTransferHistoryList(page, event.userId);
+          final response = await userRepository.fetchTransferHistoryList(
+              page, event.userId, 10);
           page++;
           if (response.isEmpty) {
             emit(TransferHistoryEmpty());
@@ -36,6 +56,17 @@ class TransferHistoryBloc
         } catch (error) {
           emit(TransferHistoryFailure(error));
         }
+      }
+    });
+
+    on<FetchNumberTransferHistoryEvent>((event, emit) async {
+      try {
+        final response =
+            await userRepository.fetchTransferHistoryList(0, event.userId, 12);
+        numTransferHistory = response.length;
+        emit(TransferHistorySuccess(listTransferHistory));
+      } catch (error) {
+        emit(TransferHistoryFailure(error));
       }
     });
   }

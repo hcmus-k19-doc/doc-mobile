@@ -28,13 +28,13 @@ class UserRepository extends BaseRepository {
   }
 
   Future<List<TransferHistory>> fetchTransferHistoryList(
-      int page, int userId) async {
+      int page, int userId, int pageSize) async {
     try {
       final response = await provider.post(
           url: "/get-transfer-history",
           cancelToken: cancelToken,
           data: {"userId": userId},
-          queryParams: {"page": page, "pageSize": 10});
+          queryParams: {"page": page, "pageSize": pageSize});
       Iterable l = response;
       return List<TransferHistory>.from(
           l.map((e) => TransferHistory.fromJson(e)));
