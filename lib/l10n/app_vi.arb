@@ -69,7 +69,6 @@
 	"currentPassword": "Mật khẩu hiện tại",
 	"newPassword": "Mật khẩu mới",
 	"confirmNewPassword": "Xác nhận mật khẩu mới",
-
 	"language": "Ngôn ngữ",
 	"application": "Ứng dụng",
 	"contactForSupport": "Hỗ trợ liên lạc",
@@ -82,9 +81,29 @@
 	"darkMode": "Nền tối",
 	"version": "Phiên bản",
 	"themeMode": "Chế độ nền",
-
 	"confirmLogout": "Bạn có muốn đăng xuất?",
 	"logout": "Đăng xuất",
 	"no": "Huỷ bỏ",
-	"yes": "Đồng ý"
+	"yes": "Đồng ý",
+	"defaultSender": "Bạn",
+	"defaultReciever": "bạn",
+	"sendDocumentIdsFor": "đã chuyển văn bản số {documentIds} cho",
+	"@sendDocumentIdsFor": {
+		"placeholders": {
+			"documentIds": {
+				"type": "String"
+			}
+		}
+	},
+	"historyProcess": "Lịch sử chuyển xử lý",
+	"sender": "Người chuyển",
+	"reciever": "Người nhận",
+	"document": "Văn bản",
+	"transferDate": "Ngày chuyển",
+	"processingTime": "Thời hạn xử lý",
+	"infiniteProcessingTime": "Không thời hạn",
+	"transferType": "Loại chuyển",
+	"transferType2": "Cùng cấp",
+	"transferType1": "Chuyển xử lý",
+	"processMethod": "Cách thức xử lý"
 }
