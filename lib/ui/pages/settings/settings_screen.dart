@@ -69,7 +69,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           trailing: Switch(
                             // This bool value toggles the switch.
                             value: _notifications[0],
-                            activeColor: Colors.blue,
+                            activeColor: ColorConst.primaryBlue,
                             onChanged: (bool value) {
                               // This is called when the user toggles the switch.
                               setState(() {
@@ -86,7 +86,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           trailing: Switch(
                             // This bool value toggles the switch.
                             value: _notifications[1],
-                            activeColor: Colors.blue,
+                            activeColor: ColorConst.primaryBlue,
                             onChanged: (bool value) {
                               // This is called when the user toggles the switch.
                               setState(() {
@@ -103,7 +103,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           trailing: Switch(
                             // This bool value toggles the switch.
                             value: _notifications[2],
-                            activeColor: Colors.blue,
+                            activeColor: ColorConst.primaryBlue,
                             onChanged: (bool value) {
                               // This is called when the user toggles the switch.
                               setState(() {
@@ -133,8 +133,8 @@ class _SettingScreenState extends State<SettingScreen> {
                             height: 18,
                           ),
                           trailing: _isVietnamese
-                              ? const Icon(Icons.radio_button_checked,
-                                  color: Colors.blue, size: 18)
+                              ?  Icon(Icons.radio_button_checked,
+                                  color: ColorConst.primaryBlue, size: 18)
                               : const Icon(Icons.radio_button_off,
                                   color: Colors.black45, size: 18),
                           onTap: () {
@@ -157,9 +157,9 @@ class _SettingScreenState extends State<SettingScreen> {
                             height: 18,
                           ),
                           trailing: !_isVietnamese
-                              ? const Icon(
+                              ?  Icon(
                                   Icons.radio_button_checked,
-                                  color: Colors.blue,
+                                  color: ColorConst.primaryBlue,
                                   size: 18,
                                 )
                               : const Icon(Icons.radio_button_off,
@@ -192,8 +192,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           leading:
                               const Icon(Icons.sunny, color: Colors.yellow),
                           trailing: _isLightMode
-                              ? const Icon(Icons.radio_button_checked,
-                                  color: Colors.blue, size: 18)
+                              ? Icon(Icons.radio_button_checked,
+                                  color: ColorConst.primaryBlue, size: 18)
                               : const Icon(Icons.radio_button_off,
                                   color: Colors.black45, size: 18),
                           onTap: () {
@@ -212,9 +212,9 @@ class _SettingScreenState extends State<SettingScreen> {
                             color: Colors.lightBlue,
                           ),
                           trailing: !_isLightMode
-                              ? const Icon(
+                              ?  Icon(
                                   Icons.radio_button_checked,
-                                  color: Colors.blue,
+                                  color: ColorConst.primaryBlue,
                                   size: 18,
                                 )
                               : const Icon(Icons.radio_button_off,

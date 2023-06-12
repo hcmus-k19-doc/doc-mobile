@@ -31,14 +31,14 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
               labelStyle: MaterialStateTextStyle.resolveWith(
                   (Set<MaterialState> states) {
                 final Color color = states.contains(MaterialState.focused)
-                    ? Theme.of(context).primaryColor
+                    ? Theme.of(context).colorScheme.primary
                     : Theme.of(context).hintColor;
                 return bodyLarge(context)!.copyWith(color: color, fontSize: 20);
               }),
               floatingLabelBehavior: FloatingLabelBehavior.always,
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Theme.of(context).primaryColor, width: 2),
+                      color: Theme.of(context).colorScheme.primary, width: 2),
                   borderRadius:
                       BorderRadius.circular(StyleConst.defaultRadius15)),
               border: OutlineInputBorder(
@@ -57,7 +57,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
               style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
                   elevation: 2,
-                  backgroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(StyleConst.defaultRadius15))),

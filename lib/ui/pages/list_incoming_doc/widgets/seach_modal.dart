@@ -154,7 +154,7 @@ class _SearchModalState extends State<SearchModal> {
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                               StyleConst.defaultRadius15), // <-- Radius

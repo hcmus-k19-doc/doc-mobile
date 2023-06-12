@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../utils/utils.dart';
+import 'color_const.dart';
 
 //secondary = text
 //background = background
 //surface = item borders
 
 ColorScheme lightTheme() {
-  return const ColorScheme(
+  return  ColorScheme(
     brightness: Brightness.light,
-    primary: Colors.blue,
+    primary: ColorConst.primaryBlue,
     onPrimary: Colors.white,
     secondary: Colors.teal,
     onSecondary: Colors.black,
@@ -23,9 +24,9 @@ ColorScheme lightTheme() {
 }
 
 ColorScheme darkTheme() {
-  return const ColorScheme(
+  return ColorScheme(
     brightness: Brightness.dark,
-    primary: Colors.blue,
+    primary: ColorConst.primaryBlue,
     onPrimary: Colors.black,
     secondary: Colors.tealAccent,
     onSecondary: Colors.black,

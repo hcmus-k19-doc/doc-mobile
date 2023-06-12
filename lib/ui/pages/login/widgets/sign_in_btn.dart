@@ -29,7 +29,7 @@ class SignInBtn extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(StyleConst.defaultPadding12),
                   elevation: 2,
-                  backgroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(StyleConst.defaultRadius15))),

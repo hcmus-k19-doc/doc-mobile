@@ -61,9 +61,9 @@ class _BuildCalendarState extends State<BuildCalendar> {
                       color: Colors.grey.withOpacity(0.3),
                       shape: BoxShape.circle),
                   todayTextStyle:
-                      TextStyle(color: Theme.of(context).primaryColor),
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
                   todayDecoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.15),
+                      color: Theme.of(context).colorScheme.primary.withOpacity(0.15),
                       shape: BoxShape.circle)),
               eventLoader: (day) {
                 if (documentReminderBloc.listReminders.isNotEmpty) {

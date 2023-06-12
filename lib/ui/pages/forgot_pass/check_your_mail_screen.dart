@@ -21,11 +21,11 @@ class CheckYourMailScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
                             Radius.circular(StyleConst.defaultRadius15)),
-                        color: Theme.of(context).primaryColor.withOpacity(0.1)),
+                        color: Theme.of(context).colorScheme.primary.withOpacity(0.1)),
                     padding: const EdgeInsets.all(StyleConst.defaultPadding24),
                     child: Icon(
                       Icons.mark_email_unread,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.primary,
                       size: 45,
                     )),
                 const SizedBox(
@@ -54,7 +54,7 @@ class CheckYourMailScreen extends StatelessWidget {
                             vertical: 16,
                             horizontal: StyleConst.defaultPadding24),
                         elevation: 2,
-                        backgroundColor: Theme.of(context).primaryColor,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                                 StyleConst.defaultRadius15))),
@@ -82,7 +82,7 @@ class CheckYourMailScreen extends StatelessWidget {
                   TextSpan(
                       text: "try another email address",
                       style: bodyLarge(context)?.copyWith(
-                          fontSize: 14, color: Theme.of(context).primaryColor),
+                          fontSize: 14, color: Theme.of(context).colorScheme.primary),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           print("Send back email");

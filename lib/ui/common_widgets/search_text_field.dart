@@ -37,7 +37,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
             labelStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
               final Color color = states.contains(MaterialState.focused)
-                  ? Theme.of(context).primaryColor
+                  ? Theme.of(context).colorScheme.primary
                   : Theme.of(context).hintColor;
               return bodyLarge(context)!.copyWith(color: color);
             }),
@@ -51,7 +51,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
             isDense: true,
             focusedBorder: OutlineInputBorder(
                 borderSide:
-                    BorderSide(color: Theme.of(context).primaryColor, width: 2),
+                    BorderSide(color: Theme.of(context).colorScheme.primary, width: 2),
                 borderRadius:
                     BorderRadius.circular(StyleConst.defaultRadius15)),
             border: OutlineInputBorder(

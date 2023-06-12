@@ -47,7 +47,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                     labelStyle: MaterialStateTextStyle.resolveWith(
                         (Set<MaterialState> states) {
                       final Color color = states.contains(MaterialState.focused)
-                          ? Theme.of(context).primaryColor
+                          ? Theme.of(context).colorScheme.primary
                           : Theme.of(context).hintColor;
                       return bodyLarge(context)!
                           .copyWith(color: color, fontSize: 20);
@@ -55,7 +55,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: Theme.of(context).primaryColor, width: 2),
+                            color: Theme.of(context).colorScheme.primary, width: 2),
                         borderRadius:
                             BorderRadius.circular(StyleConst.defaultRadius15)),
                     border: OutlineInputBorder(
@@ -90,14 +90,14 @@ class _LoginFormFieldState extends State<LoginFormField> {
                     labelStyle: MaterialStateTextStyle.resolveWith(
                         (Set<MaterialState> states) {
                       final Color color = states.contains(MaterialState.focused)
-                          ? Theme.of(context).primaryColor
+                          ? Theme.of(context).colorScheme.primary
                           : Theme.of(context).hintColor;
                       return bodyLarge(context)!
                           .copyWith(color: color, fontSize: 20);
                     }),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: Theme.of(context).primaryColor, width: 2),
+                            color: Theme.of(context).colorScheme.primary, width: 2),
                         borderRadius:
                             BorderRadius.circular(StyleConst.defaultRadius15)),
                     suffixIcon: IconButton(

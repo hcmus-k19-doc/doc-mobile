@@ -6,6 +6,8 @@ import 'package:flutter_app/model/incoming_document.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../constants/color_const.dart';
+
 class DocumentTile extends StatefulWidget {
   const DocumentTile({Key? key, required this.incomingDocument})
       : super(key: key);
@@ -41,17 +43,17 @@ class _DocumentTileState extends State<DocumentTile> {
               Text(
                 "Số ký hiệu gốc: ${widget.incomingDocument.originalSymbolNumber}",
                 style: bodyLarge(context)?.copyWith(
-                    color: _isExpanded ? Colors.blueAccent : Colors.black),
+                    color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
               ),
               Text(
                 "${widget.incomingDocument.documentType?.type}",
                 style: bodyLarge(context)?.copyWith(
-                    color: _isExpanded ? Colors.blueAccent : Colors.black),
+                    color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
               ),
               Text(
                 "Thời hạn xử lý: ${widget.incomingDocument.processingDuration ?? "01-01-1970"}",
                 style: bodyLarge(context)?.copyWith(
-                    color: _isExpanded ? Colors.blueAccent : Colors.black),
+                    color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
               )
             ],
           ),
@@ -180,7 +182,7 @@ class _DocumentTileState extends State<DocumentTile> {
                                 documentId: widget.incomingDocument.id ?? -1));
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                               StyleConst.defaultRadius15), // <-- Radius

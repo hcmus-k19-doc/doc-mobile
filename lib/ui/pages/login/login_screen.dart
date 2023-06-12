@@ -81,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                               //     child: Text(
                               //       "Forgot your password?",
                               //       style: bodyLarge(context)
-                              //           ?.copyWith(color: Colors.blue),
+                              //           ?.copyWith(color: ColorConst.primaryBlue),
                               //     ),
                               //     onPressed: () {
                               //       Navigator.pushNamed(

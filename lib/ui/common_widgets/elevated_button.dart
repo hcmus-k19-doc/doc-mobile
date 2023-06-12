@@ -43,12 +43,12 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(16),
-        foregroundColor: Colors.blue,
+        foregroundColor: ColorConst.primaryBlue,
         backgroundColor: Colors.white,
-        shape: const StadiumBorder(
+        shape: StadiumBorder(
             side: BorderSide(
           width: 1,
-          color: Colors.blue,
+          color: ColorConst.primaryBlue,
         )),
       ),
       onPressed: callback,
@@ -70,12 +70,12 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
-          foregroundColor: Colors.blue,
+          foregroundColor: ColorConst.primaryBlue,
           textStyle: const TextStyle(),
           padding: const EdgeInsets.all(16),
           elevation: 2,
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.blue, width: 1),
+            side: BorderSide(color: ColorConst.primaryBlue, width: 1),
               borderRadius: BorderRadius.circular(radius)),),
       onPressed: callback,
       child: Text(title),

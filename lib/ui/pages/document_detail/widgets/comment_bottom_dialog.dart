@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/comment_bloc/comment_bloc.dart';
+import '../../../../constants/color_const.dart';
 import '../../../../constants/font_const.dart';
 
 class CommentBottomDialog extends StatefulWidget {
@@ -129,9 +130,9 @@ class _CommentBottomDialogState extends State<CommentBottomDialog> {
                               Expanded(
                                 child: TextField(
                                   controller: txtController,
-                                  decoration: const InputDecoration(
-                                    fillColor: Colors.blue,
-                                    border: OutlineInputBorder(),
+                                  decoration: InputDecoration(
+                                    fillColor: ColorConst.primaryBlue,
+                                    border: const OutlineInputBorder(),
                                   ),
                                   maxLines: null,
                                   keyboardType: TextInputType.text,
@@ -140,7 +141,7 @@ class _CommentBottomDialogState extends State<CommentBottomDialog> {
                               IconButton(
                                 icon: const Icon(Icons.send),
                                 iconSize: 24.0,
-                                color: Colors.blue,
+                                color: ColorConst.primaryBlue,
                                 onPressed: () async {
                                   var sendingPrompt =
                                       txtController.text.toString();

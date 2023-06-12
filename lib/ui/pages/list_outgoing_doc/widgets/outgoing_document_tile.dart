@@ -6,6 +6,8 @@ import 'package:flutter_app/model/outgoing_document.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../constants/color_const.dart';
+
 class OutgoingDocumentTile extends StatefulWidget {
   const OutgoingDocumentTile({Key? key, required this.outgoingDocument})
       : super(key: key);
@@ -35,22 +37,22 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
               Text(
                 "Số ký hiệu gốc: ${widget.outgoingDocument.originalSymbolNumber}",
                 style: bodyLarge(context)?.copyWith(
-                    color: _isExpanded ? Colors.blueAccent : Colors.black),
+                    color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
               ),
               Text(
                 "${widget.outgoingDocument.documentType?.type}",
                 style: bodyLarge(context)?.copyWith(
-                    color: _isExpanded ? Colors.blueAccent : Colors.black),
+                    color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
               ),
               Text(
                 "Số phát hành: ${widget.outgoingDocument.outgoingNumber ?? ""}",
                 style: bodyLarge(context)?.copyWith(
-                    color: _isExpanded ? Colors.blueAccent : Colors.black),
+                    color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
               ),
               // Text(
               //   "Còn 5 ngày",
               //   style: bodyLarge(context)?.copyWith(
-              //       color: _isExpanded ? Colors.blueAccent : Colors.black),
+              //       color: _isExpanded ? ColorConst.primaryBlueAccent : Colors.black),
               // )
             ],
           ),
@@ -182,7 +184,7 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
 
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                               StyleConst.defaultRadius15), // <-- Radius
