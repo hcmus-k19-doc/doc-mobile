@@ -31,7 +31,7 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
       backgroundColor: ColorConst.white,
       appBar: AppBar(
         title: Text(
-          "Chi tiết văn bản ",
+          "Chi tiết văn bản đi",
           style: headLineSmall(context)?.copyWith(color: Colors.white),
         ),
       ),
@@ -74,18 +74,6 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
                           padding:
                               const EdgeInsets.all(StyleConst.defaultPadding16),
                           child: Row(children: [
-                            if (detailDocument.status != "RELEASED" && isVanThu(context))
-                            Expanded(
-                                child: CustomElevatedButton(
-                              callback: () {
-                              },
-                              title: 'Phát hành',
-                              radius: 15,
-                              buttonType: ButtonType.filledButton,
-                            )),
-                            const SizedBox(
-                              width: 18,
-                            ),
                             Expanded(
                                 child: CustomElevatedButton(
                               callback: () {
