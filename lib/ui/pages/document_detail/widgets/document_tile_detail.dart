@@ -79,7 +79,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.incomingDocument.incomingNumber}",
+                          widget.incomingDocument.incomingNumber??"Không xác định",
                           style: bodyLarge(context),
                         ))
                   ],
@@ -98,7 +98,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.incomingDocument.originalSymbolNumber}",
+                          widget.incomingDocument.originalSymbolNumber??"Không xác định",
                           style: bodyLarge(context),
                         ))
                   ],
@@ -117,7 +117,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.incomingDocument.documentType?.type}",
+                          widget.incomingDocument.documentType?.type??"Không xác định",
                           style: bodyLarge(context),
                         ))
                   ],
@@ -136,7 +136,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        "${widget.incomingDocument.arrivingDate}",
+                        widget.incomingDocument.arrivingDate??"Không xác định",
                         style: bodyLarge(context),
                       ),
                     )
@@ -156,7 +156,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        "${widget.incomingDocument.distributionDate}",
+                        widget.incomingDocument.distributionDate??"Không xác định",
                         style: bodyLarge(context),
                       ),
                     )
@@ -195,7 +195,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.incomingDocument.distributionOrg?.name}",
+                          widget.incomingDocument.distributionOrg?.name??"Không xác định",
                           style: bodyLarge(context),
                         ))
                   ],
@@ -212,7 +212,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        "${widget.incomingDocument.summary}",
+                        widget.incomingDocument.summary??"Không xác định",
                         style: bodyLarge(context),
                       ),
                     )
@@ -232,7 +232,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        "${widget.incomingDocument.folder?.folderName}",
+                        widget.incomingDocument.folder?.folderName??"Không xác định",
                         style: bodyLarge(context),
                       ),
                     )

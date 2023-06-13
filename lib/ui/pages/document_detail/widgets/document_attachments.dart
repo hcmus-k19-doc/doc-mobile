@@ -25,8 +25,7 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
     // _hasFiles = widget.incomingDocument.attachments?.isNotEmpty ?? false;
     _hasFiles = true;
     pdfUrls = [
-      "https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf",
-      "https://cdn.syncfusion.com/content/PDFViewer/encrypted.pdf"
+      "${UrlConst.DOC_FILE_URL}/files/s3/ICD/1042/CTDA - Cac moc thoi gian KLTN-DATN_TTTN_2022_2023.pdf",
     ];
   }
 

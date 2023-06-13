@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:flutter_app/bloc/close_document_detail/close_document_detail_bloc.dart';
@@ -55,7 +57,8 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
             if (state is IncomingDetailFailureState) {
               return Center(
                   child: Text(state.responseException,
-                      style: headLineSmall(context)));
+                      style: headLineSmall(context))
+              );
             }
             if (state is IncomingDetailSuccessState) {
               IncomingDocument detailDocument = state.incomingDocumentDetail;

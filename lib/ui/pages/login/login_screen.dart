@@ -116,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                               ElevatedButton(
                                   onPressed: () {
                                     Navigator.of(context)
-                                        .pushNamed(MyRouter.homeScreen);
+                                        .pushNamed(MyRouter.incomingDocumentDetail, arguments: DocumentDetailArgs(documentId: -1));
                                   },
                                   child: Text("test"))
                             ],
