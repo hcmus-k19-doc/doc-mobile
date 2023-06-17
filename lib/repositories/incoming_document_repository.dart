@@ -67,7 +67,7 @@ class IncomingDocumentRepository extends BaseRepository {
       int id) async {
     try {
       final response = await provider.get(
-          url: "/$id/processing-details?onlyAssignee=true",
+          url: "/INCOMING_DOCUMENT/$id/processing-details?onlyAssignee=true",
           cancelToken: cancelToken);
 
       return List<ProcessingDetail>.from(response.map((e) => ProcessingDetail.fromJson(e))).toList();

@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_app/model/outgoing_document.dart';
 import 'package:flutter_app/model/outgoing_search_criteria.dart';
 import 'package:flutter_app/model/pagination_outgoing_document.dart';
-import 'package:flutter_app/repositories/outgoing_document_reposiroty.dart';
+import 'package:flutter_app/repositories/outgoing_document_repository.dart';
 
 part 'list_outgoing_event.dart';
 

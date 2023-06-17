@@ -10,7 +10,6 @@ import 'package:flutter_app/model/outgoing_search_criteria.dart';
 import 'package:flutter_app/model/search_criteria.dart';
 import 'package:flutter_app/repositories/document_reminder_repository.dart';
 import 'package:flutter_app/repositories/incoming_document_repository.dart';
-import 'package:flutter_app/repositories/outgoing_document_reposiroty.dart';
 import 'package:flutter_app/repositories/user_repository.dart';
 import 'package:flutter_app/ui/pages/account/account_screen.dart';
 import 'package:flutter_app/ui/pages/list_incoming_doc/list_incoming_doc_screen.dart';
@@ -19,6 +18,8 @@ import 'package:flutter_app/ui/pages/reminder_calendar/reminder_calendar_screem.
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:badges/badges.dart' as badges;
+
+import '../../../repositories/outgoing_document_repository.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
