@@ -11,10 +11,10 @@ class OutgoingDetailLoadingState extends OutgoingDetailState {}
 
 class OutgoingDetailSuccessState extends OutgoingDetailState {
   final OutgoingDocument outgoingDocumentDetail;
-  // final List<ProcessingDetail> processingDetail;
+  final List<ProcessingDetail> processingDetail;
 
-  const OutgoingDetailSuccessState(this.outgoingDocumentDetail);
-  // const OutgoingDetailSuccessState(this.outgoingDocumentDetail, this.processingDetail);
+  // const OutgoingDetailSuccessState(this.outgoingDocumentDetail);
+  const OutgoingDetailSuccessState(this.outgoingDocumentDetail, this.processingDetail);
 
   @override
   List<Object?> get props => [outgoingDocumentDetail];

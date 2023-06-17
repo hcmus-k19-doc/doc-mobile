@@ -18,9 +18,9 @@ class DocumentProgressDetail extends StatefulWidget {
 class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
   bool _isExpanded = false;
   final List<String> upcomingProcess = [
-    "Giám đốc",
-    "Chánh văn phòng",
-    "Chuyên viên"
+    "Chuyên viên",
+    "Trưởng phòng",
+    "Giám đốc"
   ];
 
   @override

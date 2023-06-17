@@ -63,11 +63,24 @@ class IncomingDocumentRepository extends BaseRepository {
     }
   }
 
-  Future<List<ProcessingDetail>> getIncomingDocumentProcessByI(
+  Future<List<ProcessingDetail>> getIncomingDocumentProcessById(
       int id) async {
     try {
       final response = await provider.get(
           url: "/INCOMING_DOCUMENT/$id/processing-details?onlyAssignee=true",
+          cancelToken: cancelToken);
+
+      return List<ProcessingDetail>.from(response.map((e) => ProcessingDetail.fromJson(e))).toList();
+    } catch (err) {
+      rethrow;
+    }
+  }
+
+  Future<List<ProcessingDetail>> getOutgoingDocumentProcessById(
+      int id) async {
+    try {
+      final response = await provider.get(
+          url: "/OUTGOING_DOCUMENT/$id/processing-details?onlyAssignee=true",
           cancelToken: cancelToken);
 
       return List<ProcessingDetail>.from(response.map((e) => ProcessingDetail.fromJson(e))).toList();

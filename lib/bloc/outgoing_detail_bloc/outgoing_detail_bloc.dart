@@ -19,16 +19,17 @@ part 'outgoing_detail_state.dart';
 
 class OutgoingDetailBloc extends Bloc<OutgoingDetailEvent, OutgoingDetailState> {
   OutgoingDocumentRepository outgoingRepository;
+  IncomingDocumentRepository incomingRepository;
   int documentId;
 
-  OutgoingDetailBloc(this.outgoingRepository, this.documentId) : super(OutgoingDetailLoadingState()) {
+  OutgoingDetailBloc(this.outgoingRepository, this.incomingRepository, this.documentId) : super(OutgoingDetailLoadingState()) {
     on<FetchOutgoingDetailEvent>((event, emit) async {
      emit(OutgoingDetailLoadingState());
      try {
        final outgoingDocument = await outgoingRepository.getOutgoingDocumentDetailById(documentId);
-       // final processingDetail = await outgoingRepository.getIncomingDocumentProcessByI(documentId);
-       emit(OutgoingDetailSuccessState(outgoingDocument));
-       // emit(OutgoingDetailSuccessState(outgoingDocument, processingDetail));
+       final processingDetail = await incomingRepository.getOutgoingDocumentProcessById(documentId);
+       // emit(OutgoingDetailSuccessState(outgoingDocument));
+       emit(OutgoingDetailSuccessState(outgoingDocument, processingDetail));
      } catch (e) {
        emit(OutgoingDetailFailureState(e.toString()));
      }

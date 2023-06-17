@@ -6,12 +6,15 @@ import 'package:flutter_app/repositories/comment_repository.dart';
 import 'package:flutter_app/ui/common_widgets/elevated_button.dart';
 import 'package:flutter_app/ui/pages/document_detail/widgets/comment_bottom_dialog.dart';
 import 'package:flutter_app/ui/pages/document_detail/widgets/document_attachments.dart';
+import 'package:flutter_app/ui/pages/document_detail/widgets/document_progress_detail.dart';
 import 'package:flutter_app/ui/pages/document_detail/widgets/out_document_tile_detail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/auth_bloc/auth_bloc.dart';
 import '../../../bloc/outgoing_detail_bloc/outgoing_detail_bloc.dart';
 import '../../../constants/export_constants.dart';
+import '../../../model/processing_detail.dart';
+import '../../../repositories/incoming_document_repository.dart';
 import '../../../repositories/outgoing_document_repository.dart';
 
 class OutgoingDocumentDetail extends StatefulWidget {
@@ -39,6 +42,8 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
           create: (context) => OutgoingDetailBloc(
               OutgoingDocumentRepository(
                   "${UrlConst.DOC_SERVICE_URL}/outgoing-documents"),
+              IncomingDocumentRepository(
+                  "${UrlConst.DOC_SERVICE_URL}/incoming-documents"),
               widget.documentId)
             ..add(FetchOutgoingDetailEvent()),
           child: BlocBuilder<OutgoingDetailBloc, OutgoingDetailState>(
@@ -55,7 +60,7 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
             }
             if (state is OutgoingDetailSuccessState) {
               OutgoingDocument detailDocument = state.outgoingDocumentDetail;
-              // List<ProcessingDetail> processingDetail = state.processingDetail;
+              List<ProcessingDetail> processingDetail = state.processingDetail;
               return SingleChildScrollView(
                   child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -70,6 +75,12 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
                       const DocumentAttachment(
                         incomingDocument: null,
                       ),
+                        Container(
+                            padding:
+                            const EdgeInsets.all(StyleConst.defaultPadding16),
+                            child: DocumentProgressDetail(
+                              processingDetail: processingDetail,
+                            )),
                       Container(
                           padding:
                               const EdgeInsets.all(StyleConst.defaultPadding16),

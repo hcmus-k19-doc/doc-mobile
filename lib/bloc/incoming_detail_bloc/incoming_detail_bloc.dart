@@ -24,7 +24,7 @@ class IncomingDetailBloc extends Bloc<IncomingDetailEvent, IncomingDetailState> 
      emit(IncomingDetailLoadingState());
      try {
        final incomingDocument = await incomingRepository.getIncomingDocumentDetailById(documentId);
-       final processingDetail = await incomingRepository.getIncomingDocumentProcessByI(documentId);
+       final processingDetail = await incomingRepository.getIncomingDocumentProcessById(documentId);
        emit(IncomingDetailSuccessState(incomingDocument, processingDetail));
      } catch (e) {
        emit(IncomingDetailFailureState(e.toString()));
