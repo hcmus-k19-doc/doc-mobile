@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
@@ -14,22 +15,11 @@ class DocumentTileDetail extends StatefulWidget {
 
 class _DocumentTileDetailState extends State<DocumentTileDetail> {
   bool _isExpanded = false;
-  Map<String, String> convertLevel = {
-    'LOW':'Thấp',
-    'MEDIUM':'Trung bình',
-    'HIGH':'Cao',
-  };
-  Map<String, String> convertSendingLevel = {
-    'CITY':'Thành phố',
-    'DISTRICT':'Quận',
-    'SCHOOL':'Trường',
-  };
+  Map<String, String> convertLevel = DisplayMap.urgencyLevel;
 
-  Map<String, String> statusLevel = {
-    'IN_PROGRESS': 'Đang xử lý',
-    'RELEASED': 'Đã phát hành',
-    'UNPROCESSED':'Chưa xử lý'
-  };
+  Map<String, String> convertSendingLevel = DisplayMap.sendingLevel;
+
+  Map<String, String> statusLevel = DisplayMap.statusLevel;
 
   @override
   Widget build(BuildContext context) {

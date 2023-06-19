@@ -23,3 +23,26 @@ class ButtonType {
   static const filledButton = "filledButton";
   static const filledWhiteButton = "filledWhiteButton";
 }
+
+class DisplayMap {
+  static const Map<String, String> urgencyLevel = {
+    'LOW':'Thấp',
+    'MEDIUM':'Trung bình',
+    'HIGH':'Cao',
+  };
+
+  static const Map<String, String> sendingLevel = {
+    'CITY':'Thành phố',
+    'DISTRICT':'Quận',
+    'SCHOOL':'Trường',
+  };
+
+  static const Map<String, String> statusLevel = {
+    'IN_PROGRESS': 'Đang xử lý',
+    'RELEASED': 'Đã phát hành',
+    'UNPROCESSED':'Chưa xử lý',
+    'CLOSED':'Đã xử lý',
+    'READY_TO_RELEASE':"Sẵn sàng phát hành",
+    "WAITING_FOR_OUTGOING_NUMBER":"Chờ số đi"
+  };
+}
