@@ -4,7 +4,7 @@
 	"password": "Mật khẩu",
 	"loginSummitText": "Đăng nhập",
 	"failToLogin": "Xảy ra lỗi trong quá trình đăng nhập",
-	"mainPage": "{menu, select, LABEL{Văn bản đến} ACCOUNT{Tài khoản} REMINDER{Nhắc việc} INCOMING_DOCUMENT_LIST{Danh sách văn bản đến} PROCESSES_INCOMING_DOCUMENT{Xử lý văn bản đến} OUTGOING_DOCUMENT{Văn bản đi} INTERNAL_DOCUMENT{Văn bản nội bộ} MY_PROFILE{Thông tin cá nhân} SETTINGS{Cài đặt} OUTGOING_DOCUMENT_LIST{Danh sách văn bản đi} other{} other{}}",
+	"mainPage": "{menu, select, INCOMING_DOCUMENT{Văn bản đến} ACCOUNT{Tài khoản} REMINDER{Nhắc việc} INCOMING_DOCUMENT_LIST{Danh sách văn bản đến} PROCESSES_INCOMING_DOCUMENT{Xử lý văn bản đến} OUTGOING_DOCUMENT{Văn bản đi} INTERNAL_DOCUMENT{Văn bản nội bộ} MY_PROFILE{Thông tin cá nhân} SETTINGS{Cài đặt} OUTGOING_DOCUMENT_LIST{Danh sách văn bản đi} other{} other{}}",
 	"@mainPage": {
 		"placeholders": {
 			"menu": {
@@ -105,5 +105,15 @@
 	"transferType": "Loại chuyển",
 	"transferType2": "Cùng cấp",
 	"transferType1": "Chuyển xử lý",
-	"processMethod": "Cách thức xử lý"
+	"processMethod": "Cách thức xử lý",
+	"noData": "Không có dữ liệu",
+	"failToFetchData": "Xảy ra lỗi trong lúc lấy dữ liệu",
+	"originalSymbolNumber": "Số ký hiệu gốc",
+	"processingDuration": "Thời hạn xử lý",
+	"arrivingDate": "Ngày đến",
+	"issuePlace": "Nơi phát hành",
+	"summary": "Trích yếu",
+	"status": "Trạng thái",
+	"seeDetail": "Xem chi tiết",
+	"releaseNumber": "Số phát hành"
 }

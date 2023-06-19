@@ -35,7 +35,7 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Số ký hiệu gốc: ${widget.outgoingDocument.originalSymbolNumber}",
+                "${AppLocalizations.of(context)!.originalSymbolNumber}: ${widget.outgoingDocument.originalSymbolNumber}",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
               ),
@@ -45,7 +45,7 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                     color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
               ),
               Text(
-                "Số phát hành: ${widget.outgoingDocument.outgoingNumber ?? ""}",
+                "${AppLocalizations.of(context)!.releaseNumber}: ${widget.outgoingDocument.outgoingNumber ?? ""}",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
               ),
@@ -83,7 +83,7 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Ngày đến:",
+                      "${AppLocalizations.of(context)!.arrivingDate}:",
                       style: bodyLarge(context),
                     )),
                     Flexible(
@@ -105,7 +105,7 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Nơi phát hành:",
+                      "${AppLocalizations.of(context)!.issuePlace}:",
                       style: bodyLarge(context),
                     )),
                     Flexible(
@@ -122,7 +122,7 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Trích yếu",
+                      "${AppLocalizations.of(context)!.summary}:",
                       style: bodyLarge(context),
                     )),
                     Flexible(
@@ -158,7 +158,7 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Trạng thái:",
+                      "${AppLocalizations.of(context)!.status}:",
                       style: bodyLarge(context),
                     )),
                     Flexible(
@@ -181,7 +181,6 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                             MyRouter.outgoingDocumentDetail,
                             arguments: DocumentDetailArgs(
                                 documentId: widget.outgoingDocument.id ?? -1));
-
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -197,7 +196,7 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            "Xem chi tiết",
+                            AppLocalizations.of(context)!.seeDetail,
                             style: bodyLarge(context)
                                 ?.copyWith(color: Colors.white),
                           ),

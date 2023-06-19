@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<String> listTitle = [
     "INCOMING_DOCUMENT_LIST",
-    "OUTGOING_DOCUMENT",
+    "OUTGOING_DOCUMENT_LIST",
     "REMINDER",
     "ACCOUNT",
   ];
@@ -141,15 +141,18 @@ class _HomeScreenState extends State<HomeScreen> {
             bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               items: [
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.home), label: "Văn bản đến"),
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.schedule), label: "Văn bản đi"),
+                BottomNavigationBarItem(
+                    icon: const Icon(Icons.home),
+                    label: appLocalizations.mainPage("INCOMING_DOCUMENT")),
+                BottomNavigationBarItem(
+                    icon: const Icon(Icons.schedule),
+                    label: appLocalizations.mainPage("OUTGOING_DOCUMENT")),
                 BottomNavigationBarItem(
                     icon: const Icon(Icons.calendar_month),
                     label: appLocalizations.mainPage("REMINDER")),
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.person), label: "Tài khoản"),
+                BottomNavigationBarItem(
+                    icon: const Icon(Icons.person),
+                    label: appLocalizations.mainPage("ACCOUNT")),
               ],
               currentIndex: _currentIndex,
               onTap: _onTapBottomNavigation,

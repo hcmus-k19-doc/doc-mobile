@@ -3,6 +3,7 @@ import 'package:flutter_app/bloc/list_outgoing_bloc/list_outgoing_bloc.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/ui/pages/list_outgoing_doc/widgets/outgoing_document_tile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BuildListOutgoingDocument extends StatefulWidget {
   const BuildListOutgoingDocument({Key? key}) : super(key: key);
@@ -75,11 +76,11 @@ class _BuildListOutgoingDocumentState extends State<BuildListOutgoingDocument> {
                       )
                     ],
                   )),
-              Text("No data"),
+              Text(AppLocalizations.of(context)!.noData),
             ]);
           }
           if (state is ListOutgoingFailure) {
-            return const Text("Xảy ra lỗi trong lúc lấy dữ liệu");
+            return Text(AppLocalizations.of(context)!.failToFetchData);
           }
           return const SizedBox();
         });

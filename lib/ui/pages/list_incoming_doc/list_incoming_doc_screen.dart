@@ -74,39 +74,39 @@ class _ListIncomingDocScreenState extends State<ListIncomingDocScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Hiện tại bạn có:",
-                style: headLineSmall(context),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: StyleConst.defaultPadding16,
-                    top: StyleConst.defaultPadding8),
-                child: RichText(
-                  text: TextSpan(
-                      style: bodyLarge(context)?.copyWith(fontSize: 18),
-                      children: [
-                        TextSpan(text: "$numUnHandle văn bản "),
-                        const TextSpan(
-                            text: "chưa xử lý\n",
-                            style: TextStyle(color: Colors.green)),
-                        TextSpan(text: "$numCoopHandle văn bản "),
-                        const TextSpan(
-                            text: "cần phối hợp xử lý\n",
-                            style: TextStyle(color: Colors.cyan)),
-                        TextSpan(text: "$numExpired văn bản "),
-                        const TextSpan(
-                            text: "quá hạn\n",
-                            style: TextStyle(color: Colors.red)),
-                      ]),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: StyleConst.defaultPadding16),
-                child: Divider(
-                  thickness: 2,
-                ),
-              ),
+              // Text(
+              //   "Hiện tại bạn có:",
+              //   style: headLineSmall(context),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(
+              //       left: StyleConst.defaultPadding16,
+              //       top: StyleConst.defaultPadding8),
+              //   child: RichText(
+              //     text: TextSpan(
+              //         style: bodyLarge(context)?.copyWith(fontSize: 18),
+              //         children: [
+              //           TextSpan(text: "$numUnHandle văn bản "),
+              //           const TextSpan(
+              //               text: "chưa xử lý\n",
+              //               style: TextStyle(color: Colors.green)),
+              //           TextSpan(text: "$numCoopHandle văn bản "),
+              //           const TextSpan(
+              //               text: "cần phối hợp xử lý\n",
+              //               style: TextStyle(color: Colors.cyan)),
+              //           TextSpan(text: "$numExpired văn bản "),
+              //           const TextSpan(
+              //               text: "quá hạn\n",
+              //               style: TextStyle(color: Colors.red)),
+              //         ]),
+              //   ),
+              // ),
+              // const Padding(
+              //   padding: EdgeInsets.only(bottom: StyleConst.defaultPadding16),
+              //   child: Divider(
+              //     thickness: 2,
+              //   ),
+              // ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
