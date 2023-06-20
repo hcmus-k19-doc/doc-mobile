@@ -45,4 +45,16 @@ class DisplayMap {
     'READY_TO_RELEASE':"Sẵn sàng phát hành",
     "WAITING_FOR_OUTGOING_NUMBER":"Chờ số đi"
   };
+
+  static const List<String> outgoingProcess = [
+    "Chuyên viên",
+    "Trưởng phòng",
+    "Giám đốc"
+  ];
+
+  static const List<String> incomingProcess = [
+    "Giám đốc",
+    "Trưởng phòng",
+    "Văn thư"
+  ];
 }

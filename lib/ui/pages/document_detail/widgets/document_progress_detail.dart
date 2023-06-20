@@ -7,9 +7,10 @@ import 'package:timelines/timelines.dart';
 import '../../../../constants/export_constants.dart';
 
 class DocumentProgressDetail extends StatefulWidget {
-  const DocumentProgressDetail({Key? key, required this.processingDetail})
+  const DocumentProgressDetail({Key? key, required this.processingDetail, this.isOutgoing})
       : super(key: key);
   final List<ProcessingDetail> processingDetail;
+  final bool isOutgoing;
 
   @override
   State<DocumentProgressDetail> createState() => _DocumentProgressDetailState();
@@ -17,11 +18,17 @@ class DocumentProgressDetail extends StatefulWidget {
 
 class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
   bool _isExpanded = false;
-  final List<String> upcomingProcess = [
-    "Chuyên viên",
-    "Trưởng phòng",
-    "Giám đốc"
-  ];
+  List<String> upcomingProcess = [];
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.isOutgoing) {
+        upcomingProcess = DisplayMap.outgoingProcess;
+      } else {
+      upcomingProcess = DisplayMap.incomingProcess;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +71,6 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
-                      // itemCount: test.length,
                       itemCount: widget.processingDetail.length,
                       itemBuilder: (BuildContext context, int index) {
                         return TimelineTile(

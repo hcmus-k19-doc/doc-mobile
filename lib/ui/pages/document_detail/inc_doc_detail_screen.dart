@@ -75,13 +75,14 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                             incomingDocument: detailDocument,
                           )),
                       DocumentAttachment(
-                        incomingDocument: detailDocument,
+                        pdfFileUrls: detailDocument.attachments ?? [],
                       ),
                       Container(
                           padding:
                               const EdgeInsets.all(StyleConst.defaultPadding16),
                           child: DocumentProgressDetail(
                             processingDetail: processingDetail,
+                            isOutgoing: false,
                           )),
                       Container(
                           padding:
