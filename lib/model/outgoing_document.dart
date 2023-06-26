@@ -1,5 +1,6 @@
 import 'package:flutter_app/model/document_type.dart';
 import 'package:flutter_app/model/folder.dart';
+import 'package:flutter_app/model/incoming_document.dart';
 import 'package:flutter_app/model/publishing_department.dart';
 
 class OutgoingDocument {
@@ -19,7 +20,7 @@ class OutgoingDocument {
   String? releaseDate;
   PublishingDepartment? publishingDepartment;
   String? status;
-  List<String>? attachments;
+  List<Attachment>? attachments;
   bool? isDocTransferred;
   bool? isDocCollaborator;
 
@@ -65,8 +66,9 @@ class OutgoingDocument {
         ? PublishingDepartment.fromJson(json['publishingDepartment'])
         : null;
     status = json['status'];
-    attachments =
-        json["attachments"] != null ? json['attachments'].cast<String>() : null;
+    attachments = json["attachments"] != null
+        ? List<Attachment>.from(json['attachments'].map((attachment)=>Attachment.fromJson(attachment)))
+        : null;
     isDocTransferred = json['isDocTransferred'];
     isDocCollaborator = json['isDocCollaborator'];
   }

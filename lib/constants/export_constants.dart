@@ -47,14 +47,14 @@ class DisplayMap {
   };
 
   static const List<String> outgoingProcess = [
-    "Chuyên viên",
+    "Giám đốc",
     "Trưởng phòng",
-    "Giám đốc"
+    "Chuyên viên"
   ];
 
   static const List<String> incomingProcess = [
-    "Giám đốc",
+    "Văn thư",
     "Trưởng phòng",
-    "Văn thư"
+    "Giám đốc"
   ];
 }
