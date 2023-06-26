@@ -6,9 +6,9 @@ import 'package:flutter_app/model/incoming_document.dart';
 import '../../../../app/router.dart';
 
 class DocumentAttachment extends StatefulWidget {
-  const DocumentAttachment({Key? key, required this.incomingDocument})
+  const DocumentAttachment({Key? key, required this.pdfFileUrls})
       : super(key: key);
-  final IncomingDocument? incomingDocument;
+  final List<String> pdfFileUrls;
 
   @override
   State<DocumentAttachment> createState() => _DocumentAttachmentState();

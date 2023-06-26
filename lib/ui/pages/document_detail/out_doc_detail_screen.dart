@@ -72,14 +72,15 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
                             const EdgeInsets.all(StyleConst.defaultPadding16),
                         child: OutDocumentTileDetail(
                             outgoingDocument: detailDocument)),
-                      const DocumentAttachment(
-                        incomingDocument: null,
+                       DocumentAttachment(
+                        pdfFileUrls: detailDocument.attachments ?? [],
                       ),
                         Container(
                             padding:
                             const EdgeInsets.all(StyleConst.defaultPadding16),
                             child: DocumentProgressDetail(
                               processingDetail: processingDetail,
+                              isOutgoing: true,
                             )),
                       Container(
                           padding:
