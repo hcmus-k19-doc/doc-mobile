@@ -6,7 +6,8 @@ import 'package:timelines/timelines.dart';
 import '../../../../constants/export_constants.dart';
 
 class DocumentProgressDetail extends StatefulWidget {
-  const DocumentProgressDetail({Key? key, required this.processingDetail, required this.isOutgoing})
+  const DocumentProgressDetail(
+      {Key? key, required this.processingDetail, required this.isOutgoing})
       : super(key: key);
   final List<ProcessingDetail> processingDetail;
   final bool isOutgoing;
@@ -23,8 +24,8 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
   void initState() {
     super.initState();
     if (widget.isOutgoing) {
-        upcomingProcess = DisplayMap.outgoingProcess;
-      } else {
+      upcomingProcess = DisplayMap.outgoingProcess;
+    } else {
       upcomingProcess = DisplayMap.incomingProcess;
     }
   }
@@ -81,8 +82,12 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(widget.processingDetail[index].processingUser?.roleTitle??upcomingProcess[index],
-                                        style: bodyLargeBold(context)?.copyWith(fontSize: 16)),
+                                    Text(
+                                        widget.processingDetail[index]
+                                                .processingUser?.roleTitle ??
+                                            upcomingProcess[index],
+                                        style: bodyLargeBold(context)
+                                            ?.copyWith(fontSize: 16)),
                                     Text(
                                         "${widget.processingDetail[index].processingUser?.fullName} - ${widget.processingDetail[index].processingUser?.department}",
                                         style: bodyLarge(context)),
@@ -103,14 +108,21 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
-                      itemCount: (upcomingProcess.length - widget.processingDetail.length>0)?upcomingProcess.length - widget.processingDetail.length:0,
+                      itemCount: (upcomingProcess.length -
+                                  widget.processingDetail.length >
+                              0)
+                          ? upcomingProcess.length -
+                              widget.processingDetail.length
+                          : 0,
                       itemBuilder: (BuildContext context, int index) {
                         return SizedBox(
                           child: TimelineTile(
                             nodeAlign: TimelineNodeAlign.start,
                             contents: Padding(
                               padding: const EdgeInsets.all(16.0),
-                              child: Text(upcomingProcess[index + widget.processingDetail.length],
+                              child: Text(
+                                  upcomingProcess[
+                                      index + widget.processingDetail.length],
                                   style: bodyLarge(context)),
                             ),
                             node: const TimelineNode(
