@@ -75,7 +75,7 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                             incomingDocument: detailDocument,
                           )),
                       DocumentAttachment(
-                        pdfFileUrls: detailDocument.attachments ?? [],
+                        attachments: detailDocument.attachments ?? [],
                       ),
                       Container(
                           padding:

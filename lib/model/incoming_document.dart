@@ -15,7 +15,7 @@ class IncomingDocument {
   String? summary;
   SendingLevel? sendingLevel;
   Folder? folder;
-  List<String>? attachments;
+  List<Attachment>? attachments;
   String? distributionDate;
   String? arrivingTime;
   String? urgency;
@@ -59,8 +59,9 @@ class IncomingDocument {
         ? SendingLevel.fromJson(json['sendingLevel'])
         : null;
     folder = json['folder'] != null ? Folder.fromJson(json['folder']) : null;
-    attachments =
-        json["attachments"] != null ? json['attachments'].cast<String>() : null;
+    attachments = json["attachments"] != null
+        ? List<Attachment>.from(json['attachments'].map((attachment)=>Attachment.fromJson(attachment)))
+        : null;
     distributionDate = json['distributionDate'];
     arrivingTime = json['arrivingTime'];
     urgency = json['urgency'];
@@ -116,6 +117,51 @@ class SendingLevel {
     data['id'] = id;
     data['version'] = version;
     data['level'] = level;
+    return data;
+  }
+}
+
+class Attachment {
+  int? id;
+  num? version;
+  String? createdDate;
+  String? createdBy;
+  int? docId;
+  String? alfrescoFileId;
+  String? alfrescoFolderId;
+  String? fileType;
+
+  Attachment(
+      {this.id,
+        this.version,
+        this.createdDate,
+        this.createdBy,
+        this.docId,
+        this.alfrescoFileId,
+        this.alfrescoFolderId,
+        this.fileType});
+
+  Attachment.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    version = json['version'];
+    createdDate = json['createdDate'];
+    createdBy = json['createdBy'];
+    docId = json['docId'];
+    alfrescoFileId = json['alfrescoFileId'];
+    alfrescoFolderId = json['alfrescoFolderId'];
+    fileType = json['fileType'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['version'] = version;
+    data['createdDate'] = createdDate;
+    data['createdBy'] = createdBy;
+    data['docId'] = docId;
+    data['alfrescoFileId'] = alfrescoFileId;
+    data['alfrescoFolderId'] = alfrescoFolderId;
+    data['fileType'] = fileType;
     return data;
   }
 }

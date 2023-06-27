@@ -113,12 +113,6 @@ class LoginScreen extends StatelessWidget {
                                 passwordTextEditingController:
                                     passwordEditingController,
                               ),
-                              ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context)
-                                        .pushNamed(MyRouter.incomingDocumentDetail, arguments: DocumentDetailArgs(documentId: -1));
-                                  },
-                                  child: Text("test"))
                             ],
                           ))
                     ],

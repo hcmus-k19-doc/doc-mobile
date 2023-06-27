@@ -73,7 +73,7 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
                         child: OutDocumentTileDetail(
                             outgoingDocument: detailDocument)),
                        DocumentAttachment(
-                        pdfFileUrls: detailDocument.attachments ?? [],
+                        attachments: detailDocument.attachments ?? [],
                       ),
                         Container(
                             padding:

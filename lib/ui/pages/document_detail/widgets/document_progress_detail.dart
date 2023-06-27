@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/processing_detail.dart';
 import 'package:timelines/timelines.dart';
@@ -8,7 +7,7 @@ import '../../../../constants/export_constants.dart';
 
 class DocumentProgressDetail extends StatefulWidget {
   const DocumentProgressDetail(
-      {Key? key, required this.processingDetail, this.isOutgoing = false})
+      {Key? key, required this.processingDetail, required this.isOutgoing})
       : super(key: key);
   final List<ProcessingDetail> processingDetail;
   final bool isOutgoing;
@@ -83,7 +82,10 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(upcomingProcess[index] ?? "",
+                                    Text(
+                                        widget.processingDetail[index]
+                                                .processingUser?.roleTitle ??
+                                            upcomingProcess[index],
                                         style: bodyLargeBold(context)
                                             ?.copyWith(fontSize: 16)),
                                     Text(
@@ -93,7 +95,6 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
                                 ),
                               ],
                             ),
-                            // child: Text(widget.processingDetail[index].processingUser?.fullName??""),
                           ),
                           node: const TimelineNode(
                             indicator: DotIndicator(),
@@ -107,8 +108,12 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
-                      itemCount: upcomingProcess.length -
-                          widget.processingDetail.length,
+                      itemCount: (upcomingProcess.length -
+                                  widget.processingDetail.length >
+                              0)
+                          ? upcomingProcess.length -
+                              widget.processingDetail.length
+                          : 0,
                       itemBuilder: (BuildContext context, int index) {
                         return SizedBox(
                           child: TimelineTile(
