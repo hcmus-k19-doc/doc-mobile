@@ -6,9 +6,9 @@ import 'package:flutter_app/model/incoming_document.dart';
 import '../../../../app/router.dart';
 
 class DocumentAttachment extends StatefulWidget {
-  const DocumentAttachment({Key? key, required this.pdfFileUrls})
+  const DocumentAttachment({Key? key, required this.attachments})
       : super(key: key);
-  final List<String> pdfFileUrls;
+  final List<Attachment> attachments;
 
   @override
   State<DocumentAttachment> createState() => _DocumentAttachmentState();
@@ -17,16 +17,21 @@ class DocumentAttachment extends StatefulWidget {
 class _DocumentAttachmentState extends State<DocumentAttachment> {
   bool _isExpanded = false;
   late bool _hasFiles;
+  late List<String> fileNames;
   late List<String> pdfUrls;
 
   @override
   void initState() {
     super.initState();
-    // _hasFiles = widget.incomingDocument.attachments?.isNotEmpty ?? false;
-    _hasFiles = true;
-    pdfUrls = [
-      "${UrlConst.DOC_FILE_URL}/files/s3/ICD/1042/CTDA - Cac moc thoi gian KLTN-DATN_TTTN_2022_2023.pdf",
-    ];
+    _hasFiles = widget.attachments.isNotEmpty;
+    if (_hasFiles) {
+      for (var element in widget.attachments) {
+        var fileName = element.alfrescoFileId?.replaceAll("${element.alfrescoFolderId}", "")??"No_title.pdf";
+        fileNames.add(fileName);
+        var url = "${UrlConst.DOC_FILE_URL}/${element.alfrescoFileId}";
+        pdfUrls.add(url);
+      }
+    }
   }
 
   @override
@@ -89,8 +94,7 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
                                     ),
                                   ),
                                   Expanded(
-                                      child: Text(
-                                    "Filename.pdf",
+                                      child: Text(fileNames[index],
                                     style: bodyLarge(context),
                                   ))
                                 ],
@@ -99,8 +103,7 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
                             onTap: (){
                               Navigator.pushNamed(context, MyRouter.pdfViewer,
                                   arguments: PdfViewerArguments(
-                                      title:
-                                      "No title",
+                                      title:fileNames[index],
                                       pdfUrl: pdfUrls[index]));
                             }
                           );
