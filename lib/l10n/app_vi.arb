@@ -105,5 +105,13 @@
 	"transferType": "Loại chuyển",
 	"transferType2": "Cùng cấp",
 	"transferType1": "Chuyển xử lý",
-	"processMethod": "Cách thức xử lý"
+	"processMethod": "Cách thức xử lý",
+	"documentTypeReminder": "{documentTypeReminder, select, OUTGOING_DOCUMENT{Văn bản đi} INCOMING_DOCUMENT{Văn bản đến} other{Khác}}",
+	"@documentTypeReminder": {
+		"placeholders": {
+			"documentTypeReminder": {
+				"type": "String"
+			}
+		}
+	}
 }

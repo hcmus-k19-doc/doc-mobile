@@ -6,6 +6,7 @@ import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
 import 'package:flutter_app/model/reminder_detail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ReminderTile extends StatelessWidget {
   const ReminderTile({Key? key, required this.reminder}) : super(key: key);
@@ -40,21 +41,33 @@ class ReminderTile extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    reminder.documentNumber ?? "",
-                    style: bodyLargeBold(context),
-                  ),
-                  const SizedBox(
-                    height: StyleConst.defaultPadding4,
-                  ),
-                  Text(
-                    reminder.summary ?? "",
-                    style: bodyLarge(context)?.copyWith(color: Colors.grey),
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "${AppLocalizations.of(context)!.documentTypeReminder(reminder.documentType ?? "")}: ",
+                          style: bodyLargeBold(context),
+                        ),
+                        Expanded(
+                          child: Text(
+                            reminder.documentName ?? "",
+                            style: bodyLargeBold(context),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: StyleConst.defaultPadding4,
+                    ),
+                    Text(
+                      reminder.summary ?? "",
+                      style: bodyLarge(context)?.copyWith(color: Colors.grey),
+                    ),
+                  ],
+                ),
               ),
               Text(reminder.expirationDate ?? "",
                   style: bodyLarge(context)?.copyWith(color: Colors.grey))
