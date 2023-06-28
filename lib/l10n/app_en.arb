@@ -115,5 +115,13 @@
 	"summary": "Summary",
 	"status": "Status",
 	"seeDetail": "See detail",
-	"releaseNumber": "Release Number"
+	"releaseNumber": "Release Number",
+	"documentTypeReminder": "{documentTypeReminder, select, OUTGOING_DOCUMENT{Outgoing doc} INCOMING_DOCUMENT{Incoming doc} other{Khác}}",
+	"@documentTypeReminder": {
+		"placeholders": {
+			"documentTypeReminder": {
+				"type": "String"
+			}
+		}
+	}
 }

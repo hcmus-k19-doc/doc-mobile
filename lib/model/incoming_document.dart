@@ -130,6 +130,7 @@ class Attachment {
   String? alfrescoFileId;
   String? alfrescoFolderId;
   String? fileType;
+  String? fileName;
 
   Attachment(
       {this.id,
@@ -139,7 +140,8 @@ class Attachment {
         this.docId,
         this.alfrescoFileId,
         this.alfrescoFolderId,
-        this.fileType});
+        this.fileType,
+        this.fileName});
 
   Attachment.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -150,6 +152,7 @@ class Attachment {
     alfrescoFileId = json['alfrescoFileId'];
     alfrescoFolderId = json['alfrescoFolderId'];
     fileType = json['fileType'];
+    fileName = json['fileName'];
   }
 
   Map<String, dynamic> toJson() {
@@ -162,6 +165,7 @@ class Attachment {
     data['alfrescoFileId'] = alfrescoFileId;
     data['alfrescoFolderId'] = alfrescoFolderId;
     data['fileType'] = fileType;
+    data['fileName'] = fileName;
     return data;
   }
 }

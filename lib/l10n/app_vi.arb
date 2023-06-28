@@ -115,5 +115,13 @@
 	"summary": "Trích yếu",
 	"status": "Trạng thái",
 	"seeDetail": "Xem chi tiết",
-	"releaseNumber": "Số phát hành"
+	"releaseNumber": "Số phát hành",
+	"documentTypeReminder": "{documentTypeReminder, select, OUTGOING_DOCUMENT{Văn bản đi} INCOMING_DOCUMENT{Văn bản đến} other{Khác}}",
+	"@documentTypeReminder": {
+		"placeholders": {
+			"documentTypeReminder": {
+				"type": "String"
+			}
+		}
+	}
 }

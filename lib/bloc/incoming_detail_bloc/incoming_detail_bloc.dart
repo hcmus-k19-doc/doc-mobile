@@ -15,20 +15,25 @@ part 'incoming_detail_event.dart';
 
 part 'incoming_detail_state.dart';
 
-class IncomingDetailBloc extends Bloc<IncomingDetailEvent, IncomingDetailState> {
+class IncomingDetailBloc
+    extends Bloc<IncomingDetailEvent, IncomingDetailState> {
   IncomingDocumentRepository incomingRepository;
   int documentId;
 
-  IncomingDetailBloc(this.incomingRepository, this.documentId) : super(IncomingDetailLoadingState()) {
+  IncomingDetailBloc(this.incomingRepository, this.documentId)
+      : super(IncomingDetailLoadingState()) {
     on<FetchIncomingDetailEvent>((event, emit) async {
-     emit(IncomingDetailLoadingState());
-     try {
-       final incomingDocument = await incomingRepository.getIncomingDocumentDetailById(documentId);
-       final processingDetail = await incomingRepository.getIncomingDocumentProcessById(documentId);
-       emit(IncomingDetailSuccessState(incomingDocument, processingDetail));
-     } catch (e) {
-       emit(IncomingDetailFailureState(e.toString()));
-     }
+      emit(IncomingDetailLoadingState());
+      try {
+        final incomingDocument =
+            await incomingRepository.getIncomingDocumentDetailById(documentId);
+        final processingDetail =
+            await incomingRepository.getIncomingDocumentProcessById(documentId);
+        emit(IncomingDetailSuccessState(incomingDocument, processingDetail));
+      } catch (e) {
+        print(e);
+        emit(IncomingDetailFailureState(e.toString()));
+      }
     });
   }
 }

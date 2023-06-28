@@ -17,8 +17,8 @@ class DocumentAttachment extends StatefulWidget {
 class _DocumentAttachmentState extends State<DocumentAttachment> {
   bool _isExpanded = false;
   late bool _hasFiles;
-  late List<String> fileNames;
-  late List<String> pdfUrls;
+  List<String> fileNames = [];
+  List<String> pdfUrls = [];
 
   @override
   void initState() {
@@ -26,8 +26,7 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
     _hasFiles = widget.attachments.isNotEmpty;
     if (_hasFiles) {
       for (var element in widget.attachments) {
-        var fileName = element.alfrescoFileId?.replaceAll("${element.alfrescoFolderId}", "")??"No_title.pdf";
-        fileNames.add(fileName);
+        fileNames.add(element.fileName??"Attachment.pdf");
         var url = "${UrlConst.DOC_FILE_URL}/${element.alfrescoFileId}";
         pdfUrls.add(url);
       }
