@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../app/router.dart';
 
@@ -26,7 +27,7 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
     _hasFiles = widget.attachments.isNotEmpty;
     if (_hasFiles) {
       for (var element in widget.attachments) {
-        fileNames.add(element.fileName??"Attachment.pdf");
+        fileNames.add(element.fileName ?? "Attachment.pdf");
         var url = "${UrlConst.DOC_FILE_URL}/${element.alfrescoFileId}";
         pdfUrls.add(url);
       }
@@ -37,8 +38,8 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
   Widget build(BuildContext context) {
     return _hasFiles
         ? Container(
-      padding:  const EdgeInsets.all(StyleConst.defaultPadding16),
-          child: Card(
+            padding: const EdgeInsets.all(StyleConst.defaultPadding16),
+            child: Card(
               elevation: 3,
               clipBehavior: Clip.hardEdge,
               shape: RoundedRectangleBorder(
@@ -49,29 +50,28 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
                 title: Padding(
                   padding: const EdgeInsets.all(StyleConst.defaultPadding4),
                   child: Text(
-                    "Tệp đính kèm",
-                    style: bodyLargeBold(context)?.copyWith(fontSize: 18,
-                  color: Colors.black),
-            ),
-          ),
-          trailing: AnimatedRotation(
-              turns: _isExpanded ? .5 : 0,
-              duration: const Duration(milliseconds: 300),
-              child: const Icon(Icons.keyboard_arrow_down_sharp)),
-          onExpansionChanged: (value) {
-            setState(() {
-              _isExpanded = value;
-            });
-          },
-          children: [
-            const Divider(
-              thickness: 1,
-              height: 1,
-              indent: StyleConst.defaultPadding16,
-              endIndent: StyleConst.defaultPadding16
-            ),
-            Padding(
-              padding: const EdgeInsets.all(StyleConst.defaultPadding16),
+                    AppLocalizations.of(context)!.attachmentFile,
+                    style: bodyLargeBold(context)
+                        ?.copyWith(fontSize: 18, color: Colors.black),
+                  ),
+                ),
+                trailing: AnimatedRotation(
+                    turns: _isExpanded ? .5 : 0,
+                    duration: const Duration(milliseconds: 300),
+                    child: const Icon(Icons.keyboard_arrow_down_sharp)),
+                onExpansionChanged: (value) {
+                  setState(() {
+                    _isExpanded = value;
+                  });
+                },
+                children: [
+                  const Divider(
+                      thickness: 1,
+                      height: 1,
+                      indent: StyleConst.defaultPadding16,
+                      endIndent: StyleConst.defaultPadding16),
+                  Padding(
+                    padding: const EdgeInsets.all(StyleConst.defaultPadding16),
                     child: ListView.builder(
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
@@ -80,38 +80,39 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
                         itemCount: pdfUrls.length,
                         itemBuilder: (BuildContext context, int index) {
                           return GestureDetector(
-                            child: Container(
-                              padding: const EdgeInsets.only(bottom: 16),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                    child: Image.asset(
-                                      ImagesPath.pdfFile,
-                                      height: 28,
+                              child: Container(
+                                padding: const EdgeInsets.only(bottom: 16),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                      child: Image.asset(
+                                        ImagesPath.pdfFile,
+                                        height: 28,
+                                      ),
                                     ),
-                                  ),
-                                  Expanded(
-                                      child: Text(fileNames[index],
-                                    style: bodyLarge(context),
-                                  ))
-                                ],
+                                    Expanded(
+                                        child: Text(
+                                      fileNames[index],
+                                      style: bodyLarge(context),
+                                    ))
+                                  ],
+                                ),
                               ),
-                            ),
-                            onTap: (){
-                              Navigator.pushNamed(context, MyRouter.pdfViewer,
-                                  arguments: PdfViewerArguments(
-                                      title:fileNames[index],
-                                      pdfUrl: pdfUrls[index]));
-                            }
-                          );
+                              onTap: () {
+                                Navigator.pushNamed(context, MyRouter.pdfViewer,
+                                    arguments: PdfViewerArguments(
+                                        title: fileNames[index],
+                                        pdfUrl: pdfUrls[index]));
+                              });
                         }),
                   )
                 ],
               ),
             ),
-        )
+          )
         : const SizedBox();
   }
 }

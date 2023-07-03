@@ -123,5 +123,24 @@
 				"type": "String"
 			}
 		}
-	}
+	},
+	"detailIncomingDoc": "Chi tiết văn bản đến",
+	"docInfo": "Thông tin văn bản",
+	"numWithFolder": "Số theo sổ VB",
+	"unKnown": "Không xác định",
+	"issueDate": "Ngày phát hành",
+	"sendingLevelString": "Cấp gửi",
+	"folderDoc": "Hồ sơ công việc",
+	"secretLevel": "Độ mật",
+	"emergencyLevel": "Độ khẩn",
+	"attachmentFile": "Tệp đính kèm",
+	"progressInfo": "Thông tin luân chuyển",
+	"end": "Kết thúc",
+	"comment": "Góp ý",
+	"endDocument": "Kết thúc văn bản",
+	"close": "Đóng",
+	"detailOutgoingDoc": "Chi tiết văn bản đi",
+	"issueUnit": "Đơn vị phát hành",
+	"receiveUnit": "Đơn vị nhận",
+	"signer": "Người ký"
 }

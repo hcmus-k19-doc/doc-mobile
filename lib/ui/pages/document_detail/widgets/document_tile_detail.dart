@@ -3,6 +3,7 @@ import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DocumentTileDetail extends StatefulWidget {
   const DocumentTileDetail({Key? key, required this.incomingDocument})
@@ -33,9 +34,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
         title: Padding(
           padding: const EdgeInsets.all(StyleConst.defaultPadding4),
           child: Text(
-            "Thông tin văn bản",
-            style: bodyLargeBold(context)?.copyWith(fontSize: 18,
-                color: Colors.black),
+            AppLocalizations.of(context)!.docInfo,
+            style: bodyLargeBold(context)
+                ?.copyWith(fontSize: 18, color: Colors.black),
           ),
         ),
         trailing: AnimatedRotation(
@@ -49,11 +50,10 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
         },
         children: [
           const Divider(
-            thickness: 1,
-            height: 1,
-            indent: StyleConst.defaultPadding16,
-            endIndent: StyleConst.defaultPadding16
-          ),
+              thickness: 1,
+              height: 1,
+              indent: StyleConst.defaultPadding16,
+              endIndent: StyleConst.defaultPadding16),
           Padding(
             padding: const EdgeInsets.all(StyleConst.defaultPadding16),
             child: Column(
@@ -63,13 +63,14 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                          "Số theo sổ VB:",
-                          style: bodyLargeBold(context),
-                        )),
+                      "${AppLocalizations.of(context)!.numWithFolder}:",
+                      style: bodyLargeBold(context),
+                    )),
                     Flexible(
                         flex: 2,
                         child: Text(
-                          widget.incomingDocument.incomingNumber??"Không xác định",
+                          widget.incomingDocument.incomingNumber ??
+                              AppLocalizations.of(context)!.unKnown,
                           style: bodyLarge(context),
                         ))
                   ],
@@ -82,13 +83,14 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                          "Số ký hiệu gốc:",
-                          style: bodyLargeBold(context),
-                        )),
+                      "${AppLocalizations.of(context)!.originalSymbolNumber}:",
+                      style: bodyLargeBold(context),
+                    )),
                     Flexible(
                         flex: 2,
                         child: Text(
-                          widget.incomingDocument.originalSymbolNumber??"Không xác định",
+                          widget.incomingDocument.originalSymbolNumber ??
+                              AppLocalizations.of(context)!.unKnown,
                           style: bodyLarge(context),
                         ))
                   ],
@@ -101,13 +103,14 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                          "Loại văn bản:",
-                          style: bodyLargeBold(context),
-                        )),
+                      "${AppLocalizations.of(context)!.searchCriteriaBar("document_type")}:",
+                      style: bodyLargeBold(context),
+                    )),
                     Flexible(
                         flex: 2,
                         child: Text(
-                          widget.incomingDocument.documentType?.type??"Không xác định",
+                          widget.incomingDocument.documentType?.type ??
+                              AppLocalizations.of(context)!.unKnown,
                           style: bodyLarge(context),
                         ))
                   ],
@@ -120,13 +123,14 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Ngày đến:",
+                      "${AppLocalizations.of(context)!.arrivingDate}:",
                       style: bodyLargeBold(context),
                     )),
                     Flexible(
                       flex: 2,
                       child: Text(
-                        widget.incomingDocument.arrivingDate??"Không xác định",
+                        widget.incomingDocument.arrivingDate ??
+                            AppLocalizations.of(context)!.unKnown,
                         style: bodyLarge(context),
                       ),
                     )
@@ -140,13 +144,14 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                          "Ngày phát hành:",
-                          style: bodyLargeBold(context),
-                        )),
+                      "${AppLocalizations.of(context)!.issueDate}:",
+                      style: bodyLargeBold(context),
+                    )),
                     Flexible(
                       flex: 2,
                       child: Text(
-                        widget.incomingDocument.distributionDate??"Không xác định",
+                        widget.incomingDocument.distributionDate ??
+                            AppLocalizations.of(context)!.unKnown,
                         style: bodyLarge(context),
                       ),
                     )
@@ -160,9 +165,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                          "Cấp gửi:",
-                          style: bodyLargeBold(context),
-                        )),
+                      "${AppLocalizations.of(context)!.sendingLevelString}:",
+                      style: bodyLargeBold(context),
+                    )),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -179,13 +184,14 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Nơi phát hành:",
+                      "${AppLocalizations.of(context)!.issuePlace}:",
                       style: bodyLargeBold(context),
                     )),
                     Flexible(
                         flex: 2,
                         child: Text(
-                          widget.incomingDocument.distributionOrg?.name??"Không xác định",
+                          widget.incomingDocument.distributionOrg?.name ??
+                              AppLocalizations.of(context)!.unKnown,
                           style: bodyLarge(context),
                         ))
                   ],
@@ -196,13 +202,14 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Trích yếu",
+                      "${AppLocalizations.of(context)!.summary}:",
                       style: bodyLargeBold(context),
                     )),
                     Flexible(
                       flex: 2,
                       child: Text(
-                        widget.incomingDocument.summary??"Không xác định",
+                        widget.incomingDocument.summary ??
+                            AppLocalizations.of(context)!.unKnown,
                         style: bodyLarge(context),
                       ),
                     )
@@ -216,13 +223,14 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                          "Hồ sơ công việc:",
-                          style: bodyLargeBold(context),
-                        )),
+                      "${AppLocalizations.of(context)!.folderDoc}:",
+                      style: bodyLargeBold(context),
+                    )),
                     Flexible(
                       flex: 2,
                       child: Text(
-                        widget.incomingDocument.folder?.folderName??"Không xác định",
+                        widget.incomingDocument.folder?.folderName ??
+                            AppLocalizations.of(context)!.unKnown,
                         style: bodyLarge(context),
                       ),
                     )
@@ -236,9 +244,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                          "Độ mật:",
-                          style: bodyLargeBold(context),
-                        )),
+                      "${AppLocalizations.of(context)!.secretLevel}:",
+                      style: bodyLargeBold(context),
+                    )),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -256,9 +264,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                          "Độ khẩn:",
-                          style: bodyLargeBold(context),
-                        )),
+                      "${AppLocalizations.of(context)!.emergencyLevel}:",
+                      style: bodyLargeBold(context),
+                    )),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -276,13 +284,14 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Trạng thái:",
+                      "${AppLocalizations.of(context)!.status}:",
                       style: bodyLargeBold(context),
                     )),
                     Flexible(
                         flex: 2,
                         child: Text(
-                          statusLevel[widget.incomingDocument.status]??"Không xác định",
+                          statusLevel[widget.incomingDocument.status] ??
+                              AppLocalizations.of(context)!.unKnown,
                           style: bodyLarge(context),
                         ))
                   ],

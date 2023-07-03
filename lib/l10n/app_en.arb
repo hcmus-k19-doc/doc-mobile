@@ -123,5 +123,24 @@
 				"type": "String"
 			}
 		}
-	}
+	},
+	"detailIncomingDoc": "Incoming Document Details",
+	"docInfo": "Document Information",
+	"numWithFolder": "Document folder",
+	"unKnown": "Unknown",
+	"issueDate": "Issuing Date",
+	"sendingLevelString": "Sending Level",
+	"folderDoc": "Job File",
+	"secretLevel": "Secrecy Level",
+	"emergencyLevel": "Emergency Level",
+	"attachmentFile": "Attachment File",
+	"progressInfo": "Transfer Information",
+	"end": "End",
+	"comment": "Comment",
+	"endDocument": "End Document",
+	"close": "Close",
+	"detailOutgoingDoc": "Outgoing Document Details",
+	"issueUnit": "Issuing Unit",
+	"receiveUnit": "Receiving Unit",
+	"signer": "Signer"
 }
