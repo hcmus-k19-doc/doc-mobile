@@ -19,6 +19,7 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
   late bool _hasFiles;
   List<String> fileNames = [];
   List<String> pdfUrls = [];
+  List<bool> isPdf = [];
 
   @override
   void initState() {
@@ -26,9 +27,14 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
     _hasFiles = widget.attachments.isNotEmpty;
     if (_hasFiles) {
       for (var element in widget.attachments) {
-        fileNames.add(element.fileName??"Attachment.pdf");
+        fileNames.add(element.fileName??"Attachment");
         var url = "${UrlConst.DOC_FILE_URL}/${element.alfrescoFileId}";
         pdfUrls.add(url);
+        if (element.fileType == "PDF") {
+          isPdf.add(true);
+        } else {
+          isPdf.add(false);
+        }
       }
     }
   }
@@ -103,7 +109,8 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
                               Navigator.pushNamed(context, MyRouter.pdfViewer,
                                   arguments: PdfViewerArguments(
                                       title:fileNames[index],
-                                      pdfUrl: pdfUrls[index]));
+                                      url: pdfUrls[index],
+                                    isPdf: isPdf[index]));
                             }
                           );
                         }),
