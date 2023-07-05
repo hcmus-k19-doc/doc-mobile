@@ -16,6 +16,7 @@ import '../../../constants/export_constants.dart';
 import '../../../model/processing_detail.dart';
 import '../../../repositories/incoming_document_repository.dart';
 import '../../../repositories/outgoing_document_repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OutgoingDocumentDetail extends StatefulWidget {
   const OutgoingDocumentDetail({Key? key, required this.documentId})
@@ -34,7 +35,7 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
       backgroundColor: ColorConst.white,
       appBar: AppBar(
         title: Text(
-          "Chi tiết văn bản đi",
+          AppLocalizations.of(context)!.detailOutgoingDoc,
           style: headLineSmall(context)?.copyWith(color: Colors.white),
         ),
       ),
@@ -72,32 +73,32 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
                             const EdgeInsets.all(StyleConst.defaultPadding16),
                         child: OutDocumentTileDetail(
                             outgoingDocument: detailDocument)),
-                       DocumentAttachment(
-                        attachments: detailDocument.attachments ?? [],
-                      ),
-                        Container(
-                            padding:
+                    DocumentAttachment(
+                      attachments: detailDocument.attachments ?? [],
+                    ),
+                    Container(
+                        padding:
                             const EdgeInsets.all(StyleConst.defaultPadding16),
-                            child: DocumentProgressDetail(
-                              processingDetail: processingDetail,
-                              isOutgoing: true,
-                            )),
-                      Container(
-                          padding:
-                              const EdgeInsets.all(StyleConst.defaultPadding16),
-                          child: Row(children: [
-                            Expanded(
-                                child: CustomElevatedButton(
-                              callback: () {
-                                Size size = MediaQuery.of(context).size;
-                                onClickCommentButton(size);
-                              },
-                              title: 'Góp ý',
-                              radius: 15,
-                              buttonType: ButtonType.filledButton,
-                            )),
-                          ])),
-                    ]));
+                        child: DocumentProgressDetail(
+                          processingDetail: processingDetail,
+                          isOutgoing: true,
+                        )),
+                    Container(
+                        padding:
+                            const EdgeInsets.all(StyleConst.defaultPadding16),
+                        child: Row(children: [
+                          Expanded(
+                              child: CustomElevatedButton(
+                            callback: () {
+                              Size size = MediaQuery.of(context).size;
+                              onClickCommentButton(size);
+                            },
+                            title: AppLocalizations.of(context)!.comment,
+                            radius: 15,
+                            buttonType: ButtonType.filledButton,
+                          )),
+                        ])),
+                  ]));
             }
             return const Center(child: Text("Đã xảy ra lỗi không xác định"));
           })),

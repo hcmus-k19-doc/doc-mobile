@@ -27,7 +27,7 @@ class _TransferHistoryScreenState extends State<TransferHistoryScreen> {
         appBar: AppBar(),
         body: Container(
           padding: const EdgeInsets.all(StyleConst.defaultPadding8),
-          child: BuildListTransfer(),
+          child: const BuildListTransfer(),
         ),
       ),
     );

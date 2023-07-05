@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
-import 'app/my_app.dart';
-import 'app/router.dart';
-import 'app/config.dart';
+import 'my_app.dart';
+import 'router.dart';
+import 'config.dart';
 
 Future<void> main() async {
   MyApp.initSystemDefault();

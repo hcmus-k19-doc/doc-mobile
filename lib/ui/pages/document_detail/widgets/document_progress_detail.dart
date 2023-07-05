@@ -4,6 +4,7 @@ import 'package:flutter_app/model/processing_detail.dart';
 import 'package:timelines/timelines.dart';
 
 import '../../../../constants/export_constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DocumentProgressDetail extends StatefulWidget {
   const DocumentProgressDetail(
@@ -42,7 +43,7 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
         title: Padding(
           padding: const EdgeInsets.all(StyleConst.defaultPadding4),
           child: Text(
-            "Thông tin luân chuyển",
+            AppLocalizations.of(context)!.progressInfo,
             style: bodyLargeBold(context)?.copyWith(
                 fontSize: 18, color: _isExpanded ? Colors.black : Colors.black),
           ),

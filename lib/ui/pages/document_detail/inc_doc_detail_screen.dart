@@ -18,6 +18,7 @@ import '../../../bloc/incoming_detail_bloc/incoming_detail_bloc.dart';
 import '../../../constants/export_constants.dart';
 import '../../../model/incoming_document.dart';
 import '../../../repositories/incoming_document_repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class IncomingDocumentDetail extends StatefulWidget {
   const IncomingDocumentDetail({Key? key, required this.documentId})
@@ -36,7 +37,7 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
       backgroundColor: ColorConst.white,
       appBar: AppBar(
         title: Text(
-          "Chi tiết văn bản đến",
+          AppLocalizations.of(context)!.detailIncomingDoc,
           style: headLineSmall(context)?.copyWith(color: Colors.white),
         ),
       ),
@@ -56,45 +57,46 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
             if (state is IncomingDetailFailureState) {
               return Center(
                   child: Text(state.responseException,
-                      style: headLineSmall(context))
-              );
+                      style: headLineSmall(context)));
             }
             if (state is IncomingDetailSuccessState) {
               IncomingDocument detailDocument = state.incomingDocumentDetail;
               List<ProcessingDetail> processingDetail = state.processingDetail;
               return SingleChildScrollView(
-                    child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                      Container(
-                          padding:
-                              const EdgeInsets.all(StyleConst.defaultPadding16),
-                          child: DocumentTileDetail(
-                            incomingDocument: detailDocument,
-                          )),
-                      DocumentAttachment(
-                        attachments: detailDocument.attachments ?? [],
-                      ),
-                      Container(
-                          padding:
-                              const EdgeInsets.all(StyleConst.defaultPadding16),
-                          child: DocumentProgressDetail(
-                            processingDetail: processingDetail,
-                            isOutgoing: false,
-                          )),
-                      Container(
-                          padding:
-                              const EdgeInsets.all(StyleConst.defaultPadding16),
-                          child: Row(children: [
-                            if (detailDocument.status != "RELEASED" && isChuyenVien(context))
+                  child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                    Container(
+                        padding:
+                            const EdgeInsets.all(StyleConst.defaultPadding16),
+                        child: DocumentTileDetail(
+                          incomingDocument: detailDocument,
+                        )),
+                    DocumentAttachment(
+                      attachments: detailDocument.attachments ?? [],
+                    ),
+                    Container(
+                        padding:
+                            const EdgeInsets.all(StyleConst.defaultPadding16),
+                        child: DocumentProgressDetail(
+                          processingDetail: processingDetail,
+                          isOutgoing: false,
+                        )),
+                    Container(
+                        padding:
+                            const EdgeInsets.all(StyleConst.defaultPadding16),
+                        child: Row(children: [
+                          if (detailDocument.status != "RELEASED" &&
+                              isChuyenVien(context))
                             Expanded(
                                 child: CustomElevatedButton(
                               callback: () {
-                                onClickPublish(context, MediaQuery.of(context).size);
+                                onClickPublish(
+                                    context, MediaQuery.of(context).size);
                               },
-                              title: 'Kết thúc',
+                              title: AppLocalizations.of(context)!.end,
                               radius: 15,
                               buttonType: ButtonType.filledButton,
                             )),
@@ -107,7 +109,7 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                               Size size = MediaQuery.of(context).size;
                               onClickCommentButton(size);
                             },
-                            title: 'Góp ý',
+                            title: AppLocalizations.of(context)!.comment,
                             radius: 15,
                             buttonType: ButtonType.filledButton,
                           )),
@@ -121,44 +123,43 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
 
   void onClickPublish(BuildContext context, Size size) {
     CloseDocumentDetailBloc closeDocumentDetailBloc = CloseDocumentDetailBloc(
-        IncomingDocumentRepository("${UrlConst.DOC_SERVICE_URL}/incoming-documents"),
-        widget.documentId)..add(CloseIncomingDetailEvent());
+        IncomingDocumentRepository(
+            "${UrlConst.DOC_SERVICE_URL}/incoming-documents"),
+        widget.documentId)
+      ..add(CloseIncomingDetailEvent());
 
     showDialog(
         context: context,
-        builder: (BuildContext context)
-    {
-      return BlocBuilder<CloseDocumentDetailBloc, CloseDocumentDetailState>(
-          bloc: closeDocumentDetailBloc,
-          builder: (context, state) {
-            if (state is IncomingDocumentClosing) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            else  {
-              String content = "Không xác định";
-              if (state is IncomingDocumentClosedFail) {
-                content = state.result;
-              } else if (state is IncomingDocumentClosedSuccess) {
-                content = state.result;
-              }
-              return  ConfirmDialog(
-                size: size,
-                content: content,
-                title: 'Kết thúc văn bản',
-                onRightButton: () {
-                  Navigator.of(context).pop();
-                },
-                onLeftButton: () {},
-                leftButton: '',
-                rightButton: 'Đóng',
-                hasLeftButton: false,
-              );
-            }
-          });
-    }
-    );
+        builder: (BuildContext context) {
+          return BlocBuilder<CloseDocumentDetailBloc, CloseDocumentDetailState>(
+              bloc: closeDocumentDetailBloc,
+              builder: (context, state) {
+                if (state is IncomingDocumentClosing) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  String content = AppLocalizations.of(context)!.unKnown;
+                  if (state is IncomingDocumentClosedFail) {
+                    content = state.result;
+                  } else if (state is IncomingDocumentClosedSuccess) {
+                    content = state.result;
+                  }
+                  return ConfirmDialog(
+                    size: size,
+                    content: content,
+                    title: AppLocalizations.of(context)!.endDocument,
+                    onRightButton: () {
+                      Navigator.of(context).pop();
+                    },
+                    onLeftButton: () {},
+                    leftButton: '',
+                    rightButton: AppLocalizations.of(context)!.close,
+                    hasLeftButton: false,
+                  );
+                }
+              });
+        });
   }
 
   void onClickCommentButton(Size size) {

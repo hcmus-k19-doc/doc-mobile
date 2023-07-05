@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class PdfViewer extends StatefulWidget {
-  const PdfViewer({super.key, required this.title, required this.url, required this.isPdf});
+  const PdfViewer(
+      {super.key, required this.title, required this.url, required this.isPdf});
+
   final String title;
   final String url;
   final bool isPdf;
@@ -27,28 +29,38 @@ class PdfViewerState extends State<PdfViewer> {
         title: Text(widget.title),
         actions: <Widget>[
           if (widget.isPdf)
-          IconButton(
-            icon: const Icon(
-              Icons.bookmark,
-              color: Colors.white,
-              semanticLabel: 'Bookmark',
+            IconButton(
+              icon: const Icon(
+                Icons.bookmark,
+                color: Colors.white,
+                semanticLabel: 'Bookmark',
+              ),
+              onPressed: () {
+                _pdfViewerKey.currentState?.openBookmarkView();
+              },
             ),
-            onPressed: () {
-              _pdfViewerKey.currentState?.openBookmarkView();
-            },
-          ),
         ],
       ),
-      body: widget.isPdf?
-      SfPdfViewer.network(
-        widget.url,
-        key: _pdfViewerKey,
-      ):
-      CachedNetworkImage(
-        imageUrl: widget.url,
-        placeholder: (context, url) => const CircularProgressIndicator(),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
-      ),
+      body: widget.isPdf
+          ? SfPdfViewer.network(
+              widget.url,
+              key: _pdfViewerKey,
+            )
+          : SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: Center(
+                child: CachedNetworkImage(
+                  imageUrl: widget.url,
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) {
+                    print(error);
+                    return const Icon(Icons.error);
+                  },
+                ),
+              ),
+            ),
     );
   }
 }

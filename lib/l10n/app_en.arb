@@ -1,8 +1,4 @@
 {
-	"helloWorld": "Hello World!",
-	"@helloWorld": {
-		"description": "The conventional newborn programmer greeting"
-	},
 	"language": "Language",
 	"application": "Application",
 	"contactForSupport": "Contact for support",
@@ -12,12 +8,114 @@
 	"vietnamese": "Vietnamese",
 	"english": "English",
 	"lightMode": "Light mode",
+	"darkMode": "Dark Mode",
 	"version": "Version",
 	"themeMode": "Theme mode",
 	"confirmLogout": "Do you want to leave?",
 	"logout": "Logout",
 	"no": "Cancel",
 	"yes": "Agree",
+	"loginTitle": "Document approval and publication system",
+	"username": "Username",
+	"password": "Password",
+	"loginSummitText": "Login",
+	"failToLogin": "An error occurred during login",
+	"mainPage": "{menu, select, INCOMING_DOCUMENT{Incoming} ACCOUNT{Account} REMINDER{Reminders} INCOMING_DOCUMENT_LIST{Incoming Document List} PROCESSES_INCOMING_DOCUMENT{Process Incoming Document} OUTGOING_DOCUMENT{Outgoing} INTERNAL_DOCUMENT{Internal Document} MY_PROFILE{My Profile} SETTINGS{Settings} OUTGOING_DOCUMENT_LIST{Outgoing Document List} other{} other{}}",
+	"@mainPage": {
+		"placeholders": {
+			"menu": {
+				"type": "String"
+			}
+		}
+	},
+	"currentlyYouHave": "Currently you have",
+	"sendingLevel": "{sendingLevel, select, CITY{City} DISTRICT{District} SCHOOL{School} other{hello}}",
+	"@sendingLevel": {
+		"placeholders": {
+			"sendingLevel": {
+				"type": "String"
+			}
+		}
+	},
+	"documentType": "{documentType, select, CONTRACT{Contract} INSTRUCTION{Instruction} INVOICE{Invoice} LETTER{Letter} PAYMENT{Payment} RECEIPT{Receipt} other{Other}}",
+	"@documentType": {
+		"placeholders": {
+			"documentType": {
+				"type": "String"
+			}
+		}
+	},
+	"processingStatus": "{processingStatus, select, UNPROCESSED{Unprocessed} IN_PROGRESS{In Progress} CLOSED{Closed} other{}}",
+	"@processingStatus": {
+		"placeholders": {
+			"processingStatus": {
+				"type": "String"
+			}
+		}
+	},
+	"searchCriteriaBar": "{searchCriteria, select, incoming_number{Incoming Document Number} outgoing_number{Outgoing Document Number} release_date{Release Date} original_symbol_number{Original Symbol Number} document_type{Document Type} distribution_organization{Distribution Organization} arriving_date{Arriving Date} processing_duration{Processing Duration} summary{Summary} search_summit{Search} other{}}",
+	"@searchCriteriaBar": {
+		"placeholders": {
+			"searchCriteria": {
+				"type": "String"
+			}
+		}
+	},
+	"documentReminderStatus": "{reminderStatus, select, ACTIVE{Active} CLOSE_TO_EXPIRATION{Close to Expiration} EXPIRED{Expired} other{}}",
+	"@documentReminderStatus": {
+		"placeholders": {
+			"reminderStatus": {
+				"type": "String"
+			}
+		}
+	},
+	"name": "Name",
+	"userID": "User ID",
+	"role": "Role",
+	"selectRoleProfile": "{role, select, GIAM_DOC{Director} CHUYEN_VIEN{Specialist} TRUONG_PHONG{Department Manager} VAN_THU{Clerk} other{}}",
+	"@selectRoleProfile": {
+		"placeholders": {
+			"role": {
+				"type": "String"
+			}
+		}
+	},
+	"department": "Department",
+	"changePassword": "Change Password",
+	"currentPassword": "Current Password",
+	"newPassword": "New Password",
+	"confirmNewPassword": "Confirm New Password",
+	"defaultSender": "You",
+	"defaultReciever": "you",
+	"sendDocumentIdsFor": "sent document number {documentIds} to",
+	"@sendDocumentIdsFor": {
+		"placeholders": {
+			"documentIds": {
+				"type": "String"
+			}
+		}
+	},
+	"historyProcess": "Process History",
+	"sender": "Sender",
+	"reciever": "Receiver",
+	"document": "Document",
+	"transferDate": "Transfer Date",
+	"processingTime": "Processing Time",
+	"infiniteProcessingTime": "No Time Limit",
+	"transferType": "Transfer Type",
+	"transferType2": "Same Level",
+	"transferType1": "Transfer for Processing",
+	"processMethod": "Processing Method",
+	"noData": "No data",
+	"failToFetchData": "Fail to fetch data",
+	"originalSymbolNumber": "Original Symbol Number",
+	"processingDuration": "Processing Duration",
+	"arrivingDate": "Arriving Date",
+	"issuePlace": "Issuing Place",
+	"summary": "Summary",
+	"status": "Status",
+	"seeDetail": "See detail",
+	"releaseNumber": "Release Number",
 	"documentTypeReminder": "{documentTypeReminder, select, OUTGOING_DOCUMENT{Outgoing doc} INCOMING_DOCUMENT{Incoming doc} other{Khác}}",
 	"@documentTypeReminder": {
 		"placeholders": {
@@ -25,5 +123,26 @@
 				"type": "String"
 			}
 		}
-	}
+	},
+	"detailIncomingDoc": "Incoming Document Details",
+	"docInfo": "Document Information",
+	"numWithFolder": "Document folder",
+	"unKnown": "Unknown",
+	"issueDate": "Issuing Date",
+	"sendingLevelString": "Sending Level",
+	"folderDoc": "Job File",
+	"secretLevel": "Secrecy Level",
+	"emergencyLevel": "Emergency Level",
+	"attachmentFile": "Attachment File",
+	"progressInfo": "Transfer Information",
+	"end": "End",
+	"comment": "Comment",
+	"endDocument": "End Document",
+	"close": "Close",
+	"detailOutgoingDoc": "Outgoing Document Details",
+	"issueUnit": "Issuing Unit",
+	"receiveUnit": "Receiving Unit",
+	"signer": "Signer",
+	"filterBy": "Filter by",
+	"transfer": "Transfer for Processing"
 }

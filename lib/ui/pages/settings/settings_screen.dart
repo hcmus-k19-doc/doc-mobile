@@ -33,7 +33,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-        "Cài đặt",
+        AppLocalizations.of(context)!.mainPage("SETTINGS"),
         style: headLineSmall(context)?.copyWith(color: Colors.white),
       )),
       body: SingleChildScrollView(
@@ -133,7 +133,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             height: 18,
                           ),
                           trailing: _isVietnamese
-                              ?  Icon(Icons.radio_button_checked,
+                              ? Icon(Icons.radio_button_checked,
                                   color: ColorConst.primaryBlue, size: 18)
                               : const Icon(Icons.radio_button_off,
                                   color: Colors.black45, size: 18),
@@ -142,7 +142,8 @@ class _SettingScreenState extends State<SettingScreen> {
                               _isVietnamese = true;
                               if (settingsProvider.locale.languageCode !=
                                   "vi") {
-                                settingsProvider.setLocale(const Locale("vi"));
+                                settingsProvider.setLocale(
+                                    const Locale("vi"), "vi");
                               }
                             });
                           },
@@ -157,7 +158,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             height: 18,
                           ),
                           trailing: !_isVietnamese
-                              ?  Icon(
+                              ? Icon(
                                   Icons.radio_button_checked,
                                   color: ColorConst.primaryBlue,
                                   size: 18,
@@ -169,7 +170,8 @@ class _SettingScreenState extends State<SettingScreen> {
                               _isVietnamese = false;
                               if (settingsProvider.locale.languageCode ==
                                   "vi") {
-                                settingsProvider.setLocale(const Locale("en"));
+                                settingsProvider.setLocale(
+                                    const Locale("en"), "en");
                               }
                             });
                           },
@@ -212,7 +214,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             color: Colors.lightBlue,
                           ),
                           trailing: !_isLightMode
-                              ?  Icon(
+                              ? Icon(
                                   Icons.radio_button_checked,
                                   color: ColorConst.primaryBlue,
                                   size: 18,

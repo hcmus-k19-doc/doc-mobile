@@ -41,7 +41,7 @@ class _DocumentTileState extends State<DocumentTile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Số ký hiệu gốc: ${widget.incomingDocument.originalSymbolNumber}",
+                "${AppLocalizations.of(context)!.originalSymbolNumber}: ${widget.incomingDocument.originalSymbolNumber}",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
               ),
@@ -51,7 +51,7 @@ class _DocumentTileState extends State<DocumentTile> {
                     color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
               ),
               Text(
-                "Thời hạn xử lý: ${widget.incomingDocument.processingDuration ?? "01-01-1970"}",
+                "${AppLocalizations.of(context)!.processingDuration}: ${widget.incomingDocument.processingDuration ?? "01-01-1970"}",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
               )
@@ -84,7 +84,7 @@ class _DocumentTileState extends State<DocumentTile> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Ngày đến:",
+                      "${AppLocalizations.of(context)!.arrivingDate}:",
                       style: bodyLarge(context),
                     )),
                     Flexible(
@@ -104,7 +104,7 @@ class _DocumentTileState extends State<DocumentTile> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Nơi phát hành:",
+                      "${AppLocalizations.of(context)!.issuePlace}:",
                       style: bodyLarge(context),
                     )),
                     Flexible(
@@ -121,7 +121,7 @@ class _DocumentTileState extends State<DocumentTile> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Trích yếu",
+                      "${AppLocalizations.of(context)!.summary}:",
                       style: bodyLarge(context),
                     )),
                     Flexible(
@@ -157,7 +157,7 @@ class _DocumentTileState extends State<DocumentTile> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Trạng thái:",
+                      "${AppLocalizations.of(context)!.status}:",
                       style: bodyLarge(context),
                     )),
                     Flexible(
@@ -195,7 +195,7 @@ class _DocumentTileState extends State<DocumentTile> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            "Xem chi tiết",
+                            AppLocalizations.of(context)!.seeDetail,
                             style: bodyLarge(context)
                                 ?.copyWith(color: Colors.white),
                           ),

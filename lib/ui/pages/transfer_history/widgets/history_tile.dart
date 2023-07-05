@@ -51,7 +51,7 @@ class HistoryTile extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "Chuyền xử lý",
+                      AppLocalizations.of(context)!.transfer,
                       style: bodyLarge(context),
                     ),
                     const SizedBox(

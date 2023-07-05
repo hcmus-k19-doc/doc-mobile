@@ -40,7 +40,7 @@ class _FilterReminderState extends State<FilterReminder> {
           child: Row(
             children: [
               Text(
-                "Sắp xếp theo: ",
+                "${AppLocalizations.of(context)!.filterBy}: ",
                 style: bodyLarge(context)!.copyWith(fontSize: 16),
               ),
               Container(
