@@ -33,9 +33,10 @@ class DocumentDetailArgs {
 
 class PdfViewerArguments {
   final String title;
-  final String pdfUrl;
+  final String url;
+  final bool isPdf;
 
-  const PdfViewerArguments({required this.title, required this.pdfUrl});
+  const PdfViewerArguments({required this.title, required this.url, required this.isPdf});
 }
 
 class TransferHistoryArgs {
@@ -84,7 +85,7 @@ class MyRouter {
       case pdfViewer:
         if (args is PdfViewerArguments) {
           return MaterialPageRoute(
-              builder: (_) => PdfViewer(title: args.title, url: args.pdfUrl));
+              builder: (_) => PdfViewer(title: args.title, url: args.url, isPdf: args.isPdf,));
         } else {
           return errorRoute("Wrong arguments for PdfViewer");
         }

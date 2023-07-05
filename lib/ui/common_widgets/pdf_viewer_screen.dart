@@ -1,10 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class PdfViewer extends StatefulWidget {
-  const PdfViewer({super.key, required this.title, required this.url});
+  const PdfViewer({super.key, required this.title, required this.url, required this.isPdf});
   final String title;
   final String url;
+  final bool isPdf;
 
   @override
   PdfViewerState createState() => PdfViewerState();
@@ -24,6 +26,7 @@ class PdfViewerState extends State<PdfViewer> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[
+          if (widget.isPdf)
           IconButton(
             icon: const Icon(
               Icons.bookmark,
@@ -36,9 +39,15 @@ class PdfViewerState extends State<PdfViewer> {
           ),
         ],
       ),
-      body: SfPdfViewer.network(
+      body: widget.isPdf?
+      SfPdfViewer.network(
         widget.url,
         key: _pdfViewerKey,
+      ):
+      CachedNetworkImage(
+        imageUrl: widget.url,
+        placeholder: (context, url) => const CircularProgressIndicator(),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
     );
   }
