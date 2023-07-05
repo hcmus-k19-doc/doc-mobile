@@ -16,6 +16,7 @@ class ImagesPath {
   static const vietnam = "assets/images/vietnam.png";
   static const english = "assets/images/britain.png";
   static const pdfFile = "assets/images/pdf_file.png";
+  static const imageFile = "assets/images/image_file.png";
 }
 
 class ButtonType {

@@ -95,7 +95,7 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
                                       padding:
                                           const EdgeInsets.fromLTRB(8, 0, 8, 0),
                                       child: Image.asset(
-                                        ImagesPath.pdfFile,
+                                        isPdf[index]?ImagesPath.pdfFile:ImagesPath.imageFile,
                                         height: 28,
                                       ),
                                     ),
