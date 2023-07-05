@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_app/utils/secured_local_storage.dart';
 
 class PdfViewer extends StatefulWidget {
   const PdfViewer(
@@ -52,6 +55,10 @@ class PdfViewerState extends State<PdfViewer> {
               child: Center(
                 child: CachedNetworkImage(
                   imageUrl: widget.url,
+                  httpHeaders: {
+                    "Authorization":
+                        'Bearer ${BlocProvider.of<AuthBloc>(context).token?.accessToken ?? ""}'
+                  },
                   placeholder: (context, url) =>
                       const CircularProgressIndicator(),
                   errorWidget: (context, url, error) {

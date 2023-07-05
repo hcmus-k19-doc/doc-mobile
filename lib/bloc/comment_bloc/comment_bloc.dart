@@ -18,23 +18,26 @@ part 'comment_state.dart';
 class CommentBloc extends Bloc<CommentEvent, CommentState> {
   CommentRepository repository;
   int documentId;
+  bool isOutgoing;
 
-  CommentBloc(this.repository, this.documentId) : super(CommentLoadingState()) {
+  CommentBloc(this.repository, this.documentId, this.isOutgoing)
+      : super(CommentLoadingState()) {
     on<FetchCommentEvent>((event, emit) async {
-     emit(CommentLoadingState());
-     try {
-       final comments = await repository.getCommentsById(documentId);
-       emit(CommentSuccessState(comments));
-     } catch (e) {
-       emit(CommentFailureState(e.toString()));
-     }
+      emit(CommentLoadingState());
+      try {
+        final comments =
+            await repository.getCommentsById(documentId, isOutgoing);
+        emit(CommentSuccessState(comments));
+      } catch (e) {
+        emit(CommentFailureState(e.toString()));
+      }
     });
     on<PostCommentEvent>((event, emit) async {
       emit(CommentLoadingState());
       try {
-        await repository.postComment(documentId, event.comment);
+        await repository.postComment(documentId, event.comment, isOutgoing);
         emit(PostCommentSuccessState());
-      } catch(e) {
+      } catch (e) {
         emit(CommentFailureState(e.toString()));
       }
     });

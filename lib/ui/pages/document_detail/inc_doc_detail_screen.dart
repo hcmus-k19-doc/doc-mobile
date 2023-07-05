@@ -165,7 +165,8 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
   void onClickCommentButton(Size size) {
     CommentBloc commentBloc = CommentBloc(
         CommentRepository("${UrlConst.DOC_SERVICE_URL}/comments"),
-        widget.documentId);
+        widget.documentId,
+        false);
 
     showModalBottomSheet(
       backgroundColor: Colors.white,

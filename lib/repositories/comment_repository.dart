@@ -4,23 +4,27 @@ import 'package:flutter_app/repositories/base_repository.dart';
 class CommentRepository extends BaseRepository {
   CommentRepository(super.baseUrl);
 
-  Future<List<Comment>> getCommentsById(int id) async {
+  Future<List<Comment>> getCommentsById(int id, bool isOutgoing) async {
     try {
       final response = await provider.get(
-          url: "/incoming-documents/$id", cancelToken: cancelToken);
+          url: "/${isOutgoing ? "OUTGOING_DOCUMENT" : "INCOMING_DOCUMENT"}/$id",
+          cancelToken: cancelToken);
 
-      return  List<Comment>.from(response.map((e) => Comment.fromJson(e))).toList();
+      return List<Comment>.from(response.map((e) => Comment.fromJson(e)))
+          .toList();
     } catch (err) {
       rethrow;
     }
   }
 
-  Future<String> postComment(int id, String comment) async {
+  Future<String> postComment(int id, String comment, bool isOutgoing) async {
     try {
       final response = await provider.post(
-          url: "/incoming-documents/$id",
+          url: "/$id",
           data: {
-            "content": comment
+            "content": comment,
+            "processingDocumentType":
+                isOutgoing ? "OUTGOING_DOCUMENT" : "INCOMING_DOCUMENT"
           },
           cancelToken: cancelToken);
 
