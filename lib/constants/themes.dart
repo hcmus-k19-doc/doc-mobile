@@ -8,7 +8,7 @@ import 'color_const.dart';
 //surface = item borders
 
 ColorScheme lightTheme() {
-  return  ColorScheme(
+  return ColorScheme(
     brightness: Brightness.light,
     primary: ColorConst.primaryBlue,
     onPrimary: Colors.white,
@@ -41,8 +41,11 @@ ColorScheme darkTheme() {
 
 class SettingsProvider extends ChangeNotifier {
   Locale _locale = const Locale("vi", "VN");
+  String _localeString = "vi";
 
   Locale get locale => _locale;
+
+  String get localString => _localeString;
 
   ThemeMode _themeMode = getDeviceThemeMode();
 
@@ -53,8 +56,9 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setLocale(Locale locale) {
+  void setLocale(Locale locale, String localeString) {
     _locale = locale;
+    _localeString = localeString;
     notifyListeners();
   }
 }

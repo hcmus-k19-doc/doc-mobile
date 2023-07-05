@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/document_reminder_bloc/document_reminder_bloc.dart';
 import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/constants/themes.dart';
 import 'package:flutter_app/ui/pages/reminder_calendar/widgets/filter_reminder.dart';
 import 'package:flutter_app/ui/pages/reminder_calendar/widgets/reminder_tile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class BuildCalendar extends StatefulWidget {
@@ -44,6 +46,7 @@ class _BuildCalendarState extends State<BuildCalendar> {
           children: [
             TableCalendar(
               focusedDay: _today,
+              locale: Provider.of<SettingsProvider>(context).localString,
               firstDay: _firstDay,
               lastDay: _lastDay,
               calendarFormat: CalendarFormat.month,
@@ -63,7 +66,10 @@ class _BuildCalendarState extends State<BuildCalendar> {
                   todayTextStyle:
                       TextStyle(color: Theme.of(context).colorScheme.primary),
                   todayDecoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary.withOpacity(0.15),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.15),
                       shape: BoxShape.circle)),
               eventLoader: (day) {
                 if (documentReminderBloc.listReminders.isNotEmpty) {

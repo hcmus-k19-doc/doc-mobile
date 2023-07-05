@@ -142,5 +142,7 @@
 	"detailOutgoingDoc": "Outgoing Document Details",
 	"issueUnit": "Issuing Unit",
 	"receiveUnit": "Receiving Unit",
-	"signer": "Signer"
+	"signer": "Signer",
+	"filterBy": "Filter by",
+	"transfer": "Transfer for Processing"
 }

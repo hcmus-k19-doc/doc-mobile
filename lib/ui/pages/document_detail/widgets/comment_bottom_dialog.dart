@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../bloc/comment_bloc/comment_bloc.dart';
 import '../../../../constants/color_const.dart';
 import '../../../../constants/font_const.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CommentBottomDialog extends StatefulWidget {
   const CommentBottomDialog(
@@ -43,7 +44,7 @@ class _CommentBottomDialogState extends State<CommentBottomDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Bình luận",
+              AppLocalizations.of(context)!.comment,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: headLineSmall(context),

@@ -19,7 +19,6 @@ class _BuildListTransferState extends State<BuildListTransfer> {
 
   @override
   void initState() {
-    // TODO: implement initState
     scrollController = ScrollController()..addListener(_scrollListener);
     super.initState();
     transferHistoryBloc = BlocProvider.of<TransferHistoryBloc>(context);
@@ -34,7 +33,6 @@ class _BuildListTransferState extends State<BuildListTransfer> {
   }
 
   void _scrollListener() {
-    print("hello");
     if (_isScrollAble &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
       transferHistoryBloc.add(FetchMoreTransferHistoryEvent(

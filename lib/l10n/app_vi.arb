@@ -142,5 +142,7 @@
 	"detailOutgoingDoc": "Chi tiết văn bản đi",
 	"issueUnit": "Đơn vị phát hành",
 	"receiveUnit": "Đơn vị nhận",
-	"signer": "Người ký"
+	"signer": "Người ký",
+	"filterBy": "Sắp xếp theo",
+	"transfer": "Chuyển xử lý"
 }

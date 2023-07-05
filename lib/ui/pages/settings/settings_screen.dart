@@ -142,7 +142,8 @@ class _SettingScreenState extends State<SettingScreen> {
                               _isVietnamese = true;
                               if (settingsProvider.locale.languageCode !=
                                   "vi") {
-                                settingsProvider.setLocale(const Locale("vi"));
+                                settingsProvider.setLocale(
+                                    const Locale("vi"), "vi");
                               }
                             });
                           },
@@ -169,7 +170,8 @@ class _SettingScreenState extends State<SettingScreen> {
                               _isVietnamese = false;
                               if (settingsProvider.locale.languageCode ==
                                   "vi") {
-                                settingsProvider.setLocale(const Locale("en"));
+                                settingsProvider.setLocale(
+                                    const Locale("en"), "en");
                               }
                             });
                           },
