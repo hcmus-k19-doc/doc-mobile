@@ -53,8 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   List<String> listTitle = [
-    "INCOMING_DOCUMENT_LIST",
-    "OUTGOING_DOCUMENT_LIST",
+    "INCOMING_DOCUMENT",
+    "OUTGOING_DOCUMENT",
     "REMINDER",
     "ACCOUNT",
   ];
@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     appLocalizations = AppLocalizations.of(context)!;
-    _title = appLocalizations.mainPage("INCOMING_DOCUMENT_LIST");
+    _title = appLocalizations.mainPage("INCOMING_DOCUMENT");
   }
 
   @override
