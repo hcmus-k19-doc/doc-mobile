@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants/themes.dart';
+import 'package:flutter_app/utils/common_utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../bloc/comment_bloc/comment_bloc.dart';
 import '../../../../constants/color_const.dart';
@@ -94,12 +97,25 @@ class _CommentBottomDialogState extends State<CommentBottomDialog> {
                                             children: <TextSpan>[
                                               TextSpan(
                                                   text:
-                                                      "  -  ${comment.createdDate}",
+                                                      "  -  ${CommonUtil().formatDate(DateTime.parse(comment.createdDate ?? ""), "dd/MM/yyyy HH:mm")} - ",
                                                   style:
                                                       bodyLargeItalic(context)
                                                           ?.copyWith(
                                                               color:
                                                                   Colors.grey)),
+                                              TextSpan(
+                                                  text: CommonUtil().formatTimeago(
+                                                      DateTime.parse(
+                                                          comment.createdDate ??
+                                                              ""),
+                                                      Provider.of<SettingsProvider>(
+                                                              context)
+                                                          .localeString),
+                                                  style:
+                                                      bodyLargeItalic(context)
+                                                          ?.copyWith(
+                                                              color:
+                                                                  Colors.grey))
                                             ],
                                           ),
                                         ),

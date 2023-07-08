@@ -46,7 +46,7 @@ class _BuildCalendarState extends State<BuildCalendar> {
           children: [
             TableCalendar(
               focusedDay: _today,
-              locale: Provider.of<SettingsProvider>(context).localString,
+              locale: Provider.of<SettingsProvider>(context).localeString,
               firstDay: _firstDay,
               lastDay: _lastDay,
               calendarFormat: CalendarFormat.month,

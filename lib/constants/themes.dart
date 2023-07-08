@@ -45,7 +45,7 @@ class SettingsProvider extends ChangeNotifier {
 
   Locale get locale => _locale;
 
-  String get localString => _localeString;
+  String get localeString => _localeString;
 
   ThemeMode _themeMode = getDeviceThemeMode();
 

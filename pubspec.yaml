@@ -86,6 +86,7 @@ dependencies:
   timelines: ^0.1.0
   file_picker: ^5.3.1
   cached_network_image: ^3.2.3
+  timeago: 3.3.0
 
 dev_dependencies:
   flutter_test:
