@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
+import 'package:flutter_app/ui/pages/splash/widgets/animation_widget.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../constants/export_constants.dart';
@@ -13,16 +14,46 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AuthBloc authBloc;
   late String? accessTokenLocalStorage;
   late String? refressTokenLocalStorage;
+  late AnimationController _controller;
+  late Animation<double> _rotationAnimation;
+  late Animation<double> _radiusAnimation;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     authBloc = BlocProvider.of<AuthBloc>(context);
+
+    //animation controller
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 2))
+          ..forward();
+
+    //rotation animation
+
+    _rotationAnimation = Tween(begin: 0.0, end: 1.0)
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+
+    //radius animation
+    _radiusAnimation = Tween(begin: 450.0, end: 10.0)
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+
+    _controller.addListener(() {
+      setState(() {});
+    });
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        _controller.forward();
+      }
+    });
   }
 
   @override
@@ -39,6 +70,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
@@ -49,10 +87,22 @@ class _SplashScreenState extends State<SplashScreen> {
         }
       },
       child: Scaffold(
-        body: const Center(
-          child: Text("This is Splash Screen"),
+        body: Center(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              AnimationWidget(
+                rotationValue: _rotationAnimation.value,
+                radiusValue: _radiusAnimation.value,
+                width: 255,
+                height: 255,
+                colorWidget: Colors.white,
+                imagePath: "assets/images/Logo_HCMUS.png",
+              ),
+            ],
+          ),
         ),
-        backgroundColor: ColorConst.white,
+        backgroundColor: ColorConst.primaryBlue,
       ),
     );
   }

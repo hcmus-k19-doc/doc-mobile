@@ -48,6 +48,10 @@ class PdfViewerState extends State<PdfViewer> {
           ? SfPdfViewer.network(
               widget.url,
               key: _pdfViewerKey,
+              headers: {
+                "Authorization":
+                    'Bearer ${BlocProvider.of<AuthBloc>(context).token?.accessToken ?? ""}'
+              },
             )
           : SizedBox(
               width: double.infinity,
