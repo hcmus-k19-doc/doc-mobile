@@ -29,7 +29,7 @@
 			}
 		}
 	},
-	"processingStatus": "{processingStatus, select, UNPROCESSED{Chưa xử lý} IN_PROGRESS{Đang xử lý} CLOSED{Đã xử lý} other{}}",
+	"processingStatus": "{processingStatus, select, UNPROCESSED{Chưa xử lý} IN_PROGRESS{Đang xử lý} RELEASED{Đã phát hành} CLOSED{Đã xử lý} other{}}",
 	"@processingStatus": {
 		"placeholders": {
 			"processingStatus": {

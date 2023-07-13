@@ -45,7 +45,7 @@
 			}
 		}
 	},
-	"processingStatus": "{processingStatus, select, UNPROCESSED{Unprocessed} IN_PROGRESS{In Progress} CLOSED{Closed} other{}}",
+	"processingStatus": "{processingStatus, select, UNPROCESSED{Unprocessed} IN_PROGRESS{In Progress} RELEASED{Released} CLOSED{Closed} other{}}",
 	"@processingStatus": {
 		"placeholders": {
 			"processingStatus": {

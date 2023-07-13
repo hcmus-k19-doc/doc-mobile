@@ -4,6 +4,7 @@ import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/outgoing_document.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../constants/color_const.dart';
@@ -127,9 +128,9 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                     )),
                     Flexible(
                       flex: 2,
-                      child: Text(
-                        "${widget.outgoingDocument.summary}", //
-                        style: bodyLarge(context),
+                      child: HtmlWidget(
+                        widget.outgoingDocument.summary ?? "",
+                        textStyle: bodyLarge(context),
                       ),
                     )
                   ],

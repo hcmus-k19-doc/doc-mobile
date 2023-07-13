@@ -5,6 +5,7 @@ import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
 import 'package:flutter_app/model/outgoing_document.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class OutDocumentTileDetail extends StatefulWidget {
   const OutDocumentTileDetail({Key? key, required this.outgoingDocument})
@@ -91,7 +92,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                         flex: 2,
                         child: Text(
                           widget.outgoingDocument.originalSymbolNumber ??
-                              AppLocalizations.of(context)!.numWithFolder,
+                              AppLocalizations.of(context)!.unKnown,
                           style: bodyLarge(context),
                         ))
                   ],
@@ -111,7 +112,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                         flex: 2,
                         child: Text(
                           widget.outgoingDocument.documentType?.type ??
-                              AppLocalizations.of(context)!.numWithFolder,
+                              AppLocalizations.of(context)!.unKnown,
                           style: bodyLarge(context),
                         ))
                   ],
@@ -131,7 +132,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       flex: 2,
                       child: Text(
                         widget.outgoingDocument.createdDate ??
-                            AppLocalizations.of(context)!.numWithFolder,
+                            AppLocalizations.of(context)!.unKnown,
                         style: bodyLarge(context),
                       ),
                     )
@@ -152,7 +153,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       flex: 2,
                       child: Text(
                         widget.outgoingDocument.releaseDate ??
-                            AppLocalizations.of(context)!.numWithFolder,
+                            AppLocalizations.of(context)!.unKnown,
                         style: bodyLarge(context),
                       ),
                     )
@@ -174,7 +175,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                         child: Text(
                           widget.outgoingDocument.publishingDepartment
                                   ?.departmentName ??
-                              AppLocalizations.of(context)!.numWithFolder,
+                              AppLocalizations.of(context)!.unKnown,
                           style: bodyLarge(context),
                         ))
                   ],
@@ -194,7 +195,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                         flex: 2,
                         child: Text(
                           widget.outgoingDocument.recipient ??
-                              AppLocalizations.of(context)!.numWithFolder,
+                              AppLocalizations.of(context)!.unKnown,
                           style: bodyLarge(context),
                         ))
                   ],
@@ -212,7 +213,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                         flex: 2,
                         child: Text(
                           widget.outgoingDocument.signer ??
-                              AppLocalizations.of(context)!.numWithFolder,
+                              AppLocalizations.of(context)!.unKnown,
                           style: bodyLarge(context),
                         ))
                   ],
@@ -228,10 +229,10 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     )),
                     Flexible(
                       flex: 2,
-                      child: Text(
+                      child: HtmlWidget(
                         widget.outgoingDocument.summary ??
-                            AppLocalizations.of(context)!.numWithFolder,
-                        style: bodyLarge(context),
+                            AppLocalizations.of(context)!.unKnown,
+                        textStyle: bodyLarge(context),
                       ),
                     )
                   ],
@@ -251,7 +252,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       flex: 2,
                       child: Text(
                         widget.outgoingDocument.folder?.folderName ??
-                            AppLocalizations.of(context)!.numWithFolder,
+                            AppLocalizations.of(context)!.unKnown,
                         style: bodyLarge(context),
                       ),
                     )
@@ -312,7 +313,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                         flex: 2,
                         child: Text(
                           statusLevel[widget.outgoingDocument.status] ??
-                              AppLocalizations.of(context)!.numWithFolder,
+                              AppLocalizations.of(context)!.unKnown,
                           style: bodyLarge(context),
                         ))
                   ],

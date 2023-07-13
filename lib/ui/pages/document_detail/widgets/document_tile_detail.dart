@@ -4,6 +4,7 @@ import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class DocumentTileDetail extends StatefulWidget {
   const DocumentTileDetail({Key? key, required this.incomingDocument})
@@ -207,10 +208,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     )),
                     Flexible(
                       flex: 2,
-                      child: Text(
-                        widget.incomingDocument.summary ??
-                            AppLocalizations.of(context)!.unKnown,
-                        style: bodyLarge(context),
+                      child: HtmlWidget(
+                        widget.incomingDocument.summary ?? "",
+                        textStyle: bodyLarge(context),
                       ),
                     )
                   ],

@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../constants/color_const.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class DocumentTile extends StatefulWidget {
   const DocumentTile({Key? key, required this.incomingDocument})
@@ -26,6 +27,15 @@ class _DocumentTileState extends State<DocumentTile> {
     DateTime date = inputFormat.parse(originalDate!);
     return outputFormat.format(date);
   }
+
+  final htmlStyle = '''
+      <style>
+        body {
+          padding: 0;
+          margin: 0;
+        }
+      </style>
+    ''';
 
   @override
   Widget build(BuildContext context) {
@@ -126,9 +136,9 @@ class _DocumentTileState extends State<DocumentTile> {
                     )),
                     Flexible(
                       flex: 2,
-                      child: Text(
-                        "${widget.incomingDocument.summary}",
-                        style: bodyLarge(context),
+                      child: HtmlWidget(
+                        widget.incomingDocument.summary ?? "",
+                        textStyle: bodyLarge(context),
                       ),
                     )
                   ],
