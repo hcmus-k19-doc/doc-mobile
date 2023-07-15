@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/utils/local_preferences.dart';
 
 import '../utils/utils.dart';
 import 'color_const.dart';
@@ -47,12 +48,30 @@ class SettingsProvider extends ChangeNotifier {
 
   String get localeString => _localeString;
 
-  ThemeMode _themeMode = getDeviceThemeMode();
+  ThemeMode? _themeMode;
 
-  ThemeMode get themeMode => _themeMode;
+  ThemeMode get themeMode => _themeMode ?? ThemeMode.light;
 
-  void toggleTheme(bool isDark) {
+  SettingsProvider() {
+    getThemeMode();
+  }
+
+  void getThemeMode() async {
+    LocalPreferences localPreferences = LocalPreferences();
+    final String tempTheme =
+        await localPreferences.getString(DATA_CONST.THEME_MODE);
+    if (tempTheme.isEmpty || tempTheme == THEME_MODE_CONST.LIGHT_MODE) {
+      _themeMode = ThemeMode.light;
+    } else {
+      _themeMode = ThemeMode.dark;
+    }
+    notifyListeners();
+  }
+
+  Future<void> toggleTheme(bool isDark) async {
     _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+    await LocalPreferences().saveString(DATA_CONST.THEME_MODE,
+        isDark ? THEME_MODE_CONST.BLACK_MODE : THEME_MODE_CONST.LIGHT_MODE);
     notifyListeners();
   }
 
@@ -61,4 +80,9 @@ class SettingsProvider extends ChangeNotifier {
     _localeString = localeString;
     notifyListeners();
   }
+}
+
+class THEME_MODE_CONST {
+  static const String LIGHT_MODE = "LIGHT_MODE";
+  static const String BLACK_MODE = "BLACK_MODE";
 }

@@ -52,4 +52,5 @@ class DATA_CONST {
   static const String DEVICE_TOKEN = "device_token";
   static const String DEVICE_PLATFORM = "device_platform";
   static const String VERSION_APP = "version_app";
+  static const String THEME_MODE = "theme_mode";
 }
