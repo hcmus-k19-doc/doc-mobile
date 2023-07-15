@@ -7,6 +7,7 @@ import 'package:flutter_app/model/incoming_document.dart';
 import 'package:flutter_app/model/reminder_detail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class ReminderTile extends StatelessWidget {
   const ReminderTile({Key? key, required this.reminder}) : super(key: key);
@@ -62,9 +63,10 @@ class ReminderTile extends StatelessWidget {
                     const SizedBox(
                       height: StyleConst.defaultPadding4,
                     ),
-                    Text(
+                    HtmlWidget(
                       reminder.summary ?? "",
-                      style: bodyLarge(context)?.copyWith(color: Colors.grey),
+                      textStyle:
+                          bodyLarge(context)?.copyWith(color: Colors.grey),
                     ),
                   ],
                 ),
