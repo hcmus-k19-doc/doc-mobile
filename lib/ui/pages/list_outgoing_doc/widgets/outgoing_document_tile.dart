@@ -87,6 +87,9 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                       "${AppLocalizations.of(context)!.arrivingDate}:",
                       style: bodyLarge(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -109,6 +112,9 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                       "${AppLocalizations.of(context)!.issuePlace}:",
                       style: bodyLarge(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -126,6 +132,9 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                       "${AppLocalizations.of(context)!.summary}:",
                       style: bodyLarge(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: HtmlWidget(
@@ -162,6 +171,9 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                       "${AppLocalizations.of(context)!.status}:",
                       style: bodyLarge(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(

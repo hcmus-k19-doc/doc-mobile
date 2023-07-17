@@ -80,7 +80,8 @@ class HistoryDialog extends StatelessWidget {
             ),
             TextRow(
               title: AppLocalizations.of(context)!.processMethod,
-              content: transferHistory.processMethod ?? "",
+              content: transferHistory.processMethod ??
+                  AppLocalizations.of(context)!.noMethod,
             ),
             const SizedBox(
               height: StyleConst.defaultPadding8,

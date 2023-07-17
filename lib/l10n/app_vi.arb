@@ -144,5 +144,6 @@
 	"receiveUnit": "Đơn vị nhận",
 	"signer": "Người ký",
 	"filterBy": "Sắp xếp theo",
-	"transfer": "Chuyển xử lý"
+	"transfer": "Chuyển xử lý",
+	"noMethod": "Không có"
 }

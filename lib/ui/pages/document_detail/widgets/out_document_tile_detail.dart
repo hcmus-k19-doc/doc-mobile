@@ -68,6 +68,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.numWithFolder}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -88,6 +91,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.originalSymbolNumber}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -108,6 +114,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.searchCriteriaBar("document_type")}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -128,6 +137,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.arrivingDate}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -149,6 +161,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.issueDate}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -170,6 +185,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.issueUnit}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -191,6 +209,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.receiveUnit}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -209,6 +230,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.signer}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -227,6 +251,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.summary}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: HtmlWidget(
@@ -248,6 +275,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.folderDoc}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -269,6 +299,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.secretLevel}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -289,6 +322,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.emergencyLevel}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -309,6 +345,29 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                       "${AppLocalizations.of(context)!.status}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
+                    Flexible(
+                        flex: 2,
+                        child: Text(
+                          statusLevel[widget.outgoingDocument.status] ??
+                              AppLocalizations.of(context)!.unKnown,
+                          style: bodyLarge(context),
+                        ))
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        child: Text(
+                      "${AppLocalizations.of(context)!.status}:",
+                      style: bodyLargeBold(context),
+                    )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(

@@ -97,6 +97,9 @@ class _DocumentTileState extends State<DocumentTile> {
                       "${AppLocalizations.of(context)!.arrivingDate}:",
                       style: bodyLarge(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -112,11 +115,14 @@ class _DocumentTileState extends State<DocumentTile> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
+                    Flexible(
                         child: Text(
                       "${AppLocalizations.of(context)!.issuePlace}:",
                       style: bodyLarge(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -134,6 +140,9 @@ class _DocumentTileState extends State<DocumentTile> {
                       "${AppLocalizations.of(context)!.summary}:",
                       style: bodyLarge(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: HtmlWidget(
@@ -170,6 +179,9 @@ class _DocumentTileState extends State<DocumentTile> {
                       "${AppLocalizations.of(context)!.status}:",
                       style: bodyLarge(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(

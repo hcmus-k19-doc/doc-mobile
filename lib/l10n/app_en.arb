@@ -144,5 +144,6 @@
 	"receiveUnit": "Receiving Unit",
 	"signer": "Signer",
 	"filterBy": "Filter by",
-	"transfer": "Transfer for Processing"
+	"transfer": "Transfer for Processing",
+	"noMethod": "No method"
 }

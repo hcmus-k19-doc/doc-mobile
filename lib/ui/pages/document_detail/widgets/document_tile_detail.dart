@@ -67,6 +67,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                       "${AppLocalizations.of(context)!.numWithFolder}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -87,6 +90,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                       "${AppLocalizations.of(context)!.originalSymbolNumber}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -107,6 +113,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                       "${AppLocalizations.of(context)!.searchCriteriaBar("document_type")}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -127,6 +136,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                       "${AppLocalizations.of(context)!.arrivingDate}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -148,6 +160,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                       "${AppLocalizations.of(context)!.issueDate}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -161,25 +176,25 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                 const SizedBox(
                   height: StyleConst.defaultPadding12,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        child: Text(
-                      "${AppLocalizations.of(context)!.sendingLevelString}:",
-                      style: bodyLargeBold(context),
-                    )),
-                    Flexible(
-                        flex: 2,
-                        child: Text(
-                          "${convertSendingLevel[widget.incomingDocument.sendingLevel?.level]}",
-                          style: bodyLarge(context),
-                        ))
-                  ],
-                ),
-                const SizedBox(
-                  height: StyleConst.defaultPadding12,
-                ),
+                // Row(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     Expanded(
+                //         child: Text(
+                //       "${AppLocalizations.of(context)!.sendingLevelString}:",
+                //       style: bodyLargeBold(context),
+                //     )),
+                //     Flexible(
+                //         flex: 2,
+                //         child: Text(
+                //           "${convertSendingLevel[widget.incomingDocument.sendingLevel?.level]}",
+                //           style: bodyLarge(context),
+                //         ))
+                //   ],
+                // ),
+                // const SizedBox(
+                //   height: StyleConst.defaultPadding12,
+                // ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -188,6 +203,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                       "${AppLocalizations.of(context)!.issuePlace}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(
@@ -206,6 +224,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                       "${AppLocalizations.of(context)!.summary}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: HtmlWidget(
@@ -226,6 +247,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                       "${AppLocalizations.of(context)!.folderDoc}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -247,6 +271,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                       "${AppLocalizations.of(context)!.secretLevel}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -267,6 +294,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                       "${AppLocalizations.of(context)!.emergencyLevel}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                       flex: 2,
                       child: Text(
@@ -287,6 +317,9 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                       "${AppLocalizations.of(context)!.status}:",
                       style: bodyLargeBold(context),
                     )),
+                    const SizedBox(
+                      width: StyleConst.defaultPadding8,
+                    ),
                     Flexible(
                         flex: 2,
                         child: Text(

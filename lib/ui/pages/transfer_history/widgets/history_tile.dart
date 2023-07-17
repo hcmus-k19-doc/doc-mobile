@@ -59,7 +59,7 @@ class HistoryTile extends StatelessWidget {
                     ),
                     Text(
                       "${currentId == transferHistory.senderId ? AppLocalizations.of(context)!.defaultSender : transferHistory.senderName} "
-                      "${transferHistory.documentIds == null ? "" : AppLocalizations.of(context)!.sendDocumentIdsFor(transferHistory.documentIds!.join(", "))} "
+                      "${transferHistory.documentIds == null ? "" : AppLocalizations.of(context)!.sendDocumentIdsFor(transferHistory.documentIds!.join(", "))}"
                       " ${currentId != transferHistory.receiverId ? transferHistory.receiverName : AppLocalizations.of(context)!.defaultReciever}",
                       style:
                           bodyLarge(context)?.copyWith(color: ColorConst.grey),
