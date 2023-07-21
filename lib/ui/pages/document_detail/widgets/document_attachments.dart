@@ -57,8 +57,7 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
                   padding: const EdgeInsets.all(StyleConst.defaultPadding4),
                   child: Text(
                     AppLocalizations.of(context)!.attachmentFile,
-                    style: bodyLargeBold(context)
-                        ?.copyWith(fontSize: 18, color: Colors.black),
+                    style: bodyLargeBold(context)?.copyWith(fontSize: 18),
                   ),
                 ),
                 trailing: AnimatedRotation(
@@ -95,7 +94,9 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
                                       padding:
                                           const EdgeInsets.fromLTRB(8, 0, 8, 0),
                                       child: Image.asset(
-                                        isPdf[index]?ImagesPath.pdfFile:ImagesPath.imageFile,
+                                        isPdf[index]
+                                            ? ImagesPath.pdfFile
+                                            : ImagesPath.imageFile,
                                         height: 28,
                                       ),
                                     ),

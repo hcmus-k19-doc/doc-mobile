@@ -24,7 +24,7 @@ class ListTileWithBorder extends StatelessWidget {
           padding: const EdgeInsets.all(StyleConst.defaultPadding20),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(StyleConst.defaultRadius15),
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.onPrimary,
               boxShadow: const [
                 BoxShadow(
                   offset: Offset(0, 0),

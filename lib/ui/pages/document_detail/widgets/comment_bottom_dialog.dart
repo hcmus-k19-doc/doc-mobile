@@ -40,8 +40,8 @@ class _CommentBottomDialogState extends State<CommentBottomDialog> {
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
-        color: Colors.white,
         padding: const EdgeInsets.all(24),
+        color: Theme.of(context).colorScheme.background,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

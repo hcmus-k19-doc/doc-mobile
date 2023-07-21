@@ -32,7 +32,6 @@ class _OutgoingDocumentDetailState extends State<OutgoingDocumentDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: ColorConst.white,
       appBar: AppBar(
         title: Text(
           AppLocalizations.of(context)!.detailOutgoingDoc,

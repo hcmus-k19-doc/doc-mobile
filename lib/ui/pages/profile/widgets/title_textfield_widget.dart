@@ -20,8 +20,8 @@ class TitleTextFieldWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: bodyLargeBold(context)!
-              .copyWith(color: Theme.of(context).colorScheme.primary, fontSize: 16),
+          style: bodyLargeBold(context)!.copyWith(
+              color: Theme.of(context).colorScheme.primary, fontSize: 16),
         ),
         TextFormField(
           readOnly: isTextReadOnly,

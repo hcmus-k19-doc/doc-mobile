@@ -19,7 +19,12 @@ class ProfileScreen extends StatelessWidget {
           ProfileBloc(UserRepository("${UrlConst.DOC_SERVICE_URL}/users"))
             ..add(FetchCurrentProfile()),
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text(
+            AppLocalizations.of(context)!.mainPage("MY_PROFILE"),
+            style: headLineSmall(context)?.copyWith(color: Colors.white),
+          ),
+        ),
         body: BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
           if (state is ProfileLoading || state is ProfileInitial) {
             return const Center(

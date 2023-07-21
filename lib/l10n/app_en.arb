@@ -145,5 +145,6 @@
 	"signer": "Signer",
 	"filterBy": "Filter by",
 	"transfer": "Transfer for Processing",
-	"noMethod": "No method"
+	"noMethod": "No method",
+	"notification": "Notification"
 }

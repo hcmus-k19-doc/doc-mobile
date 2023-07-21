@@ -24,8 +24,7 @@ TextStyle? bodyLarge(BuildContext context) {
   return Theme.of(context).textTheme.bodyLarge?.copyWith(
       fontWeight: FontWeight.w400,
       height: ConstValue.descriptionTextScale,
-      color: DefaultColor(context).fontColor,
-      backgroundColor: DefaultColor(context).backgroundColor);
+      color: DefaultColor(context).fontColor);
 }
 
 TextStyle? bodyLargeItalic(BuildContext context) {
@@ -33,30 +32,26 @@ TextStyle? bodyLargeItalic(BuildContext context) {
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.italic,
       height: ConstValue.descriptionTextScale,
-      color: DefaultColor(context).fontColor,
-      backgroundColor: DefaultColor(context).backgroundColor);
+      color: DefaultColor(context).fontColor);
 }
 
 TextStyle? bodyLargeBold(BuildContext context) {
   return Theme.of(context).textTheme.bodyLarge?.copyWith(
       fontWeight: FontWeight.w500,
       height: ConstValue.descriptionTextScale,
-      color: DefaultColor(context).fontColor,
-      backgroundColor: DefaultColor(context).backgroundColor);
+      color: DefaultColor(context).fontColor);
 }
 
 TextStyle? headLineSmall(BuildContext context) {
   return Theme.of(context).textTheme.headlineSmall?.copyWith(
       fontWeight: FontWeight.w500,
       height: ConstValue.descriptionTextScale,
-      color: DefaultColor(context).fontColor,
-      backgroundColor: DefaultColor(context).backgroundColor);
+      color: DefaultColor(context).fontColor);
 }
 
 TextStyle? headLineMedium(BuildContext context) {
   return Theme.of(context).textTheme.headlineMedium?.copyWith(
       fontWeight: FontWeight.w500,
       height: ConstValue.descriptionTextScale,
-      color: DefaultColor(context).fontColor,
-      backgroundColor: DefaultColor(context).backgroundColor);
+      color: DefaultColor(context).fontColor);
 }

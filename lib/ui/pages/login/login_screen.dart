@@ -33,7 +33,6 @@ class LoginScreen extends StatelessWidget {
         builder: (context, state) {
           return SafeArea(
             child: Scaffold(
-              backgroundColor: Colors.white,
               body: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(

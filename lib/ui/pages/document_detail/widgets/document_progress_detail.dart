@@ -44,8 +44,7 @@ class _DocumentProgressDetailState extends State<DocumentProgressDetail> {
           padding: const EdgeInsets.all(StyleConst.defaultPadding4),
           child: Text(
             AppLocalizations.of(context)!.progressInfo,
-            style: bodyLargeBold(context)?.copyWith(
-                fontSize: 18, color: _isExpanded ? Colors.black : Colors.black),
+            style: bodyLargeBold(context)?.copyWith(fontSize: 18),
           ),
         ),
         trailing: AnimatedRotation(

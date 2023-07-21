@@ -145,5 +145,6 @@
 	"signer": "Người ký",
 	"filterBy": "Sắp xếp theo",
 	"transfer": "Chuyển xử lý",
-	"noMethod": "Không có"
+	"noMethod": "Không có",
+	"notification": "Thông báo"
 }

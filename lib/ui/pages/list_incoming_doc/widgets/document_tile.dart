@@ -28,15 +28,6 @@ class _DocumentTileState extends State<DocumentTile> {
     return outputFormat.format(date);
   }
 
-  final htmlStyle = '''
-      <style>
-        body {
-          padding: 0;
-          margin: 0;
-        }
-      </style>
-    ''';
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -53,17 +44,23 @@ class _DocumentTileState extends State<DocumentTile> {
               Text(
                 "${AppLocalizations.of(context)!.originalSymbolNumber}: ${widget.incomingDocument.originalSymbolNumber}",
                 style: bodyLarge(context)?.copyWith(
-                    color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
+                    color: _isExpanded
+                        ? ColorConst.primaryBlue
+                        : DefaultColor(context).fontColor),
               ),
               Text(
                 "${widget.incomingDocument.documentType?.type}",
                 style: bodyLarge(context)?.copyWith(
-                    color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
+                    color: _isExpanded
+                        ? ColorConst.primaryBlue
+                        : DefaultColor(context).fontColor),
               ),
               Text(
                 "${AppLocalizations.of(context)!.processingDuration}: ${widget.incomingDocument.processingDuration ?? "01-01-1970"}",
                 style: bodyLarge(context)?.copyWith(
-                    color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
+                    color: _isExpanded
+                        ? ColorConst.primaryBlue
+                        : DefaultColor(context).fontColor),
               )
             ],
           ),

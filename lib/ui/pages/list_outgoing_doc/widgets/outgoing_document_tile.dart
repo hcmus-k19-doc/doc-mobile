@@ -38,17 +38,23 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
               Text(
                 "${AppLocalizations.of(context)!.originalSymbolNumber}: ${widget.outgoingDocument.originalSymbolNumber}",
                 style: bodyLarge(context)?.copyWith(
-                    color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
+                    color: _isExpanded
+                        ? ColorConst.primaryBlue
+                        : DefaultColor(context).fontColor),
               ),
               Text(
                 "${widget.outgoingDocument.documentType?.type}",
                 style: bodyLarge(context)?.copyWith(
-                    color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
+                    color: _isExpanded
+                        ? ColorConst.primaryBlue
+                        : DefaultColor(context).fontColor),
               ),
               Text(
                 "${AppLocalizations.of(context)!.releaseNumber}: ${widget.outgoingDocument.outgoingNumber ?? ""}",
                 style: bodyLarge(context)?.copyWith(
-                    color: _isExpanded ? ColorConst.primaryBlue : Colors.black),
+                    color: _isExpanded
+                        ? ColorConst.primaryBlue
+                        : DefaultColor(context).fontColor),
               ),
               // Text(
               //   "Còn 5 ngày",

@@ -37,8 +37,7 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
           padding: const EdgeInsets.all(StyleConst.defaultPadding4),
           child: Text(
             AppLocalizations.of(context)!.docInfo,
-            style: bodyLargeBold(context)
-                ?.copyWith(fontSize: 18, color: Colors.black),
+            style: bodyLargeBold(context)?.copyWith(fontSize: 18),
           ),
         ),
         trailing: AnimatedRotation(

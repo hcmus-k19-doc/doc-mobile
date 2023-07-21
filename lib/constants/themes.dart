@@ -33,7 +33,7 @@ ColorScheme darkTheme() {
     onSecondary: Colors.black,
     error: Colors.redAccent,
     onError: Colors.black,
-    background: Colors.black,
+    background: Colors.grey[800]!,
     onBackground: Colors.white,
     surface: Colors.black,
     onSurface: Colors.white,
@@ -41,12 +41,12 @@ ColorScheme darkTheme() {
 }
 
 class SettingsProvider extends ChangeNotifier {
-  Locale _locale = const Locale("vi", "VN");
-  String _localeString = "vi";
+  Locale? _locale;
+  String? _localeString;
 
-  Locale get locale => _locale;
+  Locale get locale => _locale ?? const Locale("vi", "VN");
 
-  String get localeString => _localeString;
+  String get localeString => _localeString ?? "vi";
 
   ThemeMode? _themeMode;
 
@@ -54,6 +54,7 @@ class SettingsProvider extends ChangeNotifier {
 
   SettingsProvider() {
     getThemeMode();
+    getLocale();
   }
 
   void getThemeMode() async {
@@ -68,6 +69,20 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void getLocale() async {
+    LocalPreferences localPreferences = LocalPreferences();
+    final String tempLocale =
+        await localPreferences.getString(DATA_CONST.LOCALE);
+    if (tempLocale.isEmpty || tempLocale == LOCALE_MODE_CONST.VI) {
+      _locale = const Locale("vi", "VN");
+      _localeString = LOCALE_MODE_CONST.VI;
+    } else {
+      _locale = const Locale("en", "EN");
+      _localeString = LOCALE_MODE_CONST.EN;
+    }
+    notifyListeners();
+  }
+
   Future<void> toggleTheme(bool isDark) async {
     _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
     await LocalPreferences().saveString(DATA_CONST.THEME_MODE,
@@ -75,9 +90,11 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setLocale(Locale locale, String localeString) {
+  Future<void> setLocale(Locale locale, String localeString) async {
     _locale = locale;
     _localeString = localeString;
+    await LocalPreferences()
+        .saveString(DATA_CONST.LOCALE, _localeString ?? "vi");
     notifyListeners();
   }
 }
@@ -85,4 +102,9 @@ class SettingsProvider extends ChangeNotifier {
 class THEME_MODE_CONST {
   static const String LIGHT_MODE = "LIGHT_MODE";
   static const String BLACK_MODE = "BLACK_MODE";
+}
+
+class LOCALE_MODE_CONST {
+  static const String VI = "vi";
+  static const String EN = "en";
 }

@@ -179,7 +179,13 @@ class _SearchModalState extends State<SearchModal> {
                           const SizedBox(
                             width: StyleConst.defaultPadding24 / 2,
                           ),
-                          const Icon(Icons.search)
+                          Icon(
+                            Icons.search,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black
+                                    : Colors.white,
+                          )
                         ],
                       ),
                     ),

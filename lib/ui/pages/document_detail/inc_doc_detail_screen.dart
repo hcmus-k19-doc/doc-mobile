@@ -34,7 +34,6 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: ColorConst.white,
       appBar: AppBar(
         title: Text(
           AppLocalizations.of(context)!.detailIncomingDoc,
@@ -116,7 +115,9 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
                         ])),
                   ]));
             }
-            return const Center(child: Text("Đã xảy ra lỗi không xác định"));
+            return Center(
+                child: Text("Đã xảy ra lỗi không xác định",
+                    style: bodyLarge(context)));
           })),
     );
   }
@@ -169,7 +170,6 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
         false);
 
     showModalBottomSheet(
-      backgroundColor: Colors.white,
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -177,7 +177,7 @@ class _IncomingDocumentDetailState extends State<IncomingDocumentDetail> {
           top: Radius.circular(25),
         ),
       ),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
+      clipBehavior: Clip.hardEdge,
       builder: (BuildContext context) {
         return CommentBottomDialog(commentBloc: commentBloc, size: size);
       },

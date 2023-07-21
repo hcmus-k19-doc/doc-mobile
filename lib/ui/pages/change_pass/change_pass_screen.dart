@@ -47,7 +47,12 @@ class ChangePasswordScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            title: Text(
+              AppLocalizations.of(context)!.changePassword,
+              style: headLineSmall(context)?.copyWith(color: Colors.white),
+            ),
+          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(StyleConst.defaultPadding20),

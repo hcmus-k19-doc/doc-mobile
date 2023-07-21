@@ -38,6 +38,7 @@ class ConfirmDialog extends StatelessWidget {
             title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
+            style: bodyLarge(context),
           ),
           const SizedBox(
             height: 12,
@@ -84,8 +85,8 @@ class ConfirmDialog extends StatelessWidget {
                       child: CustomElevatedButton(
                         callback: onLeftButton,
                         title: leftButton,
-                        radius: 0,
-                        buttonType: ButtonType.outlinedButton,
+                        radius: 30,
+                        buttonType: ButtonType.filledButton,
                       )),
                 )),
                 Expanded(

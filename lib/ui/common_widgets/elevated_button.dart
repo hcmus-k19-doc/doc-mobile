@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/export_constants.dart';
 
-
 class CustomElevatedButton extends StatelessWidget {
   final VoidCallback callback;
   final String title;
@@ -22,22 +21,22 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (buttonType) {
       case ButtonType.filledButton:
-        return filledElevated();
+        return filledElevated(context);
       case ButtonType.outlinedButton:
-        return outlinedElevated();
+        return outlinedElevated(context);
       case ButtonType.filledWhiteButton:
-        return filledWhiteElevated();
+        return filledWhiteElevated(context);
       default:
-        return filledElevated();
+        return filledElevated(context);
     }
   }
 
-  ElevatedButton outlinedElevated() {
+  ElevatedButton outlinedElevated(BuildContext context) {
     Widget child;
     if (icon == null) {
-      child = childWidgetText();
+      child = childWidgetText(context);
     } else {
-      child = childWidgetTextAndIcon();
+      child = childWidgetTextAndIcon(context);
     }
 
     return ElevatedButton(
@@ -56,33 +55,37 @@ class CustomElevatedButton extends StatelessWidget {
     );
   }
 
-  Widget childWidgetText() {
-    return Text(title);
+  Widget childWidgetText(BuildContext context) {
+    return Text(title, style: bodyLarge(context));
   }
 
-  Widget childWidgetTextAndIcon() {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [Text(title), Icon(icon)]);
+  Widget childWidgetTextAndIcon(BuildContext context) {
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      Text(
+        title,
+        style: bodyLarge(context),
+      ),
+      Icon(icon)
+    ]);
   }
 
-  ElevatedButton filledWhiteElevated() {
+  ElevatedButton filledWhiteElevated(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-          foregroundColor: ColorConst.primaryBlue,
-          textStyle: const TextStyle(),
-          padding: const EdgeInsets.all(16),
-          elevation: 2,
-          shape: RoundedRectangleBorder(
+        foregroundColor: ColorConst.primaryBlue,
+        textStyle: const TextStyle(),
+        padding: const EdgeInsets.all(16),
+        elevation: 2,
+        shape: RoundedRectangleBorder(
             side: BorderSide(color: ColorConst.primaryBlue, width: 1),
-              borderRadius: BorderRadius.circular(radius)),),
+            borderRadius: BorderRadius.circular(radius)),
+      ),
       onPressed: callback,
-      child: Text(title),
+      child: Text(title, style: bodyLarge(context)),
     );
   }
 
-  ElevatedButton filledElevated() {
+  ElevatedButton filledElevated(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(16),
@@ -90,7 +93,7 @@ class CustomElevatedButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius))),
       onPressed: callback,
-      child: Text(title),
+      child: Text(title, style: bodyLarge(context)),
     );
   }
 }
