@@ -31,3 +31,9 @@ class LogoutEvent extends AuthEvent {
   // TODO: implement props
   List<Object?> get props => [];
 }
+
+class ClearAuthentication extends AuthEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}

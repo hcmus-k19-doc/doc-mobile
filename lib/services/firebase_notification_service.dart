@@ -31,7 +31,7 @@ class FirebaseNotificationService {
             _androidChannel.id,
             _androidChannel.name,
             channelDescription: _androidChannel.description,
-            icon: '@drawable/ic_launcher',
+            icon: '@drawable/logo_noti',
           )),
           payload: jsonEncode(message.toMap()));
     });
@@ -39,15 +39,21 @@ class FirebaseNotificationService {
 
   Future<void> initNotification() async {
     await _firebaseMessaging.requestPermission();
-    final fcmToken = await _firebaseMessaging.getToken();
-    print("FCMToken: ${fcmToken}");
     initPushNotification();
     initLocalNotification();
   }
 
+  Future<String?> getFirebaseToken() async {
+    return await _firebaseMessaging.getToken();
+  }
+
+  Future<void> revokeFirebaseToken() async {
+    await _firebaseMessaging.deleteToken();
+  }
+
   Future initLocalNotification() async {
     const iOS = DarwinInitializationSettings();
-    const android = AndroidInitializationSettings('@drawable/ic_launcher');
+    const android = AndroidInitializationSettings('@drawable/logo_noti');
     const settings = InitializationSettings(android: android, iOS: iOS);
     await _localNotifications.initialize(settings);
     final platForm = _localNotifications.resolvePlatformSpecificImplementation<
@@ -59,5 +65,6 @@ class FirebaseNotificationService {
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
   print("Title: ${message.notification?.title}");
   print("Body: ${message.notification?.body}");
+  print("image: ${message.notification?.android?.imageUrl}");
   print("Payload: ${message.data}");
 }

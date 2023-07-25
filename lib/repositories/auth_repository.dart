@@ -6,12 +6,14 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 class AuthRepository extends BaseRepository {
   AuthRepository(super.baseUrl);
 
-  Future<Token?> login(String username, String password) async {
+  Future<Token?> login(
+      String username, String password, String firebaseToken) async {
     try {
       var response = await provider
           .post(url: "", contentType: Headers.formUrlEncodedContentType, data: {
         "username": username,
         "password": password,
+        'firebaseCloudMessagingToken': firebaseToken
       });
       return Token(
           accessToken: response["access_token"]!,
@@ -47,12 +49,15 @@ class AuthRepository extends BaseRepository {
     }
   }
 
-  Future<void> logout(String refreshToken) async {
+  Future<void> logout(String refreshToken, String firebaseToken) async {
     try {
       await provider.post(
           url: "/revoke",
           contentType: Headers.formUrlEncodedContentType,
-          data: {"refreshToken": refreshToken});
+          data: {
+            "refreshToken": refreshToken,
+            "firebaseCloudMessagingToken": firebaseToken
+          });
     } catch (error) {
       rethrow;
     }
