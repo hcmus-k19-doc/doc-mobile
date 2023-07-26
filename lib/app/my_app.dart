@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/app/main.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:flutter_app/repositories/auth_repository.dart';
 import 'package:flutter_app/repositories/user_repository.dart';
@@ -29,8 +30,6 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  final navigatorKey = GlobalKey<NavigatorState>();
-
   @override
   void initState() {
     super.initState();

@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_app/app/main.dart';
+import 'package:flutter_app/app/router.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class FirebaseNotificationService {
   final _firebaseMessaging = FirebaseMessaging.instance;
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
   final _androidChannel = const AndroidNotificationChannel(
       "doc_noti_channel", "DOC Noti Channel",
       description: "This channel is for doc notification",
@@ -18,7 +18,10 @@ class FirebaseNotificationService {
         .setForegroundNotificationPresentationOptions(
             alert: true, badge: true, sound: true);
 
+    FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
+
     FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
+
     FirebaseMessaging.onMessage.listen((message) {
       final notification = message.notification;
       if (notification == null) return;
@@ -55,10 +58,33 @@ class FirebaseNotificationService {
     const iOS = DarwinInitializationSettings();
     const android = AndroidInitializationSettings('@drawable/logo_noti');
     const settings = InitializationSettings(android: android, iOS: iOS);
-    await _localNotifications.initialize(settings);
+    await _localNotifications.initialize(settings,
+        onDidReceiveNotificationResponse: (notificationReponse) {
+      final message = RemoteMessage.fromMap(
+          jsonDecode(notificationReponse.payload ?? "{}"));
+      handleMessage(message);
+    });
     final platForm = _localNotifications.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>();
     await platForm?.createNotificationChannel(_androidChannel);
+  }
+}
+
+void handleMessage(RemoteMessage? message) {
+  if (message == null) return;
+  try {
+    String? documentType = message.data["processingDocumentType"];
+    String? documentId = message.data["documentId"];
+    if (documentType != null && documentId != null) {
+      int docId = int.parse(documentId);
+      navigatorKey.currentState?.pushNamed(
+          documentType == "INCOMING_DOCUMENT"
+              ? MyRouter.incomingDocumentDetail
+              : MyRouter.outgoingDocumentDetail,
+          arguments: DocumentDetailArgs(documentId: docId));
+    }
+  } catch (error) {
+    print(error);
   }
 }
 

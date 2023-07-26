@@ -7,6 +7,8 @@ import 'router.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'config.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 Future<void> main() async {
   MyApp.initSystemDefault();
   timeago.setLocaleMessages("vi", timeago.ViMessages());
