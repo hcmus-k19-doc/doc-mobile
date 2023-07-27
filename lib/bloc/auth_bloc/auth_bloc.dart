@@ -4,6 +4,7 @@ import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/model/token.dart';
 import 'package:flutter_app/repositories/auth_repository.dart';
 import 'package:flutter_app/repositories/user_repository.dart';
+import 'package:flutter_app/services/firebase_notification_service.dart';
 import 'package:flutter_app/utils/secured_local_storage.dart';
 
 part 'auth_event.dart';
@@ -46,7 +47,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginEvent>((event, emit) async {
       emit(AuthLoading());
       try {
-        token = await authRepository.login(event.username, event.password);
+        final firebaseToken =
+            await FirebaseNotificationService().getFirebaseToken();
+        token = await authRepository.login(
+            event.username, event.password, firebaseToken ?? "");
+        print(firebaseToken);
+
         SecuredLocalStorage _storage = SecuredLocalStorage();
         await _storage.saveString(
             KEY_CONST.ACCESS_TOKEN_KEY, token!.accessToken!);
@@ -60,15 +66,33 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
     on<LogoutEvent>((event, emit) async {
       await SecuredLocalStorage().deleteAll();
-      emit(UnAuthenticated());
       try {
         String tempRefreshToken = token!.refreshToken!;
         token = null;
         profile = null;
-        await authRepository.logout(tempRefreshToken);
+        final String firebaseToken =
+            await FirebaseNotificationService().getFirebaseToken() ?? "";
+        await authRepository.logout(tempRefreshToken, firebaseToken);
+
+        await FirebaseNotificationService().revokeFirebaseToken();
+        emit(UnAuthenticated());
       } catch (error) {
-        print(error);
+        emit(AuthError());
       }
+    });
+
+    on<ClearAuthentication>((event, emit) async {
+      await SecuredLocalStorage().deleteAll();
+      String tempRefreshToken = token?.refreshToken ?? "";
+      token = null;
+      profile = null;
+      try {
+        final String firebaseToken =
+            await FirebaseNotificationService().getFirebaseToken() ?? "";
+        await authRepository.logout(tempRefreshToken, firebaseToken);
+
+        await FirebaseNotificationService().revokeFirebaseToken();
+      } catch (error) {}
     });
   }
 }
