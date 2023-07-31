@@ -32,7 +32,7 @@ class _TransferHistoryScreenState extends State<TransferHistoryScreen> {
           padding: const EdgeInsets.all(StyleConst.defaultPadding8),
           child: Column(
             children: [
-              Expanded(child: const BuildListTransfer()),
+              const Expanded(child: BuildListTransfer()),
               InkWell(
                 onTap: () {
                   print("12312321");
@@ -41,7 +41,7 @@ class _TransferHistoryScreenState extends State<TransferHistoryScreen> {
                     width: double.infinity,
                     alignment: Alignment.center,
                     child: Text(
-                      "Đánh dấu tất cả đã đọc",
+                      AppLocalizations.of(context)!.markReadAll,
                       style: bodyLarge(context)?.copyWith(fontSize: 15),
                     )),
               )

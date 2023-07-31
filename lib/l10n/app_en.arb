@@ -146,5 +146,6 @@
 	"filterBy": "Filter by",
 	"transfer": "Transfer for Processing",
 	"noMethod": "No method",
-	"notification": "Notification"
+	"notification": "Notification",
+	"markReadAll": "Mark read all"
 }

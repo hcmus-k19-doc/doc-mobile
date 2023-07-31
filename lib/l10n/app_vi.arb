@@ -146,5 +146,6 @@
 	"filterBy": "Sắp xếp theo",
 	"transfer": "Chuyển xử lý",
 	"noMethod": "Không có",
-	"notification": "Thông báo"
+	"notification": "Thông báo",
+	"markReadAll": "Đánh dấu tất cả đã đọc"
 }
