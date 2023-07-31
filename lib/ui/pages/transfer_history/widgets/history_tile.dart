@@ -35,7 +35,9 @@ class HistoryTile extends StatelessWidget {
                 width: StyleConst.defaultPadding12,
               ),
               CircleAvatar(
-                  backgroundColor: ColorConst.grey,
+                  backgroundColor: currentId == transferHistory.senderId
+                      ? Colors.lightGreen
+                      : Colors.lightBlue,
                   child: Icon(
                     currentId == transferHistory.senderId
                         ? Icons.arrow_upward
@@ -67,9 +69,18 @@ class HistoryTile extends StatelessWidget {
                   ],
                 ),
               ),
+              Container(
+                width: 10,
+                height: 10,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Theme.of(context).primaryColor),
+              )
             ],
           ),
-          const Divider()
+          const Divider(
+            thickness: 1,
+          )
         ],
       ),
     );
