@@ -42,4 +42,38 @@ class UserRepository extends BaseRepository {
       rethrow;
     }
   }
+
+  Future<int> fetchUnreadNoti() async {
+    try {
+      final response = await provider.get(
+        url: "/get-transfer-history/quantity",
+        cancelToken: cancelToken,
+      );
+      return response;
+    } catch (err) {
+      rethrow;
+    }
+  }
+
+  Future<void> readAHistory(int docId) async {
+    try {
+      await provider.put(
+        url: "/update-transfer-history-is-read/${docId}",
+        cancelToken: cancelToken,
+      );
+    } catch (err) {
+      rethrow;
+    }
+  }
+
+  Future<void> markAllDoc() async {
+    try {
+      await provider.put(
+        url: "/update-transfer-history-is-read",
+        cancelToken: cancelToken,
+      );
+    } catch (err) {
+      rethrow;
+    }
+  }
 }

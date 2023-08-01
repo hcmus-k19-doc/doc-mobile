@@ -9,6 +9,7 @@ class TransferHistory {
   int? senderId;
   String? senderName;
   int? receiverId;
+  bool? isRead;
   String? receiverName;
 
   TransferHistory(
@@ -22,6 +23,7 @@ class TransferHistory {
       this.senderId,
       this.senderName,
       this.receiverId,
+      this.isRead,
       this.receiverName});
 
   TransferHistory.fromJson(Map<String, dynamic> json) {
@@ -35,6 +37,7 @@ class TransferHistory {
     senderId = json['senderId'];
     senderName = json['senderName'];
     receiverId = json['receiverId'];
+    isRead = json['isRead'];
     receiverName = json['receiverName'];
   }
 
@@ -50,7 +53,40 @@ class TransferHistory {
     data['senderId'] = senderId;
     data['senderName'] = senderName;
     data['receiverId'] = receiverId;
+    data['isRead'] = isRead;
     data['receiverName'] = receiverName;
     return data;
+  }
+
+  TransferHistory copyWith({
+    int? id,
+    List<int>? documentIds,
+    String? createdDate,
+    String? processingDuration,
+    bool? isInfiniteProcessingTime,
+    bool? isTransferToSameLevel,
+    String? processMethod,
+    int? senderId,
+    String? senderName,
+    int? receiverId,
+    bool? isRead,
+    String? receiverName,
+  }) {
+    return TransferHistory(
+      id: id ?? this.id,
+      documentIds: documentIds ?? this.documentIds,
+      createdDate: createdDate ?? this.createdDate,
+      processingDuration: processingDuration ?? this.processingDuration,
+      isInfiniteProcessingTime:
+          isInfiniteProcessingTime ?? this.isInfiniteProcessingTime,
+      isTransferToSameLevel:
+          isTransferToSameLevel ?? this.isTransferToSameLevel,
+      processMethod: processMethod ?? this.processMethod,
+      senderId: senderId ?? this.senderId,
+      senderName: senderName ?? this.senderName,
+      receiverId: receiverId ?? this.receiverId,
+      isRead: isRead ?? this.isRead,
+      receiverName: receiverName ?? this.receiverName,
+    );
   }
 }

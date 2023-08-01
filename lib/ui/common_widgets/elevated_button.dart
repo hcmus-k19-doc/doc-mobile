@@ -93,7 +93,8 @@ class CustomElevatedButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius))),
       onPressed: callback,
-      child: Text(title, style: bodyLarge(context)),
+      child:
+          Text(title, style: bodyLarge(context)?.copyWith(color: Colors.white)),
     );
   }
 }

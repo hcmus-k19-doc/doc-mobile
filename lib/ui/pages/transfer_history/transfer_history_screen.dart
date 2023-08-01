@@ -35,7 +35,7 @@ class _TransferHistoryScreenState extends State<TransferHistoryScreen> {
               const Expanded(child: BuildListTransfer()),
               InkWell(
                 onTap: () {
-                  print("12312321");
+                  widget.transferHistoryBloc.add(const MarkReadAllEvent());
                 },
                 child: Container(
                     width: double.infinity,

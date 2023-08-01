@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
+import 'package:flutter_app/bloc/transfer_history_bloc/transfer_history_bloc.dart';
 import 'package:flutter_app/constants/color_const.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
@@ -19,6 +20,8 @@ class HistoryTile extends StatelessWidget {
 
     return InkWell(
       onTap: () {
+        BlocProvider.of<TransferHistoryBloc>(context).add(ReadAHistoryEvent(
+            transferHistory.id!, transferHistory.isRead ?? true));
         showDialog(
             context: context,
             builder: (_) {
@@ -69,13 +72,14 @@ class HistoryTile extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                width: 10,
-                height: 10,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).primaryColor),
-              )
+              if (transferHistory.isRead == false)
+                Container(
+                  width: 10,
+                  height: 10,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Theme.of(context).primaryColor),
+                )
             ],
           ),
           const Divider(

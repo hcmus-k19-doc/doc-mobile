@@ -27,3 +27,17 @@ class FetchMoreTransferHistoryEvent extends TransferHistoryEvent {
   @override
   List<Object?> get props => [];
 }
+
+class ReadAHistoryEvent extends TransferHistoryEvent {
+  final int docId;
+  final bool isRead;
+  const ReadAHistoryEvent(this.docId, this.isRead);
+  @override
+  List<Object?> get props => [];
+}
+
+class MarkReadAllEvent extends TransferHistoryEvent {
+  const MarkReadAllEvent();
+  @override
+  List<Object?> get props => [];
+}
