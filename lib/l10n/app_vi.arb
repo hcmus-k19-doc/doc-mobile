@@ -147,5 +147,36 @@
 	"transfer": "Chuyển xử lý",
 	"noMethod": "Không có",
 	"notification": "Thông báo",
-	"markReadAll": "Đánh dấu tất cả đã đọc"
+	"markReadAll": "Đánh dấu tất cả đã đọc",
+	"withdrawDocumentIdsFor": "đã rút lại văn bản số {documentIds}",
+	"@withdrawDocumentIdsFor": {
+		"placeholders": {
+			"documentIds": {
+				"type": "String"
+			}
+		}
+	},
+	"sendBackDocumentIdsFor": "đã trả lại văn bản số {documentIds}",
+	"@sendBackDocumentIdsFor": {
+		"placeholders": {
+			"documentIds": {
+				"type": "String"
+			}
+		}
+	},
+	"sendbackProcess": "Yêu cầu trả lại văn bản",
+	"withdrawProcess": "Yêu cầu rút lại văn bản",
+	"petitioner": "Người yêu cầu",
+	"requestDate": "Ngày yêu cầu",
+	"reason": "Lý do",
+	"requestType": "Loại yêu cầu",
+	"selectRequestType": "{requestType, select, SEND_BACK{Trả lại} WITHDRAW{Rút lại} other{}}",
+	"@selectRequestType": {
+		"placeholders": {
+			"requestType": {
+				"type": "String"
+			}
+		}
+	},
+	"quotesRequest": "Trích ký - đề nghị"
 }

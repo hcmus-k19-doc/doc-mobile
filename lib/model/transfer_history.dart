@@ -1,3 +1,5 @@
+import 'package:flutter_app/model/return_request.dart';
+
 class TransferHistory {
   int? id;
   List<int>? documentIds;
@@ -11,6 +13,7 @@ class TransferHistory {
   int? receiverId;
   bool? isRead;
   String? receiverName;
+  ReturnRequest? returnRequest;
 
   TransferHistory(
       {this.id,
@@ -24,6 +27,7 @@ class TransferHistory {
       this.senderName,
       this.receiverId,
       this.isRead,
+      this.returnRequest,
       this.receiverName});
 
   TransferHistory.fromJson(Map<String, dynamic> json) {
@@ -39,6 +43,9 @@ class TransferHistory {
     receiverId = json['receiverId'];
     isRead = json['isRead'];
     receiverName = json['receiverName'];
+    returnRequest = json['returnRequest'] != null
+        ? ReturnRequest.fromJson(json['returnRequest'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -55,6 +62,9 @@ class TransferHistory {
     data['receiverId'] = receiverId;
     data['isRead'] = isRead;
     data['receiverName'] = receiverName;
+    if (returnRequest != null) {
+      data['returnRequest'] = returnRequest!.toJson();
+    }
     return data;
   }
 
@@ -71,6 +81,7 @@ class TransferHistory {
     int? receiverId,
     bool? isRead,
     String? receiverName,
+    ReturnRequest? returnRequest,
   }) {
     return TransferHistory(
       id: id ?? this.id,
@@ -87,6 +98,7 @@ class TransferHistory {
       receiverId: receiverId ?? this.receiverId,
       isRead: isRead ?? this.isRead,
       receiverName: receiverName ?? this.receiverName,
+      returnRequest: returnRequest ?? this.returnRequest,
     );
   }
 }
