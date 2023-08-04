@@ -68,13 +68,11 @@ class HistoryTile extends StatelessWidget {
                 width: StyleConst.defaultPadding12,
               ),
               CircleAvatar(
-                  backgroundColor: currentId == transferHistory.senderId &&
-                          transferHistory.returnRequest == null
+                  backgroundColor: transferHistory.returnRequest == null
                       ? Colors.lightGreen
                       : Colors.lightBlue,
                   child: Icon(
-                    currentId == transferHistory.senderId &&
-                            transferHistory.returnRequest == null
+                    transferHistory.returnRequest == null
                         ? Icons.arrow_upward
                         : Icons.arrow_downward,
                     color: ColorConst.white,
