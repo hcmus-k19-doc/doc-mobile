@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:flutter_app/bloc/transfer_history_bloc/transfer_history_bloc.dart';
+import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/ui/pages/transfer_history/widgets/build_list_transfer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -29,7 +30,23 @@ class _TransferHistoryScreenState extends State<TransferHistoryScreen> {
         ),
         body: Container(
           padding: const EdgeInsets.all(StyleConst.defaultPadding8),
-          child: const BuildListTransfer(),
+          child: Column(
+            children: [
+              const Expanded(child: BuildListTransfer()),
+              InkWell(
+                onTap: () {
+                  widget.transferHistoryBloc.add(const MarkReadAllEvent());
+                },
+                child: Container(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    child: Text(
+                      AppLocalizations.of(context)!.markReadAll,
+                      style: bodyLarge(context)?.copyWith(fontSize: 15),
+                    )),
+              )
+            ],
+          ),
         ),
       ),
     );

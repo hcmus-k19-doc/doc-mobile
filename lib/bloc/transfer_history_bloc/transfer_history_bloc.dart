@@ -12,7 +12,7 @@ class TransferHistoryBloc
   UserRepository userRepository;
   List<TransferHistory> listTransferHistory = [];
   int page = 0;
-  int? numTransferHistory;
+  int numTransferHistory = 0;
 
   TransferHistoryBloc(this.userRepository) : super(TransferHistoryInitial()) {
     on<FetchTransferHistoryEvent>((event, emit) async {
@@ -61,13 +61,33 @@ class TransferHistoryBloc
 
     on<FetchNumberTransferHistoryEvent>((event, emit) async {
       try {
-        final response =
-            await userRepository.fetchTransferHistoryList(0, event.userId, 12);
-        numTransferHistory = response.length;
+        numTransferHistory = await userRepository.fetchUnreadNoti();
         emit(TransferHistorySuccess(listTransferHistory));
       } catch (error) {
         emit(TransferHistoryFailure(error));
       }
+    });
+    on<ReadAHistoryEvent>((event, emit) async {
+      if (event.isRead == false) {
+        try {
+          listTransferHistory[listTransferHistory
+                  .indexWhere((element) => element.id == event.docId)]
+              .isRead = true;
+          await userRepository.readAHistory(event.docId);
+          numTransferHistory = await userRepository.fetchUnreadNoti();
+          emit(TransferHistorySuccess(listTransferHistory));
+        } catch (error) {}
+      }
+    });
+    on<MarkReadAllEvent>((event, emit) async {
+      try {
+        final newList =
+            listTransferHistory.map((e) => e.copyWith(isRead: true)).toList();
+        listTransferHistory = newList;
+        await userRepository.markAllDoc();
+        numTransferHistory = 0;
+        emit(TransferHistorySuccess(listTransferHistory));
+      } catch (error) {}
     });
   }
 }

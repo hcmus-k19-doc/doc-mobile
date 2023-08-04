@@ -146,5 +146,37 @@
 	"filterBy": "Filter by",
 	"transfer": "Transfer for Processing",
 	"noMethod": "No method",
-	"notification": "Notification"
+	"notification": "Notification",
+	"markReadAll": "Mark read all",
+	"withdrawDocumentIdsFor": "withdraw document number {documentIds}",
+	"@withdrawDocumentIdsFor": {
+		"placeholders": {
+			"documentIds": {
+				"type": "String"
+			}
+		}
+	},
+	"sendBackDocumentIdsFor": "sent back document number {documentIds}",
+	"@sendBackDocumentIdsFor": {
+		"placeholders": {
+			"documentIds": {
+				"type": "String"
+			}
+		}
+	},
+	"sendbackProcess": "Request send back document",
+	"withdrawProcess": "Request withdraw document",
+	"petitioner": "Petitioner",
+	"requestDate": "Request date",
+	"reason": "Reason",
+	"requestType": "Request type",
+	"selectRequestType": "{requestType, select, SEND_BACK{Send back} WITHDRAW{Withdraw} other{}}",
+	"@selectRequestType": {
+		"placeholders": {
+			"requestType": {
+				"type": "String"
+			}
+		}
+	},
+	"quotesRequest": "Quotes - request"
 }
