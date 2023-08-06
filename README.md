@@ -1,4 +1,4 @@
-![image](https://github.com/hcmus-k19-doc/doc-mobile/assets/63282765/999770db-d6bd-46a6-83bc-c7e4b8d099ce)# doc-mobile
+# doc-mobile
 
 The doc-mobile is a component of a microservices architecture, specifically designed for displaying the **Document Publication and Approval System** on mobile devices.
 
