@@ -10,8 +10,8 @@ class CommentRepository extends BaseRepository {
           url: "/${isOutgoing ? "OUTGOING_DOCUMENT" : "INCOMING_DOCUMENT"}/$id",
           cancelToken: cancelToken);
 
-      return List<Comment>.from(response.map((e) => Comment.fromJson(e)))
-          .toList();
+      return List<Comment>.from(
+          response["payload"].map((e) => Comment.fromJson(e))).toList();
     } catch (err) {
       rethrow;
     }

@@ -356,26 +356,6 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                         ))
                   ],
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        child: Text(
-                      "${AppLocalizations.of(context)!.status}:",
-                      style: bodyLargeBold(context),
-                    )),
-                    const SizedBox(
-                      width: StyleConst.defaultPadding8,
-                    ),
-                    Flexible(
-                        flex: 2,
-                        child: Text(
-                          statusLevel[widget.outgoingDocument.status] ??
-                              AppLocalizations.of(context)!.unKnown,
-                          style: bodyLarge(context),
-                        ))
-                  ],
-                ),
                 const SizedBox(
                   height: StyleConst.defaultPadding12,
                 ),
