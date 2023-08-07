@@ -205,12 +205,13 @@ class _OutgoingSearchModalState extends State<OutgoingSearchModal> {
   }
 
   void startSearching() {
-    outgoingSearchCriteria?.outgoingNumber = outgoingNumberController.text;
+    outgoingSearchCriteria?.outgoingNumber =
+        outgoingNumberController.text.trim();
 
     outgoingSearchCriteria?.originalSymbolNumber =
-        originalSymbolNumberController.text;
+        originalSymbolNumberController.text.trim();
 
-    outgoingSearchCriteria?.summary = summaryController.text;
+    outgoingSearchCriteria?.summary = summaryController.text.trim();
 
     outgoingSearchCriteria?.documentTypeId = searchDocTypeVal?.id;
 

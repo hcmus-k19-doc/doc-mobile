@@ -161,7 +161,7 @@ class _CommentBottomDialogState extends State<CommentBottomDialog> {
                                 color: ColorConst.primaryBlue,
                                 onPressed: () async {
                                   var sendingPrompt =
-                                      txtController.text.toString();
+                                      txtController.text.trim().toString();
                                   txtController.clear();
 
                                   if (sendingPrompt.isNotEmpty) {

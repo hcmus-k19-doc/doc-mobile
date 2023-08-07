@@ -178,5 +178,6 @@
 			}
 		}
 	},
-	"quotesRequest": "Quotes - request"
+	"quotesRequest": "Quotes - request",
+	"plsInputValid": "Please input valid value"
 }

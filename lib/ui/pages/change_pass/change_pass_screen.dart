@@ -75,10 +75,12 @@ class ChangePasswordScreen extends StatelessWidget {
                                 AppLocalizations.of(context)!.currentPassword,
                             textController: currentPasswordController,
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please input value";
+                              if (value != null && value.trim().isEmpty) {
+                                return AppLocalizations.of(context)!
+                                    .plsInputValid;
+                              } else {
+                                return null;
                               }
-                              return null;
                             },
                           ),
                           const SizedBox(
@@ -88,10 +90,12 @@ class ChangePasswordScreen extends StatelessWidget {
                             title: AppLocalizations.of(context)!.newPassword,
                             textController: newPasswordController,
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please input value";
+                              if (value != null && value.trim().isEmpty) {
+                                return AppLocalizations.of(context)!
+                                    .plsInputValid;
+                              } else {
+                                return null;
                               }
-                              return null;
                             },
                           ),
                           const SizedBox(
@@ -102,7 +106,10 @@ class ChangePasswordScreen extends StatelessWidget {
                                 .confirmNewPassword,
                             textController: confirmNewPasswordController,
                             validator: (value) {
-                              if (value != newPasswordController.text) {
+                              if (value != null && value.trim().isEmpty) {
+                                return AppLocalizations.of(context)!
+                                    .plsInputValid;
+                              } else if (value != newPasswordController.text) {
                                 return "Password and confirm password don't match";
                               }
                               return null;

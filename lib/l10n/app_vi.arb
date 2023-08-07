@@ -178,5 +178,6 @@
 			}
 		}
 	},
-	"quotesRequest": "Trích ký - đề nghị"
+	"quotesRequest": "Trích ký - đề nghị",
+	"plsInputValid": "Vui lòng nhập kí tự hợp lệ"
 }

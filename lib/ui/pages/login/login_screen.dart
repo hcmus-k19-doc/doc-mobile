@@ -95,7 +95,12 @@ class LoginScreen extends StatelessWidget {
                               Visibility(
                                 visible: state is AuthError ? true : false,
                                 child: Text(
-                                  AppLocalizations.of(context)!.failToLogin,
+                                  state is AuthError
+                                      ? state.errorMessage.contains("null")
+                                          ? AppLocalizations.of(context)!
+                                              .failToLogin
+                                          : state.errorMessage
+                                      : "",
                                   style: bodyLargeBold(context)
                                       ?.copyWith(color: Colors.red),
                                 ),

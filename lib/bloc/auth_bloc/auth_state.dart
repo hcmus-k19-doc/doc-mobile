@@ -20,6 +20,9 @@ class UnAuthenticated extends AuthState {
 }
 
 class AuthError extends AuthState {
+  final String errorMessage;
+
+  const AuthError(this.errorMessage);
   @override
-  List<Object> get props => [];
+  List<Object> get props => [errorMessage];
 }

@@ -51,7 +51,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             await FirebaseNotificationService().getFirebaseToken();
         token = await authRepository.login(
             event.username, event.password, firebaseToken ?? "");
-        print(firebaseToken);
 
         SecuredLocalStorage _storage = SecuredLocalStorage();
         await _storage.saveString(
@@ -61,7 +60,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         profile = await userRepository.getCurrentProfile();
         emit(Authenticated());
       } catch (err) {
-        emit(AuthError());
+        emit(AuthError(err.toString()));
       }
     });
     on<LogoutEvent>((event, emit) async {
@@ -77,7 +76,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await FirebaseNotificationService().revokeFirebaseToken();
         emit(UnAuthenticated());
       } catch (error) {
-        emit(AuthError());
+        emit(UnAuthenticated());
       }
     });
 

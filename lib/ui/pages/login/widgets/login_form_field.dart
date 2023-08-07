@@ -34,11 +34,11 @@ class _LoginFormFieldState extends State<LoginFormField> {
               TextFormField(
                 controller: widget.usernameTextEditingController,
                 validator: (value) {
-                  // if (value != null && !value.isValidEmail) {
-                  //   return 'Email must follow standard format';
-                  // } else {
-                  //   return null;
-                  // }
+                  if (value != null && value.trim().isEmpty) {
+                    return AppLocalizations.of(context)!.plsInputValid;
+                  } else {
+                    return null;
+                  }
                   return null; //Fix this later
                 },
                 enabled: state is AuthLoading ? false : true,
@@ -55,7 +55,8 @@ class _LoginFormFieldState extends State<LoginFormField> {
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.primary, width: 2),
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 2),
                         borderRadius:
                             BorderRadius.circular(StyleConst.defaultRadius15)),
                     border: OutlineInputBorder(
@@ -75,13 +76,13 @@ class _LoginFormFieldState extends State<LoginFormField> {
                 controller: widget.passwordTextEditingController,
                 obscureText: !_passwordVisible,
                 validator: (value) {
-                  //Currently just stick with password length
-                  // if (value != null && value.length < 7) {
-                  //   return "Enter min. 7 characters";
-                  // } else {
-                  //   return null;
-                  // }
-                  return null; //Fix this later
+                  // Currently just stick with password length
+                  if (value != null && value.trim().isEmpty) {
+                    return AppLocalizations.of(context)!.plsInputValid;
+                  } else {
+                    return null;
+                  }
+                  // return null; //Fix this later
                 },
                 enabled: state is AuthLoading ? false : true,
                 decoration: InputDecoration(
@@ -97,7 +98,8 @@ class _LoginFormFieldState extends State<LoginFormField> {
                     }),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.primary, width: 2),
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 2),
                         borderRadius:
                             BorderRadius.circular(StyleConst.defaultRadius15)),
                     suffixIcon: IconButton(

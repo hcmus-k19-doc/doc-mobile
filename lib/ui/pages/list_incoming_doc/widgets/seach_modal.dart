@@ -240,11 +240,12 @@ class _SearchModalState extends State<SearchModal> {
   }
 
   void startSearching() {
-    searchCriteria?.incomingNumber = incomingNumberController.text;
+    searchCriteria?.incomingNumber = incomingNumberController.text.trim();
 
-    searchCriteria?.originalSymbolNumber = originalSymbolNumberController.text;
+    searchCriteria?.originalSymbolNumber =
+        originalSymbolNumberController.text.trim();
 
-    searchCriteria?.summary = summaryController.text;
+    searchCriteria?.summary = summaryController.text.trim();
 
     searchCriteria?.documentTypeId = searchDocTypeVal?.id;
 
