@@ -4,6 +4,7 @@ import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/ui/pages/forgot_pass/widget/forgot_pass_form.dart';
 import 'package:flutter_app/utils/validation_extension.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotPassScreen extends StatelessWidget {
   ForgotPassScreen({Key? key}) : super(key: key);
@@ -14,7 +15,8 @@ class ForgotPassScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Forgot Password",
+          AppLocalizations.of(context)!.forgotPass.substring(
+              0, AppLocalizations.of(context)!.forgotPass.length - 1),
           style: headLineSmall(context)?.copyWith(color: Colors.white),
         ),
       ),
@@ -25,7 +27,7 @@ class ForgotPassScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Reset pasword",
+                AppLocalizations.of(context)!.resetPass,
                 style: bodyLargeBold(context)?.copyWith(fontSize: 20),
               ),
               Padding(
@@ -33,8 +35,7 @@ class ForgotPassScreen extends StatelessWidget {
                     left: StyleConst.defaultPadding8,
                     top: StyleConst.defaultPadding8),
                 child: Text(
-                  "Enter the email associated with your account and we'll send "
-                  "an email with instructions to reset your password.",
+                  AppLocalizations.of(context)!.detailForgotPass,
                   style: bodyLarge(context)
                       ?.copyWith(fontSize: 18, color: Colors.grey[700]),
                 ),

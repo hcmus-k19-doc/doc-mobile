@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/constants/export_constants.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CheckYourMailScreen extends StatelessWidget {
   const CheckYourMailScreen({Key? key}) : super(key: key);
@@ -9,6 +11,7 @@ class CheckYourMailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(StyleConst.defaultPadding24),
@@ -21,7 +24,10 @@ class CheckYourMailScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
                             Radius.circular(StyleConst.defaultRadius15)),
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.1)),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primary
+                            .withOpacity(0.1)),
                     padding: const EdgeInsets.all(StyleConst.defaultPadding24),
                     child: Icon(
                       Icons.mark_email_unread,
@@ -32,15 +38,14 @@ class CheckYourMailScreen extends StatelessWidget {
                   height: StyleConst.defaultPadding24,
                 ),
                 Text(
-                  "Check your mail",
+                  AppLocalizations.of(context)!.checkYourMail,
                   style: bodyLargeBold(context)?.copyWith(fontSize: 24),
                 ),
                 const SizedBox(
                   height: StyleConst.defaultPadding12,
                 ),
                 Text(
-                  "We have sent a password recover\n"
-                  "instructions to your email.",
+                  AppLocalizations.of(context)!.weSentNewPass,
                   textAlign: TextAlign.center,
                   style: bodyLarge(context)
                       ?.copyWith(fontSize: 18, color: Colors.grey[700]),
@@ -62,13 +67,13 @@ class CheckYourMailScreen extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      "Back to login",
+                      AppLocalizations.of(context)!.backToLogin,
                       style: bodyLarge(context)
                           ?.copyWith(fontSize: 18, color: Colors.white),
                     )),
                 const Spacer(),
                 Text(
-                  "Did not receive the email? Check your spam filter,",
+                  AppLocalizations.of(context)!.didNotReceive,
                   style: bodyLarge(context)?.copyWith(fontSize: 14),
                 ),
                 const SizedBox(
@@ -77,15 +82,17 @@ class CheckYourMailScreen extends StatelessWidget {
                 RichText(
                     text: TextSpan(children: [
                   TextSpan(
-                      text: "or ",
+                      text: "${AppLocalizations.of(context)!.or} ",
                       style: bodyLarge(context)?.copyWith(fontSize: 14)),
                   TextSpan(
-                      text: "try another email address",
+                      text: AppLocalizations.of(context)!.tryOtherMail,
                       style: bodyLarge(context)?.copyWith(
-                          fontSize: 14, color: Theme.of(context).colorScheme.primary),
+                          fontSize: 14,
+                          color: Theme.of(context).colorScheme.primary),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          print("Send back email");
+                          Navigator.pushReplacementNamed(
+                              context, MyRouter.forgotPassword);
                         })
                 ]))
               ],

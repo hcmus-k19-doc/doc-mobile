@@ -65,29 +65,29 @@ class LoginScreen extends StatelessWidget {
                                     passwordEditingController,
                               ),
 
-                              // Container(
-                              //   alignment: Alignment.centerRight,
-                              //   child: TextButton(
-                              //     style: ButtonStyle(
-                              //       overlayColor: MaterialStateProperty
-                              //           .resolveWith<Color>(
-                              //         (Set<MaterialState> states) {
-                              //           return Colors.transparent;
-                              //         },
-                              //       ),
-                              //       splashFactory: NoSplash.splashFactory,
-                              //     ),
-                              //     child: Text(
-                              //       "Forgot your password?",
-                              //       style: bodyLarge(context)
-                              //           ?.copyWith(color: ColorConst.primaryBlue),
-                              //     ),
-                              //     onPressed: () {
-                              //       Navigator.pushNamed(
-                              //           context, MyRouter.forgotPassword);
-                              //     },
-                              //   ),
-                              // ),
+                              Container(
+                                alignment: Alignment.centerRight,
+                                child: TextButton(
+                                  style: ButtonStyle(
+                                    overlayColor: MaterialStateProperty
+                                        .resolveWith<Color>(
+                                      (Set<MaterialState> states) {
+                                        return Colors.transparent;
+                                      },
+                                    ),
+                                    splashFactory: NoSplash.splashFactory,
+                                  ),
+                                  child: Text(
+                                    AppLocalizations.of(context)!.forgotPass,
+                                    style: bodyLarge(context)?.copyWith(
+                                        color: ColorConst.primaryBlue),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, MyRouter.forgotPassword);
+                                  },
+                                ),
+                              ),
                               //Sign in btn
                               const SizedBox(
                                 height: StyleConst.defaultPadding20,
