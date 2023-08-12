@@ -66,11 +66,13 @@ class PdfViewerState extends State<PdfViewer> {
                   },
                   imageBuilder: (context, imageProvider) => PhotoView(
                     imageProvider: imageProvider,
-                    backgroundDecoration: BoxDecoration(color: Colors.white),
+                    backgroundDecoration:
+                        const BoxDecoration(color: Colors.white),
                   ),
                   placeholder: (context, url) =>
                       const CircularProgressIndicator(),
                   errorWidget: (context, url, error) {
+                    print(error);
                     return const Icon(Icons.error);
                   },
                 ),

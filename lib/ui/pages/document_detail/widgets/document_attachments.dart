@@ -29,7 +29,7 @@ class _DocumentAttachmentState extends State<DocumentAttachment> {
     if (_hasFiles) {
       for (var element in widget.attachments) {
         fileNames.add(element.fileName ?? "Attachment");
-        var url = "${UrlConst.DOC_FILE_URL}/${element.alfrescoFileId}";
+        var url = "${UrlConst.DOC_FILE_URL}?fileKey=${element.alfrescoFileId}";
         pdfUrls.add(url);
         if (element.fileType == "PDF") {
           isPdf.add(true);

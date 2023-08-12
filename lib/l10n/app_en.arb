@@ -179,5 +179,16 @@
 		}
 	},
 	"quotesRequest": "Quotes - request",
-	"plsInputValid": "Please input valid value"
+	"plsInputValid": "Please input valid value",
+	"forgotPass": "Forgot your password?",
+	"resetPass": "Reset pasword",
+	"detailForgotPass": "Enter the email associated with your account and we'll send an email with instructions to reset your password.",
+	"emailMustFollow": "Email must follow standard format",
+	"sendReset": "Send reset password",
+	"checkYourMail": "Check your mail",
+	"weSentNewPass": "We have sent a new password to your mail.",
+	"backToLogin": "Back to login",
+	"didNotReceive": "Did not receive the email? Check your spam filter,",
+	"or": "or",
+	"tryOtherMail": "try another email address"
 }

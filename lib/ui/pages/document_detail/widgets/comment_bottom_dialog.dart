@@ -8,6 +8,7 @@ import '../../../../bloc/comment_bloc/comment_bloc.dart';
 import '../../../../constants/color_const.dart';
 import '../../../../constants/font_const.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class CommentBottomDialog extends StatefulWidget {
   const CommentBottomDialog(
@@ -120,8 +121,11 @@ class _CommentBottomDialogState extends State<CommentBottomDialog> {
                                           ),
                                         ),
                                         // Text("${comment.createdBy} - ${comment.createdDate}",style: bodyLargeBold(context)),
-                                        Text("${comment.content}",
-                                            style: bodyLarge(context)),
+                                        HtmlWidget(
+                                          "${comment.content}",
+                                          textStyle: bodyLarge(context),
+                                        ),
+
                                         const SizedBox(height: 8),
                                       ],
                                     );

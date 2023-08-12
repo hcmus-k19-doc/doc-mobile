@@ -179,5 +179,16 @@
 		}
 	},
 	"quotesRequest": "Trích ký - đề nghị",
-	"plsInputValid": "Vui lòng nhập kí tự hợp lệ"
+	"plsInputValid": "Vui lòng nhập kí tự hợp lệ",
+	"forgotPass": "Quên mật khẩu?",
+	"resetPass": "Đặt lại mật khẩu",
+	"detailForgotPass": "Nhập email được liên kết với tài khoản của bạn và chúng tôi sẽ gửi email có hướng dẫn đặt lại mật khẩu của bạn.",
+	"emailMustFollow": "Email phải theo định dạng chuẩn",
+	"sendReset": "Gửi đặt lại mật khẩu",
+	"checkYourMail": "Kiểm tra thư của bạn",
+	"weSentNewPass": "Chúng tôi đã gửi mật khẩu mới đến thư của bạn.",
+	"backToLogin": "Quay lại đăng nhập",
+	"didNotReceive": "Không nhận được thư? Kiểm tra thư rác của bạn,",
+	"or": "hoặc",
+	"tryOtherMail": "hãy thử một địa chỉ email khác"
 }

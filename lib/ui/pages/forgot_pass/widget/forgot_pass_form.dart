@@ -3,6 +3,8 @@ import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/constants/color_const.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/utils/validation_extension.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotPassForm extends StatefulWidget {
   const ForgotPassForm({Key? key, required this.formKey}) : super(key: key);
@@ -19,12 +21,11 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
       children: [
         TextFormField(
           validator: (value) {
-            // if (value != null && !value.isValidEmail) {
-            //   return 'Email must follow standard format';
-            // } else {
-            //   return null;
-            // }
-            return null;
+            if (value != null && !value.isValidEmail) {
+              return AppLocalizations.of(context)!.emailMustFollow;
+            } else {
+              return null;
+            }
           },
           decoration: InputDecoration(
               labelText: "Email",
@@ -63,14 +64,13 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
                           BorderRadius.circular(StyleConst.defaultRadius15))),
               onPressed: () {
                 if (widget.formKey.currentState!.validate()) {
-                  print("send link reset pass");
                   Navigator.pushReplacementNamed(
                       context, MyRouter.checkYourMail);
                 }
               },
               child: Center(
                 child: Text(
-                  "Send Instructions",
+                  AppLocalizations.of(context)!.sendReset,
                   style: bodyLargeBold(context)
                       ?.copyWith(fontSize: 18, color: Colors.white),
                 ),
