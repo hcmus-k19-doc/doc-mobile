@@ -9,12 +9,14 @@ class AuthRepository extends BaseRepository {
   Future<Token?> login(
       String username, String password, String firebaseToken) async {
     try {
-      var response = await provider
-          .post(url: "", contentType: Headers.formUrlEncodedContentType, data: {
-        "username": username,
-        "password": password,
-        'firebaseCloudMessagingToken': firebaseToken
-      });
+      var response = await provider.post(
+          url: "/token",
+          contentType: Headers.formUrlEncodedContentType,
+          data: {
+            "username": username,
+            "password": password,
+            'firebaseCloudMessagingToken': firebaseToken
+          });
       return Token(
           accessToken: response["access_token"]!,
           refreshToken: response["refresh_token"]!);
@@ -34,7 +36,7 @@ class AuthRepository extends BaseRepository {
       } else {
         if (refreshTokenFromStorage != null) {
           final response = await provider.post(
-              url: "/refresh",
+              url: "/token/refresh",
               contentType: Headers.formUrlEncodedContentType,
               data: {'refreshToken': refreshTokenFromStorage});
           return Token(
@@ -52,12 +54,23 @@ class AuthRepository extends BaseRepository {
   Future<void> logout(String refreshToken, String firebaseToken) async {
     try {
       await provider.post(
-          url: "/revoke",
+          url: "/token/revoke",
           contentType: Headers.formUrlEncodedContentType,
           data: {
             "refreshToken": refreshToken,
             "firebaseCloudMessagingToken": firebaseToken
           });
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<void> forgotPassword(String email) async {
+    try {
+      await provider.post(
+          url: "/forgot-password",
+          contentType: Headers.formUrlEncodedContentType,
+          data: {"email": email});
     } catch (error) {
       rethrow;
     }

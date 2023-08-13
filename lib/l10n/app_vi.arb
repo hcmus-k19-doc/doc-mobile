@@ -190,5 +190,7 @@
 	"backToLogin": "Quay lại đăng nhập",
 	"didNotReceive": "Không nhận được thư? Kiểm tra thư rác của bạn,",
 	"or": "hoặc",
-	"tryOtherMail": "hãy thử một địa chỉ email khác"
+	"tryOtherMail": "hãy thử một địa chỉ email khác",
+	"sendResetPassFail": "Yêu cầu đặt lại mật khẩu thất bại",
+	"usernamePassInvalid": "Tên người dùng hoặc mật khẩu không hợp lệ"
 }

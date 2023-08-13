@@ -90,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                               //Sign in btn
                               const SizedBox(
-                                height: StyleConst.defaultPadding20,
+                                height: StyleConst.defaultPadding8,
                               ),
                               Visibility(
                                 visible: state is AuthError ? true : false,
@@ -100,6 +100,10 @@ class LoginScreen extends StatelessWidget {
                                           ? AppLocalizations.of(context)!
                                               .failToLogin
                                           : state.errorMessage
+                                                  .contains("invalid")
+                                              ? AppLocalizations.of(context)!
+                                                  .usernamePassInvalid
+                                              : ""
                                       : "",
                                   style: bodyLargeBold(context)
                                       ?.copyWith(color: Colors.red),

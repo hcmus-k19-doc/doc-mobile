@@ -190,5 +190,7 @@
 	"backToLogin": "Back to login",
 	"didNotReceive": "Did not receive the email? Check your spam filter,",
 	"or": "or",
-	"tryOtherMail": "try another email address"
+	"tryOtherMail": "try another email address",
+	"sendResetPassFail": "Password reset request failed",
+	"usernamePassInvalid": "Username or password is invalid"
 }

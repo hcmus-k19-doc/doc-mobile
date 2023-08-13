@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/change_pass/change_pass_bloc.dart';
+import 'package:flutter_app/bloc/forgot_pass_bloc/forgot_pass_bloc.dart';
 import 'package:flutter_app/bloc/transfer_history_bloc/transfer_history_bloc.dart';
 import 'package:flutter_app/constants/api_const.dart';
+import 'package:flutter_app/repositories/auth_repository.dart';
 import 'package:flutter_app/repositories/user_repository.dart';
 import 'package:flutter_app/ui/common_widgets/pdf_viewer_screen.dart';
 import 'package:flutter_app/ui/pages/change_pass/change_pass_screen.dart';
@@ -36,7 +38,8 @@ class PdfViewerArguments {
   final String url;
   final bool isPdf;
 
-  const PdfViewerArguments({required this.title, required this.url, required this.isPdf});
+  const PdfViewerArguments(
+      {required this.title, required this.url, required this.isPdf});
 }
 
 class TransferHistoryArgs {
@@ -85,7 +88,11 @@ class MyRouter {
       case pdfViewer:
         if (args is PdfViewerArguments) {
           return MaterialPageRoute(
-              builder: (_) => PdfViewer(title: args.title, url: args.url, isPdf: args.isPdf,));
+              builder: (_) => PdfViewer(
+                    title: args.title,
+                    url: args.url,
+                    isPdf: args.isPdf,
+                  ));
         } else {
           return errorRoute("Wrong arguments for PdfViewer");
         }
@@ -98,7 +105,12 @@ class MyRouter {
           builder: (_) => LoginScreen(),
         );
       case forgotPassword:
-        return MaterialPageRoute(builder: (_) => ForgotPassScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => ForgotPassBloc(AuthRepository(
+                      "${UrlConst.DOC_SERVICE_URL}/security/auth")),
+                  child: ForgotPassScreen(),
+                ));
       case checkYourMail:
         return MaterialPageRoute(builder: (_) => const CheckYourMailScreen());
       case setting:

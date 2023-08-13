@@ -50,8 +50,7 @@ class MyAppState extends State<MyApp> {
         providers: [
           BlocProvider(
               create: (context) => AuthBloc(
-                  AuthRepository(
-                      "${UrlConst.DOC_SERVICE_URL}/security/auth/token"),
+                  AuthRepository("${UrlConst.DOC_SERVICE_URL}/security/auth"),
                   UserRepository("${UrlConst.DOC_SERVICE_URL}/users"))),
         ],
         child: ChangeNotifierProvider(
