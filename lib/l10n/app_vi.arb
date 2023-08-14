@@ -192,5 +192,8 @@
 	"or": "hoặc",
 	"tryOtherMail": "hãy thử một địa chỉ email khác",
 	"sendResetPassFail": "Yêu cầu đặt lại mật khẩu thất bại",
-	"usernamePassInvalid": "Tên người dùng hoặc mật khẩu không hợp lệ"
+	"usernamePassInvalid": "Tên người dùng hoặc mật khẩu không hợp lệ",
+	"invalidPassword": "Mật khẩu phải có độ dài từ 6 đến 20 ký tự, phải chứa ít nhất 1 chữ cái viết hoa, 1 chữ cái viết thường, 1 số và 1 ký tự đặc biệt",
+	"passConfirmPassNotMatch": "Mật khẩu và nhập lại không trùng khớp",
+	"needChanged": "Vui lòng đổi mật khẩu để tiếp tục sử dụng hệ thống"
 }

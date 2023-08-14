@@ -192,5 +192,8 @@
 	"or": "or",
 	"tryOtherMail": "try another email address",
 	"sendResetPassFail": "Password reset request failed",
-	"usernamePassInvalid": "Username or password is invalid"
+	"usernamePassInvalid": "Username or password is invalid",
+	"invalidPassword": "Password must be between 6 and 20 characters, including at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character",
+	"passConfirmPassNotMatch": "Password and confirm password don't match",
+	"needChanged": "Please change your password to continue"
 }

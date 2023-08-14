@@ -29,6 +29,13 @@ class LoginScreen extends StatelessWidget {
           if (state is Authenticated) {
             Navigator.pushReplacementNamed(context, MyRouter.homeScreen);
           }
+          if (state is AuthError) {
+            if (state.errorMessage.contains("password.need_changed")) {
+              Navigator.pushNamed(context, MyRouter.updatePassToUse,
+                  arguments: UpdatePassToUseArgs(
+                      usernameEditingController.text.trim()));
+            }
+          }
         },
         builder: (context, state) {
           return SafeArea(
@@ -100,7 +107,9 @@ class LoginScreen extends StatelessWidget {
                                           ? AppLocalizations.of(context)!
                                               .failToLogin
                                           : state.errorMessage
-                                                  .contains("invalid")
+                                                      .contains("invalid") ||
+                                                  state.errorMessage
+                                                      .contains("incorrect")
                                               ? AppLocalizations.of(context)!
                                                   .usernamePassInvalid
                                               : ""

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/change_pass/change_pass_bloc.dart';
 import 'package:flutter_app/bloc/forgot_pass_bloc/forgot_pass_bloc.dart';
 import 'package:flutter_app/bloc/transfer_history_bloc/transfer_history_bloc.dart';
+import 'package:flutter_app/bloc/update_pass_bloc/update_pass_bloc.dart';
 import 'package:flutter_app/constants/api_const.dart';
 import 'package:flutter_app/repositories/auth_repository.dart';
 import 'package:flutter_app/repositories/user_repository.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_app/ui/pages/login/login_screen.dart';
 import 'package:flutter_app/ui/pages/profile/profile_screen.dart';
 import 'package:flutter_app/ui/pages/settings/settings_screen.dart';
 import 'package:flutter_app/ui/pages/transfer_history/transfer_history_screen.dart';
+import 'package:flutter_app/ui/pages/update_pass/update_pass_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../ui/pages/document_detail/inc_doc_detail_screen.dart';
@@ -48,6 +50,12 @@ class TransferHistoryArgs {
   TransferHistoryArgs(this.transferHistoryBloc);
 }
 
+class UpdatePassToUseArgs {
+  final String username;
+
+  UpdatePassToUseArgs(this.username);
+}
+
 class MyRouter {
   static const String splash = '/';
   static const String setting = '/setting';
@@ -63,6 +71,7 @@ class MyRouter {
   static const String pdfViewer = "/pdfViewer";
   static const String profile = "/profile";
   static const String transferHistory = "/transfer-history";
+  static const String updatePassToUse = "/update-pass-to-use";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var args = settings.arguments;
@@ -133,6 +142,21 @@ class MyRouter {
                     ));
           } else {
             return errorRoute("Wrong arguments for PdfViewer");
+          }
+        }
+      case updatePassToUse:
+        {
+          if (args is UpdatePassToUseArgs) {
+            return MaterialPageRoute(
+                builder: (_) => BlocProvider(
+                      create: (context) => UpdatePassBloc(AuthRepository(
+                          "${UrlConst.DOC_SERVICE_URL}/security/auth")),
+                      child: UpdatePassScreen(
+                        username: args.username,
+                      ),
+                    ));
+          } else {
+            return errorRoute("Wrong arguments for update pass");
           }
         }
       default:

@@ -3,6 +3,7 @@ import 'package:flutter_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:flutter_app/constants/color_const.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/utils/validation_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -79,15 +80,18 @@ class _LoginFormFieldState extends State<LoginFormField> {
                   // Currently just stick with password length
                   if (value != null && value.trim().isEmpty) {
                     return AppLocalizations.of(context)!.plsInputValid;
-                  } else {
-                    return null;
+                  } else if (!value!.isValidPassword) {
+                    return AppLocalizations.of(context)!.invalidPassword;
                   }
+                  return null;
+
                   // return null; //Fix this later
                 },
                 enabled: state is AuthLoading ? false : true,
                 decoration: InputDecoration(
                     labelText: AppLocalizations.of(context)!.password,
                     floatingLabelBehavior: FloatingLabelBehavior.always,
+                    errorMaxLines: 3,
                     labelStyle: MaterialStateTextStyle.resolveWith(
                         (Set<MaterialState> states) {
                       final Color color = states.contains(MaterialState.focused)

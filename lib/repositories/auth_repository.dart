@@ -75,4 +75,21 @@ class AuthRepository extends BaseRepository {
       rethrow;
     }
   }
+
+  Future<void> updatePassword(String username, String oldPassword,
+      String confirmPassword, String newPassword) async {
+    try {
+      await provider.put(
+          url: "/change-password",
+          contentType: Headers.formUrlEncodedContentType,
+          data: {
+            "username": username,
+            "oldPassword": oldPassword,
+            "confirmPassword": confirmPassword,
+            "newPassword": newPassword
+          });
+    } catch (error) {
+      rethrow;
+    }
+  }
 }
