@@ -42,14 +42,14 @@ class _DocumentTileState extends State<DocumentTile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "${AppLocalizations.of(context)!.originalSymbolNumber}: ${widget.incomingDocument.originalSymbolNumber}",
+                "${AppLocalizations.of(context)!.originalSymbolNumber}: ${widget.incomingDocument.originalSymbolNumber ?? ""}",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded
                         ? ColorConst.primaryBlue
                         : DefaultColor(context).fontColor),
               ),
               Text(
-                "${widget.incomingDocument.documentType?.type}",
+                widget.incomingDocument.documentType?.type ?? "",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded
                         ? ColorConst.primaryBlue
@@ -112,7 +112,7 @@ class _DocumentTileState extends State<DocumentTile> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Flexible(
+                    Expanded(
                         child: Text(
                       "${AppLocalizations.of(context)!.issuePlace}:",
                       style: bodyLarge(context),
@@ -123,7 +123,7 @@ class _DocumentTileState extends State<DocumentTile> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.incomingDocument.distributionOrg?.name}",
+                          widget.incomingDocument.distributionOrg?.name ?? "",
                           style: bodyLarge(context),
                         ))
                   ],

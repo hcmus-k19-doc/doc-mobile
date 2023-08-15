@@ -28,6 +28,7 @@ class AuthRepository extends BaseRepository {
   Future<Token?> checkAuthentication(
       String? accessTokenFromStorage, String? refreshTokenFromStorage) async {
     try {
+      print(accessTokenFromStorage);
       if (accessTokenFromStorage != null &&
           !JwtDecoder.isExpired(accessTokenFromStorage)) {
         return Token(

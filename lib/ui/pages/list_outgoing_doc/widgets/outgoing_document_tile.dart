@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app/router.dart';
 import 'package:flutter_app/constants/font_const.dart';
 import 'package:flutter_app/constants/style_const.dart';
+import 'package:flutter_app/model/custome_outgoing_doc.dart';
 import 'package:flutter_app/model/outgoing_document.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -12,7 +13,7 @@ import '../../../../constants/color_const.dart';
 class OutgoingDocumentTile extends StatefulWidget {
   const OutgoingDocumentTile({Key? key, required this.outgoingDocument})
       : super(key: key);
-  final OutgoingDocument outgoingDocument;
+  final CustomOutgoingDoc outgoingDocument;
 
   @override
   State<OutgoingDocumentTile> createState() => _OutgoingDocumentTileState();
@@ -36,14 +37,14 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "${AppLocalizations.of(context)!.originalSymbolNumber}: ${widget.outgoingDocument.originalSymbolNumber}",
+                "${AppLocalizations.of(context)!.originalSymbolNumber}: ${widget.outgoingDocument.originalSymbolNumber ?? ""}",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded
                         ? ColorConst.primaryBlue
                         : DefaultColor(context).fontColor),
               ),
               Text(
-                "${widget.outgoingDocument.documentType?.type}",
+                widget.outgoingDocument.documentTypeName ?? "",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded
                         ? ColorConst.primaryBlue
@@ -124,7 +125,8 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                     Flexible(
                         flex: 2,
                         child: Text(
-                          "${widget.outgoingDocument.publishingDepartment?.departmentName}",
+                          widget.outgoingDocument.publishingDepartmentName ??
+                              "",
                           style: bodyLarge(context),
                         ))
                   ],

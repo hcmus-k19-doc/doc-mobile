@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_app/model/custome_outgoing_doc.dart';
 import 'package:flutter_app/model/outgoing_document.dart';
 import 'package:flutter_app/model/outgoing_search_criteria.dart';
 import 'package:flutter_app/model/pagination_outgoing_document.dart';
@@ -13,7 +14,7 @@ class ListOutgoingBloc extends Bloc<ListOutgoingEvent, ListOutgoingState> {
   OutgoingDocumentRepository outgoingRepository;
   OutgoingSearchCriteria? outgoingSearchCriteria;
   int page = 0;
-  List<OutgoingDocument> listOutgoingDocument = [];
+  List<CustomOutgoingDoc> listOutgoingDocument = [];
 
   ListOutgoingBloc(this.outgoingRepository, this.outgoingSearchCriteria)
       : super(ListOutgoingInitial()) {
@@ -34,7 +35,7 @@ class ListOutgoingBloc extends Bloc<ListOutgoingEvent, ListOutgoingState> {
             emit(ListOutgoingEmpty());
           } else {
             listOutgoingDocument.addAll(
-                response.listOutgoingDocument as Iterable<OutgoingDocument>);
+                response.listOutgoingDocument as Iterable<CustomOutgoingDoc>);
             emit(ListOutgoingSuccess(PaginationOutgoingDocument(
                 totalElements: response.totalElements,
                 totalPages: response.totalPages,

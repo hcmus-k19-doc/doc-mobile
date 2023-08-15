@@ -103,16 +103,16 @@ class LoginScreen extends StatelessWidget {
                                 visible: state is AuthError ? true : false,
                                 child: Text(
                                   state is AuthError
-                                      ? state.errorMessage.contains("null")
+                                      ? state.errorMessage
+                                                  .contains("invalid") ||
+                                              state.errorMessage
+                                                  .contains("incorrect") ||
+                                              state.errorMessage
+                                                  .contains("not_found")
                                           ? AppLocalizations.of(context)!
+                                              .usernamePassInvalid
+                                          : AppLocalizations.of(context)!
                                               .failToLogin
-                                          : state.errorMessage
-                                                      .contains("invalid") ||
-                                                  state.errorMessage
-                                                      .contains("incorrect")
-                                              ? AppLocalizations.of(context)!
-                                                  .usernamePassInvalid
-                                              : ""
                                       : "",
                                   style: bodyLargeBold(context)
                                       ?.copyWith(color: Colors.red),

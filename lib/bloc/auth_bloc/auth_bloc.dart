@@ -60,6 +60,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         profile = await userRepository.getCurrentProfile();
         emit(Authenticated());
       } catch (err) {
+        print(err);
         emit(AuthError(err.toString()));
       }
     });

@@ -5,6 +5,7 @@ import 'package:flutter_app/constants/style_const.dart';
 import 'package:flutter_app/model/incoming_document.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:intl/intl.dart';
 
 class DocumentTileDetail extends StatefulWidget {
   const DocumentTileDetail({Key? key, required this.incomingDocument})
@@ -22,6 +23,14 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
   Map<String, String> convertSendingLevel = DisplayMap.sendingLevel;
 
   Map<String, String> statusLevel = DisplayMap.statusLevel;
+
+  DateFormat inputFormat = DateFormat('yyyy-MM-dd');
+  DateFormat outputFormat = DateFormat('dd-MM-yyyy');
+
+  String reformatDate(String? originalDate) {
+    DateTime date = inputFormat.parse(originalDate!);
+    return outputFormat.format(date);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -141,8 +150,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        widget.incomingDocument.arrivingDate ??
-                            AppLocalizations.of(context)!.unKnown,
+                        reformatDate(widget.incomingDocument.arrivingDate),
                         style: bodyLarge(context),
                       ),
                     )
@@ -165,8 +173,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        widget.incomingDocument.distributionDate ??
-                            AppLocalizations.of(context)!.unKnown,
+                        reformatDate(widget.incomingDocument.distributionDate),
                         style: bodyLarge(context),
                       ),
                     )

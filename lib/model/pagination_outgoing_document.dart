@@ -1,4 +1,4 @@
-import 'package:flutter_app/model/outgoing_document.dart';
+import 'package:flutter_app/model/custome_outgoing_doc.dart';
 
 class PaginationOutgoingDocument {
   int? totalPages;
@@ -7,5 +7,5 @@ class PaginationOutgoingDocument {
       {this.totalPages, this.totalElements, this.listOutgoingDocument});
 
   int? totalElements;
-  List<OutgoingDocument>? listOutgoingDocument;
+  List<CustomOutgoingDoc>? listOutgoingDocument;
 }
