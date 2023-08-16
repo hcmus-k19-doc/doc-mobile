@@ -23,8 +23,8 @@ class _DocumentTileState extends State<DocumentTile> {
   DateFormat inputFormat = DateFormat('yyyy-MM-dd');
   DateFormat outputFormat = DateFormat('dd-MM-yyyy');
 
-  String reformatDate(String? originalDate) {
-    DateTime date = inputFormat.parse(originalDate!);
+  String reformatDate(String originalDate) {
+    DateTime date = inputFormat.parse(originalDate);
     return outputFormat.format(date);
   }
 
@@ -56,7 +56,7 @@ class _DocumentTileState extends State<DocumentTile> {
                         : DefaultColor(context).fontColor),
               ),
               Text(
-                "${AppLocalizations.of(context)!.processingDuration}: ${widget.incomingDocument.processingDuration ?? "01-01-1970"}",
+                "${AppLocalizations.of(context)!.processingDuration}: ${widget.incomingDocument.processingDuration ?? AppLocalizations.of(context)!.infiniteProcessingTime}",
                 style: bodyLarge(context)?.copyWith(
                     color: _isExpanded
                         ? ColorConst.primaryBlue
@@ -100,7 +100,10 @@ class _DocumentTileState extends State<DocumentTile> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        reformatDate(widget.incomingDocument.arrivingDate),
+                        widget.incomingDocument.arrivingDate != null
+                            ? reformatDate(
+                                widget.incomingDocument.arrivingDate!)
+                            : "",
                         style: bodyLarge(context),
                       ),
                     )

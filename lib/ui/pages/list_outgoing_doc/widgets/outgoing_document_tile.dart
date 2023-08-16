@@ -100,9 +100,10 @@ class _OutgoingDocumentTileState extends State<OutgoingDocumentTile> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        outputFormat.format(DateTime.parse(
-                            widget.outgoingDocument.createdDate ??
-                                "01-01-1970")),
+                        widget.outgoingDocument.createdDate != null
+                            ? outputFormat.format(DateTime.parse(
+                                widget.outgoingDocument.createdDate!))
+                            : "",
                         style: bodyLarge(context),
                       ),
                     )

@@ -28,8 +28,8 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
   DateFormat inputFormat = DateFormat('yyyy-MM-dd');
   DateFormat outputFormat = DateFormat('dd-MM-yyyy');
 
-  String reformatDate(String? originalDate) {
-    DateTime date = inputFormat.parse(originalDate!);
+  String reformatDate(String originalDate) {
+    DateTime date = inputFormat.parse(originalDate);
     return outputFormat.format(date);
   }
 
@@ -151,7 +151,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        reformatDate(widget.outgoingDocument.createdDate),
+                        widget.outgoingDocument.createdDate != null
+                            ? reformatDate(widget.outgoingDocument.createdDate!)
+                            : "",
                         style: bodyLarge(context),
                       ),
                     )
@@ -174,7 +176,9 @@ class _OutDocumentTileDetailState extends State<OutDocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        reformatDate(widget.outgoingDocument.releaseDate),
+                        widget.outgoingDocument.releaseDate != null
+                            ? reformatDate(widget.outgoingDocument.releaseDate!)
+                            : "",
                         style: bodyLarge(context),
                       ),
                     )

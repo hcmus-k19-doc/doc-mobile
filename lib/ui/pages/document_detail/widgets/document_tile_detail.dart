@@ -27,7 +27,7 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
   DateFormat inputFormat = DateFormat('yyyy-MM-dd');
   DateFormat outputFormat = DateFormat('dd-MM-yyyy');
 
-  String reformatDate(String? originalDate) {
+  String reformatDate(String originalDate) {
     DateTime date = inputFormat.parse(originalDate!);
     return outputFormat.format(date);
   }
@@ -150,7 +150,10 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        reformatDate(widget.incomingDocument.arrivingDate),
+                        widget.incomingDocument.arrivingDate != null
+                            ? reformatDate(
+                                widget.incomingDocument.arrivingDate!)
+                            : "",
                         style: bodyLarge(context),
                       ),
                     )
@@ -173,7 +176,10 @@ class _DocumentTileDetailState extends State<DocumentTileDetail> {
                     Flexible(
                       flex: 2,
                       child: Text(
-                        reformatDate(widget.incomingDocument.distributionDate),
+                        widget.incomingDocument.distributionDate != null
+                            ? reformatDate(
+                                widget.incomingDocument.distributionDate!)
+                            : "",
                         style: bodyLarge(context),
                       ),
                     )
