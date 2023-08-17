@@ -111,8 +111,11 @@ class LoginScreen extends StatelessWidget {
                                                   .contains("not_found")
                                           ? AppLocalizations.of(context)!
                                               .usernamePassInvalid
-                                          : AppLocalizations.of(context)!
-                                              .failToLogin
+                                          : state.errorMessage.contains(
+                                                  "password.need_changed")
+                                              ? ""
+                                              : AppLocalizations.of(context)!
+                                                  .failToLogin
                                       : "",
                                   style: bodyLargeBold(context)
                                       ?.copyWith(color: Colors.red),
